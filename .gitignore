@@ -1,0 +1,8 @@
+*.a
+*.o
+fdf
+a.out
+core.* 
+libft
+
+minishell
