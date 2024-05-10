@@ -6,25 +6,37 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/04/18 07:31:51 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/10 13:14:40 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void show_text(void)
+void handle_signals(int signo) {
+  if (signo == SIGINT) {
+    printf("\n");
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+  }
+}
+
+char    *get_prefix(void)
 {
     char    *pwd;
     char    **splitted;
+    char    *tmp;
+    char    *resp;
 
     pwd = get_pwd();
     splitted = ft_split(pwd, '/');
-    ft_printf("[CUSTOM] %s>", splitted[ft_strarr_len(splitted) - 1]);
+    tmp = ft_strjoin("\e[1;35m[CUSTOM] \e[1;33m", splitted[ft_strarr_len(splitted) - 1]);
+    resp = ft_strjoin(tmp, " > \e[0;37m");
+    free(tmp);
     free_split(splitted);
     free(pwd);
+    return (resp);
 }
-
-
 
 char    **parse_str_quote(char *input)
 {
@@ -50,6 +62,8 @@ void    parse_cmd(char *input)
         ft_pwd(argc, argv);
     else if (ft_strncmp(splitted[0], "echo", 4) == 0)
         ft_echo(argc, argv);
+    else if (ft_strncmp(splitted[0], "exit", 4) == 0)
+        exit(0);
     free_split(splitted);
     free(input);
 }
@@ -58,13 +72,16 @@ int main(void)
 {
     char	*buffer;
 
-    show_text();
-    buffer = get_next_line(STDIN_FILENO);
+    if (signal(SIGINT, handle_signals) == SIG_ERR) {
+        printf("failed to register interrupts with kernel\n");
+    }
+    buffer = readline(get_prefix());
     while (buffer != NULL)
     {
-        buffer[ft_strlen(buffer) - 1] = 0;
-        parse_cmd(buffer);
-        show_text();
-        buffer = get_next_line(STDIN_FILENO);
+        if (buffer[0] != 0) {
+            add_history(buffer);
+            parse_cmd(buffer);
+        }
+        buffer = readline(get_prefix());
     }
 }

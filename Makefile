@@ -2,11 +2,11 @@ NAME		=	minishell
 LIBFT		=	libft/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
 
-CC			=	gcc
+CC			=	clang
 INCLUDE 	=	./includes/
 INCLUDE_LIBFT = $(addprefix $(LIBFT), includes/)
 
-CFLAGS		=	-Wall -Werror -Wextra -g  -I$(INCLUDE_LIBFT) -I$(INCLUDE)
+CFLAGS		=	-Wall -Werror -Wextra -g -I$(INCLUDE_LIBFT) -I$(INCLUDE)
 RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
@@ -17,7 +17,7 @@ SRCS		=	srcs/main.c \
 OBJS		=	$(SRCS:/%.c=%.o)
 
 $(NAME):		$(OBJS) $(LIBFT_A)
-				@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -o $(NAME);
+				@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include -o $(NAME);
 				@echo "Linked into executable \033[0;32m$(NAME)\033[0m."
 
 $(LIBFT_A):

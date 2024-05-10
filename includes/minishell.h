@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/04/18 07:25:20 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/10 12:41:01 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <string.h>
 # include <errno.h>
 # include <libgen.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 # ifdef LINUX
 #  include <linux/limits.h>
 # else 

@@ -6,3 +6,5 @@ core.*
 libft
 
 minishell
+
+.DS_Store
