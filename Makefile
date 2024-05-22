@@ -49,10 +49,10 @@ fclean:			localclean
 				@echo "Removed executable."
 
 test:			$(NAME)
-				./fdf test_maps/42.fdf 
+				./$(NAME)
 	
 test_leak:			$(NAME)
-				valgrind --leak-check=full ./fdf test_maps/42.fdf 
+				valgrind --leak-check=full ./$(NAME)
 
 re:				fclean all
 
