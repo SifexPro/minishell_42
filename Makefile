@@ -12,7 +12,12 @@ OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/split_quote.c \
-				srcs/command/*.c
+				srcs/command/ft_cd.c \
+				srcs/command/ft_echo.c \
+				srcs/command/ft_pwd.c \
+				srcs/command/cat/ft_cat.c \
+				srcs/command/cat/ft_cat2.c \
+				srcs/cmd_path.c
 
 OBJS		=	$(SRCS:/%.c=%.o)
 
