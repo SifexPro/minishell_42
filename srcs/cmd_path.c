@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:01:27 by Sifex             #+#    #+#             */
-/*   Updated: 2024/02/09 17:12:28 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/05/23 03:42:32 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void    free_tabs(char **tabs)
+{
+    int	i;
+
+    i = 0;
+    while (tabs[i])
+    {
+        free(tabs[i]);
+        i++;
+    }
+    free(tabs);
+}
 
 char	*get_path(char **envp)
 {

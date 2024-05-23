@@ -16,7 +16,7 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_echo.c \
 				srcs/command/ft_pwd.c \
 				srcs/command/cat/ft_cat.c \
-				srcs/command/cat/ft_cat2.c \
+				srcs/command/cat/ft_cat_2.c \
 				srcs/cmd_path.c
 
 OBJS		=	$(SRCS:/%.c=%.o)

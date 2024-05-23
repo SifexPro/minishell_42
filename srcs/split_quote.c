@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:50:25 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/23 03:30:48 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/23 03:58:58 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@ char    *handle_env_var(char *str, t_ht *env)
     {
         if (str[i] == '$' && str[i + 1] == '?')
         {
-            ft_itoa(0);
-            i += 2;
+            res = hashtable_search(env, "?");
+            if (!res)
+                res = "0";
+            tmp = ft_strndup(str, i);
+            tmp = ft_strjoin_free(tmp, res);
+            tmp = ft_strjoin_free(tmp, &str[i + 2]);
+            str = tmp;
+            hashtable_search(env, tmp);
+            i = 0;
         }
         else if (str[i] == '$' )
         {
+            printf("i = %c %d\n", str[i + 1], str[i + 1] == '?');
             if (ft_str_is_num(str[i + 1]))
             {
                 //remove the $
@@ -74,7 +82,6 @@ typedef struct s_split_sh {
 
 int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
-	(void)env;
 	if (str[sp->i] == ' ' && sp->str_start == sp->i)
 		sp->str_start++;
 	else if (str[sp->i] == '\"' && !sp->is_dbl_quote && !sp->is_simp_quote)

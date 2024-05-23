@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/22 16:45:11 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/23 03:54:49 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,22 @@ char	*get_prefix(void)
 	return (resp);
 }
 
-void	parse_cmd(char *input, t_ht *env)
+int run_program(char *path, char **argv)
+{
+    int i;
+
+    i = 0;
+    printf("run program %s\n", path);
+    printf("argv:\n");
+    while (argv[i])
+    {
+        printf("%s\n", argv[i]);
+        i++;
+    }
+    return (0);
+}    
+
+int	parse_cmd(char *input, t_ht *env)
 {
 	char	**splitted;
 	char	**argv;
@@ -52,26 +67,28 @@ void	parse_cmd(char *input, t_ht *env)
 
 	splitted = ft_split_quote(input, env);
 	if (!splitted)
-		return ;
+		return -1;
+	free(input);
 	argv = splitted;
 	argv++;
 	argc = ft_strarr_len(argv);
 	if (ft_strncmp(splitted[0], "cd", 2) == 0)
-		ft_cd(argc, argv);
+		return (ft_cd(argc, argv));
 	else if (ft_strncmp(splitted[0], "pwd", 3) == 0)
-		ft_pwd(argc, argv);
+		return (ft_pwd(argc, argv));
 	else if (ft_strncmp(splitted[0], "echo", 4) == 0)
-		ft_echo(argc, argv);
+		return (ft_echo(argc, argv));
 	else if (ft_strncmp(splitted[0], "exit", 5) == 0)
-		exit(0);
-	ft_freesplit(splitted);
-	free(input);
+		return (exit(0), 0);
+    else
+        return (run_program(splitted[0], argv));
 }
 
 int	main(void)
 {
 	char	*buffer;
 	t_ht	*env;
+    int     last_status;
 
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
 	{
@@ -91,7 +108,8 @@ int	main(void)
 		if (buffer[0] != 0)
 		{
 			add_history(buffer);
-			parse_cmd(buffer, env);
+			last_status = parse_cmd(buffer, env);
+            hashtable_insert(env, "?", ft_uitoa(last_status));
 		}
 		buffer = readline(get_prefix());
 	}
