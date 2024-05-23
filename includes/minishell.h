@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/22 14:13:30 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/23 02:57:47 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ char	**ft_split_quote(char const *str, t_ht *env);
 
 /* utils */
 int		ft_strarr_len(char **input);
-void	free_split(char **splitted);
 
 #endif

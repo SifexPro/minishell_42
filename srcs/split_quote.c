@@ -6,23 +6,62 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:50:25 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/22 16:47:20 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/23 03:30:48 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*create_str(char *str, bool is_dbl_quote, bool is_simple_quote)
+char    *handle_env_var(char *str, t_ht *env)
 {
-	t_str_input	*tmp;
+    char    *env_var;
+    char    *tmp;
+    char    *res;
+    int     i;
+    int j;
 
-	tmp = malloc(sizeof(t_str_input));
-	if (!tmp)
-		return (NULL);
-	tmp->str = str;
-	tmp->is_double_quote = is_dbl_quote;
-	tmp->is_simple_quote = is_simple_quote;
-	return (ft_lstnew(tmp));
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] == '$' && str[i + 1] == '?')
+        {
+            ft_itoa(0);
+            i += 2;
+        }
+        else if (str[i] == '$' )
+        {
+            if (ft_str_is_num(str[i + 1]))
+            {
+                //remove the $
+                i++;
+                break;
+            }
+            j = i + 1;
+            while (ft_isalnum(str[j]) || str[j] == '_')
+                j++;
+            env_var = ft_strndup(&str[i + 1], j - i - 1);
+            tmp = ft_strndup(str, i);
+            res = hashtable_search(env, env_var);
+            if (!res)
+                res = "";
+            tmp = ft_strjoin_free(tmp, res);
+            tmp = ft_strjoin_free(tmp, &str[j]);
+            str = tmp;
+            hashtable_search(env, tmp);
+            free(env_var);
+            i = j;
+        }
+        i++;
+    }
+    return (str);
+}
+
+
+t_list	*create_str(char *str, bool is_simple_quote, t_ht *env)
+{
+    if (!is_simple_quote)
+        return (ft_lstnew(handle_env_var(str, env)));
+    return (ft_lstnew(str));
 }
 
 typedef struct s_split_sh {
@@ -47,7 +86,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	{
 		ft_lstadd_back(elem, create_str(
 				ft_strndup((char *)(&str[sp->quote_start + 1]),
-					sp->i - sp->quote_start - 1), true, false));
+					sp->i - sp->quote_start - 1), false, env));
 		sp->str_start = sp->i + 1;
 		sp->quote_start = 0;
 		sp->is_dbl_quote = false;
@@ -61,7 +100,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	{
 		ft_lstadd_back(elem, create_str(
 				ft_strndup((char *)(&str[sp->quote_start + 1]),
-					sp->i - sp->quote_start - 1), false, true));
+					sp->i - sp->quote_start - 1), true, env));
 		sp->str_start = sp->i + 1;
 		sp->quote_start = 0;
 		sp->is_simp_quote = false;
@@ -73,7 +112,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 			sp->i++;
 		ft_lstadd_back(elem, create_str(
 				ft_strndup((char *)(&str[sp->str_start]),
-					sp->i - sp->str_start), false, false));
+					sp->i - sp->str_start), false, env));
 		sp->str_start = sp->i + 1;
 		if (str[sp->i] == 0)
 			return (1);
@@ -107,7 +146,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 char	**ft_split_quote(char const *str, t_ht *env)
 {
 	t_list		*elements;
-	t_str_input	*tmp;
+	char	    *tmp;
 	char		**ret;
 	int			i;
 
@@ -123,7 +162,7 @@ char	**ft_split_quote(char const *str, t_ht *env)
 	while (elements)
 	{
 		tmp = elements->content;
-		ret[i] = tmp->str;
+		ret[i] = tmp;
 		i++;
 		elements = elements->next;
 	}
