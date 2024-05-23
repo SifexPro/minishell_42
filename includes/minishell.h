@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/23 02:57:47 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/23 04:03:47 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_str_input {
 }	t_str_input;
 
 /* command/cd */
-int		ft_cd(int argc, char **argv);
+int		ft_cd(int argc, char **argv, t_ht *env);
 
 /* command/pwd */
 int		ft_pwd(int argc, char **argv);

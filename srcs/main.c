@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/23 03:54:49 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/23 04:03:54 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	parse_cmd(char *input, t_ht *env)
 	argv++;
 	argc = ft_strarr_len(argv);
 	if (ft_strncmp(splitted[0], "cd", 2) == 0)
-		return (ft_cd(argc, argv));
+		return (ft_cd(argc, argv, env));
 	else if (ft_strncmp(splitted[0], "pwd", 3) == 0)
 		return (ft_pwd(argc, argv));
 	else if (ft_strncmp(splitted[0], "echo", 4) == 0)
@@ -101,7 +101,7 @@ int	main(void)
 	env = hashtable_create(64);
 	if (!env)
 		return (printf("failed to malloc!"), 1);
-	hashtable_insert(env, "HOME", "/home/pepie");
+	hashtable_insert(env, "HOME", "/Users/polepie");
 	buffer = readline(get_prefix());
 	while (buffer != NULL)
 	{
