@@ -6,23 +6,23 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:01:27 by Sifex             #+#    #+#             */
-/*   Updated: 2024/05/23 03:42:32 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:11:42 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    free_tabs(char **tabs)
+void	free_tabs(char **tabs)
 {
-    int	i;
+	int	i;
 
-    i = 0;
-    while (tabs[i])
-    {
-        free(tabs[i]);
-        i++;
-    }
-    free(tabs);
+	i = 0;
+	while (tabs[i])
+	{
+		free(tabs[i]);
+		i++;
+	}
+	free(tabs);
 }
 
 char	*get_path(char **envp)
@@ -48,21 +48,22 @@ static char	*get_cmd_path_res(char **paths, char *cmd_path)
 static char	*get_cmd_path_while(char **paths, char *cmd_path, char *cmd, int i)
 {
 	char	*cmd_path_first;
+
 	while (paths[i])
 	{
 		cmd_path_first = ft_strjoin(paths[i], "/");
 		if (!cmd_path_first)
-			return(get_cmd_path_res(paths, NULL));
+			return (get_cmd_path_res(paths, NULL));
 		cmd_path = ft_strjoin(cmd_path_first, cmd);
 		free(cmd_path_first);
 		if (!cmd_path)
-			return(get_cmd_path_res(paths, NULL));
+			return (get_cmd_path_res(paths, NULL));
 		if (access(cmd_path, F_OK) == 0)
-			return(get_cmd_path_res(paths, cmd_path));
+			return (get_cmd_path_res(paths, cmd_path));
 		free(cmd_path);
 		i++;
 	}
-	return(get_cmd_path_res(paths, NULL));
+	return (get_cmd_path_res(paths, NULL));
 }
 
 char	*get_cmd_path(char *cmd, char *path)
@@ -75,7 +76,7 @@ char	*get_cmd_path(char *cmd, char *path)
 	if (!paths)
 		return (NULL);
 	if (access(cmd, F_OK) == 0)
-		return(get_cmd_path_res(paths, cmd));
+		return (get_cmd_path_res(paths, cmd));
 	i = 0;
 	cmd_path = NULL;
 	return (get_cmd_path_while(paths, cmd_path, cmd, i));

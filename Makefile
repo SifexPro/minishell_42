@@ -11,7 +11,8 @@ RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
 				srcs/utils.c \
-				srcs/split_quote.c \
+				srcs/parsing/expansion.c \
+				srcs/parsing/split_quote.c \
 				srcs/command/ft_cd.c \
 				srcs/command/ft_echo.c \
 				srcs/command/ft_pwd.c \

@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/23 04:03:47 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:46:08 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,21 @@
 #  define PATH_MAX 1024
 # endif
 
-typedef struct s_str_input {
+typedef struct s_str_input
+{
 	char	*str;
 	bool	is_double_quote;
 	bool	is_simple_quote;
 }	t_str_input;
+
+typedef struct s_split_sh
+{
+	int		i;
+	int		str_start;
+	int		quote_start;
+	bool	is_simp_quote;
+	bool	is_dbl_quote;
+}	t_split_sh;
 
 /* command/cd */
 int		ft_cd(int argc, char **argv, t_ht *env);
@@ -52,6 +62,10 @@ int		ft_echo(int argc, char **argv);
 
 /* split_quote */
 char	**ft_split_quote(char const *str, t_ht *env);
+
+/* parser/expansion */
+void	register_env_var(t_ht *env, char **envp);
+t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
 
 /* utils */
 int		ft_strarr_len(char **input);

@@ -6,30 +6,30 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:14:35 by pepie             #+#    #+#             */
-/*   Updated: 2024/04/17 11:39:04 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:10:08 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *get_pwd(void)
+char	*get_pwd(void)
 {
-    char    *cwd;
+	char	*cwd;
 
-    cwd = malloc(sizeof(char) * PATH_MAX);
-    if (!cwd)
-        return (NULL);
-    if (getcwd(cwd, sizeof(char) * PATH_MAX) != NULL)
-        return cwd;
-    else
-        return (NULL);
+	cwd = malloc(sizeof(char) * PATH_MAX);
+	if (!cwd)
+		return (NULL);
+	if (getcwd(cwd, sizeof(char) * PATH_MAX) != NULL)
+		return (cwd);
+	else
+		return (NULL);
 }
 
-int ft_pwd(int argc, char **argv)
+int	ft_pwd(int argc, char **argv)
 {
-    char    *pwd;
+	char	*pwd;
 
-    pwd = get_pwd();
-    ft_printf("%s\n", pwd, argc, argv);
-    return (0);
+	pwd = get_pwd();
+	ft_printf("%s\n", pwd, argc, argv);
+	return (0);
 }

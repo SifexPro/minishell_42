@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 18:41:33 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/22 14:45:36 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/24 11:09:20 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	read_stdin(void);
 void	read_file(char*name);
 int		ft_cat(int argc, char **argv);
 
-enum e_erros {
+enum e_erros
+{
 	NO_SUCH,
 	IS_DIRECTORY
 };
