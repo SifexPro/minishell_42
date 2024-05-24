@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: polepie <polepie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/24 11:50:16 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/24 19:18:14 by polepie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,26 @@ int	run_program(char *path, char **argv)
 	return (0);
 }
 
+int select_exec(char *prog, int argc, char **argv, t_ht *env)
+{
+	if (ft_strncmp(prog, "cd", 2) == 0)
+		return (ft_cd(argc, argv, env));
+	else if (ft_strncmp(prog, "pwd", 3) == 0)
+		return (ft_pwd(argc, argv));
+	else if (ft_strncmp(prog, "echo", 4) == 0)
+		return (ft_echo(argc, argv));
+	else if (ft_strncmp(prog, "exit", 5) == 0)
+		return (exit(0), 0);
+	else
+		return (run_program(prog, argv));
+}
+
 int	parse_cmd(char *input, t_ht *env)
 {
 	char	**splitted;
 	char	**argv;
 	int		argc;
+	int		res;
 
 	splitted = ft_split_quote(input, env);
 	if (!splitted)
@@ -74,16 +89,15 @@ int	parse_cmd(char *input, t_ht *env)
 	argv = splitted;
 	argv++;
 	argc = ft_strarr_len(argv);
-	if (ft_strncmp(splitted[0], "cd", 2) == 0)
-		return (ft_cd(argc, argv, env));
-	else if (ft_strncmp(splitted[0], "pwd", 3) == 0)
-		return (ft_pwd(argc, argv));
-	else if (ft_strncmp(splitted[0], "echo", 4) == 0)
-		return (ft_echo(argc, argv));
-	else if (ft_strncmp(splitted[0], "exit", 5) == 0)
-		return (exit(0), 0);
-	else
-		return (run_program(splitted[0], argv));
+	res = select_exec(splitted[0], argc, argv, env);
+	if (hashtable_search(env, "next_line"))
+	{
+		free(argv[0]);
+		argv[0] = hashtable_search(env, "next_line");
+		hashtable_delete(env, "next_line");
+		parse_cmd(argv[0], env);
+	}
+	return (res);
 }
 
 int	main(int argc, char **argv, char **envp)

@@ -13,6 +13,7 @@ SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/parsing/expansion.c \
 				srcs/parsing/split_quote.c \
+				srcs/parsing/meta.c \
 				srcs/command/ft_cd.c \
 				srcs/command/ft_echo.c \
 				srcs/command/ft_pwd.c \
