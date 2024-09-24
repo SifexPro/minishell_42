@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:14:35 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/24 11:09:38 by pepie            ###   ########.fr       */
+/*   Updated: 2024/09/24 12:41:55 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	ft_cd(int argc, char **argv, t_ht *env)
 		return (ft_printf("cd: too many arguments\n"), 1);
 	if (argc == 0)
 	{
-		ret = chdir(hashtable_search(env, "HOME"));
+		ret = chdir(ht_search(env, "HOME"));
 		if (ret == -1)
 			return (ft_printf("cd: no such file or directory: %s\n",
-					hashtable_search(env, "HOME")), 1);
+					ht_search(env, "HOME")), 1);
 		return (0);
 	}
 	ret = chdir(argv[0]);

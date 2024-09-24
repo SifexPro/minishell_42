@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: polepie <polepie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:50:25 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/24 19:11:15 by polepie          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:26:25 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 		return (free(sp), ft_lstclear(elem, &free),
 			printf("Quote non finished!\n"), 1);
 	if (res == 2)
-		return (hashtable_insert(env, "next_line", ft_strdup((char *)(&str[sp->str_start + 1]))),
+		return (ht_insert(env, "nl", ft_strdup((char *)(&str[sp->str_start + 1]))),
 			free(sp), 0);
 	return (free(sp), 0);
 }
@@ -107,6 +107,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 char	**ft_split_quote(char const *str, t_ht *env)
 {
 	t_list		*elements;
+	t_list		*e_tmp;
 	char		*tmp;
 	char		**ret;
 	int			i;
@@ -116,7 +117,7 @@ char	**ft_split_quote(char const *str, t_ht *env)
 		return (NULL);
 	elements = NULL;
 	if (create_strings_quote(str, &elements, env))
-		return (NULL);
+		return (free(elements), NULL);
 	ret = malloc(sizeof(char *) * (ft_lstsize(elements) + 1));
 	if (!ret)
 		return (NULL);
@@ -124,9 +125,12 @@ char	**ft_split_quote(char const *str, t_ht *env)
 	{
 		tmp = elements->content;
 		ret[i] = tmp;
+		e_tmp = elements->next;
+		free(elements);
 		i++;
-		elements = elements->next;
+		elements = e_tmp;
 	}
+	free(elements);
 	ret[i] = NULL;
 	return (ret);
 }
