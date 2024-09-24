@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:50:25 by pepie             #+#    #+#             */
-/*   Updated: 2024/09/24 13:26:25 by pepie            ###   ########.fr       */
+/*   Updated: 2024/09/24 14:08:29 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 	sp = malloc(sizeof(t_split_sh));
 	if (!sp)
 		return (printf("Malloc error"), 1);
-	sp->i = 0;
-	sp->str_start = 0;
-	sp->quote_start = 0;
-	sp->is_simp_quote = false;
-	sp->is_dbl_quote = false;
+	init_string_quote(sp);
 	while (str[sp->i])
 	{
 		res = loop_char(str, sp, elem, env);
@@ -99,7 +95,8 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 		return (free(sp), ft_lstclear(elem, &free),
 			printf("Quote non finished!\n"), 1);
 	if (res == 2)
-		return (ht_insert(env, "nl", ft_strdup((char *)(&str[sp->str_start + 1]))),
+		return (ht_insert(env, "nl",
+				ft_strdup((char *)(&str[sp->str_start + 1]))),
 			free(sp), 0);
 	return (free(sp), 0);
 }
@@ -107,8 +104,6 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 char	**ft_split_quote(char const *str, t_ht *env)
 {
 	t_list		*elements;
-	t_list		*e_tmp;
-	char		*tmp;
 	char		**ret;
 	int			i;
 
@@ -121,16 +116,6 @@ char	**ft_split_quote(char const *str, t_ht *env)
 	ret = malloc(sizeof(char *) * (ft_lstsize(elements) + 1));
 	if (!ret)
 		return (NULL);
-	while (elements)
-	{
-		tmp = elements->content;
-		ret[i] = tmp;
-		e_tmp = elements->next;
-		free(elements);
-		i++;
-		elements = e_tmp;
-	}
-	free(elements);
-	ret[i] = NULL;
+	sq_replace_and_free(elements, ret);
 	return (ret);
 }

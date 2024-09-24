@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: polepie <polepie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/24 17:28:46 by polepie          ###   ########.fr       */
+/*   Updated: 2024/09/24 14:06:30 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_split_sh
 
 /* main */
 int		parse_cmd(char *input, t_ht *env);
+int		exit_prog(char **splitted, t_ht *env);
 
 /* command/cd */
 int		ft_cd(int argc, char **argv, t_ht *env);
@@ -65,6 +66,10 @@ int		ft_echo(int argc, char **argv);
 
 /* split_quote */
 char	**ft_split_quote(char const *str, t_ht *env);
+
+/* split_quote_2 */
+int		sq_replace_and_free(t_list *elements, char **ret);
+int		init_string_quote(t_split_sh *sp);
 
 /* parser/expansion */
 void	register_env_var(t_ht *env, char **envp);

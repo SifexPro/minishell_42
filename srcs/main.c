@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/09/24 13:34:12 by pepie            ###   ########.fr       */
+/*   Updated: 2024/09/24 14:11:38 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,6 @@ char	*get_prefix(int last_status)
 	return (tmp);
 }
 
-int	run_program(char *path, char **argv)
-{
-	int	i;
-
-	i = 0;
-	printf("run program %s\n", path);
-	printf("argv:\n");
-	while (argv[i])
-	{
-		printf("%s\n", argv[i]);
-		i++;
-	}
-	return (0);
-}
-
 int	exit_prog(char **splitted, t_ht *env)
 {
 	ft_freesplit(splitted);
@@ -71,68 +56,11 @@ int	exit_prog(char **splitted, t_ht *env)
 	exit(0);
 }
 
-int	select_exec(char *prog, int argc, char **argv, t_ht *env)
+int	process_input(char *buffer, char *prefix, t_ht *env)
 {
-	if (ft_strncmp(prog, "cd", 2) == 0)
-		return (ft_cd(argc, argv, env));
-	else if (ft_strncmp(prog, "pwd", 3) == 0)
-		return (ft_pwd(argc, argv));
-	else if (ft_strncmp(prog, "echo", 4) == 0)
-		return (ft_echo(argc, argv));
-	else
-		return (run_program(prog, argv));
-}
-
-int	parse_cmd(char *input, t_ht *env)
-{
-	char	**splitted;
-	char	**argv;
-	int		argc;
-	int		res;
-
-	splitted = ft_split_quote(input, env);
-	if (!splitted)
-		return (0);
-	free(input);
-	argv = splitted;
-	argv++;
-	argc = ft_strarr_len(argv);
-	if (ft_strcmp(splitted[0], "exit") == 0)
-		return (exit_prog(splitted, env));
-	res = select_exec(splitted[0], argc, argv, env);
-	if (ht_search(env, "nl"))
-	{
-		free(argv[0]);
-		argv[0] = ht_search(env, "nl");
-		ht_deletef(env, "nl");
-		parse_cmd(argv[0], env);
-	}
-	ft_freesplit(splitted);
-	free(splitted);
-	return (res);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	char	*buffer;
-	char	*prefix;
 	char	*last_status_str;
-	t_ht	*env;
 	int		last_status;
 
-	(void)argc;
-	(void)argv;
-	if (signal(SIGINT, handle_signals) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
-	if (signal(SIGQUIT, handle_signals) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
-	env = hashtable_create(100);
-	if (!env)
-		return (printf("failed to malloc!"), 1);
-	register_env_var(env, envp);
-	prefix = get_prefix(0);
-	buffer = readline(prefix);
-	free(prefix);
 	while (buffer != NULL)
 	{
 		if (buffer[0] != 0)
@@ -147,4 +75,27 @@ int	main(int argc, char **argv, char **envp)
 		buffer = readline(prefix);
 		free(prefix);
 	}
+	return (0);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char	*buffer;
+	char	*prefix;
+	t_ht	*env;
+
+	(void)argc;
+	(void)argv;
+	if (signal(SIGINT, handle_signals) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGQUIT, handle_signals) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	env = hashtable_create(100);
+	if (!env)
+		return (printf("failed to malloc!"), 1);
+	register_env_var(env, envp);
+	prefix = get_prefix(0);
+	buffer = readline(prefix);
+	free(prefix);
+	process_input(buffer, prefix, env);
 }
