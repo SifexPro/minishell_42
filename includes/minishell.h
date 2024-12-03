@@ -6,7 +6,7 @@
 /*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:50 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:40:55 by anaudibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 1024
 # endif
+
+typedef struct s_exec_type 
+{
+    char    *cmd;
+    char    **envp;
+}           t_exec;
+
+typedef struct s_exec 
+{
+    char    *cmd;
+    char    **envp;
+}           t_exec;
 
 typedef struct s_str_input
 {
@@ -83,6 +95,9 @@ int		handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
 /* utils */
 int		ft_strarr_len(char **input);
+
+/* exec/exec */
+int		run_program_exec(char *path, char **argv, char **envp);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);

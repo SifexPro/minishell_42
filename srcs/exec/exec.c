@@ -6,7 +6,7 @@
 /*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 14:21:10 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:33:26 by anaudibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	run_program_exec(char *path, char **argv, char **envp)
 		printf("%s\n", argv[i]);
 		i++;
 	}*/
-	return (0);
+	return (exit(0), 0);
 }
 
 int	run_program(char *path, char **argv, char **envp)
@@ -40,7 +40,7 @@ int	run_program(char *path, char **argv, char **envp)
 	pid_t	child;
 	int		status;
 
-	printf("runprogr: %s\n", path);
+
 	child = fork();
 	if (!child)
 		run_program_exec(path, argv, envp);
