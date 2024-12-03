@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/09/24 14:06:30 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 13:55:37 by anaudibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_split_sh
 }	t_split_sh;
 
 /* main */
-int		parse_cmd(char *input, t_ht *env);
+int		parse_cmd(char *input, t_ht *env, char **envp);
 int		exit_prog(char **splitted, t_ht *env);
 
 /* command/cd */
@@ -81,5 +81,9 @@ int		handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
 /* utils */
 int		ft_strarr_len(char **input);
+
+/* exec/cmd_path */
+char	*get_path(char **envp);
+char	*get_cmd_path(char *cmd, char *path);
 
 #endif
