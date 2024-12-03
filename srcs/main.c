@@ -6,7 +6,7 @@
 /*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 13:33:35 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:14:10 by anaudibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	printf("%d\n", getpid());
 	if (signal(SIGINT, handle_signals) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
 	if (signal(SIGQUIT, handle_signals) == SIG_ERR)
