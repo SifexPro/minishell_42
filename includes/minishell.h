@@ -6,7 +6,7 @@
 /*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 13:55:37 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:02:50 by anaudibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+
+# include <sys/wait.h>
 
 # ifdef LINUX
 #  include <linux/limits.h>
