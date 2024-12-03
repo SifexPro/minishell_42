@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:53:35 by polepie           #+#    #+#             */
-/*   Updated: 2024/12/03 15:35:44 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 15:47:41 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	is_meta(char c)
 
 int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
-	printf("str: %s\n", (char *)(&str[sp->str_start]));
+	printf("str: %d %s\n", sp->str_start, (char *)(&str[sp->str_start]));
 	printf("tes %s\n", ft_strndup((char *)(&str[sp->str_start]),
 				sp->i - sp->str_start));
 	ft_lstadd_back(elem, create_str(

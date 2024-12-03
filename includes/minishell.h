@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 15:45:50 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 15:46:53 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ typedef enum e_tokens
 	APPEND,
 	PIPE
 }	t_tokens;
-
-typedef struct s_exec_type
-{
-	char	*cmd;
-	char	**envp;
-}			t_exec;
 
 typedef struct s_exec
 {

@@ -6,11 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/12/03 15:30:07 by pepie            ###   ########.fr       */
-=======
-/*   Updated: 2024/12/03 15:33:26 by anaudibe         ###   ########.fr       */
->>>>>>> cf99c88e26cce9eb481cec327a0a02fa29241328
+/*   Updated: 2024/12/03 15:47:52 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +40,6 @@ int	run_program(char *path, char **argv, char **envp)
 	pid_t	child;
 	int		status;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cf99c88e26cce9eb481cec327a0a02fa29241328
 	child = fork();
 	if (!child)
 		run_program_exec(path, argv, envp);
