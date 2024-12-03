@@ -101,9 +101,7 @@ t_list	*ft_split_quote(char const *str, t_ht *env)
 {
 	t_list		*elements;
 	t_list		*ret;
-	int			i;
 
-	i = 0;
 	if (!str)
 		return (NULL);
 	elements = NULL;

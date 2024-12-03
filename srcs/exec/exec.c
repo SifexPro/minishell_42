@@ -14,10 +14,8 @@
 
 int	run_program_exec(char *path, char **argv, char **envp)
 {
-	int		i;
 	char	*cmd_path;
 
-	i = 0;
 	if (!path)
 		return (exit(1), 1); // to print
 	cmd_path = get_cmd_path(path, get_path(envp));
@@ -76,5 +74,5 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 			return (exit_prog(&splitted, env));
 		res = select_exec(temp->argc, temp->argv, env, envp);
 	}
-	return (0);
+	return (res);
 }
