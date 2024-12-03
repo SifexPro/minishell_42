@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 14:14:10 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:19:24 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_signals(int signo)
 {
 	if (signo == SIGINT)
 	{
-		printf("\n");
+		printf("PID: %d\n", getpid());
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
