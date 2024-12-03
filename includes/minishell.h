@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 15:44:07 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 15:45:50 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ typedef enum e_tokens
 	APPEND,
 	PIPE
 }	t_tokens;
+
+typedef struct s_exec_type
+{
+	char	*cmd;
+	char	**envp;
+}			t_exec;
+
+typedef struct s_exec
+{
+	char	*cmd;
+	char	**envp;
+}			t_exec;
 
 typedef struct s_str_input
 {
@@ -92,6 +104,9 @@ int		handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
 /* utils */
 int		ft_strarr_len(char **input);
+
+/* exec/exec */
+int		run_program_exec(char *path, char **argv, char **envp);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);
