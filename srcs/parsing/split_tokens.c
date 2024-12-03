@@ -6,13 +6,13 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:29:09 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 14:34:08 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 15:40:52 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	**ft_split_tokens(char const *str, t_ht *env)
+/* t_list	**ft_split_tokens(char *str, t_ht *env)
 {
 	t_list	**lst;
 	int		i;
@@ -20,7 +20,7 @@ t_list	**ft_split_tokens(char const *str, t_ht *env)
 	i = 0;
 	while (str[i])
 	{
-		
+		if (srt[i] == '')
 	}
 	return (lst);
-}
+} */

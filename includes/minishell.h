@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:50 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:44:07 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 1024
 # endif
+
+typedef enum e_tokens
+{
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	HEREDOC,
+	APPEND,
+	PIPE
+}	t_tokens;
 
 typedef struct s_str_input
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 14:21:10 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:30:07 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	run_program(char *path, char **argv, char **envp)
 	pid_t	child;
 	int		status;
 
-	printf("runprogr: %s\n", path);
 	child = fork();
 	if (!child)
 		run_program_exec(path, argv, envp);
@@ -74,7 +73,6 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	argv = splitted;
 	argv++;
 	argc = ft_strarr_len(argv);
-	printf("|%s|\n", splitted[0]);
 	if (ft_strcmp(splitted[0], "exit") == 0)
 		return (exit_prog(splitted, env));
 	res = select_exec(splitted[0], argc, argv, env, envp);
