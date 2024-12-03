@@ -16,9 +16,9 @@ int	ft_cd(int argc, char **argv, t_ht *env)
 {
 	int	ret;
 
-	if (argc > 1)
+	if (argc > 2)
 		return (ft_printf("cd: too many arguments\n"), 1);
-	if (argc == 0)
+	if (argc == 1)
 	{
 		ret = chdir(ht_search(env, "HOME"));
 		if (ret == -1)
@@ -26,8 +26,8 @@ int	ft_cd(int argc, char **argv, t_ht *env)
 					ht_search(env, "HOME")), 1);
 		return (0);
 	}
-	ret = chdir(argv[0]);
+	ret = chdir(argv[1]);
 	if (ret == -1)
-		return (ft_printf("cd: no such file or directory: %s\n", argv[0]), 1);
+		return (ft_printf("cd: no such file or directory: %s\n", argv[1]), 1);
 	return (0);
 }

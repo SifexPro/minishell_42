@@ -1,7 +1,5 @@
 # TODO
 
-### Fix echo "$HOME<"
-### Gerer les tokens apres l'expansion de variables
 ### Faire les tokens
 	< should redirect input.
 	> should redirect output.
@@ -11,10 +9,7 @@
 
 ### Gerer les signaux
 
-### Fix le echo -n qui fait un espace au debut
-
 ### Faire les builtin
 - export with no options
 - unset with no options
--  env with no options or arguments
-
+- env with no options or arguments

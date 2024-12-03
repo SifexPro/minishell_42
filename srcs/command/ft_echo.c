@@ -26,15 +26,17 @@ int	ft_echo(int argc, char **argv)
 	while (argv[i] && i < argc)
 	{
 		if (ft_strncmp(argv[i], "-n", 2) == 0 && !text_display)
+		{
 			has_n = true;
+		}
 		else
 		{
 			text_display = true;
 			ft_printf("%s", argv[i], argc);
 		}
-		i++;
-		if (i < argc)
+		if (i < argc && ((!has_n) || (has_n && i != 0)))
 			ft_printf(" ");
+		i++;
 	}
 	if (!has_n)
 		ft_printf("\n");
