@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/09/24 14:11:38 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 13:33:35 by anaudibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exit_prog(char **splitted, t_ht *env)
 	exit(0);
 }
 
-int	process_input(char *buffer, char *prefix, t_ht *env)
+int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 {
 	char	*last_status_str;
 	int		last_status;
@@ -66,7 +66,7 @@ int	process_input(char *buffer, char *prefix, t_ht *env)
 		if (buffer[0] != 0)
 		{
 			add_history(buffer);
-			last_status = parse_cmd(buffer, env);
+			last_status = parse_cmd(buffer, env, envp);
 			last_status_str = ft_uitoa(last_status);
 			ht_deletef(env, "?");
 			ht_insert(env, "?", last_status_str);
@@ -97,5 +97,5 @@ int	main(int argc, char **argv, char **envp)
 	prefix = get_prefix(0);
 	buffer = readline(prefix);
 	free(prefix);
-	process_input(buffer, prefix, env);
+	process_input(buffer, prefix, env, envp);
 }
