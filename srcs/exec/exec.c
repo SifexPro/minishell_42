@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 15:47:52 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:38:27 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ int	run_program_exec(char *path, char **argv, char **envp)
 		return (exit(126), 126); // to print
 	else if (execve(cmd_path, argv, envp) < 0)
 		return (printf("here"), exit(1), 1);
-	/*while (argv[i])
-	{
-		printf("%s\n", argv[i]);
-		i++;
-	}*/
 	return (exit(0), 0);
 }
 
@@ -47,43 +42,39 @@ int	run_program(char *path, char **argv, char **envp)
 	return (WEXITSTATUS(status));
 }
 
-int	select_exec(char *prog, int argc, char **argv, t_ht *env, char **envp)
+int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 {
-	if (ft_strncmp(prog, "cd", 2) == 0)
+	if (ft_strncmp(argv[0], "cd", 2) == 0)
 		return (ft_cd(argc, argv, env));
-	else if (ft_strncmp(prog, "pwd", 3) == 0)
+	else if (ft_strncmp(argv[0], "pwd", 3) == 0)
 		return (ft_pwd(argc, argv));
-	else if (ft_strncmp(prog, "echo", 4) == 0)
+	else if (ft_strncmp(argv[0], "echo", 4) == 0)
 		return (ft_echo(argc, argv));
 	else
-		return (run_program(prog, argv, envp));
+		return (run_program(argv[0], argv, envp));
 }
 
 int	parse_cmd(char *input, t_ht *env, char **envp)
 {
-	char	**splitted;
-	char	**argv;
-	int		argc;
+	t_list	*splitted;
+	t_exec	*temp;
 	int		res;
 
 	splitted = ft_split_quote(input, env);
 	if (!splitted)
 		return (0);
 	free(input);
-	argv = splitted;
-	argv++;
-	argc = ft_strarr_len(argv);
-	if (ft_strcmp(splitted[0], "exit") == 0)
-		return (exit_prog(splitted, env));
-	res = select_exec(splitted[0], argc, argv, env, envp);
-	if (ht_search(env, "nl"))
+	while (splitted)
 	{
-		free(argv[0]);
-		argv[0] = ht_search(env, "nl");
-		ht_deletef(env, "nl");
-		parse_cmd(argv[0], env, envp);
+		temp = splitted->content;
+		/* printf("=====================\n");
+		printf("1 argc %d\n", temp->argc);
+		printf("1 argv1: %s\n", temp->argv[0]);
+		printf("1 tokens: %d\n", temp->token_next); */
+		splitted = splitted->next;
+		if (ft_strcmp(temp->argv[0], "exit") == 0)
+			return (exit_prog(&splitted, env));
+		res = select_exec(temp->argc, temp->argv, env, envp);
 	}
-	ft_freesplit(splitted);
-	free(splitted);
-	return (res);
+	return (0);
 }

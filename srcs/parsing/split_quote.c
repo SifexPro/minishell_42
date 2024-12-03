@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:50:25 by pepie             #+#    #+#             */
-/*   Updated: 2024/09/24 14:08:29 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 16:45:52 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	if (str[sp->i] == ' ' && sp->str_start == sp->i)
 		sp->str_start++;
 	else if (is_meta(str[sp->i]))
-		return (handle_meta(str, sp, elem, env));
+		handle_meta(str, sp, elem);
 	else if (str[sp->i] == '\"')
 		double_quote(str, sp, elem, env);
 	else if (str[sp->i] == '\'')
@@ -94,17 +94,13 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 	if (sp->is_simp_quote || sp->is_dbl_quote)
 		return (free(sp), ft_lstclear(elem, &free),
 			printf("Quote non finished!\n"), 1);
-	if (res == 2)
-		return (ht_insert(env, "nl",
-				ft_strdup((char *)(&str[sp->str_start + 1]))),
-			free(sp), 0);
 	return (free(sp), 0);
 }
 
-char	**ft_split_quote(char const *str, t_ht *env)
+t_list	*ft_split_quote(char const *str, t_ht *env)
 {
 	t_list		*elements;
-	char		**ret;
+	t_list		*ret;
 	int			i;
 
 	i = 0;
@@ -113,9 +109,7 @@ char	**ft_split_quote(char const *str, t_ht *env)
 	elements = NULL;
 	if (create_strings_quote(str, &elements, env))
 		return (free(elements), NULL);
-	ret = malloc(sizeof(char *) * (ft_lstsize(elements) + 1));
-	if (!ret)
-		return (NULL);
-	sq_replace_and_free(elements, ret);
+	ret = NULL;
+	sq_replace_and_free(elements, &ret);
 	return (ret);
 }

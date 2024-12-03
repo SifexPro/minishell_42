@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:18:12 by pepie             #+#    #+#             */
-/*   Updated: 2024/09/24 13:26:05 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 15:54:49 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,17 @@ char	*handle_expansion(char *str, t_ht *env)
 
 t_list	*create_str(char *str, bool is_simple_quote, t_ht *env)
 {
+	t_splitted	*content;
+
+	content = malloc(sizeof(t_splitted));
+	if (!content)
+		return (NULL);
+	content->is_delimiter = false;
 	if (!is_simple_quote)
-		return (ft_lstnew(handle_expansion(str, env)));
-	return (ft_lstnew(str));
+		content->content = handle_expansion(str, env);
+	else
+		content->content = str;
+	return (ft_lstnew(content));
 }
 
 void	register_env_var(t_ht *env, char **envp)

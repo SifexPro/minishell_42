@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 15:46:53 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:38:01 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ typedef enum e_tokens
 
 typedef struct s_exec
 {
-	char	*cmd;
-	char	**envp;
+	char		*cmd;
+	int			argc;
+	char		**argv;
+	char		**envp;
+	t_tokens	token_next;
 }			t_exec;
 
 typedef struct s_str_input
@@ -67,9 +70,16 @@ typedef struct s_split_sh
 	bool	is_dbl_quote;
 }	t_split_sh;
 
+typedef struct s_splitted
+{
+	bool	is_delimiter;
+	void	*content;
+	int		delimiter;
+}	t_splitted;
+
 /* main */
 int		parse_cmd(char *input, t_ht *env, char **envp);
-int		exit_prog(char **splitted, t_ht *env);
+int		exit_prog(t_list **splitted, t_ht *env);
 
 /* command/cd */
 int		ft_cd(int argc, char **argv, t_ht *env);
@@ -82,10 +92,10 @@ char	*get_pwd(void);
 int		ft_echo(int argc, char **argv);
 
 /* split_quote */
-char	**ft_split_quote(char const *str, t_ht *env);
+t_list	*ft_split_quote(char const *str, t_ht *env);
 
 /* split_quote_2 */
-int		sq_replace_and_free(t_list *elements, char **ret);
+int		sq_replace_and_free(t_list *elements, t_list **ret);
 int		init_string_quote(t_split_sh *sp);
 
 /* parser/expansion */
@@ -94,7 +104,7 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
 
 /* parser/meta */
 bool	is_meta(char c);
-int		handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
+int		handle_meta(char const *str, t_split_sh *sp, t_list **elem);
 
 /* utils */
 int		ft_strarr_len(char **input);

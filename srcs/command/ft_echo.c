@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:48:15 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/23 02:58:56 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:40:41 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_echo(int argc, char **argv)
 	i = 0;
 	has_n = false;
 	text_display = false;
+	argv++;
+	argc--;
 	while (argv[i] && i < argc)
 	{
 		if (ft_strncmp(argv[i], "-n", 2) == 0 && !text_display)

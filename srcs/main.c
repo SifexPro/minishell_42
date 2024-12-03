@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 15:20:37 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:37:38 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ char	*get_prefix(int last_status)
 	return (tmp);
 }
 
-int	exit_prog(char **splitted, t_ht *env)
+int	exit_prog(t_list **splitted, t_ht *env)
 {
-	ft_freesplit(splitted);
-	free(splitted);
+	(void)splitted;
+	/* ft_freesplit(splitted);
+	free(splitted); */
 	hashtable_destroy(env);
 	exit(0);
 }
