@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 15:19:24 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/03 15:20:37 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	handle_signals(int signo)
 {
 	if (signo == SIGINT)
 	{
-		printf("PID: %d\n", getpid());
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
