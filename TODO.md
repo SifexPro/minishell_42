@@ -1,5 +1,11 @@
 # TODO
 
+### To-Fix
+- pipe = tokens: -1
+- space after a command (ex: "cat TODO.md ", "ls -a ", ...)
+- CTRL+C -> New line (has the native bash)
+- cmd + token + void ("cat Makefile <") = Segmentation fault (core dumped)
+
 ### Faire les tokens
 	< should redirect input.
 	> should redirect output.

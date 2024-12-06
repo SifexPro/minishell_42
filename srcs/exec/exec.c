@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 16:06:46 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/06 16:38:50 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	run_program(char *path, char **argv, char **envp)
 	int		status;
 
 	child = fork();
-	has_pipe(NULL);
 	if (!child)
 		run_program_exec(path, argv, envp);
 	waitpid(child, &status, 0);
@@ -66,10 +65,11 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	while (splitted)
 	{
 		temp = splitted->content;
-		/* printf("=====================\n");
+		//has_pipe(NULL);
+		printf("=====================\n");
 		printf("1 argc %d\n", temp->argc);
 		printf("1 argv1: %s\n", temp->argv[0]);
-		printf("1 tokens: %d\n", temp->token_next); */
+		printf("1 tokens: %d\n", temp->token_next); 
 		splitted = splitted->next;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (exit_prog(&splitted, env));
