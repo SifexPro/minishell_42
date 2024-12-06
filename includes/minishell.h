@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 17:38:01 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/06 16:05:43 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,8 @@ int		run_program_exec(char *path, char **argv, char **envp);
 /* exec/cmd_path */
 char	*get_path(char **envp);
 char	*get_cmd_path(char *cmd, char *path);
+
+/* exec/exec_pipe */
+int		has_pipe(t_list *idk);
 
 #endif

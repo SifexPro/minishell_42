@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaudibe <anaudibe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:27:00 by anaudibe          #+#    #+#             */
-/*   Updated: 2024/12/03 18:04:09 by anaudibe         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:04:36 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	has_pipe(t_list *idk)
+{
+	int	i;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (idk)
+	{
+		printf("idk->content = %s\n", input->content);
+		idk = idk->next;
+	}
+	return (res);
+}
 
 //void    run_program_pipe()
 // Base code
@@ -54,3 +69,4 @@ void    run_program_pipe(char *path, char **argv, char **envp)
         i++;
     }
 }
+

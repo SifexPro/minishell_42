@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 17:38:27 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/06 16:06:46 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	run_program(char *path, char **argv, char **envp)
 	int		status;
 
 	child = fork();
+	has_pipe(NULL);
 	if (!child)
 		run_program_exec(path, argv, envp);
 	waitpid(child, &status, 0);
