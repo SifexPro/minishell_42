@@ -12,6 +12,7 @@ OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/exec/exec.c \
+				srcs/exec/exec_pipe.c\
 				srcs/parsing/expansion.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \

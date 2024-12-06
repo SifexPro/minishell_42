@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 17:07:07 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:20:52 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	if (!splitted)
 		return (0);
 	free(input);
+	printf("pipes: %d\n", has_pipe(splitted));
 	while (splitted)
 	{
 		temp = splitted->content;

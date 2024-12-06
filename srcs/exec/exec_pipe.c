@@ -6,35 +6,29 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:27:00 by anaudibe          #+#    #+#             */
-/*   Updated: 2024/12/06 16:04:36 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:25:57 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	has_pipe(t_list *idk)
+int	has_pipe(t_list *splitted)
 {
-	int	i;
-	int	res;
+	t_exec	*temp;
+	int		res;
 
-	i = 0;
 	res = 0;
-	while (idk)
+	while (splitted)
 	{
-		printf("idk->content = %s\n", input->content);
-		idk = idk->next;
+		temp = splitted->content;
+		if (temp->token_next == PIPE)
+			res++;
+		splitted = splitted->next;
 	}
 	return (res);
 }
 
-//void    run_program_pipe()
-// Base code
-// check if has "file < command"
-// check if has "command > file"
-// check if has "command | command"
-// check if has combo of the above
-// do the heredoc thing  
-void    run_program_pipe(char *path, char **argv, char **envp)
+/*void    run_program_pipe(char *path, char **argv, char **envp)
 {
     pid_t	pid[2];
     int		pipe_fd[2];
@@ -68,5 +62,11 @@ void    run_program_pipe(char *path, char **argv, char **envp)
         }
         i++;
     }
-}
+}*/
 
+// Base code
+// check if has "file < command"
+// check if has "command > file"
+// check if has "command | command"
+// check if has combo of the above
+// do the heredoc thing  
