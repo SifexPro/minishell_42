@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:53:35 by polepie           #+#    #+#             */
-/*   Updated: 2024/12/03 17:21:08 by pepie            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:00:47 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 		content->delimiter = APPEND;
 		sp->str_start = sp->i + 2;
 	}
-	else if (strncmp((char *)(&str[sp->str_start]), "||", 2) == 0)
+	else if (strncmp((char *)(&str[sp->str_start]), "|", 1) == 0)
 	{
 		content->delimiter = PIPE;
 		sp->str_start = sp->i + 2;

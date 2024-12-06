@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 16:38:50 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:07:07 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ int	run_program(char *path, char **argv, char **envp)
 
 int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 {
-	if (ft_strncmp(argv[0], "cd", 2) == 0)
+	if (!ft_strncmp(argv[0], "cd", 2))
 		return (ft_cd(argc, argv, env));
-	else if (ft_strncmp(argv[0], "pwd", 3) == 0)
+	else if (!ft_strncmp(argv[0], "pwd", 3))
 		return (ft_pwd(argc, argv));
-	else if (ft_strncmp(argv[0], "echo", 4) == 0)
+	else if (!ft_strncmp(argv[0], "echo", 4))
 		return (ft_echo(argc, argv));
+	else if (!ft_strncmp(argv[0], "cat", 3))
+		return (ft_cat(argc, argv));
 	else
 		return (run_program(argv[0], argv, envp));
 }
@@ -65,7 +67,6 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	while (splitted)
 	{
 		temp = splitted->content;
-		//has_pipe(NULL);
 		printf("=====================\n");
 		printf("1 argc %d\n", temp->argc);
 		printf("1 argv1: %s\n", temp->argv[0]);

@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 16:05:43 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:07:02 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ char	*get_pwd(void);
 
 /* command/echo */
 int		ft_echo(int argc, char **argv);
+
+/* command/cat */
+int		ft_cat(int argc, char **argv);
 
 /* split_quote */
 t_list	*ft_split_quote(char const *str, t_ht *env);
