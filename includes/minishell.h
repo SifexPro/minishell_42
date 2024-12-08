@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 17:22:10 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/09 00:44:40 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ typedef struct s_exec
 	char		**envp;
 	t_tokens	token_next;
 }			t_exec;
+
+typedef struct s_flags
+{
+	int		cmd_count;
+	int		pipe_count;
+	pid_t	*pid;
+	int		*fd_in;
+	int		*fd_out;
+	t_exec 	**cmd;
+}			t_flags;
+// flag for if has file in start & end
 
 typedef struct s_str_input
 {
@@ -114,12 +125,13 @@ int		ft_strarr_len(char **input);
 
 /* exec/exec */
 int		run_program_exec(char *path, char **argv, char **envp);
+int		select_exec(int argc, char **argv, t_ht *env, char **envp);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);
 char	*get_cmd_path(char *cmd, char *path);
 
 /* exec/exec_pipe */
-int	has_pipe(t_list *splitted);
+void	forking(t_flags *flags, t_ht *env);
 
 #endif

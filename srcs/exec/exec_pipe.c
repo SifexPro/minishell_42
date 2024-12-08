@@ -6,65 +6,138 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:27:00 by anaudibe          #+#    #+#             */
-/*   Updated: 2024/12/06 17:25:57 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/09 00:50:51 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	has_pipe(t_list *splitted)
+///////////////////////////////////////////
+int	run_program_exec_tmp(char *path, char **argv, char **envp)
 {
-	t_exec	*temp;
-	int		res;
+	char	*cmd_path;
 
-	res = 0;
-	while (splitted)
-	{
-		temp = splitted->content;
-		if (temp->token_next == PIPE)
-			res++;
-		splitted = splitted->next;
-	}
-	return (res);
+	if (!path)
+		return (exit(1), 1); // to print
+	cmd_path = get_cmd_path(path, get_path(envp));
+	if (!cmd_path)
+		return (exit(127), 127); // to print
+	else if (access(cmd_path, X_OK))
+		return (exit(126), 126); // to print
+	else if (execve(cmd_path, argv, envp) < 0)
+		return (printf("here"), exit(1), 1);
+	return (exit(6), 6);
 }
 
-/*void    run_program_pipe(char *path, char **argv, char **envp)
+int	run_program_tmp(char *path, char **argv, char **envp)
 {
-    pid_t	pid[2];
-    int		pipe_fd[2];
-    int		status;
-    int		i;
+	return (run_program_exec_tmp(path, argv, envp));
+}
 
-    i = 0;
-    while (argv[i])
-    {
-        if (pipe(pipe_fd) < 0)
-            exit(1);
-        pid[i] = fork();
-        if (pid[i] < 0)
-            exit(1);
-        if (pid[i] == 0)
-        {
-            if (i == 0)
-            {
-                close(pipe_fd[0]);
-                dup2(pipe_fd[1], 1);
-                close(pipe_fd[1]);
-                execve(path, argv, envp);
-            }
-            else
-            {
-                close(pipe_fd[1]);
-                dup2(pipe_fd[0], 0);
-                close(pipe_fd[0]);
-                execve(path, argv, envp);
-            }
-        }
-        i++;
+int	select_exec_tmp(int argc, char **argv, t_ht *env, char **envp)
+{
+	return (run_program_tmp(argv[0], argv, envp));
+}
+///////////////////////////////////////////
+
+void	open_pipe(t_flags *flags)
+{
+	int	i;
+	int pipe_fd[2];
+
+	i = 0;
+	while (i < flags->pipe_count)
+	{
+		if (pipe(pipe_fd) < 0)
+			exit(1);///exit if pipe is not successful
+		flags->fd_in[i] = pipe_fd[0];//i + 1
+		flags->fd_out[i] = pipe_fd[1];
+		i++;
+	}
+}
+
+void	close_pipe(t_flags *flags)
+{
+	int	i;
+
+	i = 0;
+	//checks
+	while (i < flags->pipe_count)
+	{
+		if (flags->fd_in && flags->fd_in[i] != -1)
+		{
+			close(flags->fd_in[i]);
+			flags->fd_in[i] = -1;
+		}
+		if (flags->fd_out && flags->fd_out[i] != -1)
+		{
+			close(flags->fd_out[i]);
+			flags->fd_out[i] = -1;
+		}	
+		i++;
+	}
+}
+
+void	child_exec(t_flags *flags, int i, t_ht *env)
+{
+	/*if (i > 0) {
+        dup2(flags->fd_in[i - 1], 0);
     }
-}*/
+    if (i < flags->cmd_count - 1) {
+        dup2(flags->fd_out[i], 1);
+    }*/
+    
+    close_pipe(flags);
+	//exit(select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, env, flags->cmd[i]->envp));
+	//execve(flags->cmd[i]->argv[0], flags->cmd[i]->argv, flags->cmd[i]->envp);
+	//select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, env, flags->cmd[i]->envp);
+	exit(13);
+}
+// if (i == 0)
+	// open file in if has
+	//dup2(flags->fd_in[i], 0);
+		
+	// open file out if has
+	//dup2(flags->fd_out[i], 1);
+	
+	//close(flags->fd_in[i]);
+	//close(flags->fd_out[i]);
+	
+	//close_pipe(flags);
+	//printf("%d -> flags->fd_in[%d]: %d\n", i, i, flags->fd_in[i]);
 
-// Base code
+void	forking(t_flags *flags, t_ht *env)
+{
+	int		i;
+
+	i = 0;
+	open_pipe(flags);
+	while (i < flags->cmd_count)
+	{
+		flags->pid[i] = fork();
+		if (flags->pid[i] < 0)
+			exit(1);///exit if fork is not successful
+		else if (flags->pid[i] == 0)
+			child_exec(flags, i, env);
+		//if (ft_strcmp(temp->argv[0], "exit") == 0)
+		//	return (exit_prog(&splitted, env));
+		//printf("temp->argv[0]); %s\n", temp->argv[0]);
+		i++;
+	}
+	///////////////////////////////////////////
+	i = 0;
+	close_pipe(flags);
+	int status;
+	while (i < flags->cmd_count)
+	{
+		waitpid(flags->pid[i], &status, 0);
+		i++;
+	}
+	printf("status : %d\n", status);
+	printf("status : %d\n", WEXITSTATUS(status));
+	///////////////////////////////////////////
+}
+
 // check if has "file < command"
 // check if has "command > file"
 // check if has "command | command"
