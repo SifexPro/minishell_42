@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 16:06:28 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/08 20:25:37 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 	char	*last_status_str;
 	int		last_status;
 
+	last_status = 0;
 	while (buffer != NULL)
 	{
 		if (buffer[0] != 0)

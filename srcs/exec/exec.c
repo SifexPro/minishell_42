@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/06 17:20:52 by Sifex            ###   ########.fr       */
+/*   Updated: 2024/12/08 20:23:23 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	t_exec	*temp;
 	int		res;
 
+	res = 0;
 	splitted = ft_split_quote(input, env);
 	if (!splitted)
 		return (0);
