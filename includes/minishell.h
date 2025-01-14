@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 23:57:11 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/09 00:44:40 by Sifex            ###   ########.fr       */
+/*   Updated: 2025/01/14 15:08:13 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,6 @@ char	*get_path(char **envp);
 char	*get_cmd_path(char *cmd, char *path);
 
 /* exec/exec_pipe */
-void	forking(t_flags *flags, t_ht *env);
+void	forking(t_flags *flags, t_ht *env, char **envp);
 
 #endif

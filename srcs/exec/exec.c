@@ -6,7 +6,7 @@
 /*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 07:51:42 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/08 23:21:01 by Sifex            ###   ########.fr       */
+/*   Updated: 2025/01/14 15:11:18 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_flags(t_flags *flags, t_list *splitted)
 	splitted = start;
 
 	flags->cmd_count = flags->pipe_count + 1;
-	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * flags->cmd_count);
+	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * (flags->cmd_count + 1));
 	//check malloc
 	i = 0;
 	while (splitted)
@@ -89,14 +89,16 @@ void	init_flags(t_flags *flags, t_list *splitted)
 		splitted = splitted->next;
 		i++;
 	}
+	flags->cmd[i] = NULL;
 
 	if (flags->pipe_count > 0)
 	{
 		flags->pid = ft_calloc(flags->cmd_count + 1, sizeof(pid_t));////
-		flags->fd_in = ft_calloc(flags->cmd_count + 1, sizeof(int));//// prévoir un fd_in[0] pour le cas où il y a un fichier en entrée
-		flags->fd_in = ft_memset(flags->fd_in, -1, sizeof(int) * flags->cmd_count);
-		flags->fd_out = ft_calloc(flags->cmd_count + 1, sizeof(int));////
-		flags->fd_out = ft_memset(flags->fd_out, -1, sizeof(int) * flags->cmd_count);
+
+		flags->fd_in = ft_calloc((flags->cmd_count + 2), sizeof(int));//// prévoir un fd_in[0] pour le cas où il y a un fichier en entrée
+		flags->fd_in = ft_memset(flags->fd_in, -1, (sizeof(int) * flags->cmd_count + 1));
+		flags->fd_out = ft_calloc((flags->cmd_count + 2), sizeof(int));////
+		flags->fd_out = ft_memset(flags->fd_out, -1, (sizeof(int) * flags->cmd_count + 1));
 	}
 }
 ///////////////////////////////////////////
@@ -122,13 +124,16 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	if (flags->pipe_count > 0)
 	{
 		printf("pid: %d\n", flags->pid[0]);
+		//printf("flags->cmd[i]->envp[0]: %s\n", flags->cmd[0]->envp[0]);
 		int i = 0;
 		while (i < flags->cmd_count)
 		{
-			printf("cmd[%d]: %s\n", i, flags->cmd[i]->argv[0]);
+			printf("argc[%d]: %d\n", i, flags->cmd[i]->argc);
+			printf("argv[%d]: %s\n", i, flags->cmd[i]->argv[0]);
+			printf("cmd[%d]: -%s-\n", i, flags->cmd[i]->argv[0]);
 			i++;
 		}
-		forking(flags, env);
+		forking(flags, env, envp);
 	}
 	else
 	{
