@@ -63,7 +63,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	else if ((str[sp->i] == ' ' && sp->quote_start == 0)
 		|| str[sp->i + 1] == 0 || is_meta(str[sp->i]))
 	{
-		if (str[sp->i + 1] == 0)
+		if (str[sp->i + 1] == 0 && str[sp->i] != ' ')
 			sp->i++;
 		ft_lstadd_back(elem, create_str(
 				ft_strndup((char *)(&str[sp->str_start]),

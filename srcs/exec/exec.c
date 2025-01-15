@@ -33,6 +33,11 @@ int	run_program(char *path, char **argv, char **envp)
 	pid_t	child;
 	int		status;
 
+	/* printf("=====================\n");
+	printf("path: {%s}\n", path);
+	printf("argv: {%s}\n", argv[0]);
+	printf("envp: {%s}\n", envp[0]);
+	printf("=====================\n"); */
 	child = fork();
 	if (!child)
 		run_program_exec(path, argv, envp);
@@ -151,3 +156,4 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	}
 	return (res);
 }
+ 
