@@ -1,8 +1,6 @@
 # TODO
 
 ### To-Fix
-- space after a command (ex: "cat TODO.md ", "ls -a ", ...)
-- CTRL+C -> New line (has the native bash)
 - cmd + token + void ("cat Makefile <") = Segmentation fault (core dumped)
 - historique minishell != historique bash (fleche du haut pour ancienne commande) : faut faire un strcmp pour pas dupliquer les commandes identique dans l'historique
 
