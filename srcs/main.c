@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	handle_signals(int signo)
+void	handle_signals_edit(int signo)
 {
 	if (signo == SIGINT)
 	{
@@ -70,6 +70,10 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 			add_history(buffer);
 			last_status = parse_cmd(buffer, env, envp);
 			last_status_str = ft_uitoa(last_status);
+			if (signal(SIGINT, handle_signals_edit) == SIG_ERR)
+				printf("failed to register interrupts with kernel\n");
+			if (signal(SIGQUIT, handle_signals_edit) == SIG_ERR)
+				printf("failed to register interrupts with kernel\n");
 			ht_deletef(env, "?");
 			ht_insert(env, "?", last_status_str);
 		}
@@ -89,9 +93,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	printf("%d\n", getpid());
-	if (signal(SIGINT, handle_signals) == SIG_ERR)
+	if (signal(SIGINT, handle_signals_edit) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
-	if (signal(SIGQUIT, handle_signals) == SIG_ERR)
+	if (signal(SIGQUIT, handle_signals_edit) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
 	env = hashtable_create(100);
 	if (!env)

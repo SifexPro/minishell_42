@@ -108,6 +108,15 @@ void	init_flags(t_flags *flags, t_list *splitted)
 }
 ///////////////////////////////////////////
 
+void	handle_signals_cmd(int signo)
+{
+	if (signo == SIGINT)
+	{
+		printf("\n");
+		rl_redisplay();
+	}
+}
+
 int	parse_cmd(char *input, t_ht *env, char **envp)
 {
 	t_list	*splitted;
@@ -124,19 +133,23 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		return (0);
 	free(input);
 	init_flags(flags, splitted);
-	printf("pipe_count: %d\n", flags->pipe_count);
-	printf("cmd_count: %d\n", flags->cmd_count);
+	if (signal(SIGINT, handle_signals_cmd) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGQUIT, handle_signals_cmd) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	/* printf("pipe_count: %d\n", flags->pipe_count);
+	printf("cmd_count: %d\n", flags->cmd_count); */
 	if (flags->pipe_count > 0)
 	{
-		printf("pid: %d\n", flags->pid[0]);
+		//printf("pid: %d\n", flags->pid[0]);
 		//printf("flags->cmd[i]->envp[0]: %s\n", flags->cmd[0]->envp[0]);
 		int i = 0;
 		while (i < flags->cmd_count)
 		{
-			printf("cmd[%d]: -%s-\n", i, flags->cmd[i]->argv[0]);
+			//printf("cmd[%d]: -%s-\n", i, flags->cmd[i]->argv[0]);
 			i++;
 		}
-		printf("\n-----------------\n\n");
+		//printf("\n-----------------\n\n");
 		forking(flags, env, envp);
 	}
 	else
@@ -144,10 +157,10 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		while (splitted)
 		{
 			temp = splitted->content;
-			printf("=====================\n");
+			/* printf("=====================\n");
 			printf("1 argc %d\n", temp->argc);
 			printf("1 argv1: %s\n", temp->argv[0]);
-			printf("1 tokens: %d\n", temp->token_next); 
+			printf("1 tokens: %d\n", temp->token_next);  */
 			splitted = splitted->next;
 			if (ft_strcmp(temp->argv[0], "exit") == 0)
 				return (exit_prog(&splitted, env));
