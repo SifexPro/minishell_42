@@ -128,11 +128,10 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		int i = 0;
 		while (i < flags->cmd_count)
 		{
-			printf("argc[%d]: %d\n", i, flags->cmd[i]->argc);
-			printf("argv[%d]: %s\n", i, flags->cmd[i]->argv[0]);
 			printf("cmd[%d]: -%s-\n", i, flags->cmd[i]->argv[0]);
 			i++;
 		}
+		printf("\n-----------------\n\n");
 		forking(flags, env, envp);
 	}
 	else

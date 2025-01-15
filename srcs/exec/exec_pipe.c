@@ -42,15 +42,31 @@ int	run_program_tmp(char *path, char **argv, char **envp)
 	//return (run_program_exec_tmp(path, argv, envp));
 }
 
-int	select_exec_tmp(int argc, char **argv, char **envp)
+///////////////////////////////////////////
+char **temp_fix(char **argv, int argc)
 {
-	printf("Here 1\n");
-	printf("argc: %d\n", argc);
-	while (argc)
+	char **temp;
+	int i;
+
+	i = 0;
+	temp = malloc(sizeof(char *) * (argc + 1));
+	while (i < argc)
 	{
-		printf("argv[%d]: %s\n", argc, argv[argc]);
-		argc--;
+		temp[i] = argv[i];
+		i++;
 	}
+	temp[i] = NULL;
+	return (temp);
+}
+///////////////////////////////////////////
+
+int	select_exec_tmp(int argc, char **argv, t_ht *env, char **envp)
+{
+	//printf("Here 1\n");
+	//printf("argc: %d\n", argc);
+	argv = temp_fix(argv, argc);////
+	//printf("argv[1]: %s\n", argv[argc]);
+	
 	return (run_program_tmp(argv[0], argv, envp));
 }
 ///////////////////////////////////////////
@@ -102,7 +118,7 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	if (i < flags->cmd_count - 1)
 		dup2(flags->fd_out[i], 1);
 	close_pipe(flags);
-	//exit(select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp));
+	exit(select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp));
 }
 
 void	forking(t_flags *flags, t_ht *env, char **envp)
@@ -115,17 +131,18 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 	while (i < flags->cmd_count)
 	{
 		temp = envp;
-		printf("\n\n---\n");
-		printf("-> i: %d\n", i);
-		printf("flags->cmd[i]->argv[0]: -%s-\n", flags->cmd[i]->argv[0]);
-		printf("flags->cmd[i]->argc: %d\n", flags->cmd[i]->argc);
-		printf("temp[0]: -%s-\n", temp[0]);
-		/*flags->pid[i] = fork();
+
+		//printf("\n\n---\n");
+		//printf("-> i: %d\n", i);
+		//printf("flags->cmd[i]->argv[0]: -%s-\n", flags->cmd[i]->argv[0]);
+		//printf("flags->cmd[i]->argc: %d\n", flags->cmd[i]->argc);
+		//printf("temp[0]: -%s-\n", temp[0]);
+		flags->pid[i] = fork();
 		if (flags->pid[i] < 0)
 			exit(1);///exit if fork is not successful
 		else if (flags->pid[i] == 0)
-			child_exec(flags, i, env, envp);*/
-		printf("select_exec_tmp: -%d-", select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, temp));
+			child_exec(flags, i, env, envp);
+		//printf("select_exec_tmp: -%d-", select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, temp));
 		
 		//if (ft_strcmp(temp->argv[0], "exit") == 0)
 		//	return (exit_prog(&splitted, env));
@@ -135,14 +152,15 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 	///////////////////////////////////////////
 
 	i = 0;
-	/*close_pipe(flags);
+	close_pipe(flags);
 	int status;
 	while (i < flags->cmd_count)
 	{
 		waitpid(flags->pid[i], &status, 0);
-		printf("status : %d\n", WEXITSTATUS(status));
 		i++;
-	}*/
+	}
+	printf("\n-----------------\n");
+	printf("status : %d\n", WEXITSTATUS(status));
 	///////////////////////////////////////////
 }
 
