@@ -24,7 +24,7 @@ int	run_program_exec(char *path, char **argv, char **envp)
 	else if (access(cmd_path, X_OK))
 		return (exit(126), 126); // to print
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (printf("here"), exit(1), 1);
+		return (exit(1), 1);
 	return (exit(0), 0);
 }
 
@@ -60,6 +60,7 @@ int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 }
 
 ///////////////////////////////////////////
+
 void	init_flags(t_flags *flags, t_list *splitted)
 {
 	int		i;
@@ -70,6 +71,10 @@ void	init_flags(t_flags *flags, t_list *splitted)
 
 	flags->cmd_count = 0;
 	flags->pipe_count = 0;
+	flags->infile = NULL;
+	flags->outfile = NULL;
+	flags->has_infile = false;
+	flags->has_outfile = false;
 	flags->pid = NULL;
 	flags->fd_in = NULL;
 	flags->fd_out = NULL;
@@ -80,16 +85,24 @@ void	init_flags(t_flags *flags, t_list *splitted)
 		//flags->cmd_count++;
 		if (temp->token_next == PIPE)
 			flags->pipe_count++;
+		else if (temp->token_next == REDIRECT_INPUT)
+			flags->has_infile = true;
+		else if (temp->token_next == REDIRECT_OUTPUT)
+			flags->has_outfile = true;
 		splitted = splitted->next;
 	}
 	splitted = start;
 
-	flags->cmd_count = flags->pipe_count + 1;
+	flags->cmd_count = flags->pipe_count + 1 + flags->has_infile + flags->has_outfile;
 	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * (flags->cmd_count + 1));
 	//check malloc
 	i = 0;
 	while (splitted)
 	{
+		if (i == 0 && flags->has_infile)
+			flags->infile = ((t_exec *)splitted->content)->argv[0];
+		else if (i == flags->cmd_count - 1 && flags->has_outfile)
+			flags->outfile = ((t_exec *)splitted->content)->argv[0];
 		flags->cmd[i] = splitted->content;
 		splitted = splitted->next;
 		i++;
@@ -137,18 +150,23 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		printf("failed to register interrupts with kernel\n");
 	if (signal(SIGQUIT, handle_signals_cmd) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
-	/* printf("pipe_count: %d\n", flags->pipe_count);
-	printf("cmd_count: %d\n", flags->cmd_count); */
-	if (flags->pipe_count > 0)
+	printf("pipe_count: %d\n", flags->pipe_count);
+	printf("cmd_count: %d\n", flags->cmd_count);
+	if (flags->pipe_count || flags->has_infile || flags->has_outfile)
 	{
 		//printf("pid: %d\n", flags->pid[0]);
 		//printf("flags->cmd[i]->envp[0]: %s\n", flags->cmd[0]->envp[0]);
+		printf("flags->has_infile: %d\n", flags->has_infile);
+		printf("flags->has_outfile: %d\n", flags->has_outfile);
+		printf("flags->infile: %s\n", flags->infile);
+		printf("flags->outfile: %s\n", flags->outfile);
 		int i = 0;
 		while (i < flags->cmd_count)
 		{
-			//printf("cmd[%d]: -%s-\n", i, flags->cmd[i]->argv[0]);
+			printf("cmd[%d]: -%s-\n", i, flags->cmd[i]->argv[0]);
 			i++;
 		}
+		printf("Blud");
 		//printf("\n-----------------\n\n");
 		forking(flags, env, envp);
 	}

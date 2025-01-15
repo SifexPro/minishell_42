@@ -67,7 +67,9 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 	{
 		if (buffer[0] != 0)
 		{
-			add_history(buffer);
+			HIST_ENTRY *last_entry = history_get(history_length);
+   			if (!last_entry || last_entry && (ft_strcmp(last_entry->line, buffer) != 0))
+        		add_history(buffer);
 			last_status = parse_cmd(buffer, env, envp);
 			last_status_str = ft_uitoa(last_status);
 			if (signal(SIGINT, handle_signals_edit) == SIG_ERR)

@@ -58,6 +58,10 @@ typedef struct s_flags
 {
 	int		cmd_count;
 	int		pipe_count;
+	char	*infile;
+	char	*outfile;
+	bool	has_infile;
+	bool 	has_outfile;
 	pid_t	*pid;
 	int		*fd_in;
 	int		*fd_out;

@@ -31,43 +31,21 @@ int	run_program_exec_tmp(char *path, char **argv, char **envp)
 
 int	run_program_tmp(char *path, char **argv, char **envp)
 {
-	pid_t	child;
-	int		status;
-
-	child = fork();
-	if (!child)
-		run_program_exec_tmp(path, argv, envp);
-	waitpid(child, &status, 0);
-	return (WEXITSTATUS(status));
-	//return (run_program_exec_tmp(path, argv, envp));
+	return (run_program_exec_tmp(path, argv, envp));
 }
-
-///////////////////////////////////////////
-char **temp_fix(char **argv, int argc)
-{
-	char **temp;
-	int i;
-
-	i = 0;
-	temp = malloc(sizeof(char *) * (argc + 1));
-	while (i < argc)
-	{
-		temp[i] = argv[i];
-		i++;
-	}
-	temp[i] = NULL;
-	return (temp);
-}
-///////////////////////////////////////////
 
 int	select_exec_tmp(int argc, char **argv, t_ht *env, char **envp)
 {
-	//printf("Here 1\n");
-	//printf("argc: %d\n", argc);
-	//argv = temp_fix(argv, argc);////
-	//printf("argv[1]: %s\n", argv[argc]);
-	
-	return (run_program_tmp(argv[0], argv, envp));
+	/*if (!ft_strncmp(argv[0], "cd", 2))
+		return (ft_cd(argc, argv, env));
+	else if (!ft_strncmp(argv[0], "pwd", 3))
+		return (ft_pwd(argc, argv));
+	else if (!ft_strncmp(argv[0], "echo", 4))
+		return (ft_echo(argc, argv));*/
+	//else if (!ft_strncmp(argv[0], "cat", 3))
+	//	return (ft_cat(argc, argv));
+	//else
+		return (run_program_tmp(argv[0], argv, envp));
 }
 ///////////////////////////////////////////
 
@@ -124,33 +102,23 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 void	forking(t_flags *flags, t_ht *env, char **envp)
 {
 	int		i;
-	char 	**temp;
 
 	i = 0;
 	open_pipe(flags);
 	while (i < flags->cmd_count)
 	{
-		temp = envp;
-
-		//printf("\n\n---\n");
-		//printf("-> i: %d\n", i);
-		//printf("flags->cmd[i]->argv[0]: -%s-\n", flags->cmd[i]->argv[0]);
-		//printf("flags->cmd[i]->argc: %d\n", flags->cmd[i]->argc);
-		//printf("temp[0]: -%s-\n", temp[0]);
 		flags->pid[i] = fork();
+		//if (ft_strcmp(temp->argv[0], "exit") == 0) // exit
+		//	return (exit_prog(&splitted, env));
 		if (flags->pid[i] < 0)
 			exit(1);///exit if fork is not successful
 		else if (flags->pid[i] == 0)
 			child_exec(flags, i, env, envp);
 		//printf("select_exec_tmp: -%d-", select_exec_tmp(flags->cmd[i]->argc, flags->cmd[i]->argv, temp));
-		
-		//if (ft_strcmp(temp->argv[0], "exit") == 0)
-		//	return (exit_prog(&splitted, env));
-		//printf("temp->argv[0]); %s\n", temp->argv[0]);
 		i++;
 	}
-	///////////////////////////////////////////
 
+	///////////////////////////////////////////
 	i = 0;
 	close_pipe(flags);
 	int status;
@@ -159,13 +127,12 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 		waitpid(flags->pid[i], &status, 0);
 		i++;
 	}
-	printf("\n-----------------\n");
 	printf("status : %d\n", WEXITSTATUS(status));
 	///////////////////////////////////////////
 }
 
 // check if has "file < command"
 // check if has "command > file"
-// check if has "command | command"
+// check if has "command | command" //
 // check if has combo of the above
 // do the heredoc thing  
