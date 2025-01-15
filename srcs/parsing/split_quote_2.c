@@ -61,6 +61,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		tmp = elements->content;
 		if (tmp->is_delimiter)
 		{
+			tmp_exec->argv[i] = NULL;
 			tmp_exec->token_next = tmp->delimiter;
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			tmp_exec = malloc(sizeof(t_exec));
@@ -81,6 +82,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		i++;
 		elements = e_tmp;
 	}
+	tmp_exec->argv[i] = NULL;
 	tmp_exec->token_next = -1;
 	ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 	free(elements);

@@ -64,7 +64,7 @@ int	select_exec_tmp(int argc, char **argv, t_ht *env, char **envp)
 {
 	//printf("Here 1\n");
 	//printf("argc: %d\n", argc);
-	argv = temp_fix(argv, argc);////
+	//argv = temp_fix(argv, argc);////
 	//printf("argv[1]: %s\n", argv[argc]);
 	
 	return (run_program_tmp(argv[0], argv, envp));
