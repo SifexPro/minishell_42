@@ -13,8 +13,10 @@ OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/exec/exec.c \
-				srcs/exec/exec_pipe.c \
 				srcs/exec/complex/cmd_flags.c \
+				srcs/exec/complex/pipe.c \
+				srcs/exec/complex/exec_pipe.c \
+				srcs/exec/complex/fork.c \
 				srcs/parsing/expansion.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \

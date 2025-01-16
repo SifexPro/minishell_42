@@ -69,15 +69,15 @@ t_flags	*set_flags(t_list *splitted)
 	while (splitted)
 	{
 		temp = splitted->content;
-		if (temp->token_next == PIPE)
+		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT)
 			flags->pipe_count++;
-		else if (temp->token_next == REDIRECT_INPUT)
+		if (temp->token_next == REDIRECT_INPUT)
 			flags->has_infile = true;
 		else if (temp->token_next == REDIRECT_OUTPUT)
 			flags->has_outfile = true;
 		splitted = splitted->next;
 	}
-	flags->cmd_count = flags->pipe_count + 1 + flags->has_infile + flags->has_outfile;
+	flags->cmd_count = flags->pipe_count + 1;
 	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * (flags->cmd_count + 1));
 	//check malloc
 	return (set_flags_cmd(flags, start));

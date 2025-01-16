@@ -135,10 +135,17 @@ int		select_exec(int argc, char **argv, t_ht *env, char **envp);
 char	*get_path(char **envp);
 char	*get_cmd_path(char *cmd, char *path);
 
-/* exec/exec_pipe */
-void	forking(t_flags *flags, t_ht *env, char **envp);
-
-/* exec/complex */
+/* exec/complex/cmd_flags */
 t_flags	*set_flags(t_list *splitted);
+
+/* exec/complex/pipe */
+void	open_pipe(t_flags *flags);
+void	close_pipe(t_flags *flags);
+
+/* exec/complex/exec_pipe */
+void	child_exec(t_flags *flags, int i, t_ht *env, char **envp);
+
+/* exec/complex/fork */
+void	forking(t_flags *flags, t_ht *env, char **envp);
 
 #endif

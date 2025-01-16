@@ -67,7 +67,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 {
 	t_list	*splitted;
 	t_flags	*flags;
-	t_exec	*temp;// On peut s'en passer ?
+	t_exec	*temp;
 	int		res;
 
 	res = 0;
@@ -83,26 +83,32 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 
 	printf("pipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
-	
+
 	if (flags->pipe_count || flags->has_infile || flags->has_outfile)
 		forking(flags, env, envp);
 	else
 	{
+		temp = splitted->content;
+		if (ft_strcmp(temp->argv[0], "exit") == 0)
+			return (exit_prog(&splitted, env));
+		res = select_exec(temp->argc, temp->argv, env, envp);
+		// On peut s'en passer ?
+		/*
 		while (splitted)// On peut s'en passer ?
 		{
 			printf("splitted\n");
-			temp = splitted->content;// On peut s'en passer ?
+			temp = splitted->content;
 
-			/* printf("=====================\n");
-			printf("1 argc %d\n", temp->argc);
-			printf("1 argv1: %s\n", temp->argv[0]);
-			printf("1 tokens: %d\n", temp->token_next);  */
+			//printf("=====================\n");
+			//printf("1 argc %d\n", temp->argc);
+			//printf("1 argv1: %s\n", temp->argv[0]);
+			//printf("1 tokens: %d\n", temp->token_next);
 
 			splitted = splitted->next;
 			if (ft_strcmp(temp->argv[0], "exit") == 0)
 				return (exit_prog(&splitted, env));
 			res = select_exec(temp->argc, temp->argv, env, envp);
-		}
+		}*/
 	}
 	return (res);
 }
