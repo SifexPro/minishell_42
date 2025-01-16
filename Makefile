@@ -13,7 +13,8 @@ OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/exec/exec.c \
-				srcs/exec/exec_pipe.c\
+				srcs/exec/exec_pipe.c \
+				srcs/exec/complex/cmd_flags.c \
 				srcs/parsing/expansion.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \
@@ -23,7 +24,7 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_pwd.c \
 				srcs/command/cat/ft_cat.c \
 				srcs/command/cat/ft_cat_2.c \
-				srcs/cmd_path.c
+				srcs/cmd_path.c \
 
 OBJS		=	$(SRCS:/%.c=%.o)
 

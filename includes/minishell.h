@@ -138,4 +138,7 @@ char	*get_cmd_path(char *cmd, char *path);
 /* exec/exec_pipe */
 void	forking(t_flags *flags, t_ht *env, char **envp);
 
+/* exec/complex */
+t_flags	*set_flags(t_list *splitted);
+
 #endif
