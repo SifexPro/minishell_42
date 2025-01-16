@@ -44,6 +44,11 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 {
+	if (i == 0 && flags->infile)
+	{
+		open_infile(flags);
+		dup2(flags->fd_in[i], 0);
+	}
 	if (i > 0)
 		dup2(flags->fd_in[i], 0);
 	if (i < flags->cmd_count - 1)
