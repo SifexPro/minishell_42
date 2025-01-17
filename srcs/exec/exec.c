@@ -81,9 +81,10 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	if (signal(SIGQUIT, handle_signals_cmd) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
 
-	printf("pipe_count: %d\n", flags->pipe_count);////
+	printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
 	printf("infile: %s\n", flags->infile);////
+	printf("cmd[0]: %s\n", flags->cmd[0]->argv[0]);////
 
 	int i = 0;
 	while (i < flags->cmd_count)

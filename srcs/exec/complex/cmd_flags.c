@@ -38,10 +38,10 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 	i = 0;
 	while (splitted)
 	{
-		if (i == 0 && flags->has_infile)
-			flags->infile = ((t_exec *)splitted->content)->argv[0];
-		else if (i == flags->cmd_count - 1 && flags->has_outfile)
-			flags->outfile = ((t_exec *)splitted->content)->argv[0];
+		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
+
+		//else if (i == flags->cmd_count - 1 && flags->has_outfile)
+		//	flags->outfile = ((t_exec *)splitted->content)->argv[0];
 		flags->cmd[i] = splitted->content;
 		splitted = splitted->next;
 		i++;
@@ -58,6 +58,27 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 	return (flags);
 }
 
+static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
+{
+	t_list	*start;
+
+	start = splitted;
+	printf("\n\nset_flags_files\n");////
+	if (flags->has_infile)
+	{
+		flags->infile = ((t_exec *)splitted->content)->argv[0];
+		printf("flags->infile: %s\n", flags->infile);////
+		start = start->next;
+	}
+	printf("((t_exec *)start->content)->argv[0]: %s\n", ((t_exec *)start->content)->argv[0]);////
+	/*if (flags->has_outfile)
+	{
+		flags->outfile = ((t_exec *)splitted->content)->argv[0];
+		printf("flags->outfile: %s\n", flags->outfile);////
+	}*/
+	return (set_flags_cmd(flags, start));
+}
+
 t_flags	*set_flags(t_list *splitted)
 {
 	t_flags	*flags;
@@ -70,6 +91,7 @@ t_flags	*set_flags(t_list *splitted)
 	{
 		temp = splitted->content;
 		printf("temp->argv[0]: %s\n", temp->argv[0]);////
+		printf("temp->argv[1]: %s\n", temp->argv[1]);////
 		printf("temp->token_next: %d\n", temp->token_next);////
 		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT)
 			flags->pipe_count++;
@@ -79,8 +101,9 @@ t_flags	*set_flags(t_list *splitted)
 			flags->has_outfile = true;
 		splitted = splitted->next;
 	}
-	flags->cmd_count = flags->pipe_count + 1;
+	printf("flags->has_infile: %d\n", flags->has_infile);////
+	flags->cmd_count = flags->pipe_count - flags->has_infile - flags->has_outfile + 1;
 	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * (flags->cmd_count + 1));
 	//check malloc
-	return (set_flags_cmd(flags, start));
+	return (set_flags_files(flags, start));
 }
