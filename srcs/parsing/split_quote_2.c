@@ -63,6 +63,16 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		{
 			tmp_exec->argv[i] = NULL;
 			tmp_exec->token_next = tmp->delimiter;
+			if (tmp->delimiter == REDIRECT_INPUT) 
+			{
+
+				tmp = elements->next->content;
+				tmp_exec->argv[i] = tmp->content;
+				tmp_exec->argv[i + 1] = NULL;
+
+				elements = elements->next;
+				tmp = elements->content;
+			}
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			tmp_exec = malloc(sizeof(t_exec));
 			if (!tmp_exec)
