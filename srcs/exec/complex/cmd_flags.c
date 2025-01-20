@@ -23,8 +23,10 @@ static t_flags	*init_flags(void)
 	flags->pipe_count = 0;
 	flags->infile = NULL;
 	flags->outfile = NULL;
+	flags->heredoc = NULL;
 	flags->has_infile = false;
 	flags->has_outfile = false;
+	flags->has_heredoc = false;
 	flags->pid = NULL;
 	flags->fd_in = NULL;
 	flags->fd_out = NULL;
@@ -73,6 +75,13 @@ static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 		printf("flags->infile: %s\n", flags->infile);////
 		start = start->next;
 	}
+	else if (flags->has_heredoc)
+	{
+		printf("brr");
+		flags->heredoc = ((t_exec *)splitted->content)->argv[0];
+		printf("flags->heredoc: %s\n", flags->heredoc);////
+		start = start->next;
+	}
 	printf("((t_exec *)start->content)->argv[0]: %s\n", ((t_exec *)start->content)->argv[0]);////
 	if (flags->has_outfile)
 	{
@@ -103,16 +112,18 @@ t_flags	*set_flags(t_list *splitted)
 		printf("temp->argv[0]: %s\n", temp->argv[0]);////
 		printf("temp->argv[1]: %s\n", temp->argv[1]);////
 		printf("temp->token_next: %d\n", temp->token_next);////
-		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT)
+		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT || temp->token_next == HEREDOC)
 			flags->pipe_count++;
 		if (temp->token_next == REDIRECT_INPUT)
 			flags->has_infile = true;
 		else if (temp->token_next == REDIRECT_OUTPUT)
 			flags->has_outfile = true;
+		else if (temp->token_next == HEREDOC)
+			flags->has_heredoc = true;
 		splitted = splitted->next;
 	}
 	printf("flags->has_infile: %d\n", flags->has_infile);////
-	flags->cmd_count = flags->pipe_count - flags->has_infile - flags->has_outfile + 1;
+	flags->cmd_count = flags->pipe_count - flags->has_infile - flags->has_outfile - flags->has_heredoc + 1;
 	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * (flags->cmd_count + 1));
 	//check malloc
 	return (set_flags_files(flags, start));

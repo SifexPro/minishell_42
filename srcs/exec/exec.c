@@ -75,6 +75,18 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	if (!splitted)
 		return (0);
 	free(input);
+
+	////
+	t_list	*temp_list = splitted;
+	while (splitted)
+	{
+		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
+		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
+		splitted = splitted->next;
+	}
+	splitted = temp_list;
+	////
+
 	flags = set_flags(splitted);
 	if (signal(SIGINT, handle_signals_cmd) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
@@ -84,9 +96,12 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
 	printf("has_infile: %d\n", flags->has_infile);////
-	printf("infile: %s\n", flags->infile);////
 	printf("has_outfile: %d\n", flags->has_outfile);////
+	printf("has_heredoc: %d\n", flags->has_heredoc);////
+	printf("infile: %s\n", flags->infile);////
 	printf("outfile: %s\n", flags->outfile);////
+	printf("heredoc: %s\n", flags->heredoc);////
+	
 
 	int i = 0;
 	while (i < flags->cmd_count)
