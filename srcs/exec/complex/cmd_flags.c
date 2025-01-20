@@ -122,3 +122,12 @@ t_flags	*set_flags(t_list *splitted)
 	//check malloc
 	return (set_flags_files(flags, start));
 }
+
+void	free_flags(t_flags *flags)
+{
+	free(flags->cmd);
+	free(flags->fd_in);
+	free(flags->fd_out);
+	free(flags->pid);
+	free(flags);
+}

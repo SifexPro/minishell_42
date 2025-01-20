@@ -50,9 +50,7 @@ char	*get_prefix(int last_status)
 
 int	exit_prog(t_list **splitted, t_ht *env)
 {
-	(void)splitted;
-	/* ft_freesplit(splitted);
-	free(splitted); */
+	ft_lstclear(splitted, &free_splitted_wc);
 	hashtable_destroy(env);
 	exit(0);
 }

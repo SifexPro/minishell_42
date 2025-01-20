@@ -63,6 +63,39 @@ void	handle_signals_cmd(int signo)
 	}
 }
 
+void	free_splitted(void *v)
+{
+	t_list		*splitted;
+	t_splitted	*tmp_splitted;
+
+	tmp_splitted = v;
+	if (tmp_splitted)
+	{
+		free(tmp_splitted);
+	}
+}
+void	free_splitted_wc(void *v)
+{
+	t_list	*splitted;
+	t_exec	*tmp_exec;
+	int		i;
+
+	tmp_exec = v;
+	i = 0;
+	if (tmp_exec)
+	{
+		while (tmp_exec->argv[i])
+		{
+			free(tmp_exec->argv[i]);
+			i++;
+		}
+		free(tmp_exec->argv);
+		if (tmp_exec->envp)
+			free(tmp_exec->envp);
+		free(tmp_exec);
+	}
+}
+
 int	parse_cmd(char *input, t_ht *env, char **envp)
 {
 	t_list	*splitted;
@@ -115,9 +148,11 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	{
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
-			return (exit_prog(&splitted, env));
+			return (free_flags(flags), exit_prog(&splitted, env));
 		res = select_exec(temp->argc, temp->argv, env, envp);
 	}
+	free_flags(flags);
+	ft_lstclear(&splitted, &free_splitted_wc);
 	return (res);
 }
  

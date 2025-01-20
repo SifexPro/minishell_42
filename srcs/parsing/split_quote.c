@@ -92,7 +92,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 		sp->i++;
 	}
 	if (sp->is_simp_quote || sp->is_dbl_quote)
-		return (free(sp), ft_lstclear(elem, &free),
+		return (free(sp),
 			printf("Quote non finished!\n"), 1);
 	return (free(sp), 0);
 }
@@ -106,8 +106,10 @@ t_list	*ft_split_quote(char const *str, t_ht *env)
 		return (NULL);
 	elements = NULL;
 	if (create_strings_quote(str, &elements, env))
-		return (free(elements), NULL);
+		return (NULL);
 	ret = NULL;
 	sq_replace_and_free(elements, &ret);
+	if (elements)
+		ft_lstclear(&elements, &free_splitted);
 	return (ret);
 }

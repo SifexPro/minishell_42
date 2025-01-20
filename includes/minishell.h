@@ -47,7 +47,6 @@ typedef enum e_tokens
 
 typedef struct s_exec
 {
-	char		*cmd;
 	int			argc;
 	char		**argv;
 	char		**envp;
@@ -133,6 +132,8 @@ int		ft_strarr_len(char **input);
 /* exec/exec */
 int		run_program_exec(char *path, char **argv, char **envp);
 int		select_exec(int argc, char **argv, t_ht *env, char **envp);
+void	free_splitted(void *splitted);
+void	free_splitted_wc(void *splitted);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);
@@ -140,6 +141,7 @@ char	*get_cmd_path(char *cmd, char *path);
 
 /* exec/complex/cmd_flags */
 t_flags	*set_flags(t_list *splitted);
+void	free_flags(t_flags *flags);
 
 /* exec/complex/pipe */
 void	open_pipe(t_flags *flags);

@@ -54,6 +54,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		return (1);
 	tmp_exec->argc = count_until_del(elements);
 	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+	tmp_exec->envp = NULL;
 	if (!tmp_exec->argv)
 		return (1);
 	while (elements)
@@ -79,6 +80,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			if (!tmp_exec)
 				return (1);
 			tmp = elements->content;
+			tmp_exec->envp = NULL;
 			tmp_exec->argc = count_until_del(elements);
 			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 			if (!tmp_exec->argv)
@@ -88,13 +90,11 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		}
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
-		free(elements);
 		i++;
 		elements = e_tmp;
 	}
 	tmp_exec->argv[i] = NULL;
 	tmp_exec->token_next = -1;
 	ft_lstadd_back(ret, ft_lstnew(tmp_exec));
-	free(elements);
 	return (0);
 }

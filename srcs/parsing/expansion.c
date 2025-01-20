@@ -81,7 +81,9 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env)
 		return (NULL);
 	content->is_delimiter = false;
 	if (!is_simple_quote)
+	{
 		content->content = handle_expansion(str, env);
+	}
 	else
 		content->content = str;
 	return (ft_lstnew(content));
