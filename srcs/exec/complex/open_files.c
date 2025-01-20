@@ -24,8 +24,36 @@ int	open_infile(t_flags *flags)
 
 int open_outfile(t_flags *flags)
 {
-	flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0667);//// 0667~
+	if (flags->has_append)
+		flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_APPEND, 0667);//// 0667~ 
+	else
+		flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0667);//// 0667~
 	if (flags->fd_out[flags->cmd_count - 1] < 0)
 		return (1);////real exit
 	return (0);
+}
+
+void	open_heredoc(t_flags *flags)
+{
+	int		fd[2];
+	char	*line;
+	int		len_heredoc;
+
+	if (pipe(fd) < 0)
+		exit(1);///real exit
+	len_heredoc = ft_strlen(flags->heredoc);
+	while (1)
+	{
+		line = readline("> ");
+		if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]))
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, fd[1]);
+		ft_putstr_fd("\n", fd[1]);
+		free(line);
+	}
+	close(fd[1]);
+	flags->fd_in[0] = fd[0];
 }

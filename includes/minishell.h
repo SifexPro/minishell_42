@@ -63,6 +63,7 @@ typedef struct s_flags
 	char	*heredoc;
 	bool	has_infile;
 	bool 	has_outfile;
+	bool	has_append;
 	bool	has_heredoc;
 	pid_t	*pid;
 	int		*fd_in;
@@ -153,5 +154,6 @@ void	forking(t_flags *flags, t_ht *env, char **envp);
 /* exec/complex/open_files */
 int		open_infile(t_flags *flags);
 int		open_outfile(t_flags *flags);
+void	open_heredoc(t_flags *flags);
 
 #endif

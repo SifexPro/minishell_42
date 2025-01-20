@@ -77,14 +77,14 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	free(input);
 
 	////
-	t_list	*temp_list = splitted;
+	/*t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;
+	splitted = temp_list;*/
 	////
 
 	flags = set_flags(splitted);
@@ -98,17 +98,17 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	printf("has_infile: %d\n", flags->has_infile);////
 	printf("has_outfile: %d\n", flags->has_outfile);////
 	printf("has_heredoc: %d\n", flags->has_heredoc);////
+	printf("has_append: %d\n", flags->has_append);////
 	printf("infile: %s\n", flags->infile);////
 	printf("outfile: %s\n", flags->outfile);////
 	printf("heredoc: %s\n", flags->heredoc);////
-	
-
 	int i = 0;
 	while (i < flags->cmd_count)
 	{
 		printf("cmd[%d]: %s\n", i, flags->cmd[i]->argv[0]);////
 		i++;
 	}
+
 	if (flags->pipe_count || flags->has_infile || flags->has_outfile)
 		forking(flags, env, envp);
 	else

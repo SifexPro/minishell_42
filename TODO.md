@@ -19,4 +19,7 @@
 - env with no options or arguments
 
 ### Fix in exec
-- < file = crash
+- "< file" = crash
+- "<< heredoc" = crash
+- Handle exit (in pipe)
+- Signaux dans heredoc

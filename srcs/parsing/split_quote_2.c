@@ -63,7 +63,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		{
 			tmp_exec->argv[i] = NULL;
 			tmp_exec->token_next = tmp->delimiter;
-			if (tmp->delimiter == REDIRECT_INPUT) 
+			if (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC) 
 			{
 
 				tmp = elements->next->content;

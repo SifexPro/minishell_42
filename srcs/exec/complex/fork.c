@@ -18,6 +18,8 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 	int	status;
 
 	i = 0;
+	if (flags->has_heredoc)
+		open_heredoc(flags);
 	open_pipe(flags);
 	while (i < flags->cmd_count)
 	{

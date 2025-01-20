@@ -49,6 +49,8 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 		open_infile(flags);
 		dup2(flags->fd_in[i], 0);
 	}
+	else if (i == 0 && flags->has_heredoc)
+		dup2(flags->fd_in[i], 0);
 	if (i == flags->cmd_count - 1 && flags->outfile)
 	{
 		open_outfile(flags);

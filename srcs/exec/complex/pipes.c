@@ -36,9 +36,9 @@ void	close_pipe(t_flags *flags)
 	//checks
 	while (i < flags->pipe_count)
 	{
-		close(flags->fd_in[i + 1]);
-		close(flags->fd_out[i]);
-		/*if (flags->fd_in && flags->fd_in[i] != -1)
+		//close(flags->fd_in[i + 1]);
+		//close(flags->fd_out[i]);
+		if (flags->fd_in && flags->fd_in[i] != -1)
 		{
 			close(flags->fd_in[i]);
 			flags->fd_in[i] = -1;
@@ -47,7 +47,7 @@ void	close_pipe(t_flags *flags)
 		{
 			close(flags->fd_out[i]);
 			flags->fd_out[i] = -1;
-		}*/
+		}
 		i++;
 	}
 }
