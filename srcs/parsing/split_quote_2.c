@@ -33,7 +33,7 @@ int	count_until_del(t_list *ret)
 	while (e_tmp)
 	{
 		tmp = e_tmp->content;
-		if (tmp->is_delimiter)
+		if (tmp->is_delimiter && tmp->delimiter != HEREDOC && tmp->delimiter != REDIRECT_INPUT)
 			break ;
 		e_tmp = e_tmp->next;
 		i++;
@@ -65,19 +65,19 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			tmp_exec->token_next = tmp->delimiter;
 			if (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC) 
 			{
-
 				tmp = elements->next->content;
 				tmp_exec->argv[i] = tmp->content;
-				tmp_exec->argv[i + 1] = NULL;
-
+				i++;
 				elements = elements->next;
 				tmp = elements->content;
 			}
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+			elements = elements->next;
+			if (elements == NULL)
+				break;
 			tmp_exec = malloc(sizeof(t_exec));
 			if (!tmp_exec)
 				return (1);
-			elements = elements->next;
 			tmp = elements->content;
 			tmp_exec->argc = count_until_del(elements);
 			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
