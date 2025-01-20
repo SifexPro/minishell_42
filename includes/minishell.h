@@ -150,5 +150,6 @@ void	forking(t_flags *flags, t_ht *env, char **envp);
 
 /* exec/complex/open_files */
 int		open_infile(t_flags *flags);
+int		open_outfile(t_flags *flags);
 
 #endif

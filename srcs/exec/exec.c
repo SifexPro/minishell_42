@@ -83,8 +83,10 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 
 	printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
+	printf("has_infile: %d\n", flags->has_infile);////
 	printf("infile: %s\n", flags->infile);////
-	printf("cmd[0]: %s\n", flags->cmd[0]->argv[0]);////
+	printf("has_outfile: %d\n", flags->has_outfile);////
+	printf("outfile: %s\n", flags->outfile);////
 
 	int i = 0;
 	while (i < flags->cmd_count)

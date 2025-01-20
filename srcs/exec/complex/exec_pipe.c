@@ -24,7 +24,7 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 	else if (access(cmd_path, X_OK))
 		return (126); // to print
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (1);
+		return (111);
 	return (0);
 }
 
@@ -48,6 +48,11 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	{
 		open_infile(flags);
 		dup2(flags->fd_in[i], 0);
+	}
+	if (i == flags->cmd_count - 1 && flags->outfile)
+	{
+		open_outfile(flags);
+		dup2(flags->fd_out[i], 1);
 	}
 	if (i > 0)
 		dup2(flags->fd_in[i], 0);

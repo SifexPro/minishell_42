@@ -36,12 +36,12 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 	int		i;
 
 	i = 0;
+	printf("\n\nset_flags_cmd\n");////
 	while (splitted)
 	{
 		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
-
-		//else if (i == flags->cmd_count - 1 && flags->has_outfile)
-		//	flags->outfile = ((t_exec *)splitted->content)->argv[0];
+		if (flags->has_infile && i == flags->cmd_count)
+			break;
 		flags->cmd[i] = splitted->content;
 		splitted = splitted->next;
 		i++;
@@ -61,7 +61,10 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 {
 	t_list	*start;
+	t_list	*temp;
+	int		i;
 
+	i = 0;
 	start = splitted;
 	printf("\n\nset_flags_files\n");////
 	if (flags->has_infile)
@@ -71,11 +74,18 @@ static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 		start = start->next;
 	}
 	printf("((t_exec *)start->content)->argv[0]: %s\n", ((t_exec *)start->content)->argv[0]);////
-	/*if (flags->has_outfile)
+	if (flags->has_outfile)
 	{
+		while (splitted->next)
+		{
+			splitted = splitted->next;
+			i++;
+		}
+		printf("i = %d\n", i);////
+		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
 		flags->outfile = ((t_exec *)splitted->content)->argv[0];
 		printf("flags->outfile: %s\n", flags->outfile);////
-	}*/
+	}
 	return (set_flags_cmd(flags, start));
 }
 

@@ -21,3 +21,11 @@ int	open_infile(t_flags *flags)
 		return (1);
 	return (0);
 }
+
+int open_outfile(t_flags *flags)
+{
+	flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0667);//// 0667~
+	if (flags->fd_out[flags->cmd_count - 1] < 0)
+		return (1);////real exit
+	return (0);
+}

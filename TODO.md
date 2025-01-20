@@ -17,3 +17,6 @@
 - export with no options
 - unset with no options
 - env with no options or arguments
+
+### Fix in exec
+- < file = crash
