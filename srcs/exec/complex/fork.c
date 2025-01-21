@@ -16,8 +16,6 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 {
 	int	i;
 	int	status;
-	
-	ft_printf("Forking\n");
 
 	i = 0;
 	if (flags->has_heredoc)
@@ -39,7 +37,7 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 		waitpid(flags->pid[i], &status, 0);
 		i++;
 	}
-	printf("status : %d\n", WEXITSTATUS(status));
+	////printf("status : %d\n", WEXITSTATUS(status));
 }
 
 // handle the exit command

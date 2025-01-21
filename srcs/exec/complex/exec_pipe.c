@@ -17,14 +17,14 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 	char	*cmd_path;
 
 	if (!path)
-		return (1); // to print
+		return (exec_error("failed to exec command", NULL), 1);
 	cmd_path = get_cmd_path(path, get_path(envp));
 	if (!cmd_path)
-		return (127); // to print
+		return (exec_error("command not found", argv[0]), 127);
 	else if (access(cmd_path, X_OK))
-		return (126); // to print
+		return (free(cmd_path), exec_error("permission denied", argv[0]), 126);////free(cmd_path) ?
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (111);
+		return (exec_error("failed to exec command", argv[0]), 1);
 	return (0);
 }
 
@@ -46,7 +46,8 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 {
 	if (i == 0 && flags->infile)
 	{
-		open_infile(flags);
+		if (!open_infile(flags))
+			exit(1);////close_pipe(flags); ?
 		dup2(flags->fd_in[i], 0);
 	}
 	else if (i == 0 && flags->has_heredoc)
@@ -71,3 +72,5 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 // check if has "command | command" //
 // check if has combo of the above
 // do the heredoc thing  
+
+//// exit -> "real_exit"

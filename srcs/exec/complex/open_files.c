@@ -16,13 +16,13 @@ int	open_infile(t_flags *flags)
 {
 	flags->fd_in[0] = open(flags->infile, O_RDONLY);
 	if (flags->fd_in[0] < 0)
-		return (1);////real exit
+		return (file_error("No such file or directory", flags->infile), 0);////real exit
 	if (access(flags->infile, R_OK) < 0)
-		return (1);
-	return (0);
+		return (file_error("Permission denied", flags->infile), 0);////real exit
+	return (1);
 }
 
-int open_outfile(t_flags *flags)
+int	open_outfile(t_flags *flags)
 {
 	if (flags->has_append)
 		flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_APPEND, 0667);//// 0667~ 

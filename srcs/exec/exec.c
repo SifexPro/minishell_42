@@ -17,14 +17,14 @@ int	run_program_exec(char *path, char **argv, char **envp)
 	char	*cmd_path;
 
 	if (!path)
-		return (exit(1), 1); // to print
+		return (exec_error("failed to exec command", NULL), exit(1), 1);
 	cmd_path = get_cmd_path(path, get_path(envp));
 	if (!cmd_path)
-		return (exit(127), 127); // to print
+		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK))
-		return (exit(126), 126); // to print
+		return (exec_error("permission denied", argv[0]), exit(126), 126);
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (exit(1), 1);
+		return (exec_error("failed to exec command", argv[0]), exit(1), 1);
 	return (exit(0), 0);
 }
 
@@ -137,7 +137,6 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		forking(flags, env, envp);
 	else
 	{
-		ft_printf("EEE\n");
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (free_flags(flags), exit_prog(&splitted, env));

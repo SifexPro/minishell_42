@@ -17,5 +17,10 @@
 - Handle exit (in pipe)
 - Signaux dans heredoc
 
+0 [CUSTOM] minishell_42 > < sss ls 
+error: sss: No such file or directory
+0 [CUSTOM] minishell_42 > echo $?
+0 should be 1
+
 ### Conditionals mes couilles
 - < Makefile cat | wc -l | cat > test

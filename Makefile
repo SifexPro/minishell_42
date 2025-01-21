@@ -19,6 +19,7 @@ SRCS		=	srcs/main.c \
 				srcs/exec/complex/exec_pipe.c \
 				srcs/exec/complex/fork.c \
 				srcs/exec/complex/open_files.c \
+				srcs/exec/complex/exec_utils.c \
 				srcs/parsing/expansion.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \

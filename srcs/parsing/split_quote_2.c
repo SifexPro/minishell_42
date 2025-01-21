@@ -72,21 +72,16 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				elements = elements->next;
 				tmp = elements->content;
 			}
-			ft_printf("tet\n");
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			elements = elements->next;
 			tmp_exec = malloc(sizeof(t_exec));
-			ft_printf("4\n");
 			if (!tmp_exec)
 				return (1);
-			ft_printf("1\n");
 			tmp_exec->envp = NULL;
-			ft_printf("7\n");
 			tmp_exec->argc = count_until_del(elements);
 			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 			if (elements == NULL)
 				break;
-			ft_printf("9\n");
 			tmp = elements->content;
 			if (!tmp_exec->argv)
 				return (1);

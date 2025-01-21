@@ -81,7 +81,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	printf("%d\n", getpid());
 	if (signal(SIGINT, handle_signals_edit) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
 	if (signal(SIGQUIT, handle_signals_edit) == SIG_ERR)

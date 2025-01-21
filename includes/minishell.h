@@ -61,13 +61,14 @@ typedef struct s_flags
 	char	*outfile;
 	char	*heredoc;
 	bool	has_infile;
-	bool 	has_outfile;
+	bool	has_outfile;
 	bool	has_append;
 	bool	has_heredoc;
 	pid_t	*pid;
 	int		*fd_in;
 	int		*fd_out;
-	t_exec 	**cmd;
+	t_exec	**cmd;
+	t_list	*splitted;////to free
 }			t_flags;
 // flag for if has file in start & end
 
@@ -162,5 +163,9 @@ void	forking(t_flags *flags, t_ht *env, char **envp);
 int		open_infile(t_flags *flags);
 int		open_outfile(t_flags *flags);
 void	open_heredoc(t_flags *flags);
+
+/* exec/complex/exec_utils */
+void	exec_error(char *error, char *cmd);
+void	file_error(char *error, char *file);
 
 #endif
