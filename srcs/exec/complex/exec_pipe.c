@@ -47,14 +47,15 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	if (i == 0 && flags->infile)
 	{
 		if (!open_infile(flags))
-			exit(1);////close_pipe(flags); ?
+			return close_pipe(flags), exit(1);////real exit
 		dup2(flags->fd_in[i], 0);
 	}
 	else if (i == 0 && flags->has_heredoc)
 		dup2(flags->fd_in[i], 0);
 	if (i == flags->cmd_count - 1 && flags->outfile)
 	{
-		open_outfile(flags);
+		if (!open_outfile(flags))
+			return close_pipe(flags), exit(1);////real exit
 		dup2(flags->fd_out[i], 1);
 	}
 	if (i > 0)

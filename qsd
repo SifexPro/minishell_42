@@ -1,0 +1,16 @@
+Makefile
+README.md
+TODO.md
+includes
+libft
+minishell
+minishell_tester
+objs
+out
+outclear
+qsd
+srcs
+test
+testcat
+void
+while.c

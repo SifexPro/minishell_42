@@ -22,6 +22,7 @@
 avant de faire par ex : < tests/test1 cat
 = invalid free
 - << stop cat | wc -l ne s'arrête jamaiks avec les kill signaux, normal ?
+- ./bruh = rien 
 
 0 [CUSTOM] minishell_42 > < sss ls 
 error: sss: No such file or directory
