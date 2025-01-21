@@ -18,3 +18,6 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 
 ## CRASH
 - echo te < cat
+
+### DOUBLE FICHIERS
+ - cmd_path.c

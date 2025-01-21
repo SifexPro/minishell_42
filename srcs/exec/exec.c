@@ -141,7 +141,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (free_flags(flags), exit_prog(&splitted, env));
-		res = select_exec(temp->argc, temp->argv, env, envp);
+		res = select_exec(temp->argc, temp->argv, env, ht_to_envp(env));
 	}
 	ft_lstclear(&splitted, &free_splitted_wc);
 	free_flags(flags);

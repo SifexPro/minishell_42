@@ -24,6 +24,7 @@ SRCS		=	srcs/main.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \
 				srcs/parsing/meta.c \
+				srcs/parsing/environement.c \
 				srcs/command/ft_cd.c \
 				srcs/command/ft_echo.c \
 				srcs/command/ft_pwd.c \

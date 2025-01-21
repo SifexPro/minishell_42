@@ -135,6 +135,10 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
 bool	is_meta(char c);
 int		handle_meta(char const *str, t_split_sh *sp, t_list **elem);
 
+/* parser/environement */
+char	**ht_to_envp(t_ht *env);
+void    clear_envp(char **env);
+
 /* utils */
 int		ft_strarr_len(char **input);
 
