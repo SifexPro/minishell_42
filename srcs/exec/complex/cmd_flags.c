@@ -102,16 +102,16 @@ t_flags	*set_flags(t_list *splitted)
 	while (splitted)
 	{
 		temp = splitted->content;
-		//printf("temp->argv[0]: %s\n", temp->argv[0]);////
+		printf("temp->argv[0]: %s\n", temp->argv[0]);////
 		//printf("temp->argv[1]: %s\n", temp->argv[1]);////
-		//printf("temp->token_next: %d\n", temp->token_next);////
+		printf("temp->token_next: %d\n", temp->token_next);////
 		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT || temp->token_next == HEREDOC || temp->token_next == APPEND)
 			flags->pipe_count++;
 		if (temp->token_next == REDIRECT_OUTPUT || temp->token_next == APPEND)
 			flags->has_outfile = true;
 		if (temp->token_next == REDIRECT_INPUT)
 			flags->has_infile = true;
-		else if (temp->token_next == HEREDOC)
+		else if (temp->token_next == HEREDOC) 
 			flags->has_heredoc = true;
 		else if (temp->token_next == APPEND)
 			flags->has_append = true;

@@ -16,6 +16,8 @@ void	forking(t_flags *flags, t_ht *env, char **envp)
 {
 	int	i;
 	int	status;
+	
+	ft_printf("Forking\n");
 
 	i = 0;
 	if (flags->has_heredoc)

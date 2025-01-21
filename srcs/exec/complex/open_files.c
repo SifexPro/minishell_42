@@ -42,7 +42,11 @@ void	open_heredoc(t_flags *flags)
 	if (pipe(fd) < 0)
 		exit(1);///real exit
 	len_heredoc = ft_strlen(flags->heredoc);
-	while (1)
+	if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	while (1) 
 	{
 		line = readline("> ");
 		if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]))

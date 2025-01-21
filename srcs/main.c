@@ -12,17 +12,6 @@
 
 #include "minishell.h"
 
-void	handle_signals_edit(int signo)
-{
-	if (signo == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-
 char	*get_prefix(int last_status)
 {
 	char	*pwd;

@@ -16,3 +16,6 @@
 - "<< heredoc" = crash
 - Handle exit (in pipe)
 - Signaux dans heredoc
+
+### Conditionals mes couilles
+- < Makefile cat | wc -l | cat > test

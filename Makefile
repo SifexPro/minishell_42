@@ -12,6 +12,7 @@ RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
 				srcs/utils.c \
+				srcs/signals.c \
 				srcs/exec/exec.c \
 				srcs/exec/complex/cmd_flags.c \
 				srcs/exec/complex/pipes.c \

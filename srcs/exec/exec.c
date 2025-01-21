@@ -54,15 +54,6 @@ int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 		return (run_program(argv[0], argv, envp));
 }
 
-void	handle_signals_cmd(int signo)
-{
-	if (signo == SIGINT)
-	{
-		printf("\n");
-		rl_redisplay();
-	}
-}
-
 void	free_splitted(void *v)
 {
 	t_list		*splitted;
@@ -82,7 +73,7 @@ void	free_splitted_wc(void *v)
 
 	tmp_exec = v;
 	i = 0;
-	if (tmp_exec)
+	if (tmp_exec && tmp_exec->argv)
 	{
 		while (tmp_exec->argv[i])
 		{
@@ -126,7 +117,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	if (signal(SIGQUIT, handle_signals_cmd) == SIG_ERR)
 		printf("failed to register interrupts with kernel\n");
 
-	/*printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
+	/* printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
 	printf("has_infile: %d\n", flags->has_infile);////
 	printf("has_outfile: %d\n", flags->has_outfile);////
@@ -140,12 +131,13 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	{
 		printf("cmd[%d]: %s\n", i, flags->cmd[i]->argv[0]);////
 		i++;
-	}*/
+	} */
 
-	if (flags->pipe_count || flags->has_infile || flags->has_outfile)
+	if (flags->pipe_count || flags->has_infile || flags->has_outfile || flags->has_heredoc)
 		forking(flags, env, envp);
 	else
 	{
+		ft_printf("EEE\n");
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (free_flags(flags), exit_prog(&splitted, env));
