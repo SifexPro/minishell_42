@@ -14,7 +14,7 @@
 
 void	exec_error(char *error, char *cmd)
 {
-	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd("bash: ", 2);
 	if (!cmd)
 		ft_putstr_fd(" ", 2);
 	else
@@ -25,7 +25,7 @@ void	exec_error(char *error, char *cmd)
 
 void	file_error(char *error, char *file)
 {
-	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(error, 2);

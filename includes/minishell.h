@@ -157,7 +157,7 @@ void	close_pipe(t_flags *flags);
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp);
 
 /* exec/complex/fork */
-void	forking(t_flags *flags, t_ht *env, char **envp);
+int		forking(t_flags *flags, t_ht *env, char **envp);
 
 /* exec/complex/open_files */
 int		open_infile(t_flags *flags);
