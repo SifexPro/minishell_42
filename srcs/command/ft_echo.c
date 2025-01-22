@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Sifex <Sifex@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:48:15 by pepie             #+#    #+#             */
-/*   Updated: 2024/12/03 17:40:41 by pepie            ###   ########.fr       */
+/*   Updated: 2025/01/22 15:33:28 by Sifex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_echo(int argc, char **argv)
 			text_display = true;
 			ft_printf("%s", argv[i], argc);
 		}
-		if (i < argc && ((!has_n) || (has_n && i != 0)))
+		if (i < argc - 1 && ((!has_n) || (has_n && i != 0)))////argc - 1 - hotfix (espace en trop à la fin sinon)
 			ft_printf(" ");
 		i++;
 	}

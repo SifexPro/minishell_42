@@ -36,8 +36,8 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 		return (ft_pwd(argc, argv));
 	else if (!ft_strncmp(argv[0], "echo", 4))
 		return (ft_echo(argc, argv));
-	//else if (!ft_strncmp(argv[0], "cat", 3))
-	//	return (ft_cat(argc, argv));
+	else if (!ft_strncmp(argv[0], "cat", 3))////belek
+		return (ft_cat(argc, argv));
 	else if (!ft_strcmp(argv[0], "exit"))
 		return (exit(0), 0);
 	else
