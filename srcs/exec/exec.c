@@ -81,8 +81,6 @@ void	free_splitted_wc(void *v)
 			i++;
 		}
 		free(tmp_exec->argv);
-		if (tmp_exec->envp)
-			free(tmp_exec->envp);
 		free(tmp_exec);
 	}
 }
@@ -133,8 +131,9 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		i++;
 	} */
 
-	if (flags->pipe_count || flags->has_infile || flags->has_outfile || flags->has_heredoc)
+	if (flags->pipe_count || flags->has_infile || flags->has_outfile || flags->has_heredoc) {
 		res = forking(flags, env, envp);
+	}
 	else
 	{
 		temp = splitted->content;
@@ -142,8 +141,9 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 			return (free_flags(flags), exit_prog(&splitted, env));
 		res = select_exec(temp->argc, temp->argv, env, envp);
 	}
-	free_flags(flags);
 	ft_lstclear(&splitted, &free_splitted_wc);
+	free_flags(flags);
+
 	return (res);
 }
  

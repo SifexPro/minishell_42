@@ -47,14 +47,15 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 	t_splitted	*tmp;
 	int			i;
 	t_exec		*tmp_exec;
+	int			has_heredoc;
 
 	i = 0;
 	tmp_exec = malloc(sizeof(t_exec));
+	tmp_exec->argv = NULL;
 	if (!tmp_exec)
 		return (1);
 	tmp_exec->argc = count_until_del(elements);
-	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
-	tmp_exec->envp = NULL;
+ 	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 	if (!tmp_exec->argv)
 		return (1);
 	while (elements)
@@ -64,24 +65,35 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		{
 			tmp_exec->argv[i] = NULL;
 			tmp_exec->token_next = tmp->delimiter;
-			if (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC) 
+			has_heredoc = tmp->delimiter == HEREDOC;
+			if (elements->next && (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC)) 
 			{
 				tmp = elements->next->content;
 				tmp_exec->argv[i] = tmp->content;
-				i++;
+				tmp_exec->argv[i + 1] = NULL;
 				elements = elements->next;
 				tmp = elements->content;
 			}
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			elements = elements->next;
 			tmp_exec = malloc(sizeof(t_exec));
+			tmp_exec->argv = NULL;
 			if (!tmp_exec)
 				return (1);
-			tmp_exec->envp = NULL;
 			tmp_exec->argc = count_until_del(elements);
-			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+			tmp_exec->argv = NULL;
 			if (elements == NULL)
-				break;
+			{
+				if (!has_heredoc)
+				{
+					printf("bash: syntax error near unexpected token `newline'\n");
+					free(tmp_exec);
+					return (1);
+				}
+				else
+					break;
+			}
+			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 			tmp = elements->content;
 			if (!tmp_exec->argv)
 				return (1);

@@ -108,7 +108,8 @@ t_list	*ft_split_quote(char const *str, t_ht *env)
 	if (create_strings_quote(str, &elements, env))
 		return (NULL);
 	ret = NULL;
-	sq_replace_and_free(elements, &ret);
+	if (sq_replace_and_free(elements, &ret))
+		return (ft_lstclear(&ret, &free_splitted_wc), ft_lstclear(&elements, &free_splitted), NULL);
 	if (elements)
 		ft_lstclear(&elements, &free_splitted);
 	return (ret);

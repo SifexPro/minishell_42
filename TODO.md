@@ -1,9 +1,5 @@
 # TODO
 
-### To-Fix
-- cmd + token + void ("cat Makefile <") = Segmentation fault (core dumped)
-- historique minishell != historique bash (fleche du haut pour ancienne commande) : faut faire un strcmp pour pas dupliquer les commandes identique dans l'historique
-
 ## Gerer les signaux
 
 ## Faire les builtin
@@ -19,15 +15,6 @@
 - << stop cat | wc -l
 ne s'arrête jamaiks avec les kill signaux, normal ?
 
-### Bugs étranges
-- qui ne surviennent pas dans TOUS les cas
-- restart minishell pour avoir le bug
-- les crash sont souvent lié à un :
-
-free(): invalid pointer
-Aborted (core dumped)
-
-> bruh = fichier non existant
 
 - "< bruh ls" = crash
 - "< test" = crash
