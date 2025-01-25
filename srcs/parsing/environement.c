@@ -12,75 +12,81 @@
 
 #include "minishell.h"
 
-void    do_entry(char *out, char* key, char * val)
+void	do_entry(char *out, char *key, char *val)
 {
-    int     i;
-    int     j;
+	int	i;
+	int	j;
 
-    i = 0;
-    j = 0;
-    while (key[i])
-    {
-        out[j] = key[i];
-        i++;
-        j++;
-    }
-    out[j] = '=';
-    j++;
-    i = 0;
-    while (val[i])
-    {
-        out[j] = val[i];
-        i++;
-        j++;
-    }
-    out[j] = 0;
+	i = 0;
+	j = 0;
+	while (key[i])
+	{
+		out[j] = key[i];
+		i++;
+		j++;
+	}
+	out[j] = '=';
+	j++;
+	i = 0;
+	while (val[i])
+	{
+		out[j] = val[i];
+		i++;
+		j++;
+	}
+	out[j] = 0;
 }
 
-char **ht_to_envp(t_ht *env)
+void	process_env(t_entry	*entry, int j, char **new_envp)
 {
-    char    **new_envp;
-    char    *e;
-    t_entry *entry;
-    int     i;
-    int     j;
-    int     len;
+	char	*e;
+	int		len;
 
-    new_envp = malloc(sizeof(char *) * (env->size + 1));
-    if (!new_envp)
-        return (NULL);
-    i = 0;
-    j = 0;
+	e = entry->value;
+	len = ft_strlen(entry->key) + 2 + ft_strlen(e);
+	new_envp[j] = malloc(sizeof(char) * (len));
+	do_entry(new_envp[j], entry->key, e);
+}
 
-    while(i < env->size)
-    {
-        entry = env->elements[i];
-        if (entry)
-        {
+char	**ht_to_envp(t_ht *env)
+{
+	char	**new_envp;
+	t_entry	*entry;
+	int		i;
+	int		j;
+
+	new_envp = malloc(sizeof(char *) * (env->size + 1));
+	if (!new_envp)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (i < env->size)
+	{
+		entry = env->elements[i];
+		if (entry)
+		{
 			while (entry)
 			{
-				e = entry->value;
-				len = ft_strlen(entry->key) + 2 + ft_strlen(e);
-				new_envp[j] = malloc(sizeof(char) * (len));
-				do_entry(new_envp[j], entry->key, e);
+				process_env(entry, j, new_envp);
 				j++;
 				entry = entry->next;
 			}
-        }
-        i++;
-    }
-    new_envp[j] = NULL;
-    return (new_envp);
+		}
+		i++;
+	}
+	new_envp[j] = NULL;
+	return (new_envp);
 }
 
-void    clear_envp(char **env)
+void	clear_envp(char **env)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (env[i])
-    {
-        free(env[i]);
-    }
-    free(env);
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
 }

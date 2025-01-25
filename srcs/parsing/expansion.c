@@ -63,9 +63,8 @@ char	*handle_expansion(char *str, t_ht *env)
 		{
 			str = handle_last_status(str, env, i);
 		}
-		else if (str[i] == '$' && ft_isalpha(str[i + 1]) )
+		else if (str[i] == '$' && ft_isalpha(str[i + 1]))
 		{
-
 			str = handle_env_var(&str, env, i);
 		}
 		i++;

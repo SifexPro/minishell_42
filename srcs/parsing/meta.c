@@ -27,6 +27,36 @@ bool	is_meta(char c)
 	return (false);
 }
 
+bool	handle_meta_2(
+	char const *str,
+	t_split_sh *sp,
+	t_list **elem,
+	t_splitted *content
+)
+{
+	if (strncmp((char *)(&str[sp->i]), "|", 1) == 0)
+	{
+		content->delimiter = PIPE;
+		sp->str_start = sp->i + 1;
+	}
+	else if (strncmp((char *)(&str[sp->i]), "<", 1) == 0)
+	{
+		content->delimiter = REDIRECT_INPUT;
+		sp->str_start = sp->i + 1;
+	}
+	else if (strncmp((char *)(&str[sp->i]), ">", 1) == 0)
+	{
+		content->delimiter = REDIRECT_OUTPUT;
+		sp->str_start = sp->i + 1;
+	}
+	else
+	{
+		sp->str_start = sp->i + 1;
+		return (true);
+	}
+	return (false);
+}
+
 int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 {
 	t_splitted	*content;
@@ -45,26 +75,8 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 		content->delimiter = APPEND;
 		sp->str_start = sp->i + 2;
 	}
-	else if (strncmp((char *)(&str[sp->i]), "|", 1) == 0)
-	{
-		content->delimiter = PIPE;
-		sp->str_start = sp->i + 1;
-	}
-	else if (strncmp((char *)(&str[sp->i]), "<", 1) == 0)
-	{
-		content->delimiter = REDIRECT_INPUT;
-		sp->str_start = sp->i + 1;
-	}
-	else if (strncmp((char *)(&str[sp->i]), ">", 1) == 0)
-	{
-		content->delimiter = REDIRECT_OUTPUT;
-		sp->str_start = sp->i + 1;
-	}
-	else
-	{
-		sp->str_start = sp->i + 1;
+	else if (handle_meta_2(str, sp, elem, content))
 		return (0);
-	}
 	ft_lstadd_back(elem, ft_lstnew(content));
 	while (ft_str_is_whitespace(str[sp->str_start]))
 		sp->str_start++;

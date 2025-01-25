@@ -77,7 +77,8 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	else if (str[sp->i] == '\'')
 		simple_quote(str, sp, elem, env);
 	else if ((str[sp->i] == ' ' && sp->quote_start == 0)
-		|| str[sp->i + 1] == 0 || (is_meta(str[sp->i]) && !sp->is_dbl_quote && !sp->is_simp_quote))
+		|| str[sp->i + 1] == 0
+		|| (is_meta(str[sp->i]) && !sp->is_dbl_quote && !sp->is_simp_quote))
 	{
 		if (str[sp->str_start] == 0)
 			return (1);
@@ -127,7 +128,8 @@ t_list	*ft_split_quote(char const *str, t_ht *env)
 		return (NULL);
 	ret = NULL;
 	if (sq_replace_and_free(elements, &ret))
-		return (ft_lstclear(&ret, &free_splitted_wc), ft_lstclear(&elements, &free_splitted), NULL);
+		return (ft_lstclear(&ret, &free_splitted_wc),
+			ft_lstclear(&elements, &free_splitted), NULL);
 	if (elements)
 		ft_lstclear(&elements, &free_splitted);
 	return (ret);

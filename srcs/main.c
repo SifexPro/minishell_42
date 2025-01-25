@@ -46,25 +46,25 @@ int	exit_prog(t_list **splitted, t_ht *env)
 
 int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 {
-	char	*last_status_str;
-	int		last_status;
+	HIST_ENTRY	*last_entry;
+	char		*last_status_str;
+	int			last_status;
 
 	last_status = 0;
 	while (buffer != NULL)
 	{
 		if (buffer[0] != 0)
 		{
-			HIST_ENTRY *last_entry = history_get(history_length);
-   			if (!last_entry || last_entry && (ft_strcmp(last_entry->line, buffer) != 0))
-        		add_history(buffer);
+			last_entry = history_get(history_length);
+			if (!last_entry || (last_entry && ft_strcmp(last_entry->line, buffer) != 0))
+				add_history(buffer);
 			last_status = parse_cmd(buffer, env, envp);
 			last_status_str = ft_uitoa(last_status);
 			if (signal(SIGINT, handle_signals_edit) == SIG_ERR)
 				printf("failed to register interrupts with kernel\n");
 			if (signal(SIGQUIT, handle_signals_edit) == SIG_ERR)
 				printf("failed to register interrupts with kernel\n");
-			ht_deletef(env, "?");
-			ht_insert(env, "?", last_status_str);
+			(ht_deletef(env, "?"), ht_insert(env, "?", last_status_str));
 		}
 		prefix = get_prefix(last_status);
 		buffer = readline(prefix);

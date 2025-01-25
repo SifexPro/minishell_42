@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int ft_unset(int argc, char **argv, t_ht *env)
+int	ft_unset(int argc, char **argv, t_ht *env)
 {
 	int		i;
 	char	*key;
@@ -22,7 +22,6 @@ int ft_unset(int argc, char **argv, t_ht *env)
 		printf("unset: no arguments\n");
 		return (1);
 	}
-
 	i = 1;
 	while (argv[i])
 	{

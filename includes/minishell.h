@@ -68,7 +68,7 @@ typedef struct s_flags
 	int		*fd_in;
 	int		*fd_out;
 	t_exec	**cmd;
-	t_list	*splitted;////to free
+	t_list	*splitted;
 }			t_flags;
 // flag for if has file in start & end
 
@@ -143,7 +143,7 @@ int		handle_meta(char const *str, t_split_sh *sp, t_list **elem);
 
 /* parser/environement */
 char	**ht_to_envp(t_ht *env);
-void    clear_envp(char **env);
+void	clear_envp(char **env);
 
 /* utils */
 int		ft_strarr_len(char **input);

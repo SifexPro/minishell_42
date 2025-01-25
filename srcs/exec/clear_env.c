@@ -24,4 +24,3 @@ void	clear_env(char **envp)
 	}
 	free(envp);
 }
-
