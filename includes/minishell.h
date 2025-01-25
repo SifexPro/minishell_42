@@ -117,6 +117,9 @@ int		ft_echo(int argc, char **argv);
 /* command/cat */
 int		ft_cat(int argc, char **argv);
 
+/* command/unset */
+int		ft_unset(int argc, char **argv, t_ht *env);
+
 /* command/env */
 int		ft_env(char **envp);
 

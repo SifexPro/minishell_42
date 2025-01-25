@@ -30,6 +30,7 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_echo.c \
 				srcs/command/ft_pwd.c \
 				srcs/command/ft_env.c \
+				srcs/command/ft_unset.c \
 				srcs/command/cat/ft_cat.c \
 				srcs/command/cat/ft_cat_2.c \
 				srcs/cmd_path.c \
