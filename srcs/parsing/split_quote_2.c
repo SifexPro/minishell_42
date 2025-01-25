@@ -41,17 +41,27 @@ int	count_until_del(t_list *ret)
 	return (i);
 }
 
+t_exec	*init_exec(void)
+{
+	t_exec	*tmp_exec;
+
+	tmp_exec = malloc(sizeof(t_exec));
+	tmp_exec->argv = NULL;
+	tmp_exec->argc = 0;
+	tmp_exec->token_next = -1;
+	return (tmp_exec);
+}
+
 int	sq_replace_and_free(t_list *elements, t_list **ret)
 {
 	t_list		*e_tmp;
 	t_splitted	*tmp;
 	int			i;
 	t_exec		*tmp_exec;
-	int			has_heredoc;
+	int			can_error;
 
 	i = 0;
-	tmp_exec = malloc(sizeof(t_exec));
-	tmp_exec->argv = NULL;
+	tmp_exec = init_exec();
 	if (!tmp_exec)
 		return (1);
 	tmp_exec->argc = count_until_del(elements);
@@ -65,26 +75,42 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		{
 			tmp_exec->argv[i] = NULL;
 			tmp_exec->token_next = tmp->delimiter;
-			has_heredoc = tmp->delimiter == HEREDOC;
-			if (elements->next && (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC)) 
+			can_error = false;
+			if (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC)
 			{
-				tmp = elements->next->content;
-				tmp_exec->argv[i] = tmp->content;
-				tmp_exec->argv[i + 1] = NULL;
-				elements = elements->next;
-				tmp = elements->content;
+				if (!elements->next)
+					can_error = true;
+				else
+				{
+					if (i != 0)
+					{
+						tmp_exec = init_exec();
+						if (!tmp_exec)
+							return (1);
+						tmp_exec->argc = count_until_del(elements);
+						tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+						if (!tmp_exec->argv)
+							return (1);
+						i = 0;
+					}
+					tmp = elements->next->content;
+					tmp_exec->argv[i] = tmp->content;
+					tmp_exec->argv[i + 1] = NULL;
+					elements = elements->next;
+					tmp = elements->content;
+				}
 			}
+			else if (!elements->next)
+				can_error = true;
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			elements = elements->next;
-			tmp_exec = malloc(sizeof(t_exec));
-			tmp_exec->argv = NULL;
+			tmp_exec = init_exec();
 			if (!tmp_exec)
 				return (1);
 			tmp_exec->argc = count_until_del(elements);
-			tmp_exec->argv = NULL;
 			if (elements == NULL)
-			{
-				if (!has_heredoc)
+			{ 
+				if (can_error)
 				{
 					printf("bash: syntax error near unexpected token `newline'\n");
 					free(tmp_exec);

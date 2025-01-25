@@ -14,7 +14,7 @@
 - Signaux dans heredoc
 - << stop cat | wc -l
 ne s'arrête jamaiks avec les kill signaux, normal ?
-
+- 'cat Makefile < Makefile' ne pas faire de msg d'erreur parsing
 
 - "< bruh ls" = crash
 - "< test" = crash

@@ -48,7 +48,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 	else if (strncmp((char *)(&str[sp->str_start]), "|", 1) == 0)
 	{
 		content->delimiter = PIPE;
-		sp->str_start = sp->i + 2;
+		sp->str_start = sp->i + 1;
 	}
 	else if (strncmp((char *)(&str[sp->str_start]), "<", 1) == 0)
 	{
