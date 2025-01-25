@@ -4,7 +4,6 @@
 
 ## Faire les builtin
 - export with no options
-- unset with no options
 
 ## Fix in exec
 
@@ -18,3 +17,6 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 
 ## CRASH
 - echo te < cat
+
+### DOUBLE FICHIERS
+ - cmd_path.c

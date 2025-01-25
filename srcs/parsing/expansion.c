@@ -92,6 +92,7 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env)
 void	register_env_var(t_ht *env, char **envp)
 {
 	char	**splitted;
+	char	*key;
 	char	*val;
 	int		i;
 

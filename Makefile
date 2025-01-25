@@ -14,6 +14,7 @@ SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/signals.c \
 				srcs/exec/exec.c \
+				srcs/exec/clear_env.c \
 				srcs/exec/complex/cmd_flags.c \
 				srcs/exec/complex/pipes.c \
 				srcs/exec/complex/exec_pipe.c \
@@ -24,10 +25,12 @@ SRCS		=	srcs/main.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \
 				srcs/parsing/meta.c \
+				srcs/parsing/environement.c \
 				srcs/command/ft_cd.c \
 				srcs/command/ft_echo.c \
 				srcs/command/ft_pwd.c \
 				srcs/command/ft_env.c \
+				srcs/command/ft_unset.c \
 				srcs/command/cat/ft_cat.c \
 				srcs/command/cat/ft_cat_2.c \
 				srcs/cmd_path.c \

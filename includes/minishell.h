@@ -117,8 +117,14 @@ int		ft_echo(int argc, char **argv);
 /* command/cat */
 int		ft_cat(int argc, char **argv);
 
+/* command/unset */
+int		ft_unset(int argc, char **argv, t_ht *env);
+
 /* command/env */
 int		ft_env(char **envp);
+
+/* command/clear_env */
+void	clear_env(char **envp);
 
 /* split_quote */
 t_list	*ft_split_quote(char const *str, t_ht *env);
@@ -134,6 +140,10 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
 /* parser/meta */
 bool	is_meta(char c);
 int		handle_meta(char const *str, t_split_sh *sp, t_list **elem);
+
+/* parser/environement */
+char	**ht_to_envp(t_ht *env);
+void    clear_envp(char **env);
 
 /* utils */
 int		ft_strarr_len(char **input);

@@ -46,6 +46,8 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 {
+	char **envp_cpy;
+
 	if (i == 0 && flags->infile)
 	{
 		if (!open_infile(flags))
@@ -65,7 +67,9 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	if (i < flags->cmd_count - 1)
 		dup2(flags->fd_out[i], 1);
 	close_pipe(flags);
-	exit(select_exec_pipe(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp));
+	envp_cpy = ht_to_envp(env);
+	exit(select_exec_pipe(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp_cpy));
+	clear_env(envp_cpy);
 }
 
 

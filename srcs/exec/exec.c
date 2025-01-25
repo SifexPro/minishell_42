@@ -52,6 +52,8 @@ int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 		return (ft_cat(argc, argv));
 	else if (!ft_strncmp(argv[0], "env", 3))
 		return (ft_env(envp));
+	else if (!ft_strncmp(argv[0], "unset", 5))
+		return (ft_unset(argc, argv, env));
 	else
 		return (run_program(argv[0], argv, envp));
 }
@@ -93,6 +95,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	t_flags	*flags;
 	t_exec	*temp;
 	int		res;
+	char	**envp_cpy;
 
 	res = 0;
 	splitted = ft_split_quote(input, env);
@@ -141,7 +144,9 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (free_flags(flags), exit_prog(&splitted, env));
-		res = select_exec(temp->argc, temp->argv, env, envp);
+		envp_cpy = ht_to_envp(env);
+		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
+		clear_env(envp_cpy);
 	}
 	ft_lstclear(&splitted, &free_splitted_wc);
 	free_flags(flags);
