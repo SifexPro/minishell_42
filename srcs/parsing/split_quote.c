@@ -70,7 +70,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	if (str[sp->i] == ' ' && sp->str_start == sp->i)
 		sp->str_start++;
-	else if (is_meta(str[sp->i]))
+	else if (is_meta(str[sp->i]) && !sp->is_dbl_quote && !sp->is_simp_quote)
 		handle_meta(str, sp, elem);
 	else if (str[sp->i] == '\"')
 		double_quote(str, sp, elem, env);
