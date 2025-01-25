@@ -84,12 +84,14 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				{
 					if (i != 0)
 					{
+						tmp_exec->token_next = -1;
 						ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 						tmp_exec = init_exec();
 						if (!tmp_exec)
 							return (1);
 						tmp_exec->argc = count_until_del(elements);
 						tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+						tmp_exec->token_next = tmp->delimiter;
 						if (!tmp_exec->argv)
 							return (1);
 						i = 0;
