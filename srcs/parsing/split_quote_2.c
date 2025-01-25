@@ -49,6 +49,7 @@ t_exec	*init_exec(void)
 	tmp_exec->argv = NULL;
 	tmp_exec->argc = 0;
 	tmp_exec->token_next = -1;
+	//ft_printf("init exec\n");
 	return (tmp_exec);
 }
 
@@ -97,7 +98,9 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 						i = 0;
 					}
 					tmp = elements->next->content;
+					//ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
 					tmp_exec->argv[i] = tmp->content;
+					//ft_printf("tmp_exec->argv[%d] = NULL\n", i + 1);
 					tmp_exec->argv[i + 1] = NULL;
 					elements = elements->next;
 					tmp = elements->content;
@@ -129,6 +132,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			i = 0;
 			tmp = elements->content;
 		}
+		//ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
 		i++;
