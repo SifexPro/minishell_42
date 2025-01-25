@@ -120,6 +120,9 @@ int		ft_cat(int argc, char **argv);
 /* command/env */
 int		ft_env(char **envp);
 
+/* command/clear_env */
+void	clear_env(char **envp);
+
 /* split_quote */
 t_list	*ft_split_quote(char const *str, t_ht *env);
 

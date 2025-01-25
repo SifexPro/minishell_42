@@ -52,16 +52,20 @@ char **ht_to_envp(t_ht *env)
     i = 0;
     j = 0;
 
-    while(i < HASHTABLE_SIZE)
+    while(i < env->size)
     {
         entry = env->elements[i];
         if (entry)
         {
-            e = entry->value;
-            len = ft_strlen(entry->key) + 2 + ft_strlen(e);
-            new_envp[j] = malloc(sizeof(char) * (len));
-            do_entry(new_envp[j], entry->key, e);
-            j++;
+			while (entry)
+			{
+				e = entry->value;
+				len = ft_strlen(entry->key) + 2 + ft_strlen(e);
+				new_envp[j] = malloc(sizeof(char) * (len));
+				do_entry(new_envp[j], entry->key, e);
+				j++;
+				entry = entry->next;
+			}
         }
         i++;
     }

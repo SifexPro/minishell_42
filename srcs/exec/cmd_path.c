@@ -20,10 +20,7 @@ char	*get_path(char **envp)
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			printf("FOND");
 			return (envp[i] + 5);
-		}
 		i++;
 	}
 	return (NULL);

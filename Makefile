@@ -14,6 +14,7 @@ SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/signals.c \
 				srcs/exec/exec.c \
+				srcs/exec/clear_env.c \
 				srcs/exec/complex/cmd_flags.c \
 				srcs/exec/complex/pipes.c \
 				srcs/exec/complex/exec_pipe.c \
