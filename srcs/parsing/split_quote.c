@@ -77,7 +77,7 @@ int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	else if (str[sp->i] == '\'')
 		simple_quote(str, sp, elem, env);
 	else if ((str[sp->i] == ' ' && sp->quote_start == 0)
-		|| str[sp->i + 1] == 0 || is_meta(str[sp->i]))
+		|| str[sp->i + 1] == 0 || (is_meta(str[sp->i]) && !sp->is_dbl_quote && !sp->is_simp_quote))
 	{
 		if (str[sp->str_start] == 0)
 			return (1);
