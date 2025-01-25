@@ -35,27 +35,27 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 	if (!content)
 		return (0);
 	content->is_delimiter = true;
-	if (strncmp((char *)(&str[sp->str_start]), "<<", 2) == 0)
+	if (strncmp((char *)(&str[sp->i]), "<<", 2) == 0)
 	{
 		content->delimiter = HEREDOC;
 		sp->str_start = sp->i + 2;
 	}
-	else if (strncmp((char *)(&str[sp->str_start]), ">>", 2) == 0)
+	else if (strncmp((char *)(&str[sp->i]), ">>", 2) == 0)
 	{
 		content->delimiter = APPEND;
 		sp->str_start = sp->i + 2;
 	}
-	else if (strncmp((char *)(&str[sp->str_start]), "|", 1) == 0)
+	else if (strncmp((char *)(&str[sp->i]), "|", 1) == 0)
 	{
 		content->delimiter = PIPE;
 		sp->str_start = sp->i + 1;
 	}
-	else if (strncmp((char *)(&str[sp->str_start]), "<", 1) == 0)
+	else if (strncmp((char *)(&str[sp->i]), "<", 1) == 0)
 	{
 		content->delimiter = REDIRECT_INPUT;
 		sp->str_start = sp->i + 1;
 	}
-	else if (strncmp((char *)(&str[sp->str_start]), ">", 1) == 0)
+	else if (strncmp((char *)(&str[sp->i]), ">", 1) == 0)
 	{
 		content->delimiter = REDIRECT_OUTPUT;
 		sp->str_start = sp->i + 1;
@@ -68,6 +68,6 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 	ft_lstadd_back(elem, ft_lstnew(content));
 	while (ft_str_is_whitespace(str[sp->str_start]))
 		sp->str_start++;
-	sp->i = sp->str_start;
+	sp->i = sp->str_start - 1;
 	return (2);
 }
