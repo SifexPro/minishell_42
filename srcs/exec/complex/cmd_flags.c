@@ -37,18 +37,23 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	//printf("\n\nset_flags_cmd\n");////
 	while (splitted)
 	{
 		//printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
-		if ((flags->has_infile || flags->has_heredoc) && i == flags->cmd_count)
-			break;
-		flags->cmd[i] = splitted->content;
+		//if ((flags->has_infile || flags->has_heredoc) && i == flags->cmd_count)
+		//	break;
+		/*if (((t_exec *)splitted->content)->token_next != REDIRECT_INPUT && ((t_exec *)splitted->content)->token_next != HEREDOC && ((t_exec *)splitted->content)->token_next != REDIRECT_OUTPUT && ((t_exec *)splitted->content)->token_next != APPEND)
+		{	
+			printf("i: %d\n", i);////
+			printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
+			flags->cmd[++i] = splitted->content;
+		}*/
+		flags->cmd[++i] = splitted->content;
 		splitted = splitted->next;
-		i++;
 	}
-	flags->cmd[i] = NULL;
+	flags->cmd[++i] = NULL;
 	if (flags->pipe_count > 0)//// rework for files in and out
 	{
 		flags->pid = ft_calloc(flags->cmd_count + 1, sizeof(pid_t));////
@@ -96,26 +101,29 @@ t_flags	*set_flags(t_list *splitted)
 	t_flags	*flags;
 	t_exec	*temp;
 	t_list	*start;
+	int		i;
 
+	i = 0;
 	flags = init_flags();
 	start = splitted;
 	while (splitted)
 	{
 		temp = splitted->content;
-		printf("temp->argv[0]: %s\n", temp->argv[0]);////
-		printf("temp->argv[1]: %s\n", temp->argv[1]);////
-		printf("temp->token_next: %d\n", temp->token_next);////
+		//printf("temp->argv[0]: %s\n", temp->argv[0]);////
+		//printf("temp->argv[1]: %s\n", temp->argv[1]);////
+		//printf("temp->token_next: %d\n", temp->token_next);////
 		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT || temp->token_next == HEREDOC || temp->token_next == APPEND)
 			flags->pipe_count++;
 		if (temp->token_next == REDIRECT_OUTPUT || temp->token_next == APPEND)
 			flags->has_outfile = true;
-		if (temp->token_next == REDIRECT_INPUT)
+		if (temp->token_next == REDIRECT_INPUT && i == 0)
 			flags->has_infile = true;
 		else if (temp->token_next == HEREDOC) 
 			flags->has_heredoc = true;
 		else if (temp->token_next == APPEND)
 			flags->has_append = true;
 		splitted = splitted->next;
+		i++;
 	}
 	flags->cmd_count = flags->pipe_count - flags->has_infile - flags->has_outfile - flags->has_heredoc + 1;
 	flags->cmd = (t_exec **)malloc(sizeof(t_exec *) * (flags->cmd_count + 1));
