@@ -4,7 +4,6 @@
 
 ## Faire les builtin
 - export with no options
-- unset with no options
 
 ## Fix in exec
 
