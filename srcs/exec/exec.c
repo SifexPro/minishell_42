@@ -54,6 +54,8 @@ int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 		return (ft_env(envp));
 	else if (!ft_strncmp(argv[0], "unset", 5))
 		return (ft_unset(argc, argv, env));
+	else if (!ft_strncmp(argv[0], "export", 6))
+		return (ft_export(argc, argv, env, envp));
 	else
 		return (run_program(argv[0], argv, envp));
 }

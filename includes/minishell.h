@@ -120,6 +120,9 @@ int		ft_cat(int argc, char **argv);
 /* command/unset */
 int		ft_unset(int argc, char **argv, t_ht *env);
 
+/* command/export */
+int		ft_export(int argc, char **argv, t_ht *env, char **envp);
+
 /* command/env */
 int		ft_env(char **envp);
 

@@ -66,6 +66,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		return (1);
 	tmp_exec->argc = count_until_del(elements);
  	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+	tmp_exec->token_next = -1;
 	if (!tmp_exec->argv)
 		return (1);
 	while (elements)
@@ -74,40 +75,47 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		if (tmp->is_delimiter)
 		{
 			tmp_exec->argv[i] = NULL;
-			tmp_exec->token_next = tmp->delimiter;
 			can_error = false;
-			if (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC)
+			if (!elements->next && (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC))
 			{
-				if (!elements->next)
-					can_error = true;
+				printf("error0\n");
+				can_error = true;
+			}
+			else
+			{
+				if (i != 0)
+				{
+					tmp_exec->token_next = -1;
+					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+					tmp_exec = init_exec();
+					if (!tmp_exec)
+						return (1);
+					tmp_exec->argc = count_until_del(elements);
+					tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+					tmp_exec->token_next = tmp->delimiter;
+					if (!tmp_exec->argv)
+						return (1);
+					i = 0;
+				}
 				else
 				{
-					if (i != 0)
-					{
-						tmp_exec->token_next = -1;
-						ft_lstadd_back(ret, ft_lstnew(tmp_exec));
-						tmp_exec = init_exec();
-						if (!tmp_exec)
-							return (1);
-						tmp_exec->argc = count_until_del(elements);
-						tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
-						tmp_exec->token_next = tmp->delimiter;
-						if (!tmp_exec->argv)
-							return (1);
-						i = 0;
-					}
-					tmp = elements->next->content;
-					tmp_exec->argv[i] = tmp->content;
-					tmp_exec->argv[i + 1] = NULL;
-					elements = elements->next;
-					tmp = elements->content;
+					tmp_exec->token_next = tmp->delimiter;
 				}
+				tmp = elements->next->content;
+				tmp_exec->argv[i] = tmp->content;
+				tmp_exec->argv[i + 1] = NULL;
+				elements = elements->next;
+				tmp = elements->content;
 			}
-			else if (!elements->next)
+			/* if (!elements->next && (tmp->delimiter == HEREDOC))
+			{
+				printf("error1 %d\n", tmp->delimiter);
 				can_error = true;
+			} */
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			elements = elements->next;
 			tmp_exec = init_exec();
+			tmp_exec->token_next = -1;
 			if (!tmp_exec)
 				return (1);
 			tmp_exec->argc = count_until_del(elements);
