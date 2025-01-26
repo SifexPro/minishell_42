@@ -105,6 +105,7 @@ void	register_env_var(t_ht *env, char **envp)
 		if (splitted[1])
 		{
 			val = ft_strdup(splitted[1]);
+			ht_deletef(env, splitted[0]);
 			ht_insert(env, splitted[0], val);
 		}
 		ft_freesplit(splitted);

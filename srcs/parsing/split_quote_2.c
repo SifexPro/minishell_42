@@ -76,11 +76,8 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		{
 			tmp_exec->argv[i] = NULL;
 			can_error = false;
-			if (!elements->next && (tmp->delimiter == REDIRECT_INPUT || tmp->delimiter == HEREDOC))
-			{
-				printf("error0\n");
+			if (!elements->next)
 				can_error = true;
-			}
 			else
 			{
 				if (i != 0)
@@ -107,11 +104,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				elements = elements->next;
 				tmp = elements->content;
 			}
-			/* if (!elements->next && (tmp->delimiter == HEREDOC))
-			{
-				printf("error1 %d\n", tmp->delimiter);
-				can_error = true;
-			} */
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			elements = elements->next;
 			tmp_exec = init_exec();
