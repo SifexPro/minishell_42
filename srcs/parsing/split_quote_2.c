@@ -127,7 +127,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			}
 			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 			tmp = elements->content;
-			elements = elements->next;
 			if (!tmp_exec->argv)
 				return (1);
 			i = 0;
