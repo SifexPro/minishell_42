@@ -20,3 +20,6 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 
 ### DOUBLE FICHIERS
  - cmd_path.c
+
+### Damn
+- gérer "'command' < file 'suite command'"

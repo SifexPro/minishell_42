@@ -26,10 +26,13 @@ static t_flags	*init_flags(void)
 	flags->heredoc = NULL;
 	flags->has_infile = false;
 	flags->has_outfile = false;
+	flags->has_append = false;
 	flags->has_heredoc = false;
 	flags->pid = NULL;
 	flags->fd_in = NULL;
 	flags->fd_out = NULL;
+	flags->cmd = NULL;
+	flags->splitted = NULL;
 	return (flags);
 }
 
@@ -38,19 +41,13 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 	int		i;
 
 	i = -1;
-	//printf("\n\nset_flags_cmd\n");////
+	printf("\n\nset_flags_cmd\n");////
 	while (splitted)
 	{
-		//printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
-		//if ((flags->has_infile || flags->has_heredoc) && i == flags->cmd_count)
-		//	break;
-		/*if (((t_exec *)splitted->content)->token_next != REDIRECT_INPUT && ((t_exec *)splitted->content)->token_next != HEREDOC && ((t_exec *)splitted->content)->token_next != REDIRECT_OUTPUT && ((t_exec *)splitted->content)->token_next != APPEND)
-		{	
-			printf("i: %d\n", i);////
-			printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
+		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
+		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
+		if (((t_exec *)splitted->content)->token_next == -1)
 			flags->cmd[++i] = splitted->content;
-		}*/
-		flags->cmd[++i] = splitted->content;
 		splitted = splitted->next;
 	}
 	flags->cmd[++i] = NULL;
@@ -71,6 +68,27 @@ static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 	t_list	*temp;
 
 	start = splitted;
+	while (splitted)
+	{
+		if (flags->has_infile && ((t_exec *)splitted->content)->token_next == REDIRECT_INPUT)
+			flags->infile = ((t_exec *)splitted->content)->argv[0];
+		else if (flags->has_heredoc && ((t_exec *)splitted->content)->token_next == HEREDOC)
+			flags->heredoc = ((t_exec *)splitted->content)->argv[0];
+		else if (flags->has_outfile && (((t_exec *)splitted->content)->token_next == REDIRECT_OUTPUT || ((t_exec *)splitted->content)->token_next == APPEND))
+			flags->outfile = ((t_exec *)splitted->content)->argv[0];
+		splitted = splitted->next;
+	}
+	//printf("\n\nset_flags_files\n");////
+	splitted = start;
+	return (set_flags_cmd(flags, start));
+}
+
+/*static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
+{
+	t_list	*start;
+	t_list	*temp;
+
+	start = splitted;
 	//printf("\n\nset_flags_files\n");////
 	if (flags->has_infile)
 	{
@@ -84,6 +102,7 @@ static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 		//printf("flags->heredoc: %s\n", flags->heredoc);////
 		start = start->next;
 	}
+	splitted = start;
 	//printf("((t_exec *)start->content)->argv[0]: %s\n", ((t_exec *)start->content)->argv[0]);////
 	if (flags->has_outfile)
 	{
@@ -94,7 +113,7 @@ static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 		//printf("flags->outfile: %s\n", flags->outfile);////
 	}
 	return (set_flags_cmd(flags, start));
-}
+}*/
 
 t_flags	*set_flags(t_list *splitted)
 {
@@ -116,7 +135,7 @@ t_flags	*set_flags(t_list *splitted)
 			flags->pipe_count++;
 		if (temp->token_next == REDIRECT_OUTPUT || temp->token_next == APPEND)
 			flags->has_outfile = true;
-		if (temp->token_next == REDIRECT_INPUT && i == 0)
+		if (temp->token_next == REDIRECT_INPUT)
 			flags->has_infile = true;
 		else if (temp->token_next == HEREDOC) 
 			flags->has_heredoc = true;
