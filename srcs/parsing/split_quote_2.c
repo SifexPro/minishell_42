@@ -72,10 +72,10 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 	while (elements)
 	{
 		tmp = elements->content;
+		can_error = false;
 		if (tmp->is_delimiter)
 		{
 			tmp_exec->argv[i] = NULL;
-			can_error = false;
 			if (!elements->next)
 				can_error = true;
 			else
@@ -107,9 +107,9 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 			elements = elements->next;
 			tmp_exec = init_exec();
-			tmp_exec->token_next = -1;
 			if (!tmp_exec)
 				return (1);
+			tmp_exec->token_next = -1;
 			tmp_exec->argc = count_until_del(elements);
 			if (elements == NULL)
 			{ 
@@ -120,7 +120,10 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 					return (1);
 				}
 				else
+				{
+					can_error = true;
 					break;
+				}
 			}
 			tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 			tmp = elements->content;
@@ -138,6 +141,8 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 	if (tmp_exec->argv)
 		tmp_exec->argv[i] = NULL;
 	tmp_exec->token_next = -1;
-	ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+	if (!can_error)
+		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 	return (0);
 }
+
