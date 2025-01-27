@@ -132,6 +132,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				return (1);
 			i = 0;
 			tmp = elements->content;
+			continue;
 		}
 		//ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
 		tmp_exec->argv[i] = tmp->content;
