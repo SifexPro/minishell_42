@@ -25,3 +25,4 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 ### Damn
 - gérer "'command' < file 'suite command'"
 - "exit exit_code"
+- gérer "wc -w < Makefile > test | wc -l

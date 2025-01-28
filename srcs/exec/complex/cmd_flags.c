@@ -46,7 +46,7 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 	{
 		//printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
 		//printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
-		if (((t_exec *)splitted->content)->token_next == -1)
+		if (((t_exec *)splitted->content)->token_next == -1 || ((t_exec *)splitted->content)->token_next == PIPE)
 			flags->cmd[++i] = splitted->content;
 		splitted = splitted->next;
 	}
