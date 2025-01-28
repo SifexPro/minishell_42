@@ -84,7 +84,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			{
 				if (i != 0)
 				{
-					tmp_exec->token_next = -1;
+					//tmp_exec->token_next = -1;
 					//ft_printf("Add to back2\n");////
 					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 					tmp_exec = init_exec();
