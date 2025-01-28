@@ -45,6 +45,7 @@ t_exec	*init_exec(void)
 {
 	t_exec	*tmp_exec;
 
+	ft_printf("init_exec\n");
 	tmp_exec = malloc(sizeof(t_exec));
 	tmp_exec->argv = NULL;
 	tmp_exec->argc = 0;
@@ -59,6 +60,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 	int			i;
 	t_exec		*tmp_exec;
 	int			can_error;
+	int			delimiter;
 
 	i = 0;
 	tmp_exec = init_exec();
@@ -75,6 +77,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		can_error = false;
 		if (tmp->is_delimiter)
 		{
+			delimiter = tmp->delimiter;
 			tmp_exec->argv[i] = NULL;
 			if (!elements->next)
 				can_error = true;
@@ -83,6 +86,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				if (i != 0)
 				{
 					tmp_exec->token_next = -1;
+					ft_printf("Add to back2\n");
 					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 					tmp_exec = init_exec();
 					if (!tmp_exec)
@@ -107,14 +111,24 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				tmp = elements->content;
 				i++;
 			}
-			ft_lstadd_back(ret, ft_lstnew(tmp_exec));
-			//ft_lstadd_back(ret, ft_lstnew(tmp_exec));
-			elements = elements->next;
-			/* tmp_exec = init_exec();
-			if (!tmp_exec)
-				return (1);
-			tmp_exec->token_next = -1;
-			tmp_exec->argc = count_until_del(elements); */
+			ft_printf("Add to back %d\n", delimiter);
+			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND)
+			{
+				ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+				i = 0;
+				tmp_exec = init_exec();
+				if (!tmp_exec)
+					return (1);
+				tmp_exec->token_next = -1;
+				elements = elements->next;
+				tmp_exec->argc = count_until_del(elements);
+			}
+			else
+			{
+				elements = elements->next;
+				//tmp = elements->content;
+			}
+			/*  */
 			if (elements == NULL)
 			{ 
 				if (can_error)
@@ -129,15 +143,26 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 					break;
 				}
 			}
-			/* tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
-			tmp = elements->content;
-			if (!tmp_exec->argv)
-				return (1); */
-			//i = 0;
-			tmp = elements->content;
-			continue;
+			
+			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND)
+			{
+				tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+				tmp = elements->content;
+				if (!tmp_exec->argv)
+					return (1);
+				i = 0;
+				tmp = elements->content;
+				continue;
+			}
+			else
+			{
+				tmp = elements->content;
+				continue;
+			}
 		}
-		//ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
+		else
+			delimiter = -1;
+		ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
 		i++;
