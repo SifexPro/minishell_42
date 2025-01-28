@@ -68,7 +68,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		return (1);
 	tmp_exec->argc = count_until_del(elements);
  	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
-	tmp_exec->token_next = -1;
 	if (!tmp_exec->argv)
 		return (1);
 	while (elements)
@@ -99,9 +98,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 					i = 0;
 				}
 				else
-				{
 					tmp_exec->token_next = tmp->delimiter;
-				}
 				tmp = elements->next->content;
 				ft_printf("argv[%d] = %s\n", i, tmp->content);
 				tmp_exec->argv[i] = tmp->content;
@@ -119,12 +116,14 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				tmp_exec = init_exec();
 				if (!tmp_exec)
 					return (1);
-				tmp_exec->token_next = -1;
+				//tmp_exec->token_next = -1;
 				elements = elements->next;
 				tmp_exec->argc = count_until_del(elements);
 			}
 			else
 			{
+				ft_printf("delimiter = %d\n", delimiter);
+				tmp_exec->token_next = delimiter;
 				elements = elements->next;
 				//tmp = elements->content;
 			}
@@ -161,7 +160,10 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			}
 		}
 		else
+		{
 			delimiter = -1;
+			//tmp_exec->token_next = -1;
+		}
 		ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
@@ -170,7 +172,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 	}
 	if (tmp_exec->argv)
 		tmp_exec->argv[i] = NULL;
-	tmp_exec->token_next = -1;
 	if (!can_error)
 		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 	return (0);
