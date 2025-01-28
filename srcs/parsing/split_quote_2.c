@@ -45,7 +45,7 @@ t_exec	*init_exec(void)
 {
 	t_exec	*tmp_exec;
 
-	ft_printf("init_exec\n");
+	//ft_printf("init_exec\n");////
 	tmp_exec = malloc(sizeof(t_exec));
 	tmp_exec->argv = NULL;
 	tmp_exec->argc = 0;
@@ -86,7 +86,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				if (i != 0)
 				{
 					tmp_exec->token_next = -1;
-					ft_printf("Add to back2\n");
+					//ft_printf("Add to back2\n");////
 					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 					tmp_exec = init_exec();
 					if (!tmp_exec)
@@ -103,15 +103,15 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 					tmp_exec->token_next = tmp->delimiter;
 				}
 				tmp = elements->next->content;
-				ft_printf("argv[%d] = %s\n", i, tmp->content);
+				//ft_printf("argv[%d] = %s\n", i, tmp->content);////
 				tmp_exec->argv[i] = tmp->content;
-				ft_printf("argv[%d] = NULL\n", i + 1);
+				//ft_printf("argv[%d] = NULL\n", i + 1);////
 				tmp_exec->argv[i + 1] = NULL;
 				elements = elements->next;
 				tmp = elements->content;
 				i++;
 			}
-			ft_printf("Add to back %d\n", delimiter);
+			//ft_printf("Add to back %d\n", delimiter);////
 			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND)
 			{
 				ft_lstadd_back(ret, ft_lstnew(tmp_exec));
@@ -133,7 +133,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 			{ 
 				if (can_error)
 				{
-					printf("bash: syntax error near unexpected token `newline'\n");
+					printf("bash: syntax error near unexpected token `newline'\n");////
 					free(tmp_exec);
 					return (1);
 				}
@@ -162,7 +162,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 		}
 		else
 			delimiter = -1;
-		ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);
+		//ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);////
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
 		i++;

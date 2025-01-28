@@ -11,6 +11,7 @@
 - Signaux dans heredoc
 - << stop cat | wc -l
 ne s'arrête jamaiks avec les kill signaux, normal ?
+- wc -l < Makefile -m == segmentation fault
 
 ### Conditionals mes couilles
 - < Makefile cat | wc -l | cat > test
@@ -23,3 +24,4 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 
 ### Damn
 - gérer "'command' < file 'suite command'"
+- "exit exit_code"

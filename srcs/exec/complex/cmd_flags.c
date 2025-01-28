@@ -41,11 +41,11 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 	int		i;
 
 	i = -1;
-	printf("\n\nset_flags_cmd\n");////
+	//printf("\n\nset_flags_cmd\n");////
 	while (splitted)
 	{
-		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
-		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
+		//printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
+		//printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		if (((t_exec *)splitted->content)->token_next == -1)
 			flags->cmd[++i] = splitted->content;
 		splitted = splitted->next;
@@ -65,7 +65,6 @@ static t_flags *set_flags_cmd(t_flags *flags, t_list *splitted)
 static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 {
 	t_list	*start;
-	t_list	*temp;
 
 	start = splitted;
 	while (splitted)
@@ -79,7 +78,6 @@ static t_flags *set_flags_files(t_flags *flags, t_list *splitted)
 		splitted = splitted->next;
 	}
 	//printf("\n\nset_flags_files\n");////
-	splitted = start;
 	return (set_flags_cmd(flags, start));
 }
 
@@ -128,9 +126,9 @@ t_flags	*set_flags(t_list *splitted)
 	while (splitted)
 	{
 		temp = splitted->content;
-		printf("temp->argv[0]: %s\n", temp->argv[0]);////
-		printf("temp->argv[1]: %s\n", temp->argv[1]);////
-		printf("temp->token_next: %d\n", temp->token_next);////
+		//printf("temp->argv[0]: %s\n", temp->argv[0]);////
+		//printf("temp->argv[1]: %s\n", temp->argv[1]);////
+		//printf("temp->token_next: %d\n", temp->token_next);////
 		if (temp->token_next == PIPE || temp->token_next == REDIRECT_INPUT || temp->token_next == REDIRECT_OUTPUT || temp->token_next == HEREDOC || temp->token_next == APPEND)
 			flags->pipe_count++;
 		if (temp->token_next == REDIRECT_OUTPUT || temp->token_next == APPEND)
