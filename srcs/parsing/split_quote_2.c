@@ -108,9 +108,9 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				tmp = elements->content;
 				i++;
 			}
-			//ft_printf("Add to back %d\n", delimiter);////
-			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND)
+			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND || delimiter == HEREDOC)
 			{
+				ft_printf("Add to back %d\n", delimiter);////
 				ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 				i = 0;
 				tmp_exec = init_exec();
@@ -143,7 +143,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				}
 			}
 			
-			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND)
+			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND || delimiter == HEREDOC)
 			{
 				tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 				tmp = elements->content;
