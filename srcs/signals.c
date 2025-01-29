@@ -12,11 +12,17 @@
 
 #include "minishell.h"
 
-void	handle_signals_edit(int signo)
+void	handle_signals_term(int signo)
 {
 	if (signo == SIGINT)
 	{
 		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (signo == SIGQUIT)
+	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -46,7 +52,30 @@ void	handle_signals_cmd(int signo)
 {
 	if (signo == SIGINT)
 	{
-		printf("\n");
-		rl_redisplay();
+		
 	}
+}
+
+void	setup_cmd_signals(void)
+{
+	if (signal(SIGINT, handle_signals_cmd) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGQUIT, handle_signals_cmd) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+}
+
+void	setup_heredoc_signals(void)
+{
+	if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+}
+
+void	setup_term_signals(void)
+{
+	if (signal(SIGINT, handle_signals_term) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGQUIT, handle_signals_term) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
 }

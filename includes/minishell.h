@@ -100,9 +100,11 @@ int		parse_cmd(char *input, t_ht *env, char **envp);
 int		exit_prog(t_list **splitted, t_ht *env, int status);
 
 /* signals */
-void	handle_signals_edit(int signo);
-void	handle_signals_cmd(int signo);
 void	handle_signals_heredoc(int signo);
+void	setup_term_signals(void);
+void	setup_cmd_signals(void);
+void	setup_heredoc_signals(void);
+
 
 /* command/cd */
 int		ft_cd(int argc, char **argv, t_ht *env);
@@ -183,5 +185,7 @@ void	open_heredoc(t_flags *flags);
 /* exec/complex/exec_utils */
 void	exec_error(char *error, char *cmd);
 void	file_error(char *error, char *file);
+
+extern int	g_pid;
 
 #endif

@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int	g_pid;
+
 char	*get_prefix(int last_status)
 {
 	char	*pwd;
@@ -58,13 +60,12 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 			le = history_get(history_length);
 			if (!le || (le && ft_strcmp(le->line, buffer) != 0))
 				add_history(buffer);
+			setup_cmd_signals();
 			last_status = parse_cmd(buffer, env, envp);
 			last_status_str = ft_uitoa(last_status);
-			if (signal(SIGINT, handle_signals_edit) == SIG_ERR)
-				printf("failed to register interrupts with kernel\n");
-			if (signal(SIGQUIT, handle_signals_edit) == SIG_ERR)
-				printf("failed to register interrupts with kernel\n");
-			(ht_deletef(env, "?"), ht_insert(env, "?", last_status_str));
+			setup_term_signals();
+			ht_deletef(env, "?");
+			ht_insert(env, "?", last_status_str);
 		}
 		prefix = get_prefix(last_status);
 		buffer = readline(prefix);
@@ -81,10 +82,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	if (signal(SIGINT, handle_signals_edit) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
-	if (signal(SIGQUIT, handle_signals_edit) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
+	g_pid = 0;
+	setup_term_signals();
 	env = hashtable_create(100);
 	if (!env)
 		return (printf("failed to malloc!"), 1);

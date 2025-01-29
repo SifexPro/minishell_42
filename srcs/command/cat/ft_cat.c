@@ -60,6 +60,6 @@ void	read_stdin(void)
 		free(buffer);
 		buffer = get_next_line(0);
 	}
-
+	free(buffer);
 }
 
