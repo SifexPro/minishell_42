@@ -33,6 +33,7 @@ int	run_program(char *path, char **argv, char **envp)
 	pid_t	child;
 	int		status;
 
+	printf("here\n");////
 	child = fork();
 	if (!child)
 		run_program_exec(path, argv, envp);
@@ -146,7 +147,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	{
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
-			return (free_flags(flags), exit_prog(&splitted, env));
+			return (free_flags(flags), exit_prog(&splitted, env, ft_atoi(temp->argv[1])));
 		envp_cpy = ht_to_envp(env);
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);

@@ -44,8 +44,8 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 		return (ft_unset(argc, argv, env));
 	else if (!ft_strncmp(argv[0], "export", 6))
 		return (ft_export(argc, argv, env, envp));
-	//else if (!ft_strcmp(argv[0], "exit"))
-	//	return (exit(ft_atoi(argv[1])), 0);
+	else if (!ft_strcmp(argv[0], "exit"))
+		return (exit(ft_atoi(argv[1])), 0);
 	else
 		return (run_program_exec_pipe(argv[0], argv, envp));
 }

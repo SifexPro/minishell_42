@@ -37,11 +37,11 @@ char	*get_prefix(int last_status)
 	return (tmp);
 }
 
-int	exit_prog(t_list **splitted, t_ht *env)
+int	exit_prog(t_list **splitted, t_ht *env, int status)
 {
 	ft_lstclear(splitted, &free_splitted_wc);
 	hashtable_destroy(env);
-	exit(0);
+	exit(status);
 }
 
 int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)

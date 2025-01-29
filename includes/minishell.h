@@ -97,7 +97,7 @@ typedef struct s_splitted
 
 /* main */
 int		parse_cmd(char *input, t_ht *env, char **envp);
-int		exit_prog(t_list **splitted, t_ht *env);
+int		exit_prog(t_list **splitted, t_ht *env, int status);
 
 /* signals */
 void	handle_signals_edit(int signo);
