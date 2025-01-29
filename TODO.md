@@ -8,6 +8,10 @@
 - Signaux dans heredoc
 - << stop cat | wc -l
 ne s'arrête jamaiks avec les kill signaux, normal ?
+- << test
+== crash
+- < Makefile cat | wc -l | cat
+res devrait etre 1 mais cat le cat pas
 
 ## CRASH
 - echo te < cat
@@ -24,7 +28,4 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 - gérer exit
 
 ### Check
-- < Makefile cat | wc -l | cat
 - cat Makefile | gzip > test.gz
-- << file cat
--> cant exit

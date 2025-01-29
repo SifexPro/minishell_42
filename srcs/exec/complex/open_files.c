@@ -35,16 +35,14 @@ void	open_heredoc(t_flags *flags)
 {
 	int		fd[2];
 	char	*line;
-	pid_t	child;
 	int		len_heredoc;
 
-	child = fork();
-	if (child < 0)
-		exit(1);///real exit
-	g_pid = child;
 	if (pipe(fd) < 0)
-		exit(1);///real exit
-	if (!child)
+		exit(1);////real exit
+	g_pid = fork();
+	if (g_pid < 0)
+		exit(1);////real exit
+	if (!g_pid)
 	{
 		len_heredoc = ft_strlen(flags->heredoc);
 		if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
@@ -64,11 +62,15 @@ void	open_heredoc(t_flags *flags)
 			free(line);
 		}
 		close(fd[1]);
-		flags->fd_in[0] = fd[0];
+		close(fd[0]);
+		exit(0);
 	}
-	close(fd[1]);
-	//close(fd[0]);
-	waitpid(child, NULL, 0);
-	g_pid = 0;
+	else
+	{
+		waitpid(g_pid, NULL, 0);
+		close(fd[1]);
+		flags->fd_in[0] = fd[0];
+		g_pid = 0;
+	}
 }
 //// close pipe ?

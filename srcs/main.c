@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	g_pid;
+int	g_pid;////?
 
 char	*get_prefix(int last_status)
 {
