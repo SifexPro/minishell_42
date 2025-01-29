@@ -39,6 +39,7 @@ int	run_program(char *path, char **argv, char **envp)
 	if (!child)
 		run_program_exec(path, argv, envp);
 	waitpid(child, &status, 0);
+	g_pid = 0;
 	return (WEXITSTATUS(status));
 }
 
