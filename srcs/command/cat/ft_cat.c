@@ -51,8 +51,15 @@ void	read_file(char*name)
 
 void	read_stdin(void)
 {
-	char	buffer[1024];
+	char	*buffer;
 
-	while (read(0, buffer, 1024) != 0)
-		write(1, &buffer, 1);
+	buffer = get_next_line(0);
+	while (buffer)
+	{
+		write(1, buffer, ft_strlen(buffer));
+		free(buffer);
+		buffer = get_next_line(0);
+	}
+
 }
+
