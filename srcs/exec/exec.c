@@ -154,7 +154,6 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	}
 	ft_lstclear(&splitted, &free_splitted_wc);
 	free_flags(flags);
-
 	return (res);
 }
  
