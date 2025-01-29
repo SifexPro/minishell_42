@@ -46,7 +46,7 @@ int	exit_prog(t_list **splitted, t_ht *env, int status)
 
 int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 {
-	HIST_ENTRY	*last_entry;
+	HIST_ENTRY	*le;
 	char		*last_status_str;
 	int			last_status;
 
@@ -55,8 +55,8 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 	{
 		if (buffer[0] != 0)
 		{
-			last_entry = history_get(history_length);
-			if (!last_entry || (last_entry && ft_strcmp(last_entry->line, buffer) != 0))
+			le = history_get(history_length);
+			if (!le || (le && ft_strcmp(le->line, buffer) != 0))
 				add_history(buffer);
 			last_status = parse_cmd(buffer, env, envp);
 			last_status_str = ft_uitoa(last_status);

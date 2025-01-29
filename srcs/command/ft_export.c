@@ -35,9 +35,8 @@ int	process_line(char *argv, t_ht *env)
 int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 {
 	int		i;
-	
+
 	i = 1;
-	ft_printf("export %d\n", argc);
 	if (argc == 1)
 	{
 		ft_env(envp);
@@ -52,6 +51,4 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 		i++;
 	}
 	return (0);
-
 }
-

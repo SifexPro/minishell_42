@@ -58,9 +58,9 @@ char	**ht_to_envp(t_ht *env)
 	new_envp = malloc(sizeof(char *) * (env->size + 1));
 	if (!new_envp)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (i < env->size)
+	while (++i < env->size)
 	{
 		entry = env->elements[i];
 		if (entry)
@@ -72,7 +72,6 @@ char	**ht_to_envp(t_ht *env)
 				entry = entry->next;
 			}
 		}
-		i++;
 	}
 	new_envp[j] = NULL;
 	return (new_envp);
