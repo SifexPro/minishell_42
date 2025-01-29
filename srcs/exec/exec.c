@@ -92,7 +92,19 @@ void	free_splitted_wc(void *v)
 	}
 }
 
+int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, t_exec *temp)
+{
+	int		exit_status;
+
+	exit_status = ft_atoi(temp->argv[1]);
+	free_flags(flags);
+	ft_lstclear(splitted, &free_splitted_wc);
+	exit_prog(splitted, env, exit_status);
+	return (exit_status);
+}
+
 int	parse_cmd(char *input, t_ht *env, char **envp)
+
 {
 	t_list	*splitted;
 	t_flags	*flags;
@@ -147,7 +159,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	{
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
-			return (free_flags(flags), exit_prog(&splitted, env, ft_atoi(temp->argv[1])));
+			return (exit_with_clear(&splitted, env, flags, temp));
 		envp_cpy = ht_to_envp(env);
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
