@@ -35,6 +35,7 @@ int	run_program(char *path, char **argv, char **envp)
 
 	printf("here\n");////
 	child = fork();
+	g_pid = child;
 	if (!child)
 		run_program_exec(path, argv, envp);
 	waitpid(child, &status, 0);

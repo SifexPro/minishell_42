@@ -24,6 +24,7 @@ int	forking(t_flags *flags, t_ht *env, char **envp)
 	while (i < flags->cmd_count)
 	{
 		flags->pid[i] = fork();
+		g_pid = flags->pid[i];
 		if (flags->pid[i] < 0)
 		{
 			ft_printf("fork failed\n");
