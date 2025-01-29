@@ -40,7 +40,6 @@ int	forking(t_flags *flags, t_ht *env, char **envp)
 	{
 		waitpid(flags->pid[i], &status, 0);
 		g_pid = 0;
-		printf("status: %d\n", WEXITSTATUS(status));
 		i++;
 	}
 	return (WEXITSTATUS(status));

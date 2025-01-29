@@ -33,8 +33,9 @@ int	run_program(char *path, char **argv, char **envp)
 	pid_t	child;
 	int		status;
 
-	printf("here\n");////
 	child = fork();
+	if (child < 0)
+		return (1);////real exit
 	g_pid = child;
 	if (!child)
 		run_program_exec(path, argv, envp);
@@ -132,6 +133,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp)
 	splitted = temp_list;
 	////
 
+//// < Makefile cat | wc -l> test
 	flags = set_flags(splitted);
 
 	printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////

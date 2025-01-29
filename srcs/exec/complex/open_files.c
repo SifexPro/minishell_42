@@ -35,27 +35,40 @@ void	open_heredoc(t_flags *flags)
 {
 	int		fd[2];
 	char	*line;
+	pid_t	child;
 	int		len_heredoc;
 
+	child = fork();
+	if (child < 0)
+		exit(1);///real exit
+	g_pid = child;
 	if (pipe(fd) < 0)
 		exit(1);///real exit
-	len_heredoc = ft_strlen(flags->heredoc);
-	if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
-	if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
-	while (1) 
+	if (!child)
 	{
-		line = readline("> ");
-		if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]))
+		len_heredoc = ft_strlen(flags->heredoc);
+		if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
+			printf("failed to register interrupts with kernel\n");
+		if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
+			printf("failed to register interrupts with kernel\n");
+		while (1) 
 		{
+			line = readline("> ");
+			if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]))
+			{
+				free(line);
+				break ;
+			}
+			ft_putstr_fd(line, fd[1]);
+			ft_putstr_fd("\n", fd[1]);
 			free(line);
-			break ;
 		}
-		ft_putstr_fd(line, fd[1]);
-		ft_putstr_fd("\n", fd[1]);
-		free(line);
+		close(fd[1]);
+		flags->fd_in[0] = fd[0];
 	}
 	close(fd[1]);
-	flags->fd_in[0] = fd[0];
+	//close(fd[0]);
+	waitpid(child, NULL, 0);
+	g_pid = 0;
 }
+//// close pipe ?

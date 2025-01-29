@@ -22,3 +22,9 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 - "exit exit_code"
 - gérer "wc -w < Makefile > test | wc -l" - "wc -l < Makefile | ls | wc -l > test | wc -l" - "ls > test | wc < Makefile -w -l"
 - gérer exit
+
+### Check
+- < Makefile cat | wc -l | cat
+- cat Makefile | gzip > test.gz
+- << file cat
+-> cant exit
