@@ -74,3 +74,4 @@ void	open_heredoc(t_flags *flags)
 	}
 }
 //// close pipe ?
+

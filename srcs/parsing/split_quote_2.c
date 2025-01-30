@@ -138,7 +138,8 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 				}
 				else
 				{
-					can_error = true;
+					if (delimiter != PIPE)
+						can_error = true;
 					break;
 				}
 			}
@@ -170,8 +171,8 @@ int	sq_replace_and_free(t_list *elements, t_list **ret)
 	if (tmp_exec->argv)
 		tmp_exec->argv[i] = NULL;
 		//ft_printf("add back %d\n", can_error);////
-	//if (!can_error)
-	ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+	if (!can_error)
+		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 	return (0);
 }
 
