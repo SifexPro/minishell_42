@@ -116,9 +116,6 @@ char	*get_pwd(void);
 /* command/echo */
 int		ft_echo(int argc, char **argv);
 
-/* command/cat */
-int		ft_cat(int argc, char **argv);
-
 /* command/unset */
 int		ft_unset(int argc, char **argv, t_ht *env);
 
