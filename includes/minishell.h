@@ -96,7 +96,7 @@ typedef struct s_splitted
 }	t_splitted;
 
 /* main */
-int		parse_cmd(char *input, t_ht *env, char **envp);
+int		parse_cmd(char *input, t_ht *env, char **envp, int last_status);
 int		exit_prog(t_list **splitted, t_ht *env, int status);
 
 /* signals */
@@ -127,6 +127,9 @@ int		ft_env(char **envp);
 
 /* command/clear_env */
 void	clear_env(char **envp);
+
+/* command/exit */
+int		ft_exit(int argc, char **argv);
 
 /* split_quote */
 t_list	*ft_split_quote(char const *str, t_ht *env);

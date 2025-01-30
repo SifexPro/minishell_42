@@ -61,7 +61,7 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 			if (!le || (le && ft_strcmp(le->line, buffer) != 0))
 				add_history(buffer);
 			setup_cmd_signals();
-			last_status = parse_cmd(buffer, env, envp);
+			last_status = parse_cmd(buffer, env, envp, last_status);
 			last_status_str = ft_uitoa(last_status);
 			setup_term_signals();
 			ht_deletef(env, "?");
