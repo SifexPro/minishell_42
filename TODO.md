@@ -8,9 +8,9 @@
 - Signaux dans heredoc
 - << stop cat | wc -l
 ne s'arrête jamaiks avec les kill signaux, normal ?
-- << test
-== crash
+gerer export avec _
 
+== fix cd on deleted folder
 - cat | | jkfe
 == bash: syntax error near unexpected token `|'
 == status 2
@@ -42,12 +42,13 @@ ab
 
 
 ## CRASH
+
+### Fix parsing (Il manque le > test)
 - echo te < cat
+- < Makefile cat | wc -l | cat > test
 
 ## Sifex 
 
-### Conditionals mes couilles
-- < Makefile cat | wc -l | cat > test
 
 ### Damn
 - gérer "'command' < file 'suite command'"

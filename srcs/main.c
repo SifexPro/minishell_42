@@ -53,6 +53,7 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 	int			last_status;
 
 	last_status = 0;
+	ht_insert(env, "?", ft_strdup("0"));
 	while (buffer != NULL)
 	{
 		if (buffer[0] != 0)
@@ -62,10 +63,15 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 				add_history(buffer);
 			setup_cmd_signals();
 			last_status = parse_cmd(buffer, env, envp, last_status);
-			last_status_str = ft_uitoa(last_status);
 			setup_term_signals();
-			ht_deletef(env, "?");
-			ht_insert(env, "?", last_status_str);
+			if (last_status > -1)
+			{
+				last_status_str = ft_uitoa(last_status);
+				ht_deletef(env, "?");
+				ht_insert(env, "?", last_status_str);
+			}
+			else
+				last_status = ft_atoi(ht_search(env, "?"));
 		}
 		prefix = get_prefix(last_status);
 		buffer = readline(prefix);

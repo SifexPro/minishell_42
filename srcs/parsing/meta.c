@@ -64,6 +64,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 	content = malloc(sizeof(t_splitted));
 	if (!content)
 		return (0);
+	content->content = NULL;
 	content->is_delimiter = true;
 	if (strncmp((char *)(&str[sp->i]), "<<", 2) == 0)
 	{
@@ -81,5 +82,6 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 	while (ft_str_is_whitespace(str[sp->str_start]))
 		sp->str_start++;
 	sp->i = sp->str_start - 1;
+	sp->prev_meta = true;
 	return (2);
 }
