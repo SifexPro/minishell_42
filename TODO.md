@@ -13,12 +13,13 @@ gerer export avec _
 == fix cd on deleted folder
 
 ## CRASH
+
+### Fix parsing (Il manque le > test)
 - echo te < cat
+- < Makefile cat | wc -l | cat > test
 
 ## Sifex 
 
-### Conditionals mes couilles
-- < Makefile cat | wc -l | cat > test
 
 ### Damn
 - gérer "'command' < file 'suite command'"
