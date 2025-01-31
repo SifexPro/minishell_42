@@ -129,7 +129,7 @@ int		ft_env(char **envp);
 void	clear_env(char **envp);
 
 /* command/exit */
-int		ft_exit(int argc, char **argv, long long last_status);
+long	ft_exit(int argc, char **argv, long long last_status);
 
 /* split_quote */
 t_list	*ft_split_quote(char const *str, t_ht *env);

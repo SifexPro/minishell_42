@@ -12,36 +12,35 @@
 
 #include "minishell.h"
 
-static long long	check_args(int argc, char **argv, long long last_status)
+static bool	is_sign(char c)
 {
-	int	i;
-
-	i = -1;
-	printf("argc = %d\n", argc);
-	if (argc > 1)
-	{
-		while (argv[1][++i])
-			if (!ft_isdigit(argv[1][i]))
-				return (exec_error("numeric argument required", "exit"), 2);
-		if (argc > 2)
-			return (exec_error("too many arguments", "exit"), -1);
-		printf("argv[1] = %s\n", argv[1]);
-		return (ft_atoi(argv[1]));
-	}
-	return (last_status);
+	return (c == '-' || c == '+');
 }
 
-int	ft_exit(int argc, char **argv, long long last_status)
+long	ft_exit(int argc, char **argv, long long last_status)
 {
-	long long	exit_status;
+	int			i;
+	bool 		has_sign;
 
-	printf("argc = %d\n", argc);
-	printf("argv[0] = %s\n", argv[0]);
-	printf("argv[1] = %s\n", argv[1]);
+	i = -1;
 	if (last_status != -1)
 		ft_putstr_fd("exit\n", 2);
 	else
 		last_status = 0;
-	exit_status = check_args(argc, argv, last_status);
-	return (exit_status);
+	if (argc > 1)
+	{
+		has_sign = is_sign(argv[1][0]);
+		if (has_sign)
+			i = 0;
+		while (argv[1][++i])
+			if (!ft_isdigit(argv[1][i]))
+				return (exec_error("numeric argument required", "exit"), 2);
+		if (ft_strcmp(ft_ltoa(ft_atol(argv[1])), &argv[1][has_sign]) &&
+			ft_strcmp(ft_ltoa(ft_atol(argv[1])), argv[1]))
+			return (exec_error("numeric argument required", "exit"), 2);
+		if (argc > 2)
+			return (exec_error("too many arguments", "exit"), 1);
+		return (ft_atol(argv[1]));
+	}
+	return (last_status);
 }

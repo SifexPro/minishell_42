@@ -95,10 +95,10 @@ void	free_splitted_wc(void *v)
 
 int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status)
 {
-	long long	exit_status;
+	long	exit_status;
 
 	exit_status = ft_exit(((t_exec *)(*splitted)->content)->argc, ((t_exec *)(*splitted)->content)->argv, last_status);
-	if (exit_status < 0)
+	if (((t_exec *)(*splitted)->content)->argc > 2 && exit_status == 1)
 		return (1);
 	free_flags(flags);
 	ft_lstclear(splitted, &free_splitted_wc);
@@ -122,7 +122,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	free(input);
 
 	////
-	t_list	*temp_list = splitted;
+	/*t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -132,7 +132,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;
+	splitted = temp_list;*/
 	////
 
 	//// < Makefile cat | wc -l> test

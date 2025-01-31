@@ -77,5 +77,5 @@ ouvre X*cat
 ### Check
 - cat Makefile | gzip > test.gz
 - ls | echo t
-
+- ls | exit 5 5
 
