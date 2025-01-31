@@ -122,17 +122,17 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	free(input);
 
 	////
-	/*t_list	*temp_list = splitted;
+	t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
 		printf("((t_exec *)splitted->content)->argc: %d\n", ((t_exec *)splitted->content)->argc);////
-		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
-		printf("((t_exec *)splitted->content)->argv[1]: %s\n", ((t_exec *)splitted->content)->argv[1]);////
+		for (int i = 0; i < ((t_exec *)splitted->content)->argc; i++)
+			printf("((t_exec *)splitted->content)->argv[%d]: %s\n", i, ((t_exec *)splitted->content)->argv[i]);////
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;*/
+	splitted = temp_list;
 	////
 
 	//// < Makefile cat | wc -l> test

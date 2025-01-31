@@ -37,6 +37,8 @@ bash: $non_existant: ambiguous redirect
 == dans env
 - export a+=example
 == concatene dans a
+- echo a'b'
+ab
 
 
 ## CRASH
@@ -61,16 +63,17 @@ rien
 - < Makefile > t2 < test3 > t1 echo test
 == pas d'exec
 creation t2
-- cat | cat | cat | cat | ls
+- cat | cat | cat | cat | ls(command qui n'attend pas de input)
 ouvre X*cat
 
-- print exit quand exit
-- exit avec non num arg
++ print exit quand exit
++ exit avec non num arg
 == bash: exit: a: numeric argument required
-- exit avec > 1 arg
++ exit avec > 1 arg
 == bash: exit: too many arguments
-- exist sans arg
++ exist sans arg
 == dernier status
+-> ls | exit 9223372036854775809 | ls
 
 - Gerer multiple pipe & redirection
 
