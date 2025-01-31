@@ -1,13 +1,1 @@
-includes
-libft
-Makefile
-minishell
-minishell_tester
-objs
-README.md
-srcs
-tes
-tes t
-test
-tester2
-TODO.md
+exit

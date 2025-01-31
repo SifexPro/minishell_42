@@ -10,8 +10,6 @@
 ne s'arrête jamaiks avec les kill signaux, normal ?
 - << test
 == crash
-- < Makefile cat | wc -l | cat
-res devrait etre 1 mais cat le cat pas
 
 - cat | | jkfe
 == bash: syntax error near unexpected token `|'

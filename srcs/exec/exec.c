@@ -93,17 +93,25 @@ void	free_splitted_wc(void *v)
 	}
 }
 
-int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, int last_status)
+int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status)
 {
-	int		exit_status;
-	t_exec *temp;
+	int			i;
+	t_exec		*temp;
+	long long	exit_status;
 
+	i = -1;
 	temp = (*splitted)->content;
-	printf("temp->argc: %d\n", temp->argc);////
-	if (temp->argc > 1)
+	exit_status = last_status;
+	ft_putstr_fd("exit\n", 2);
+	if (temp->argc == 2)
+	{
+		while (temp->argv[1][++i])
+			if (!ft_isdigit(temp->argv[1][i]))
+				exec_error("numeric argument required", "exit");
 		exit_status = ft_atoi(temp->argv[1]);
-	else
-		exit_status = last_status;
+	}
+	else if (temp->argc > 2)
+		return (exec_error("too many arguments", "exit"), 1);
 	free_flags(flags);
 	ft_lstclear(splitted, &free_splitted_wc);
 	exit_prog(splitted, env, exit_status);
@@ -129,6 +137,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	t_list	*temp_list = splitted;
 	while (splitted)
 	{
+		ft_printf("splitted != NULL\n");////
 		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
 		printf("((t_exec *)splitted->content)->argv[1]: %s\n", ((t_exec *)splitted->content)->argv[1]);////
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
@@ -137,7 +146,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	splitted = temp_list;
 	////
 
-//// < Makefile cat | wc -l> test
+	//// < Makefile cat | wc -l> test
 	flags = set_flags(splitted);
 
 	printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
