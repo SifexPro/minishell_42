@@ -8,19 +8,9 @@
 - Signaux dans heredoc
 - << stop cat | wc -l
 ne s'arrête jamaiks avec les kill signaux, normal ?
-- << test
-== crash
+gerer export avec _
 
-- token suivi d'un mot (pas pipe, pas void, <, >, <<, >>)
-- < $non_existant
-bash: $non_existant: ambiguous redirect
-- expand seuleument alphanum+_, premier char != num
-- echo -nnn -n i
-== doit juste print i sans \n (actuellement met un espece)
-- echo -nA
-== print "-nA"
 == fix cd on deleted folder
-
 
 ## CRASH
 - echo te < cat

@@ -138,6 +138,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
+		printf("((t_exec *)splitted->content)->argc: %d\n", ((t_exec *)splitted->content)->argc);////
 		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
 		printf("((t_exec *)splitted->content)->argv[1]: %s\n", ((t_exec *)splitted->content)->argv[1]);////
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////

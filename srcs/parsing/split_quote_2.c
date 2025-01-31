@@ -19,6 +19,7 @@ int	init_string_quote(t_split_sh *sp)
 	sp->quote_start = 0;
 	sp->is_simp_quote = false;
 	sp->is_dbl_quote = false;
+	sp->prev_meta = false;
 	return (0);
 }
 
@@ -33,10 +34,11 @@ int	count_until_del(t_list *ret)
 	while (e_tmp)
 	{
 		tmp = e_tmp->content;
-		if (tmp->is_delimiter && tmp->delimiter != HEREDOC && tmp->delimiter != REDIRECT_INPUT)
+		if (tmp->is_delimiter && tmp->delimiter == PIPE)
 			break ;
 		e_tmp = e_tmp->next;
-		i++;
+		if (tmp->content)
+			i++;
 	}
 	return (i);
 }
@@ -89,7 +91,10 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					tmp_exec = init_exec();
 					if (!tmp_exec)
 						return (1);
-					tmp_exec->argc = count_until_del(elements);
+					if (delimiter == PIPE)
+						tmp_exec->argc = count_until_del(elements->next);
+					else
+						tmp_exec->argc = count_until_del(elements);
 					tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 					tmp_exec->token_next = tmp->delimiter;
 					if (!tmp_exec->argv)
@@ -99,9 +104,9 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				else
 					tmp_exec->token_next = tmp->delimiter;
 				tmp = elements->next->content;
-				//ft_printf("argv[%d] = %s\n", i, tmp->content);////
+				ft_printf("argv[%d] = %s\n", i, tmp->content);////
 				tmp_exec->argv[i] = tmp->content;
-				//ft_printf("argv[%d] = NULL\n", i + 1);////
+				ft_printf("argv[%d] = NULL\n", i + 1);////
 				tmp_exec->argv[i + 1] = NULL;
 				elements = elements->next;
 				tmp = elements->content;
@@ -123,16 +128,33 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				ht_insert(env, "?", ft_strdup("2"));
 				return (free(tmp_exec->argv), free(tmp_exec), 1);
 			}
-			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND || delimiter == HEREDOC)
+			if (elements == NULL)
 			{
-				//ft_printf("Add to back %d\n", delimiter);////
+				if (can_error)
+				{
+					printf("bash: syntax error near unexpected token `newline'\n");////
+					free(tmp_exec);
+					ht_deletef(env, "?");
+					ht_insert(env, "?", ft_strdup("2"));
+					return (1);
+				}
+				else
+				{
+					if (delimiter != PIPE)
+						can_error = true;
+					break;
+				}
+			};
+			//ft_printf("CONTENT: %p\n", elements->next);
+			if (delimiter != PIPE && elements && elements->next)
+			{
 				ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 				i = 0;
 				tmp_exec = init_exec();
 				if (!tmp_exec)
 					return (1);
-				elements = elements->next;
 				tmp_exec->argc = count_until_del(elements);
+				elements = elements->next;
 			}
 			else
 			{
@@ -156,7 +178,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					break;
 				}
 			}
-			if (delimiter == REDIRECT_INPUT || delimiter == REDIRECT_OUTPUT || delimiter == APPEND || delimiter == HEREDOC)
+			if (delimiter != PIPE)
 			{
 				tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 				tmp = elements->content;

@@ -28,28 +28,57 @@ char	*handle_last_status(char *str, t_ht *env, int i)
 	return (tmp);
 }
 
-char	*handle_env_var(char **s, t_ht *env, int i)
+char	*get_var_from_str(char *str, t_ht *env)
 {
 	char	*env_var;
-	char	*tmp;
 	char	*res;
-	char	*str;
 	int		j;
 
-	str = *s;
-	j = i + 1;
+	j = 0;
 	while (ft_isalnum(str[j]) || str[j] == '_')
 		j++;
-	env_var = ft_strndup(&str[i + 1], j - i - 1);
-	tmp = ft_strndup(str, i);
+	env_var = ft_strndup(str, j - 1);
 	res = ht_search(env, env_var);
-	if (!res)
-		res = ft_strdup("");
-	tmp = ft_strjoin_free(tmp, res);
-	tmp = ft_strjoin_free(tmp, &str[j]);
 	free(env_var);
-	free(str);
-	return (tmp);
+	return (res);
+}
+
+char    *handle_env_var(char **s, t_ht *env, int i)
+{
+    char    *env_var;
+    char    *tmp;
+    char    *res;
+    char    *str;
+    int        j;
+
+    str = *s;
+    j = i + 1;
+    while (ft_isalnum(str[j]) || str[j] == '_')
+        j++;
+    env_var = ft_strndup(&str[i + 1], j - i - 1);
+    tmp = ft_strndup(str, i);
+    res = ht_search(env, env_var);
+    if (!res)
+        res = ft_strdup("");
+    tmp = ft_strjoin_free(tmp, res);
+    tmp = ft_strjoin_free(tmp, &str[j]);
+    free(env_var);
+    free(str);
+    return (tmp);
+}
+
+bool	is_valid_env(char *str)
+{
+	int	i;
+	
+	i = 1;
+	if (str[0] != '$')
+		return (false);
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+		i++;
+	if (str[i] != 0)
+		return (false);
+	return (true);
 }
 
 char	*handle_expansion(char *str, t_ht *env)
@@ -63,7 +92,7 @@ char	*handle_expansion(char *str, t_ht *env)
 		{
 			str = handle_last_status(str, env, i);
 		}
-		else if (str[i] == '$' && ft_isalpha(str[i + 1]))
+		else if (str[i] == '$' && ft_isalnum(str[i + 1]))
 		{
 			str = handle_env_var(&str, env, i);
 		}

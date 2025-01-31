@@ -86,6 +86,7 @@ typedef struct s_split_sh
 	int		quote_start;
 	bool	is_simp_quote;
 	bool	is_dbl_quote;
+	bool	prev_meta;
 }	t_split_sh;
 
 typedef struct s_splitted
@@ -138,9 +139,15 @@ t_list	*ft_split_quote(char const *str, t_ht *env);
 int		sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env);
 int		init_string_quote(t_split_sh *sp);
 
+/* parsing */
+void    fix_argc(t_list *ret);
+
 /* parser/expansion */
 void	register_env_var(t_ht *env, char **envp);
 t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
+char	*handle_expansion(char *str, t_ht *env);
+char	*get_var_from_str(char *str, t_ht *env);
+bool	is_valid_env(char *str);
 
 /* parser/meta */
 bool	is_meta(char c);

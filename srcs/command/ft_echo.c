@@ -12,6 +12,22 @@
 
 #include "minishell.h"
 
+bool	is_good_arg(char *str)
+{
+	int		i;
+
+	i = 1;
+	if (str[0] != '-')
+		return (false);
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 int	ft_echo(int argc, char **argv)
 {
 	int		i;
@@ -25,7 +41,7 @@ int	ft_echo(int argc, char **argv)
 	argc--;
 	while (argv[i] && i < argc)
 	{
-		if (ft_strncmp(argv[i], "-n", 2) == 0 && !text_display)
+		if (is_good_arg(argv[i]) && !text_display)
 			has_n = true;
 		else
 		{
