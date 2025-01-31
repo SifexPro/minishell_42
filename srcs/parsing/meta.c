@@ -64,6 +64,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
 	content = malloc(sizeof(t_splitted));
 	if (!content)
 		return (0);
+	content->content = NULL;
 	content->is_delimiter = true;
 	if (strncmp((char *)(&str[sp->i]), "<<", 2) == 0)
 	{

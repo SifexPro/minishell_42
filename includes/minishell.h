@@ -135,7 +135,7 @@ int		ft_exit(int argc, char **argv);
 t_list	*ft_split_quote(char const *str, t_ht *env);
 
 /* split_quote_2 */
-int		sq_replace_and_free(t_list *elements, t_list **ret);
+int		sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env);
 int		init_string_quote(t_split_sh *sp);
 
 /* parser/expansion */

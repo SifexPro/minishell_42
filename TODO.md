@@ -11,9 +11,6 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 - << test
 == crash
 
-- cat | | jkfe
-== bash: syntax error near unexpected token `|'
-== status 2
 - token suivi d'un mot (pas pipe, pas void, <, >, <<, >>)
 - < $non_existant
 bash: $non_existant: ambiguous redirect
@@ -22,7 +19,7 @@ bash: $non_existant: ambiguous redirect
 == doit juste print i sans \n (actuellement met un espece)
 - echo -nA
 == print "-nA"
-
+== fix cd on deleted folder
 
 
 ## CRASH

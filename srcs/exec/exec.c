@@ -130,7 +130,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	res = 0;
 	splitted = ft_split_quote(input, env);
 	if (!splitted)
-		return (0);
+		return (-1);
 	free(input);
 
 	////
