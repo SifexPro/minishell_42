@@ -22,7 +22,21 @@ bash: $non_existant: ambiguous redirect
 == doit juste print i sans \n (actuellement met un espece)
 - echo -nA
 == print "-nA"
-
+- cd test_dir
+-> rm -r ../test_dir 
+[1]    811449 segmentation fault (core dumped)  ./minishell
+- pwd si dans non_existant
+== pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+- unset ne marche pas
+- export append a la fin
+- export b
+== dans export
+== pas dans env
+- export b=
+== dans export
+== dans env
+- export a+=example
+== concatene dans a
 
 
 ## CRASH
@@ -35,9 +49,7 @@ bash: $non_existant: ambiguous redirect
 
 ### Damn
 - gérer "'command' < file 'suite command'"
-- "exit exit_code"
 - gérer "wc -w < Makefile > test | wc -l" - "wc -l < Makefile | ls | wc -l > test | wc -l" - "ls > test | wc < Makefile -w -l"
-- gérer exit
 - > test1 > test2 > test3 echo salut | echo cho >test4
 - < Makefile > t1 < bruh > t2
 
@@ -51,10 +63,7 @@ rien
 creation t2
 - cat | cat | cat | cat | ls
 ouvre X*cat
-- rm -r ../test_dir
-[1]    811449 segmentation fault (core dumped)  ./minishell
-- pwd si dans non_existant
-== pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+
 - print exit quand exit
 - exit avec non num arg
 == bash: exit: a: numeric argument required
@@ -69,14 +78,4 @@ ouvre X*cat
 - cat Makefile | gzip > test.gz
 - ls | echo t
 
-- unset ne marche pas
-- export append a la fin
-- export b
-== dans export
-== pas dans env
-- export b=
-== dans export
-== dans env
-- export a+=example
-== concatene dans a
 

@@ -95,23 +95,11 @@ void	free_splitted_wc(void *v)
 
 int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status)
 {
-	int			i;
-	t_exec		*temp;
 	long long	exit_status;
 
-	i = -1;
-	temp = (*splitted)->content;
-	exit_status = last_status;
-	ft_putstr_fd("exit\n", 2);
-	if (temp->argc == 2)
-	{
-		while (temp->argv[1][++i])
-			if (!ft_isdigit(temp->argv[1][i]))
-				exec_error("numeric argument required", "exit");
-		exit_status = ft_atoi(temp->argv[1]);
-	}
-	else if (temp->argc > 2)
-		return (exec_error("too many arguments", "exit"), 1);
+	exit_status = ft_exit(((t_exec *)(*splitted)->content)->argc, ((t_exec *)(*splitted)->content)->argv, last_status);
+	if (exit_status < 0)
+		return (1);
 	free_flags(flags);
 	ft_lstclear(splitted, &free_splitted_wc);
 	exit_prog(splitted, env, exit_status);
@@ -138,6 +126,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
+		printf("((t_exec *)splitted->content)->argc: %d\n", ((t_exec *)splitted->content)->argc);////
 		printf("((t_exec *)splitted->content)->argv[0]: %s\n", ((t_exec *)splitted->content)->argv[0]);////
 		printf("((t_exec *)splitted->content)->argv[1]: %s\n", ((t_exec *)splitted->content)->argv[1]);////
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
@@ -149,7 +138,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	//// < Makefile cat | wc -l> test
 	flags = set_flags(splitted);
 
-	printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
+	/*printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
 	printf("has_infile: %d\n", flags->has_infile);////
 	printf("has_outfile: %d\n", flags->has_outfile);////
@@ -163,7 +152,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	{
 		printf("cmd[%d]: %s\n", i, flags->cmd[i]->argv[0]);////
 		i++;
-	}
+	}*/
 
 	if (flags->pipe_count || flags->has_infile || flags->has_outfile || flags->has_heredoc) {
 		res = forking(flags, env, envp);
@@ -171,7 +160,6 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	else
 	{
 		temp = splitted->content;
-		printf("res: %d\n", last_status);////
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (exit_with_clear(&splitted, env, flags, last_status));
 		envp_cpy = ht_to_envp(env);

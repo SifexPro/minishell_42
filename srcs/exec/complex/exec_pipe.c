@@ -43,7 +43,7 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 	else if (!ft_strncmp(argv[0], "export", 6))
 		return (ft_export(argc, argv, env, envp));
 	else if (!ft_strcmp(argv[0], "exit"))
-		return (exit(ft_atoi(argv[1])), 0);
+		return (ft_exit(argc, argv, -1), 0);
 	else
 		return (run_program_exec_pipe(argv[0], argv, envp));
 }
@@ -72,6 +72,9 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 		dup2(flags->fd_out[i], 1);
 	close_pipe(flags);
 	envp_cpy = ht_to_envp(env);
+	printf("flags->cmd[%d]->argc = %d\n", i, flags->cmd[i]->argc);////
+	printf("flags->cmd[%d]->argv[0] = %s\n", i, flags->cmd[i]->argv[0]);////
+	printf("flags->cmd[%d]->argv[1] = %s\n", i, flags->cmd[i]->argv[1]);////
 	exit(select_exec_pipe(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp_cpy));
 	clear_env(envp_cpy);
 }

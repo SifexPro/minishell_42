@@ -34,6 +34,7 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_env.c \
 				srcs/command/ft_unset.c \
 				srcs/command/ft_export.c \
+				srcs/command/ft_exit.c \
 				srcs/cmd_path.c \
 
 OBJS		=	$(SRCS:/%.c=%.o)
