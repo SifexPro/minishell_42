@@ -23,6 +23,22 @@ void	exec_error(char *error, char *cmd)
 	ft_putendl_fd(error, 2);
 }
 
+void	exec_error_arg(char *error, char *arg, char *cmd)
+{
+	ft_putstr_fd("bash: ", 2);
+	if (!cmd)
+		ft_putstr_fd(" ", 2);
+	else
+		ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	if (!arg)
+		ft_putstr_fd(" ", 2);
+	else
+		ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(error, 2);
+}
+
 void	file_error(char *error, char *file)
 {
 	ft_putstr_fd("bash: ", 2);
