@@ -53,22 +53,37 @@ typedef struct s_exec
 	t_tokens	token_next;
 }			t_exec;
 
+typedef struct s_file
+{
+	char	*file;
+	bool	is_infile;
+	bool	is_outfile;
+	bool	is_heredoc;
+	bool	is_append;
+}			t_file;
+
+typedef struct s_pipe
+{
+	int		infile_index;////-1 when finished/none
+	int		infile_nb;
+	t_file	**infile;
+	int		outfile_index;////-1 when finished/none
+	int		outfile_nb;
+	t_file	**outfile;
+	t_exec	*cmd;////if infile_index -1 
+}			t_pipe;
+
 typedef struct s_flags
 {
-	int		cmd_count;
-	int		pipe_count;
-	char	*infile;
-	char	*outfile;
-	char	*heredoc;
-	bool	has_infile;
-	bool	has_outfile;
-	bool	has_append;
-	bool	has_heredoc;
+	int		total_redir;
 	pid_t	*pid;
 	int		*fd_in;
 	int		*fd_out;
-	t_exec	**cmd;
-	t_list	*splitted;
+	int 	pipe_index;
+	int		pipe_nb;//// ?
+	bool	pipe_index_changed;
+	t_pipe	**pipe;
+	t_list	*splitted;//// remove ?
 }			t_flags;
 // flag for if has file in start & end
 
@@ -187,7 +202,7 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp);
 int		forking(t_flags *flags, t_ht *env, char **envp);
 
 /* exec/complex/open_files */
-int		open_infile(t_flags *flags);
+int		open_infile(int index, t_flags *flags);
 int		open_outfile(t_flags *flags);
 void	open_heredoc(t_flags *flags);
 

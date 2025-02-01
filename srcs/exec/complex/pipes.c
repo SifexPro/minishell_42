@@ -18,7 +18,7 @@ void	open_pipe(t_flags *flags)
 	int pipe_fd[2];
 
 	i = 0;
-	while (i < flags->pipe_count)
+	while (i < flags->total_redir)
 	{
 		if (pipe(pipe_fd) < 0)
 			exit(1);///real exit
@@ -34,7 +34,7 @@ void	close_pipe(t_flags *flags)
 
 	i = 0;
 	//checks
-	while (i < flags->pipe_count)
+	while (i < flags->total_redir)
 	{
 		if (flags->fd_in && flags->fd_in[i] != -1)
 		{

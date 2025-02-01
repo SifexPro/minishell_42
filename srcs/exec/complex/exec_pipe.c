@@ -43,12 +43,45 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 	else if (!ft_strncmp(argv[0], "export", 6))
 		return (ft_export(argc, argv, env, envp));
 	else if (!ft_strcmp(argv[0], "exit"))
-		return (ft_exit(argc, argv, -1), 0);
+		return (ft_exit(argc, argv, -1));
 	else
 		return (run_program_exec_pipe(argv[0], argv, envp));
 }
 
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
+{
+	char	**envp_cpy;
+	int		infile_index;
+	int		outfile_index;
+	int		pipe_index;
+
+	pipe_index = flags->pipe_index;
+	infile_index = flags->pipe[pipe_index]->infile_index;
+	outfile_index = flags->pipe[pipe_index]->outfile_index;
+	printf("i = %d\nflags->pipe_index = %d\nflags->pipe[flags->pipe_index]->infile_index = %d\nflags->pipe[flags->pipe_index]->infile_nb = %d\nflags->pipe[flags->pipe_index]->outfile_index = %d\nflags->pipe[flags->pipe_index]->outfile_nb = %d\n", i, flags->pipe_index, flags->pipe[flags->pipe_index]->infile_index, flags->pipe[flags->pipe_index]->infile_nb, flags->pipe[flags->pipe_index]->outfile_index, flags->pipe[flags->pipe_index]->outfile_nb);////
+	if (infile_index != -1)
+	{
+		if (!flags->pipe[pipe_index]->infile[infile_index]->is_heredoc)
+			if (!open_infile(i, flags))
+				return (close_pipe(flags), exit(1));////real exit
+		//else heredoc
+		//dup2(flags->fd_in[i], 0);
+	}
+	else if (outfile_index != -1)
+	{
+		// code
+	}
+	dup2(flags->fd_in[i], 0);
+	dup2(flags->fd_out[i], 1);
+	close_pipe(flags);
+	envp_cpy = ht_to_envp(env);
+	if (infile_index + 1 == flags->pipe[pipe_index]->infile_nb)
+		printf("here");
+		//exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc, flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
+	exit(0);
+}
+
+/*void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 {
 	char **envp_cpy;
 
@@ -72,12 +105,12 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 		dup2(flags->fd_out[i], 1);
 	close_pipe(flags);
 	envp_cpy = ht_to_envp(env);
-	//printf("flags->cmd[%d]->argc = %d\n", i, flags->cmd[i]->argc);////
+	printf("flags->cmd[%d]->token_next = %d\n", i, flags->cmd[i]->argc);////
 	//printf("flags->cmd[%d]->argv[0] = %s\n", i, flags->cmd[i]->argv[0]);////
 	//printf("flags->cmd[%d]->argv[1] = %s\n", i, flags->cmd[i]->argv[1]);////
 	exit(select_exec_pipe(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp_cpy));
 	clear_env(envp_cpy);
-}
+}*/
 
 
 

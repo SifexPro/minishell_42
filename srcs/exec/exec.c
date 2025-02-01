@@ -134,7 +134,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	free(input);
 
 	////
-	/*t_list	*temp_list = splitted;
+	t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -144,11 +144,53 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;*/
+	splitted = temp_list;
 	////
 
-	//// < Makefile cat | wc -l> test
+	//// < Makefile cat | wc -l > test
 	flags = set_flags(splitted);
+
+	printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
+	printf("pipe_index: %d\n", flags->pipe_index);////
+	printf("pipe_nb: %d\n", flags->pipe_nb);////
+	for (int i = 0; i < flags->pipe_nb && flags->total_redir > 0; i++)
+	{
+		printf("\n[INFILE]\n");////
+		printf("pipe[%d]->infile_index: %d\n", i, flags->pipe[i]->infile_index);////
+		printf("pipe[%d]->infile_nb: %d\n", i, flags->pipe[i]->infile_nb);////
+		printf("[IN] infile\n");////
+		for (int f = 0; f < flags->pipe[i]->infile_nb; f++)
+		{
+			printf("infile[%d]: %s\n", f, flags->pipe[i]->infile[f]->file);////
+			printf("is_infile: %d\n", flags->pipe[i]->infile[f]->is_infile);////
+			printf("is_outfile: %d\n", flags->pipe[i]->infile[f]->is_outfile);////
+			printf("is_heredoc: %d\n", flags->pipe[i]->infile[f]->is_heredoc);////
+			printf("is_append: %d\n", flags->pipe[i]->infile[f]->is_append);////
+		}
+		printf("[OUT] infile\n");////
+
+		printf("\n[OUTFILE]\n");///
+		printf("pipe[%d]->outfile_index: %d\n", i, flags->pipe[i]->outfile_index);////
+		printf("pipe[%d]->outfile_nb: %d\n", i, flags->pipe[i]->outfile_nb);////
+		printf("[IN] outfile\n");////
+		for (int f = 0; f < flags->pipe[i]->outfile_nb; f++)
+		{
+			printf("outfile[%d]: %s\n", f, flags->pipe[i]->outfile[f]->file);////
+			printf("is_infile: %d\n", flags->pipe[i]->outfile[f]->is_infile);////
+			printf("is_outfile: %d\n", flags->pipe[i]->outfile[f]->is_outfile);////
+			printf("is_heredoc: %d\n", flags->pipe[i]->outfile[f]->is_heredoc);////
+			printf("is_append: %d\n", flags->pipe[i]->outfile[f]->is_append);////
+		}
+		printf("[OUT] outfile\n");////
+
+		printf("\n[COMMAND]\n");////
+		if (flags->pipe[i]->cmd)
+		{
+			printf("pipe[%d]->cmd->argc: %d\n", i, flags->pipe[i]->cmd->argc);////
+			for (int j = 0; j < flags->pipe[i]->cmd->argc; j++)
+				printf("pipe[%d]->cmd->argv[%d]: %s\n", i, j, flags->pipe[i]->cmd->argv[j]);////
+		}
+	}
 
 	/*printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
 	printf("cmd_count: %d\n", flags->cmd_count);////
@@ -166,7 +208,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		i++;
 	}*/
 
-	if (flags->pipe_count || flags->has_infile || flags->has_outfile || flags->has_heredoc) {
+	if (flags->total_redir > 0) {
+		printf("forking\n");////
 		res = forking(flags, env, envp);
 	}
 	else

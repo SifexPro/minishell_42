@@ -17,12 +17,6 @@ SRCS		=	srcs/main.c \
 				srcs/signals.c \
 				srcs/exec/exec.c \
 				srcs/exec/clear_env.c \
-				srcs/exec/complex/cmd_flags.c \
-				srcs/exec/complex/pipes.c \
-				srcs/exec/complex/exec_pipe.c \
-				srcs/exec/complex/fork.c \
-				srcs/exec/complex/open_files.c \
-				srcs/exec/complex/exec_utils.c \
 				srcs/parsing/expansion.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \
@@ -37,6 +31,12 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_export.c \
 				srcs/command/ft_exit.c \
 				srcs/cmd_path.c \
+				srcs/exec/complex/exec_utils.c \
+				srcs/exec/complex/cmd_flags.c \
+				srcs/exec/complex/pipes.c \
+				srcs/exec/complex/exec_pipe.c \
+				srcs/exec/complex/fork.c \
+				srcs/exec/complex/open_files.c \
 
 OBJS		=	$(SRCS:/%.c=%.o)
 

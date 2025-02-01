@@ -78,4 +78,5 @@ ouvre X*cat
 - cat Makefile | gzip > test.gz
 - ls | echo t
 - ls | exit 5 5
+- < Makefile < test cat |
 

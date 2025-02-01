@@ -12,15 +12,18 @@
 
 #include "minishell.h"
 
-int	open_infile(t_flags *flags)
+int	open_infile(int index, t_flags *flags)
 {
-	flags->fd_in[0] = open(flags->infile, O_RDONLY);
-	if (flags->fd_in[0] < 0)
-		return (file_error(strerror(errno), flags->infile), 0);
+	char	*file;
+
+	file = flags->pipe[flags->pipe_index]->infile[flags->pipe[flags->pipe_index]->infile_index]->file;
+	flags->fd_in[index] = open(file, O_RDONLY);
+	if (flags->fd_in[index] < 0)
+		return (file_error(strerror(errno), file), 0);
 	return (1);
 }
 
-int	open_outfile(t_flags *flags)
+/*int	open_outfile(t_flags *flags)
 {
 	if (flags->has_append)
 		flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_APPEND, 0667);//// 0667~ 
@@ -72,6 +75,6 @@ void	open_heredoc(t_flags *flags)
 		flags->fd_in[0] = fd[0];
 		g_pid = 0;
 	}
-}
+}*/
 //// close pipe ?
 
