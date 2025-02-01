@@ -22,20 +22,28 @@ char	*get_prefix(int last_status)
 	char	*status_str;
 
 	pwd = get_pwd();
+	if (!pwd)
+		pwd = ft_strdup("--deleted--");
 	status_str = ft_itoa(last_status);
+	if (!status_str)
+		return (NULL);
 	if (last_status == 0)
 		tmp = ft_strjoin("\e[1;32m", status_str);
 	else
 		tmp = ft_strjoin("\e[1;31m", status_str);
+	free(status_str);
+	if (!tmp)
+		return (NULL);
 	tmp = ft_strjoin_free(tmp, " \e[1;35m[CUSTOM] \e[1;33m");
 	splitted = ft_split(pwd, '/');
+	if (!splitted)
+		return (free(tmp), NULL);
 	tmp = ft_strjoin_free(tmp,
 			splitted[ft_strarr_len(splitted) - 1]);
 	tmp = ft_strjoin_free(tmp, " > \e[0;37m");
 	ft_freesplit(splitted);
 	free(splitted);
 	free(pwd);
-	free(status_str);
 	return (tmp);
 }
 
@@ -75,7 +83,8 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 		}
 		prefix = get_prefix(last_status);
 		buffer = readline(prefix);
-		free(prefix);
+		if (prefix)
+			free(prefix);
 	}
 	return (0);
 }

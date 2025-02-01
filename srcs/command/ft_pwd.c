@@ -30,6 +30,13 @@ int	ft_pwd(int argc, char **argv)
 	char	*pwd;
 
 	pwd = get_pwd();
-	ft_printf("%s\n", pwd, argc, argv);
+	if (!pwd)
+	{
+		printf("pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+		return (1);
+	}
+	printf("%s\n", pwd);
+	(void)argc;
+	(void)argv;
 	return (0);
 }

@@ -12,9 +12,39 @@
 
 #include "minishell.h"
 
+bool	has_plus(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (str[i - 1] == '+');
+}
+
+bool	is_valid_identifier(char *str)
+{
+	int		i;
+	bool	plus;
+
+	i = 0;
+	plus = has_plus(str);
+	while (str[i])
+	{
+		if (!ft_isalpha(str[i]) && str[i] != '_' && !plus)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 int	process_line(char *argv, t_ht *env)
 {
 	char	**split_argv;
+	char	*prev;
+	char	*env_key;
 
 	split_argv = ft_split(argv, '=');
 	if (!split_argv)
@@ -23,13 +53,40 @@ int	process_line(char *argv, t_ht *env)
 		return (ft_freesplit(split_argv), free(split_argv), 1);
 	if (!ft_isalpha(split_argv[0][0]))
 		return (ft_freesplit(split_argv), free(split_argv), 2);
+	if (!is_valid_identifier(split_argv[0]))
+		return (ft_freesplit(split_argv), free(split_argv), 2);
+	prev = NULL;
+	env_key = split_argv[0];
+	if (has_plus(split_argv[0]))
+	{
+		env_key[ft_strlen(env_key) - 1] = '\0';
+		prev = ht_search(env, env_key);
+		if (prev)
+			prev = ft_strdup(prev);
+	}
 	ht_deletef(env, split_argv[0]);
 	if (!split_argv[1])
 		return (ft_freesplit(split_argv), free(split_argv), 0);
-	ht_insert(env, split_argv[0], ft_strdup(split_argv[1]));
+	
+	if (prev)
+		ht_insert(env, split_argv[0], ft_strjoin(prev, split_argv[1]));
+	else
+		ht_insert(env, split_argv[0], ft_strdup(split_argv[1]));
 	ft_freesplit(split_argv);
 	free(split_argv);
 	return (0);
+}
+
+void	show_export(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		printf("export %s\n", envp[i]);
+		i++;
+	}
 }
 
 int	ft_export(int argc, char **argv, t_ht *env, char **envp)
@@ -39,7 +96,7 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 	i = 1;
 	if (argc == 1)
 	{
-		ft_env(envp);
+		show_export(envp);
 		return (0);
 	}
 	while (argv[i])

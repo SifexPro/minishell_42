@@ -17,6 +17,8 @@ int	ft_strarr_len(char **input)
 	int	i;
 
 	i = 0;
+	if (!input)
+		return (0);
 	while (input[i])
 		i++;
 	return (i);

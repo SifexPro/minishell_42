@@ -45,7 +45,7 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		if (str[sp->i - 1] != '\"')
 		{
 			if (sp->pretext)
-				handle_pretext(elem, str, sp, env);
+				handle_pretext(elem, (char *)str, sp, env);
 			else
 				ft_lstadd_back(elem, create_str(
 						ft_strndup((char *)(&str[sp->quote_start + 1]),
@@ -78,7 +78,7 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		if (str[sp->i - 1] != '\'')
 		{
 			if (sp->pretext)
-				handle_pretext(elem, str, sp, env);
+				handle_pretext(elem, (char *)str, sp, env);
 			else
 				ft_lstadd_back(elem, create_str(
 					ft_strndup((char *)(&str[sp->quote_start + 1]),
