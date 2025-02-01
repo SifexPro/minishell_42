@@ -45,9 +45,8 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 	while (argv[i])
 	{
 		if (process_line(argv[i], env) > 0)
-		{
-			printf("bash: export: `%s': not a valid identifier\n", argv[i]);
-		}
+			exec_error_arg("not a valid identifier", argv[i], "export");////return ?
+			//printf("bash: export: `%s': not a valid identifier\n", argv[i]);////
 		i++;
 	}
 	return (0);
