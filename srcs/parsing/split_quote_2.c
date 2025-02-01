@@ -86,7 +86,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 			{
 				if (i != 0)
 				{
-					//ft_printf("Add to back2\n");////
 					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 					tmp_exec = init_exec();
 					if (!tmp_exec)
@@ -104,9 +103,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				else
 					tmp_exec->token_next = tmp->delimiter;
 				tmp = elements->next->content;
-				ft_printf("argv[%d] = %s\n", i, tmp->content);////
 				tmp_exec->argv[i] = tmp->content;
-				ft_printf("argv[%d] = NULL\n", i + 1);////
 				tmp_exec->argv[i + 1] = NULL;
 				elements = elements->next;
 				tmp = elements->content;
@@ -128,25 +125,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				ht_insert(env, "?", ft_strdup("2"));
 				return (free(tmp_exec->argv), free(tmp_exec), 1);
 			}
-			if (elements == NULL)
-			{
-				if (can_error)
-				{
-					printf("bash: syntax error near unexpected token `newline'\n");////
-					free(tmp_exec);
-					ht_deletef(env, "?");
-					ht_insert(env, "?", ft_strdup("2"));
-					return (1);
-				}
-				else
-				{
-					if (delimiter != PIPE)
-						can_error = true;
-					break;
-				}
-			};
-			//ft_printf("CONTENT: %p\n", elements->next);
-			if (delimiter != PIPE && elements && elements->next)
+			if (delimiter != PIPE && elements)
 			{
 				ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 				i = 0;
@@ -196,13 +175,13 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		}
 		else
 			delimiter = -1;
-		//ft_printf("tmp_exec->argv[%d] = %s\n", i, tmp->content);////
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
 		i++;
 		elements = e_tmp;
 	}
-	tmp_exec->argv[i] = NULL;
+	if (tmp_exec->argv)
+		tmp_exec->argv[i] = NULL;
 	if (!can_error) {
 		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 	}
