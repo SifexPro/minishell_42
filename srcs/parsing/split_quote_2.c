@@ -91,37 +91,54 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					tmp_exec = init_exec();
 					if (!tmp_exec)
 						return (1);
-					if (delimiter == PIPE)
-						tmp_exec->argc = count_until_del(elements->next);
-					else
-						tmp_exec->argc = count_until_del(elements);
-					tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+					tmp_exec->argc = count_until_del(elements);
+					if (delimiter != PIPE)
+						tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 					tmp_exec->token_next = tmp->delimiter;
-					if (!tmp_exec->argv)
-						return (1);
+					/* if (!tmp_exec->argv)
+						return (1); */
 					i = 0;
 				}
 				else
 					tmp_exec->token_next = tmp->delimiter;
 				tmp = elements->next->content;
-				tmp_exec->argv[i] = tmp->content;
-				tmp_exec->argv[i + 1] = NULL;
+				if (delimiter == PIPE)
+				{
+
+					tmp_exec->argc = 0;
+					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+					tmp_exec = init_exec();
+					if (!tmp_exec)
+						return (1);
+					tmp_exec->argc = count_until_del(elements->next);
+					tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+					if (tmp->content)
+						tmp_exec->argv[0] = tmp->content;
+					else
+					{
+						ft_printf("spec]ULL\n");
+					}
+				}
+				else
+				{
+					tmp_exec->argv[i] = tmp->content;
+					tmp_exec->argv[i + 1] = NULL;
+				}
 				elements = elements->next;
 				tmp = elements->content;
 				i++;
+
 			}
-			if (!tmp->content && tmp->delimiter != -1)
+			if (!tmp->content && tmp->delimiter != -1 && delimiter != PIPE)
 			{
 				if (tmp->delimiter == REDIRECT_INPUT)
-					printf("bash: syntax error near unexpected token `<`\n");
+					ft_putstr_fd("bash: syntax error near unexpected token `<`\n", 2);
 				else if (tmp->delimiter == REDIRECT_OUTPUT)
-					printf("bash: syntax error near unexpected token `>`\n");
-				else if (tmp->delimiter == PIPE)
-					printf("bash: syntax error near unexpected token `|`\n");
+					ft_putstr_fd("bash: syntax error near unexpected token `>`\n", 2);
 				else if (tmp->delimiter == HEREDOC)
-					printf("bash: syntax error near unexpected token `<<`\n");
+					ft_putstr_fd("bash: syntax error near unexpected token `<<`\n", 2);
 				else if (tmp->delimiter == APPEND)
-					printf("bash: syntax error near unexpected token `>>`\n");
+					ft_putstr_fd("bash: syntax error near unexpected token `>>`\n", 2);
 				ht_deletef(env, "?");
 				ht_insert(env, "?", ft_strdup("2"));
 				return (free(tmp_exec->argv), free(tmp_exec), 1);
@@ -145,7 +162,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 			{
 				if (can_error)
 				{
-					printf("bash: syntax error near unexpected token `newline'\n");////
+					ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);////
 					free(tmp_exec);
 					ht_deletef(env, "?");
 					ht_insert(env, "?", ft_strdup("2"));
