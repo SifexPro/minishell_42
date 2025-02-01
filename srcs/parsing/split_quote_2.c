@@ -20,6 +20,7 @@ int	init_string_quote(t_split_sh *sp)
 	sp->is_simp_quote = false;
 	sp->is_dbl_quote = false;
 	sp->prev_meta = false;
+	sp->pretext = NULL;
 	return (0);
 }
 

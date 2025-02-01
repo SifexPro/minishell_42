@@ -64,12 +64,24 @@ int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 
 void	free_splitted(void *v)
 {
-	t_list		*splitted;
 	t_splitted	*tmp_splitted;
 
 	tmp_splitted = v;
 	if (tmp_splitted)
 	{
+		free(tmp_splitted);
+	}
+}
+
+void	free_splitted_c(void *v)
+{
+	t_splitted	*tmp_splitted;
+
+	tmp_splitted = v;
+	if (tmp_splitted)
+	{
+		if (tmp_splitted->content)
+			free(tmp_splitted->content);
 		free(tmp_splitted);
 	}
 }

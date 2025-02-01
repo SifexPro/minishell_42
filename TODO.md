@@ -11,17 +11,17 @@ ne s'arrête jamaiks avec les kill signaux, normal ?
 gerer export avec _
 
 == fix cd on deleted folder
-- cat | | jkfe
-== bash: syntax error near unexpected token `|'
-== status 2
-- token suivi d'un mot (pas pipe, pas void, <, >, <<, >>)
-- < $non_existant
-bash: $non_existant: ambiguous redirect
-- expand seuleument alphanum+_, premier char != num
-- echo -nnn -n i
-== doit juste print i sans \n (actuellement met un espece)
-- echo -nA
-== print "-nA"
+-x cat | | jkfe
+=x= bash: syntax error near unexpected token `|'
+=x= status 2
+-x token suivi d'un mot (pas pipe, pas void, <, >, <<, >>)
+-x < $non_existant
+-x bash: $non_existant: ambiguous redirect
+-x expand seuleument alphanum+_, premier char != num
+-x echo -nnn -n i
+=x= doit juste print i sans \n (actuellement met un espece)
+-x echo -nA
+=x= print "-nA"
 - cd test_dir
 -> rm -r ../test_dir 
 [1]    811449 segmentation fault (core dumped)  ./minishell
@@ -36,16 +36,12 @@ bash: $non_existant: ambiguous redirect
 == dans export
 == dans env
 - export a+=example
-== concatene dans a
-- echo a'b'
-ab
+=x= concatene dans a
+-x echo a'b'
+-x ab
 
 
 ## CRASH
-
-### Fix parsing (Il manque le > test)
-- echo te < cat
-- < Makefile cat | wc -l | cat > test
 
 ## Sifex 
 

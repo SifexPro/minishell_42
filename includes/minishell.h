@@ -87,6 +87,7 @@ typedef struct s_split_sh
 	bool	is_simp_quote;
 	bool	is_dbl_quote;
 	bool	prev_meta;
+	char	*pretext;
 }	t_split_sh;
 
 typedef struct s_splitted
@@ -165,6 +166,7 @@ int		run_program_exec(char *path, char **argv, char **envp);
 int		select_exec(int argc, char **argv, t_ht *env, char **envp);
 void	free_splitted(void *splitted);
 void	free_splitted_wc(void *splitted);
+void	free_splitted_c(void *v);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);
