@@ -34,10 +34,10 @@ long	ft_exit(int argc, char **argv, long long last_status)
 			i = 0;
 		while (argv[1][++i])
 			if (!ft_isdigit(argv[1][i]))
-				return (exec_error("numeric argument required", "exit"), 2);
+				return (exec_error_arg("numeric argument required", argv[1], "exit"), 2);
 		if (ft_strcmp(ft_ltoa(ft_atol(argv[1])), &argv[1][has_sign]) &&
 			ft_strcmp(ft_ltoa(ft_atol(argv[1])), argv[1]))
-			return (exec_error("numeric argument required", "exit"), 2);
+			return (exec_error_arg("numeric argument required", argv[1], "exit"), 2);
 		if (argc > 2)
 			return (exec_error("too many arguments", "exit"), 1);
 		return (ft_atol(argv[1]));
