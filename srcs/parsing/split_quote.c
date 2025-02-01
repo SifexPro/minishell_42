@@ -42,15 +42,12 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	}
 	else if (sp->is_dbl_quote)
 	{
-		if (str[sp->i - 1] != '\"')
-		{
-			if (sp->pretext)
-				handle_pretext(elem, (char *)str, sp, env);
-			else
-				ft_lstadd_back(elem, create_str(
-						ft_strndup((char *)(&str[sp->quote_start + 1]),
-							sp->i - sp->quote_start - 1), false, env));
-		}
+		if (sp->pretext)
+			handle_pretext(elem, (char *)str, sp, env);
+		else if (str[sp->i - 1] != '\"')
+			ft_lstadd_back(elem, create_str(
+					ft_strndup((char *)(&str[sp->quote_start + 1]),
+						sp->i - sp->quote_start - 1), false, env));
 		sp->str_start = sp->i + 1;
 		sp->quote_start = 0;
 		sp->is_dbl_quote = false;
@@ -75,15 +72,12 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	}
 	else if (sp->is_simp_quote)
 	{
-		if (str[sp->i - 1] != '\'')
-		{
-			if (sp->pretext)
-				handle_pretext(elem, (char *)str, sp, env);
-			else
-				ft_lstadd_back(elem, create_str(
-					ft_strndup((char *)(&str[sp->quote_start + 1]),
-						sp->i - sp->quote_start - 1), true, env));
-		}
+		if (sp->pretext)
+			handle_pretext(elem, (char *)str, sp, env);
+		else if (str[sp->i - 1] != '\'')
+			ft_lstadd_back(elem, create_str(
+				ft_strndup((char *)(&str[sp->quote_start + 1]),
+					sp->i - sp->quote_start - 1), true, env));
 		sp->str_start = sp->i + 1;
 		sp->quote_start = 0;
 		sp->is_simp_quote = false;
