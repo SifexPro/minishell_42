@@ -40,6 +40,7 @@ gerer export avec _
 -x echo a'b'
 -x ab
 
+- Leaks avec `< Makefile cat |`
 
 ## CRASH
 
