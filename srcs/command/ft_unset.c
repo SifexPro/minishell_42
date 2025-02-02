@@ -22,7 +22,7 @@ int	ft_unset(int argc, char **argv, t_ht *env)
 	i = 1;
 	while (argv[i])
 	{
-		ft_printf("unset %s\n", argv[i]);
+		//ft_printf("unset %s\n", argv[i]);
 		key = ft_strdup(argv[i]);
 		ht_delete(env, key);
 		free(key);

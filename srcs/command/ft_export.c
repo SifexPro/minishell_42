@@ -92,8 +92,10 @@ void	show_export(char **envp)
 int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 {
 	int		i;
+	bool	has_error;
 
 	i = 1;
+	has_error = false;
 	if (argc == 1)
 	{
 		show_export(envp);
@@ -102,9 +104,15 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 	while (argv[i])
 	{
 		if (process_line(argv[i], env) > 0)
-			exec_error_arg("not a valid identifier", argv[i], "export");////return ?
-			//printf("bash: export: `%s': not a valid identifier\n", argv[i]);////
+		{
+			has_error = true;
+			ft_putstr_fd("bash: export: `", 2);
+			ft_putstr_fd(argv[i], 2);
+			ft_putstr_fd("\': not a valid identifier\n", 2);
+		}
 		i++;
 	}
+	if (has_error)
+		return (1);
 	return (0);
 }
