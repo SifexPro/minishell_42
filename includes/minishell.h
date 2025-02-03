@@ -50,6 +50,7 @@ typedef enum e_tokens
 typedef struct s_exec
 {
 	int			argc;
+	int 		i;
 	char		**argv;
 	char		**envp;
 	t_tokens	token_next;

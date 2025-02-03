@@ -52,6 +52,7 @@ t_exec	*init_exec(void)
 	tmp_exec->argv = NULL;
 	tmp_exec->argc = 0;
 	tmp_exec->token_next = -1;
+	tmp_exec->i = 0;
 	return (tmp_exec);
 }
 
@@ -73,8 +74,9 @@ void	append_to_argv(t_exec *exec, char *str)
 		exec->argv[i] = old_argv[i];
 		i++;
 	}
-	exec->argv[i] = str;
-	exec->argv[i + 1] = NULL;
+	exec->argv[exec->i] = str;
+	exec->argv[exec->i + 1] = NULL;
+	exec->i++;
 	free(old_argv);
 }
 
@@ -83,13 +85,11 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 {
 	t_list		*e_tmp;
 	t_splitted	*tmp;
-	int			i;
 	t_exec		*tmp_exec;
 	int			can_error;
 	int			delimiter;
 	t_exec		*last_neutral;
 
-	i = 0;
 	tmp_exec = init_exec();
 	if (!tmp_exec)
 		return (1);
@@ -106,12 +106,12 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		if (tmp->is_delimiter)
 		{
 			delimiter = tmp->delimiter;
-			tmp_exec->argv[i] = NULL;
+			tmp_exec->argv[tmp_exec->i] = NULL;
 			if (!elements->next)
 				can_error = true;
 			else
 			{
-				if (i != 0)
+				if (tmp_exec->i != 0)
 				{
 					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 					tmp_exec = init_exec();
@@ -123,7 +123,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					tmp_exec->token_next = tmp->delimiter;
 					/* if (!tmp_exec->argv)
 						return (1); */
-					i = 0;
+					tmp_exec->i = 0;
 				}
 				else
 					tmp_exec->token_next = tmp->delimiter;
@@ -152,13 +152,12 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				}
 				else
 				{
-					tmp_exec->argv[i] = tmp->content;
-					tmp_exec->argv[i + 1] = NULL;
+					tmp_exec->argv[tmp_exec->i] = tmp->content;
+					tmp_exec->argv[tmp_exec->i + 1] = NULL;
 				}
 				elements = elements->next;
 				tmp = elements->content;
-				i++;
-
+				tmp_exec->i++;
 			}
 			if (!tmp->content && tmp->delimiter != -1 && delimiter != PIPE)
 			{
@@ -177,7 +176,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 			if (delimiter != PIPE && elements)
 			{
 				ft_lstadd_back(ret, ft_lstnew(tmp_exec));
-				i = 0;
 				tmp_exec = init_exec();
 				if (!tmp_exec)
 					return (1);
@@ -211,7 +209,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				tmp = elements->content;
 				if (!tmp_exec->argv)
 					return (1);
-				i = 0;
+				tmp_exec->i = 0;
 				tmp = elements->content;
 				continue;
 			}
@@ -233,14 +231,13 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		{
 			last_neutral = tmp_exec;
 		}
-		tmp_exec->argv[i] = tmp->content;
+		tmp_exec->argv[tmp_exec->i] = tmp->content;
 		e_tmp = elements->next;
-		i++;
+		tmp_exec->i++;
 		elements = e_tmp;
-
 	}
 	if (tmp_exec->argv)
-		tmp_exec->argv[i] = NULL;
+		tmp_exec->argv[tmp_exec->i] = NULL;
 	if (!can_error) {
 		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 	}
