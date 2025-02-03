@@ -1,0 +1,14 @@
+Makefile
+README.md
+TODO.md
+includes
+libft
+minishell
+minishell_tester
+objs
+pipe_index
+srcs
+test
+test1
+test2
+tester2

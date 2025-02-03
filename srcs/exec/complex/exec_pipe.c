@@ -48,6 +48,44 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 		return (run_program_exec_pipe(argv[0], argv, envp));
 }
 
+////
+void read_from_fd(int fd, char *text, bool print) {
+    char buffer[1024];
+    ssize_t bytesRead;
+    
+    struct pollfd pfd = { .fd = fd, .events = POLLIN };
+
+    ft_putstr_fd("\n[READ_FROM_FD] ", 2);
+	ft_putendl_fd(text, 2);////
+    // Vérifier si des données sont disponibles
+    int ret = poll(&pfd, 1, 0); // Timeout = 0 → ne bloque pas
+    if (ret == 0) {
+        ft_putstr_fd("fd is null\n", 2);
+        return ;
+    } else if (ret == -1) {
+        perror("poll");
+        return;
+    }
+	else
+	{
+        ft_putstr_fd("fd is not null\n", 2);
+	}
+	
+
+	if (print)
+	{
+		// Lire uniquement si `poll()` dit qu'il y a des données
+		while ((bytesRead = read(fd, buffer, sizeof(buffer) - 1)) > 0 && ret != 0) {
+			buffer[bytesRead] = '\0';
+			ft_putstr_fd("Child received: ", 2);
+			ft_putstr_fd(buffer, 2);
+		}
+	}
+    ft_putstr_fd("[READ_FROM_FD] ", 2);
+	ft_putendl_fd(text, 2);////
+}
+////
+
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 {
 	char	**envp_cpy;
@@ -55,64 +93,111 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	int		outfile_index;
 	int		pipe_index;
 
+	//ft_printf("here\n");////
+	//ft_putstr_fd("\n[CHILD_EXEC]\n", 2);////
 	pipe_index = flags->pipe_index;
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;
+	/*
+	printf("flags->pipe[pipe_index]->index = %d\n", flags->pipe[pipe_index]->index);////
+	printf("flags->pipe[pipe_index]->index_max = %d\n", flags->pipe[pipe_index]->index_max);////
+	printf("pipe_index = %d\n", pipe_index);////
+	//printf("flags->pipe_nb = %d\n", flags->pipe_nb);////
+	//printf("i = %d\n", i);////
 	printf("i = %d\nflags->pipe_index = %d\nflags->pipe[flags->pipe_index]->infile_index = %d\nflags->pipe[flags->pipe_index]->infile_nb = %d\nflags->pipe[flags->pipe_index]->outfile_index = %d\nflags->pipe[flags->pipe_index]->outfile_nb = %d\n", i, flags->pipe_index, flags->pipe[flags->pipe_index]->infile_index, flags->pipe[flags->pipe_index]->infile_nb, flags->pipe[flags->pipe_index]->outfile_index, flags->pipe[flags->pipe_index]->outfile_nb);////
-	if (infile_index != -1)
+	*/
+
+	/*ft_putstr_fd("condition : ", 2);////
+	//ft_putnbr_fd(infile_index < flags->pipe[pipe_index]->infile_nb, 2);////
+	ft_putnbr_fd(infile_index != -1 && infile_index < flags->pipe[pipe_index]->infile_nb 
+	&& outfile_index + 1 >= flags->pipe[pipe_index]->outfile_nb, 2);////
+	ft_putstr_fd("\n", 2);////*/
+	if (infile_index != -1 && infile_index < flags->pipe[pipe_index]->infile_nb)	
+//&& outfile_index + 1 >= flags->pipe[pipe_index]->outfile_nb)
 	{
+		//ft_putstr_fd("infile\n", 2);////
 		if (!flags->pipe[pipe_index]->infile[infile_index]->is_heredoc)
+		{
 			if (!open_infile(i, flags))
 				return (close_pipe(flags), exit(1));////real exit
-		//else heredoc
-		//dup2(flags->fd_in[i], 0);
+		}
+		else
+		{
+			if (!open_heredoc(i, flags))
+				return (close_pipe(flags), exit(1));////real exit
+		}
+		dup2(flags->fd_in[i], 0);
+		//ft_putendl_fd("OPENFILE: dup2(flags->fd_in[i], 0);", 2);////
 	}
-	else if (outfile_index != -1)
+	if (outfile_index != -1 && outfile_index < flags->pipe[pipe_index]->outfile_nb)
 	{
-		// code
+		//if (flags->pipe[pipe_index]->outfile_nb == 1 || flags->pipe[pipe_index]->outfile_nb > 1 && infile_index >= flags->pipe[pipe_index]->infile_nb - 1)
+		//{
+			//ft_putstr_fd("outfile\n", 2);////
+			if (!open_outfile(i, flags))
+				return (close_pipe(flags), exit(1));////real exit
+			dup2(flags->fd_out[i], 1);
+			//ft_putendl_fd("OPENOUTFILE: dup2(flags->fd_out[i], 1);", 2);////
+		//}
 	}
-	dup2(flags->fd_in[i], 0);
-	dup2(flags->fd_out[i], 1);
+
+
+	//if (flags->pipe[pipe_index]->index > 0)
+	//ft_putstr_fd("IS : pipe_index > 0\n", 2);////
+	//ft_putnbr_fd(pipe_index > 0, 2);////
+	//ft_putstr_fd("\n", 2);////
+	if (pipe_index > 0)
+	{
+		//ft_putendl_fd("dup2(flags->fd_in[i], 0);", 2);////
+		dup2(flags->fd_in[i], 0);
+	}
+	/*ft_putstr_fd("IS : pipe_index < flags->pipe_nb - 1\n", 2);////
+	ft_putnbr_fd(pipe_index < flags->pipe_nb - 1, 2);////
+	ft_putstr_fd("\n", 2);////*/
+	//if (flags->pipe[pipe_index]->index < flags->pipe[pipe_index]->index_max)
+	if (pipe_index < flags->pipe_nb - 1)
+	{
+		//ft_putendl_fd("dup2(flags->fd_out[i], 1);", 2);////
+		dup2(flags->fd_out[i], 1);
+	}
+
+	////
+	//read_from_fd(flags->fd_in[i], "fd_in", false);////
+	//read_from_fd(flags->fd_out[i], "fd_out", false);////
+	////
+
 	close_pipe(flags);
+
+	if (!flags->pipe[pipe_index]->cmd)
+		ft_putstr_fd("no cmd\n", 2);////
+
 	envp_cpy = ht_to_envp(env);
-	if (infile_index + 1 == flags->pipe[pipe_index]->infile_nb)
-		printf("here");
-		//exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc, flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
+
+	
+	if (infile_index >= flags->pipe[pipe_index]->infile_nb - 1)
+	{
+		//&& flags->pipe[pipe_index]->outfile_nb <= 1
+		if (outfile_index >= flags->pipe[pipe_index]->outfile_nb - 1)
+		{
+			/*ft_putendl_fd("[EXEC]\n", 2);////
+			ft_putnbr_fd(flags->pipe[pipe_index]->cmd->argc, 2);////
+			ft_putstr_fd("\n", 2);////
+			ft_putendl_fd(flags->pipe[pipe_index]->cmd->argv[0], 2);////*/
+			exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc, flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
+		}
+	}
+	/*else if (infile_index >= flags->pipe[pipe_index]->infile_nb - 1 && flags->pipe[pipe_index]->outfile_nb > 1)
+	{
+		ft_putendl_fd("[EXEC]\n", 2);////
+		ft_putnbr_fd(flags->pipe[pipe_index]->cmd->argc, 2);////
+		ft_putstr_fd("\n", 2);////
+		ft_putendl_fd(flags->pipe[pipe_index]->cmd->argv[0], 2);////
+		exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc, flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
+	}*/
+	//ft_putendl_fd("[NO EXEC]\n", 2);////
 	exit(0);
+	clear_env(envp_cpy);////useless (after exit)
 }
-
-/*void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
-{
-	char **envp_cpy;
-
-	if (i == 0 && flags->infile)
-	{
-		if (!open_infile(flags))
-			return close_pipe(flags), exit(1);////real exit
-		dup2(flags->fd_in[i], 0);
-	}
-	else if (i == 0 && flags->has_heredoc)
-		dup2(flags->fd_in[i], 0);
-	if (i == flags->cmd_count - 1 && flags->outfile)
-	{
-		if (!open_outfile(flags))
-			return close_pipe(flags), exit(1);////real exit
-		dup2(flags->fd_out[i], 1);
-	}
-	if (i > 0)
-		dup2(flags->fd_in[i], 0);
-	if (i < flags->cmd_count - 1)
-		dup2(flags->fd_out[i], 1);
-	close_pipe(flags);
-	envp_cpy = ht_to_envp(env);
-	printf("flags->cmd[%d]->token_next = %d\n", i, flags->cmd[i]->argc);////
-	//printf("flags->cmd[%d]->argv[0] = %s\n", i, flags->cmd[i]->argv[0]);////
-	//printf("flags->cmd[%d]->argv[1] = %s\n", i, flags->cmd[i]->argv[1]);////
-	exit(select_exec_pipe(flags->cmd[i]->argc, flags->cmd[i]->argv, env, envp_cpy));
-	clear_env(envp_cpy);
-}*/
-
-
 
 // check if has "file < command"
 // check if has "command > file"

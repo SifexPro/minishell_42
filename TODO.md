@@ -48,7 +48,6 @@ gerer export avec _
 
 
 ### Damn
-- gérer "'command' < file 'suite command'"
 - gérer "wc -w < Makefile > test | wc -l" - "wc -l < Makefile | ls | wc -l > test | wc -l" - "ls > test | wc < Makefile -w -l"
 - > test1 > test2 > test3 echo salut | echo cho >test4
 - < Makefile > t1 < bruh > t2
@@ -61,9 +60,9 @@ rien
 - < Makefile > t2 < test3 > t1 echo test
 == pas d'exec
 creation t2
-- cat | cat | cat | cat | ls(command qui n'attend pas de input)
-ouvre X*cat
 
++ cat | cat | cat | cat | ls(command qui n'attend pas de input)
+ouvre X*cat
 + print exit quand exit
 + exit avec non num arg
 == bash: exit: a: numeric argument required
@@ -74,10 +73,13 @@ ouvre X*cat
 -> ls | exit 9223372036854775809 | ls
 
 - Gerer multiple pipe & redirection
+- < file < bruh cat
+== pas d'exec dans le pipe
 
 ### Check
 - cat Makefile | gzip > test.gz
 - ls | echo t
 - ls | exit 5 5
 - < Makefile < test cat |
+- << heredoc < file cat | ls
 

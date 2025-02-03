@@ -246,4 +246,3 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 	}
 	return (0);
 }
-

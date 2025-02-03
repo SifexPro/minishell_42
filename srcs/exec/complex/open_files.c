@@ -16,62 +16,74 @@ int	open_infile(int index, t_flags *flags)
 {
 	char	*file;
 
+	//ft_putstr_fd("open_infile\n", 2);////
 	file = flags->pipe[flags->pipe_index]->infile[flags->pipe[flags->pipe_index]->infile_index]->file;
+	/*ft_putstr_fd("FILE : ", 2);////
+	ft_putstr_fd(file, 2);////
+	ft_putstr_fd("\n", 2);////*/
 	flags->fd_in[index] = open(file, O_RDONLY);
+	/*ft_putstr_fd("open_infile condition : ", 2);////
+	ft_putnbr_fd(flags->fd_in[index] < 0, 2);////
+	ft_putstr_fd("\n", 2);////*/
 	if (flags->fd_in[index] < 0)
 		return (file_error(strerror(errno), file), 0);
+	//ft_putstr_fd("open_infile return 1\n", 2);////
 	return (1);
 }
 
-/*int	open_outfile(t_flags *flags)
+int	open_outfile(int index, t_flags *flags)
 {
-	if (flags->has_append)
-		flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_APPEND, 0667);//// 0667~ 
+	char	*file;
+
+	//ft_putstr_fd("open_outfile\n", 2);////
+	file = flags->pipe[flags->pipe_index]->outfile[flags->pipe[flags->pipe_index]->outfile_index]->file;
+	/*ft_putstr_fd("FILE : ", 2);////
+	ft_putstr_fd(file, 2);////
+	ft_putstr_fd("\n", 2);////*/
+	if (flags->pipe[flags->pipe_index]->outfile[flags->pipe[flags->pipe_index]->outfile_index]->is_append)
+		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_APPEND, 0667);//// 0667~ 
 	else
-		flags->fd_out[flags->cmd_count - 1] = open(flags->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0667);//// 0667~
-	if (flags->fd_out[flags->cmd_count - 1] < 0)
-		return (file_error(strerror(errno), flags->outfile), 0);
+		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0667);//// 0667~
+	/*ft_putstr_fd("open_outfile condition : ", 2);////
+	ft_putnbr_fd(flags->fd_out[index] < 0, 2);////
+	ft_putstr_fd("\n", 2);////*/
+	if (flags->fd_out[index] < 0)
+		return (file_error(strerror(errno), file), 0);
+	//ft_putstr_fd("open_outfile return 1\n", 2);////
 	return (1);
 }
 
-void	open_heredoc(t_flags *flags)
+int	open_heredoc(int index, t_flags *flags)
 {
 	int		fd[2];
+	char	*heredoc;
 	char	*line;
 	int		len_heredoc;
 
+	//ft_putstr_fd("open_heredoc\n", 2);////
 	if (pipe(fd) < 0)
-		exit(1);////real exit
-	g_pid = fork();
-	if (g_pid < 0)
-		exit(1);////real exit
-	if (!g_pid)
+		return (0);
+	heredoc = flags->pipe[flags->pipe_index]->infile[flags->pipe[flags->pipe_index]->infile_index]->file;
+	len_heredoc = ft_strlen(heredoc);
+	if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
+		printf("failed to register interrupts with kernel\n");
+	while (1) 
 	{
-		len_heredoc = ft_strlen(flags->heredoc);
-		while (1) 
+		line = readline("> ");
+		if (!line || (!ft_strncmp(line, heredoc, len_heredoc) && !line[len_heredoc]))
 		{
-			write(0, "> ", 2);
-			line = get_next_line(STDIN_FILENO);
-			if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]) || g_ctrl_c)
-			{
-				free(line);
-				break ;
-			}
-			ft_putstr_fd(line, fd[1]);
-			ft_putstr_fd("\n", fd[1]);
 			free(line);
+			break ;
 		}
-		close(fd[1]);
-		close(fd[0]);
-		exit(0);
+		ft_putstr_fd(line, fd[1]);
+		ft_putstr_fd("\n", fd[1]);
+		free(line);
 	}
-	else
-	{
-		waitpid(g_pid, NULL, 0);
-		close(fd[1]);
-		flags->fd_in[0] = fd[0];
-		g_pid = 0;
-	}
-}*/
-//// close pipe ?
+	close(fd[1]);
+	flags->fd_in[index] = fd[0];
+	return (1);
+}
+
 

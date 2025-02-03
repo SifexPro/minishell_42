@@ -14,32 +14,57 @@
 
 static bool	edit_flags(t_flags **flags, int i)
 {
-	if ((*flags)->pipe_index_changed)
-	{
-		(*flags)->pipe_index_changed = false;
-		return (true);
-	}
-		
-	if ((*flags)->pipe[(*flags)->pipe_index]->infile_index != -1)
-		(*flags)->pipe[(*flags)->pipe_index]->infile_index++;
+	(*flags)->pipe[(*flags)->pipe_index]->index++;
+	//printf("\n[!] flags->pipe[pipe_index]->index = %d\n", (*flags)->pipe[(*flags)->pipe_index]->index);////
+	//printf("[!] flags->pipe[pipe_index]->index_max = %d\n", (*flags)->pipe[(*flags)->pipe_index]->index_max);////
 
-	if ((*flags)->pipe[(*flags)->pipe_index]->infile_index == (*flags)->pipe[(*flags)->pipe_index]->infile_nb)
-		return ((*flags)->pipe[(*flags)->pipe_index]->infile_index = -1, true);
-
-	if ((*flags)->pipe[(*flags)->pipe_index]->outfile_index != -1 && 
-		(*flags)->pipe[(*flags)->pipe_index]->infile_index == -1)
+	if ((*flags)->pipe[(*flags)->pipe_index]->outfile_nb > 0 && (*flags)->pipe[(*flags)->pipe_index]->outfile_index < (*flags)->pipe[(*flags)->pipe_index]->outfile_nb
+		&& (
+			(*flags)->pipe[(*flags)->pipe_index]->infile_index + 1 >= (*flags)->pipe[(*flags)->pipe_index]->infile_nb 
+			|| (*flags)->pipe[(*flags)->pipe_index]->infile_nb == 1
+		)
+		) 
 		(*flags)->pipe[(*flags)->pipe_index]->outfile_index++;
 
-	if ((*flags)->pipe[(*flags)->pipe_index]->outfile_index == (*flags)->pipe[(*flags)->pipe_index]->outfile_nb && 
-		(*flags)->pipe[(*flags)->pipe_index]->infile_index == -1)
-		(*flags)->pipe[(*flags)->pipe_index]->outfile_index = -1;
+	if ((*flags)->pipe[(*flags)->pipe_index]->infile_nb > 0 && (*flags)->pipe[(*flags)->pipe_index]->infile_index < (*flags)->pipe[(*flags)->pipe_index]->infile_nb
+		&& (
+			(*flags)->pipe[(*flags)->pipe_index]->outfile_index + 1 >= (*flags)->pipe[(*flags)->pipe_index]->outfile_nb
+			|| (*flags)->pipe[(*flags)->pipe_index]->outfile_nb == 1
+		)
+		)
+		(*flags)->pipe[(*flags)->pipe_index]->infile_index++;
 
-	if ((*flags)->pipe[(*flags)->pipe_index]->infile_index == -1 && (*flags)->pipe[(*flags)->pipe_index]->outfile_index == -1)
+	if ((*flags)->pipe[(*flags)->pipe_index]->outfile_index == -1 && (*flags)->pipe[(*flags)->pipe_index]->infile_index + 1 >= (*flags)->pipe[(*flags)->pipe_index]->infile_nb)
+		(*flags)->pipe[(*flags)->pipe_index]->outfile_index++;
+		
+	if ((*flags)->pipe[(*flags)->pipe_index]->infile_nb > 1 && (*flags)->pipe[(*flags)->pipe_index]->outfile_nb > 1)
 	{
+		if ((*flags)->pipe[(*flags)->pipe_index]->infile_index + 1 < (*flags)->pipe[(*flags)->pipe_index]->infile_nb)
+			(*flags)->pipe[(*flags)->pipe_index]->infile_index++;
+		if ((*flags)->pipe[(*flags)->pipe_index]->outfile_index + 1 < (*flags)->pipe[(*flags)->pipe_index]->outfile_nb
+			&& (*flags)->pipe[(*flags)->pipe_index]->infile_index + 1 >= (*flags)->pipe[(*flags)->pipe_index]->infile_nb)
+			(*flags)->pipe[(*flags)->pipe_index]->outfile_index++;
+
+		if ((*flags)->pipe[(*flags)->pipe_index]->outfile_index + 1 >= (*flags)->pipe[(*flags)->pipe_index]->outfile_nb
+			&& (*flags)->pipe[(*flags)->pipe_index]->infile_index >= (*flags)->pipe[(*flags)->pipe_index]->infile_nb)
+			(*flags)->pipe[(*flags)->pipe_index]->infile_index--;
+		//&& (*flags)->pipe[(*flags)->pipe_index]->outfile_index == -1)
+	}
+
+	//printf("[!] flags->pipe[pipe_index]->infile_index = %d\n", (*flags)->pipe[(*flags)->pipe_index]->infile_index);////
+	//printf("[!] flags->pipe[pipe_index]->infile_nb = %d\n", (*flags)->pipe[(*flags)->pipe_index]->infile_nb);////
+
+	if ((*flags)->pipe[(*flags)->pipe_index]->index >= (*flags)->pipe[(*flags)->pipe_index]->index_max)
+	{
+		//printf("[!] chnage pipe_index\n");////
 		(*flags)->pipe_index += 1;
-		(*flags)->pipe_index_changed = true;
+		(*flags)->pipe[(*flags)->pipe_index]->index = 0;
+		(*flags)->pipe[(*flags)->pipe_index]->infile_index = 0;
+
+		//(*flags)->pipe_index_changed = true;
 	}
 	
+	//usleep(50000);////
 	return (true);
 }
 
@@ -52,11 +77,13 @@ int	forking(t_flags *flags, t_ht *env, char **envp)
 	//if (flags->has_heredoc)////in child
 	//	open_heredoc(flags);
 	open_pipe(flags);
+	//printf("flags->total_redir: %d\n", flags->total_redir);////
 	while (i < flags->total_redir)
 	{
 		if (edit_flags(&flags, i))
 		{
-			printf("flags->pipe_index = %d\n", flags->pipe_index);////
+			//printf("-flags->pipe_index = %d\n", flags->pipe_index);////
+			//usleep(100000);////
 			flags->pid[i] = fork();
 		}
 		g_pid = flags->pid[i];
@@ -74,7 +101,7 @@ int	forking(t_flags *flags, t_ht *env, char **envp)
 		g_pid = 0;
 		i++;
 	}
-	printf("pipe_index: %d\n", flags->pipe_index);////
+	//printf("pipe_index: %d\n", flags->pipe_index);////
 	return (WEXITSTATUS(status));
 }
 

@@ -134,7 +134,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	free(input);
 
 	////
-	t_list	*temp_list = splitted;
+	/*t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -144,13 +144,13 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;
+	splitted = temp_list;*/
 	////
 
 	//// < Makefile cat | wc -l > test
 	flags = set_flags(splitted);
 
-	printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
+	/*printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
 	printf("pipe_index: %d\n", flags->pipe_index);////
 	printf("pipe_nb: %d\n", flags->pipe_nb);////
 	for (int i = 0; i < flags->pipe_nb && flags->total_redir > 0; i++)
@@ -190,26 +190,10 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 			for (int j = 0; j < flags->pipe[i]->cmd->argc; j++)
 				printf("pipe[%d]->cmd->argv[%d]: %s\n", i, j, flags->pipe[i]->cmd->argv[j]);////
 		}
-	}
-
-	/*printf("HERE\n\npipe_count: %d\n", flags->pipe_count);////
-	printf("cmd_count: %d\n", flags->cmd_count);////
-	printf("has_infile: %d\n", flags->has_infile);////
-	printf("has_outfile: %d\n", flags->has_outfile);////
-	printf("has_heredoc: %d\n", flags->has_heredoc);////
-	printf("has_append: %d\n", flags->has_append);////
-	printf("infile: %s\n", flags->infile);////
-	printf("outfile: %s\n", flags->outfile);////
-	printf("heredoc: %s\n", flags->heredoc);////
-	int i = 0;
-	while (i < flags->cmd_count)
-	{
-		printf("cmd[%d]: %s\n", i, flags->cmd[i]->argv[0]);////
-		i++;
 	}*/
 
-	if (flags->total_redir > 0) {
-		printf("forking\n");////
+	if (flags->multi_exec) {
+		//printf("forking\n");////
 		res = forking(flags, env, envp);
 	}
 	else
@@ -221,8 +205,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
 	}
-	ft_lstclear(&splitted, &free_splitted_wc);
-	free_flags(flags);
+	//ft_lstclear(&splitted, &free_splitted_wc);
+	//free_flags(flags);
 	return (res);
 }
  

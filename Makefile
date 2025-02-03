@@ -1,5 +1,3 @@
-
-
 NAME		=	minishell
 LIBFT		=	libft/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)

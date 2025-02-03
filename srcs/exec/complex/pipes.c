@@ -18,6 +18,7 @@ void	open_pipe(t_flags *flags)
 	int pipe_fd[2];
 
 	i = 0;
+
 	while (i < flags->total_redir)
 	{
 		if (pipe(pipe_fd) < 0)

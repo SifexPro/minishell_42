@@ -26,6 +26,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <sys/time.h>////
+# include <poll.h>////
 
 # include <sys/wait.h>
 
@@ -64,6 +66,8 @@ typedef struct s_file
 
 typedef struct s_pipe
 {
+	int		index;
+	int		index_max;
 	int		infile_index;////-1 when finished/none
 	int		infile_nb;
 	t_file	**infile;
@@ -75,6 +79,7 @@ typedef struct s_pipe
 
 typedef struct s_flags
 {
+	bool	multi_exec;
 	int		total_redir;
 	pid_t	*pid;
 	int		*fd_in;
@@ -203,8 +208,8 @@ int		forking(t_flags *flags, t_ht *env, char **envp);
 
 /* exec/complex/open_files */
 int		open_infile(int index, t_flags *flags);
-int		open_outfile(t_flags *flags);
-void	open_heredoc(t_flags *flags);
+int		open_outfile(int index, t_flags *flags);
+int		open_heredoc(int index, t_flags *flags);
 
 /* exec/complex/exec_utils */
 void	exec_error(char *error, char *cmd);
