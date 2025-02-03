@@ -139,7 +139,10 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					tmp_exec->argc = count_until_del(elements->next);
 					tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 					if (tmp->content)
+					{
 						tmp_exec->argv[0] = tmp->content;
+						last_neutral = tmp_exec;
+					}
 					else if (tmp->delimiter > -1)
 					{
 						delimiter = tmp->delimiter;
