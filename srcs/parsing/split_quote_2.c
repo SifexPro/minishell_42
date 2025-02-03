@@ -55,6 +55,30 @@ t_exec	*init_exec(void)
 	return (tmp_exec);
 }
 
+void	append_to_argv(t_exec *exec, char *str)
+{
+	char	**old_argv;
+	int		i;
+	int		old_argc;
+
+	old_argv = exec->argv;
+	old_argc = exec->argc;
+	exec->argv = malloc(sizeof(char *) * (old_argc + 1));
+	if (!exec->argv)
+		return ;
+	exec->argc = old_argc + 1;
+	i = 0;
+	while (old_argv[i])
+	{
+		exec->argv[i] = old_argv[i];
+		i++;
+	}
+	exec->argv[i] = str;
+	exec->argv[i + 1] = NULL;
+	free(old_argv);
+}
+
+
 int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 {
 	t_list		*e_tmp;
@@ -63,6 +87,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 	t_exec		*tmp_exec;
 	int			can_error;
 	int			delimiter;
+	t_exec		*last_neutral;
 
 	i = 0;
 	tmp_exec = init_exec();
@@ -73,6 +98,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 	if (!tmp_exec->argv)
 		return (1);
 	can_error = false;
+	last_neutral = NULL;
 	while (elements)
 	{
 		tmp = elements->content;
@@ -104,7 +130,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				tmp = elements->next->content;
 				if (delimiter == PIPE)
 				{
-
+					last_neutral = NULL;
 					tmp_exec->argc = 0;
 					ft_lstadd_back(ret, ft_lstnew(tmp_exec));
 					tmp_exec = init_exec();
@@ -121,7 +147,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 						tmp = elements->next->content;
 						tmp_exec->token_next = delimiter;
 						tmp_exec->argv[0] = tmp->content;
-						ft_printf("spec]ULL\n");
 						tmp = elements->content;
 					}
 				}
@@ -198,10 +223,21 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		}
 		else
 			delimiter = -1;
+		if (last_neutral)
+		{
+			append_to_argv(last_neutral, tmp->content);
+			elements = elements->next;
+			continue;
+		}
+		else if (tmp_exec->token_next == -1)
+		{
+			last_neutral = tmp_exec;
+		}
 		tmp_exec->argv[i] = tmp->content;
 		e_tmp = elements->next;
 		i++;
 		elements = e_tmp;
+
 	}
 	if (tmp_exec->argv)
 		tmp_exec->argv[i] = NULL;
