@@ -212,5 +212,6 @@ void	exec_error_arg(char *error, char *arg, char *cmd);
 void	file_error(char *error, char *file);
 
 extern int	g_pid;
+extern bool	g_ctrl_c;
 
 #endif

@@ -48,14 +48,11 @@ void	open_heredoc(t_flags *flags)
 	if (!g_pid)
 	{
 		len_heredoc = ft_strlen(flags->heredoc);
-		if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
-			printf("failed to register interrupts with kernel\n");
-		if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
-			printf("failed to register interrupts with kernel\n");
 		while (1) 
 		{
-			line = readline("> ");
-			if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]))
+			write(0, "> ", 2);
+			line = get_next_line(STDIN_FILENO);
+			if (!line || (!ft_strncmp(line, flags->heredoc, len_heredoc) && !line[len_heredoc]) || g_ctrl_c)
 			{
 				free(line);
 				break ;

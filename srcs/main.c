@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-int	g_pid;////?
+int		g_pid;////?
+bool	g_ctrl_c;
 
 char	*get_prefix(int last_status)
 {
@@ -98,12 +99,14 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	g_pid = 0;
+	g_ctrl_c = false;
 	setup_term_signals();
 	env = hashtable_create(100);
 	if (!env)
 		return (printf("failed to malloc!"), 1);
 	register_env_var(env, envp);
 	prefix = get_prefix(0);
+	setup_cmd_signals();
 	buffer = readline(prefix);
 	free(prefix);
 	process_input(buffer, prefix, env, envp);

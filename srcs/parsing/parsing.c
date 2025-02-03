@@ -21,7 +21,7 @@ void    fix_argc(t_list *ret)
     {
         i = 0;
         tmp = ret->content;
-        while (tmp->argv[i])
+        while (tmp->argv && tmp->argv[i])
             i++;
         tmp->argc = i;
         ret = ret->next;
