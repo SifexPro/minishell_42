@@ -238,8 +238,11 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 	}
 	if (tmp_exec->argv)
 		tmp_exec->argv[tmp_exec->i] = NULL;
-	if (!can_error) {
+	if (!can_error && tmp_exec->i > 0) {
 		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
+	} else {
+		free(tmp_exec->argv);
+		free(tmp_exec);
 	}
 	return (0);
 }
