@@ -94,16 +94,16 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	int		pipe_index;
 
 	//ft_printf("here\n");////
-	ft_putstr_fd("\n[CHILD_EXEC]\n", 2);////
+	//ft_putstr_fd("\n[CHILD_EXEC]\n", 2);////
 	pipe_index = flags->pipe_index;
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;
-	printf("flags->pipe[pipe_index]->index = %d\n", flags->pipe[pipe_index]->index);////
+	/*printf("flags->pipe[pipe_index]->index = %d\n", flags->pipe[pipe_index]->index);////
 	printf("flags->pipe[pipe_index]->index_max = %d\n", flags->pipe[pipe_index]->index_max);////
-	printf("pipe_index = %d\n", pipe_index);////
+	printf("pipe_index = %d\n", pipe_index);////*/
 	//printf("flags->pipe_nb = %d\n", flags->pipe_nb);////
 	//printf("i = %d\n", i);////
-	printf("i = %d\nflags->pipe_index = %d\nflags->pipe[flags->pipe_index]->infile_index = %d\nflags->pipe[flags->pipe_index]->infile_nb = %d\nflags->pipe[flags->pipe_index]->outfile_index = %d\nflags->pipe[flags->pipe_index]->outfile_nb = %d\n", i, flags->pipe_index, flags->pipe[flags->pipe_index]->infile_index, flags->pipe[flags->pipe_index]->infile_nb, flags->pipe[flags->pipe_index]->outfile_index, flags->pipe[flags->pipe_index]->outfile_nb);////
+	//printf("i = %d\nflags->pipe_index = %d\nflags->pipe[flags->pipe_index]->infile_index = %d\nflags->pipe[flags->pipe_index]->infile_nb = %d\nflags->pipe[flags->pipe_index]->outfile_index = %d\nflags->pipe[flags->pipe_index]->outfile_nb = %d\n", i, flags->pipe_index, flags->pipe[flags->pipe_index]->infile_index, flags->pipe[flags->pipe_index]->infile_nb, flags->pipe[flags->pipe_index]->outfile_index, flags->pipe[flags->pipe_index]->outfile_nb);////
 
 	/*ft_putstr_fd("condition : ", 2);////
 	//ft_putnbr_fd(infile_index < flags->pipe[pipe_index]->infile_nb, 2);////
@@ -166,8 +166,8 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 
 	close_pipe(flags);
 
-	if (!flags->pipe[pipe_index]->cmd)
-		ft_putstr_fd("no cmd\n", 2);////
+	//if (!flags->pipe[pipe_index]->cmd)
+	//	ft_putstr_fd("no cmd\n", 2);////
 
 	envp_cpy = ht_to_envp(env);
 
