@@ -14,41 +14,12 @@
 
 int	create_strings_quote(char const *str, t_list **elem, t_ht *env);
 
-void	handle_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
-{
-	char	*txt;
-	char	*end;
-
-	end = ft_strndup((char *)(&str[sp->quote_start + 1]),
-		sp->i - sp->quote_start - 1);
-	txt = ft_strjoin(sp->pretext, end);
-	free(sp->pretext);
-	sp->pretext = NULL;
-	free(end);
-	ft_lstadd_back(elem, create_str(txt, true, env));
-}
-
-void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
-{
-	char	*txt;
-
-	txt = ft_strjoin(sp->pretext, str);
-	free(str);
-	if (sp->pretext)
-		free(sp->pretext);
-	sp->pretext = txt;
-}
 void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	if (!sp->is_simp_quote && !sp->is_dbl_quote)
 	{
-		if (sp->i != sp->str_start || sp->pretext)
-			concat_pretext(elem, ft_strndup((char *)(&str[sp->str_start]),
-				sp->i - sp->str_start), sp, env);
-		else
-			sp->pretext = NULL;
+		handle_start(sp, elem, (char *)str, env);
 		sp->is_dbl_quote = true;
-		sp->quote_start = sp->i;
 	}
 	else if (sp->is_dbl_quote)
 	{
@@ -63,7 +34,7 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		}
 		else
 			concat_pretext(elem, ft_strndup((char *)(&str[sp->quote_start + 1]),
-				sp->i - sp->quote_start - 1), sp, env);
+					sp->i - sp->quote_start - 1), sp, env);
 		sp->str_start = sp->i + 1;
 		sp->quote_start = 0;
 		sp->is_dbl_quote = false;
@@ -73,18 +44,10 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 
 void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
-	bool	has_pretext;
-	char	*txt;
-
 	if (!sp->is_simp_quote && !sp->is_dbl_quote)
 	{
-		if (sp->i != sp->str_start || sp->pretext)
-			concat_pretext(elem, ft_strndup((char *)(&str[sp->str_start]),
-				sp->i - sp->str_start), sp, env);
-		else
-			sp->pretext = NULL;
+		handle_start(sp, elem, (char *)str, env);
 		sp->is_simp_quote = true;
-		sp->quote_start = sp->i;
 	}
 	else if (sp->is_simp_quote)
 	{
@@ -94,12 +57,12 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 				handle_pretext(elem, (char *)str, sp, env);
 			else if (str[sp->i - 1] != '\'')
 				ft_lstadd_back(elem, create_str(
-					ft_strndup((char *)(&str[sp->quote_start + 1]),
-						sp->i - sp->quote_start - 1), true, env));		
+						ft_strndup((char *)(&str[sp->quote_start + 1]),
+							sp->i - sp->quote_start - 1), true, env));
 		}
 		else
 			concat_pretext(elem, ft_strndup((char *)(&str[sp->quote_start + 1]),
-				sp->i - sp->quote_start - 1), sp, env);
+					sp->i - sp->quote_start - 1), sp, env);
 		sp->str_start = sp->i + 1;
 		sp->is_simp_quote = false;
 		sp->quote_start = 0;
@@ -107,43 +70,9 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	sp->prev_meta = false;
 }
 
-int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
-{
-	char	*s;
-	int		j;
-
-	if (str[sp->str_start] == 0)
-		return (1);
-	if (str[sp->i + 1] == 0 && str[sp->i] != ' ')
-		sp->i++;
-	s = ft_strndup((char *)(&str[sp->str_start]),
-				sp->i - sp->str_start);
-	if (is_valid_env(s) && sp->prev_meta)
-
-	{
-		if (!get_var_from_str(&s[1], env))
-		{
-			printf("bash: %s: ambiguous redirect\n", s);
-			ht_deletef(env, "?");
-			ht_insert(env, "?", ft_strdup("1"));
-			return (free(sp), -2);
-		}
-	}
-	ft_lstadd_back(elem, create_str(ft_strjoin(sp->pretext, s), false, env));
-	if (sp->pretext)
-		free(sp->pretext);
-	sp->pretext = NULL;
-	free(s);
-	sp->str_start = sp->i + 1;
-	sp->prev_meta = false;
-	if (str[sp->i] == 0)
-		return (1);
-	return (0);
-}
-
 int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
-	int resp;
+	int	resp;
 
 	if (str[sp->i] == ' ' && sp->str_start == sp->i)
 		sp->str_start++;
@@ -173,7 +102,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 	if (!sp)
 		return (printf("Malloc error"), 1);
 	init_string_quote(sp);
-	while (str[sp->i] || (str[sp->i - 1] && str[sp->i] ))
+	while (str[sp->i] || (str[sp->i - 1] && str[sp->i]))
 	{
 		res = loop_char(str, sp, elem, env);
 		if (res == -2)

@@ -46,15 +46,9 @@ int	process_line(char *argv, t_ht *env)
 	char	*prev;
 	char	*env_key;
 
-	split_argv = ft_split(argv, '=');
+	split_argv = get_export_splitted(argv);
 	if (!split_argv)
 		return (1);
-	if (!split_argv[0])
-		return (ft_freesplit(split_argv), free(split_argv), 1);
-	if (!ft_isalpha(split_argv[0][0]))
-		return (ft_freesplit(split_argv), free(split_argv), 2);
-	if (!is_valid_identifier(split_argv[0]))
-		return (ft_freesplit(split_argv), free(split_argv), 2);
 	prev = NULL;
 	env_key = split_argv[0];
 	if (has_plus(split_argv[0]))
@@ -67,14 +61,11 @@ int	process_line(char *argv, t_ht *env)
 	ht_deletef(env, split_argv[0]);
 	if (!split_argv[1])
 		return (ft_freesplit(split_argv), free(split_argv), 0);
-	
 	if (prev)
 		ht_insert(env, split_argv[0], ft_strjoin(prev, split_argv[1]));
 	else
 		ht_insert(env, split_argv[0], ft_strdup(split_argv[1]));
-	ft_freesplit(split_argv);
-	free(split_argv);
-	return (0);
+	return (ft_freesplit(split_argv), free(split_argv), 0);
 }
 
 void	show_export(char **envp)

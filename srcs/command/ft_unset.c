@@ -18,11 +18,10 @@ int	ft_unset(int argc, char **argv, t_ht *env)
 	char	*key;
 
 	if (argc == 1)
-		return (0);////return (printf("unset: no arguments\n"), 1); 
+		return (0);
 	i = 1;
 	while (argv[i])
 	{
-		//ft_printf("unset %s\n", argv[i]);
 		key = ft_strdup(argv[i]);
 		ht_delete(env, key);
 		free(key);

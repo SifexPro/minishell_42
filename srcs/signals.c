@@ -14,11 +14,9 @@
 
 void	handle_signals_term(int signo)
 {
-	//ft_printf("term signal\n");
 	if (signo == SIGINT)
 	{
 		printf("\n");
-
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -36,7 +34,6 @@ void	handle_signals_heredoc(int signo)
 {
 	char	test[2];
 
-	//ft_printf("heredoc signal\n");
 	if (signo == SIGQUIT)
 	{
 		printf("\n");
@@ -51,7 +48,6 @@ void	handle_signals_heredoc(int signo)
 
 void	handle_signals_cmd(int signo)
 {
-	//ft_printf("cmd signal\n");
 	if (signo == SIGINT && g_pid != -1)
 	{
 		kill(g_pid, SIGQUIT);
@@ -62,7 +58,6 @@ void	handle_sigint(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{
-		//printf("sigint %d\n", g_pid);
 		write(1, "\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 0);

@@ -11,13 +11,16 @@ CFLAGS		=	-g -I$(INCLUDE_LIBFT) -I$(INCLUDE)
 RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \
+				srcs/prefix.c \
 				srcs/utils.c \
 				srcs/signals.c \
 				srcs/exec/exec.c \
 				srcs/exec/clear_env.c \
 				srcs/parsing/expansion.c \
+				srcs/parsing/expansion_2.c \
 				srcs/parsing/split_quote.c \
 				srcs/parsing/split_quote_2.c \
+				srcs/parsing/split_quote_3.c \
 				srcs/parsing/meta.c \
 				srcs/parsing/parsing.c \
 				srcs/parsing/environement.c \
@@ -27,6 +30,7 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_env.c \
 				srcs/command/ft_unset.c \
 				srcs/command/ft_export.c \
+				srcs/command/ft_export_2.c \
 				srcs/command/ft_exit.c \
 				srcs/cmd_path.c \
 				srcs/exec/complex/exec_utils.c \

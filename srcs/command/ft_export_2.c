@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,33 +12,25 @@
 
 #include "minishell.h"
 
-char	*get_pwd(void)
+char	**get_export_splitted(char *argv)
 {
-	char	*cwd;
+	char	**split_argv;
 
-	cwd = malloc(sizeof(char) * PATH_MAX);
-	if (!cwd)
+	split_argv = ft_split(argv, '=');
+	if (!split_argv)
 		return (NULL);
-	if (getcwd(cwd, sizeof(char) * PATH_MAX) != NULL)
-		return (cwd);
-	else
-		return (NULL);
+	if (!split_argv[0])
+		return (ft_freesplit(split_argv), free(split_argv), NULL);
+	if (!is_valid_export(split_argv[0]))
+		return (ft_freesplit(split_argv), free(split_argv), NULL);
+	return (split_argv);
 }
 
-int	ft_pwd(int argc, char **argv)
+bool	is_valid_export(char *str)
 {
-	char	*pwd;
-
-	pwd = get_pwd();
-	if (!pwd)
-	{
-		ft_putstr_fd("pwd: error retrieving current directory: getcwd:", 2);
-		ft_putstr_fd(" cannot access parent directories: ", 2);
-		ft_putstr_fd("No such file or directory\n", 2);
-		return (1);
-	}
-	printf("%s\n", pwd);
-	(void)argc;
-	(void)argv;
-	return (0);
+	if (!ft_isalpha(str[0]))
+		return (false);
+	if (!is_valid_env(str))
+		return (false);
+	return (true);
 }

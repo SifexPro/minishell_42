@@ -80,7 +80,6 @@ void	append_to_argv(t_exec *exec, char *str)
 	free(old_argv);
 }
 
-
 int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 {
 	t_list		*e_tmp;
@@ -94,7 +93,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 	if (!tmp_exec)
 		return (1);
 	tmp_exec->argc = count_until_del(elements);
- 	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
+	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 	if (!tmp_exec->argv)
 		return (1);
 	can_error = false;
@@ -121,8 +120,6 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					if (delimiter != PIPE)
 						tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 					tmp_exec->token_next = tmp->delimiter;
-					/* if (!tmp_exec->argv)
-						return (1); */
 					tmp_exec->i = 0;
 				}
 				else
@@ -203,7 +200,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 				{
 					if (delimiter != PIPE)
 						can_error = true;
-					break;
+					break ;
 				}
 			}
 			if (delimiter != PIPE)
@@ -214,12 +211,12 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 					return (1);
 				tmp_exec->i = 0;
 				tmp = elements->content;
-				continue;
+				continue ;
 			}
 			else
 			{
 				tmp = elements->content;
-				continue;
+				continue ;
 			}
 		}
 		else
@@ -228,7 +225,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		{
 			append_to_argv(last_neutral, tmp->content);
 			elements = elements->next;
-			continue;
+			continue ;
 		}
 		else if (tmp_exec->token_next == -1)
 		{
@@ -243,7 +240,9 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		tmp_exec->argv[tmp_exec->i] = NULL;
 	if (!can_error && tmp_exec->i > 0) {
 		ft_lstadd_back(ret, ft_lstnew(tmp_exec));
-	} else {
+	}
+	else
+	{
 		free(tmp_exec->argv);
 		free(tmp_exec);
 	}

@@ -51,7 +51,7 @@ typedef enum e_tokens
 typedef struct s_exec
 {
 	int			argc;
-	int 		i;
+	int			i;
 	char		**argv;
 	char		**envp;
 	t_tokens	token_next;
@@ -88,7 +88,7 @@ typedef struct s_flags
 	pid_t	*pid;
 	int		*fd_in;
 	int		*fd_out;
-	int 	pipe_index;
+	int		pipe_index;
 	int		pipe_nb;//// ?
 	bool	pipe_index_changed;
 	t_pipe	**pipe;
@@ -125,12 +125,15 @@ typedef struct s_splitted
 int		parse_cmd(char *input, t_ht *env, char **envp, int last_status);
 int		exit_prog(t_list **splitted, t_ht *env, int status);
 
+/* prefix */
+char	*get_prefix(int last_status);
+int		handle_lst_status(t_ht *env, int last_status);
+
 /* signals */
 void	handle_signals_heredoc(int signo);
 void	setup_term_signals(void);
 void	setup_cmd_signals(void);
 void	setup_heredoc_signals(void);
-
 
 /* command/cd */
 int		ft_cd(int argc, char **argv, t_ht *env);
@@ -148,6 +151,10 @@ int		ft_unset(int argc, char **argv, t_ht *env);
 /* command/export */
 int		ft_export(int argc, char **argv, t_ht *env, char **envp);
 
+/* command/export_2 */
+char	**get_export_splitted(char *argv);
+bool	is_valid_export(char *str);
+
 /* command/env */
 int		ft_env(char **envp);
 
@@ -164,8 +171,14 @@ t_list	*ft_split_quote(char const *str, t_ht *env);
 int		sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env);
 int		init_string_quote(t_split_sh *sp);
 
+/* split_quote_3 */
+void	handle_start(t_split_sh *sp, t_list **elem, char *str, t_ht *env);
+void	handle_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
+void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
+int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
+
 /* parsing */
-void    fix_argc(t_list *ret);
+void	fix_argc(t_list *ret);
 
 /* parser/expansion */
 void	register_env_var(t_ht *env, char **envp);

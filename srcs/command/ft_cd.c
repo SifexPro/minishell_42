@@ -22,7 +22,8 @@ int	ft_cd(int argc, char **argv, t_ht *env)
 	{
 		ret = chdir(ht_search(env, "HOME"));
 		if (ret == -1)
-			return (exec_error_arg("No such file or directory", ht_search(env, "HOME"), "cd"), 1);
+			return (exec_error_arg("No such file or directory",
+					ht_search(env, "HOME"), "cd"), 1);
 		return (0);
 	}
 	ret = chdir(argv[1]);

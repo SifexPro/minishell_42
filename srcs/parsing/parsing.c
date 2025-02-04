@@ -12,18 +12,18 @@
 
 #include "minishell.h"
 
-void    fix_argc(t_list *ret)
+void	fix_argc(t_list *ret)
 {
 	t_exec	*tmp;
-    int         i;
+	int		i;
 
-    while (ret)
-    {
-        i = 0;
-        tmp = ret->content;
-        while (tmp->argv && tmp->argv[i])
-            i++;
-        tmp->argc = i;
-        ret = ret->next;
-    }
+	while (ret)
+	{
+		i = 0;
+		tmp = ret->content;
+		while (tmp->argv && tmp->argv[i])
+			i++;
+		tmp->argc = i;
+		ret = ret->next;
+	}
 }
