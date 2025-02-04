@@ -95,6 +95,7 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 
 	//ft_printf("here\n");////
 	//ft_putstr_fd("\n[CHILD_EXEC]\n", 2);////
+	//usleep(100000 * (i+1));////
 	pipe_index = flags->pipe_index;
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;
@@ -110,6 +111,20 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	ft_putnbr_fd(infile_index != -1 && infile_index < flags->pipe[pipe_index]->infile_nb 
 	&& outfile_index + 1 >= flags->pipe[pipe_index]->outfile_nb, 2);////
 	ft_putstr_fd("\n", 2);////*/
+	
+	/*printf("> outfile_max\n");////
+	printf("- infile_index: %d\n", infile_index);////
+	printf("- outfile_index: %d\n", outfile_index);////
+	printf("- flags->pipe[pipe_index]->infile_max: %d\n", flags->pipe[pipe_index]->infile_max);////
+	printf("- flags->pipe[pipe_index]->outfile_max: %d\n", flags->pipe[pipe_index]->outfile_max);////*/
+
+	if (flags->pipe[pipe_index]->infile_max != -1 && infile_index >= flags->pipe[pipe_index]->infile_max)
+		return (close_pipe(flags), exit(1));////real exit
+	else if (flags->pipe[pipe_index]->outfile_max != -1 && outfile_index >= flags->pipe[pipe_index]->outfile_max)
+	{
+		return (close_pipe(flags), exit(1));////real exit
+	}
+
 	if (infile_index != -1 && infile_index < flags->pipe[pipe_index]->infile_nb)	
 //&& outfile_index + 1 >= flags->pipe[pipe_index]->outfile_nb)
 	{

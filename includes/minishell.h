@@ -26,6 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <sys/stat.h>
 # include <sys/time.h>////
 # include <poll.h>////
 
@@ -69,13 +70,15 @@ typedef struct s_pipe
 {
 	int		index;
 	int		index_max;
-	int		infile_index;////-1 when finished/none
+	int		infile_index;
+	int		infile_max;
 	int		infile_nb;
 	t_file	**infile;
-	int		outfile_index;////-1 when finished/none
+	int		outfile_index;
+	int		outfile_max;
 	int		outfile_nb;
 	t_file	**outfile;
-	t_exec	*cmd;////if infile_index -1 
+	t_exec	*cmd;
 }			t_pipe;
 
 typedef struct s_flags

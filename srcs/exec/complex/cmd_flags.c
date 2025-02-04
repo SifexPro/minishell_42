@@ -131,14 +131,17 @@ static void	set_pipes(t_flags **flags, t_list *splitted)
 		(*flags)->pipe[i]->index = -1;
 		(*flags)->pipe[i]->index_max = 1;
 		(*flags)->pipe[i]->infile_index = -1;
+		(*flags)->pipe[i]->infile_max = -1;
 		(*flags)->pipe[i]->infile_nb = 0;
 		(*flags)->pipe[i]->infile = NULL;
 		(*flags)->pipe[i]->outfile_index = -1;
+		(*flags)->pipe[i]->outfile_max = -1;
 		(*flags)->pipe[i]->outfile_nb = 0;
 		(*flags)->pipe[i]->outfile = NULL;
 		(*flags)->pipe[i]->cmd = NULL;
 
 		set_files(0, 0, flags, &splitted);
+		//(*flags)->pipe[i]->outfile_max = (*flags)->pipe[i]->outfile_nb;
 		if ((*flags)->pipe[i]->infile_nb > 0)
 			(*flags)->pipe[i]->index_max += (*flags)->pipe[i]->infile_nb - 1;
 		if ((*flags)->pipe[i]->outfile_nb > 0)
