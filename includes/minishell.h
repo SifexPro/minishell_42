@@ -129,7 +129,7 @@ typedef struct s_parsing
 	t_exec		*tmp_exec;
 	t_splitted	*tmp;
 	t_list		**ret;
-}	t_parsing;
+}	t_pars;
 
 
 
@@ -194,19 +194,25 @@ void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
 int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
 /* split_quote_4 */
-void	append_to_argv(t_parsing *pars);
-int		handle_delimiter(t_parsing *pars, t_ht *env);
-int		pipe_case(t_parsing *pars, int delimiter, t_splitted *tmp);
-int 	norme_2(t_parsing *pars, int delimiter);
-int		norme_1(t_parsing *pars, int delimiter);
-int		handle_reformat_start(t_parsing *pars, int delimiter);
-int		check_pipe_error(t_parsing *pars, t_splitted *tmp, int delimiter, t_ht *env);
+void	append_to_argv(t_pars *pars);
+int		handle_delimiter(t_pars *pars, t_ht *env);
+int		pipe_case(t_pars *pars, int delimiter, t_splitted *tmp);
+int 	norme_2(t_pars *pars, int delimiter);
+int		norme_1(t_pars *pars, int delimiter);
+int		handle_reformat_start(t_pars *pars, int delimiter);
+int		check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env);
 
 /* split_quote_5 */
-int		process_next_elem(t_parsing *pars, int delimiter);
+int		process_next_elem(t_pars *pars, int delimiter);
+int		to_argv(t_pars *pars);
+void	end_replace(t_pars *pars);
+t_pars	*create_pars(t_list **ret, t_list *elements) 	;
+/* split_quote_6 */
+int 	handle_no_next(t_pars *pars, int delimiter, t_ht *env);
 
 /* parsing */
 void	fix_argc(t_list *ret);
+
 
 
 /* parser/expansion */

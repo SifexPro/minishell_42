@@ -76,7 +76,7 @@ int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	return (0);
 }
 
-void	append_to_argv(t_parsing *pars)
+void	append_to_argv(t_pars *pars)
 {
 	char	**old_argv;
 	int		i;

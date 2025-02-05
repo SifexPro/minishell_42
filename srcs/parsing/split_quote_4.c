@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	handle_reformat_start(t_parsing *pars, int delimiter)
+int	handle_reformat_start(t_pars *pars, int delimiter)
 {
 	if (pars->tmp_exec->i != 0)
 	{
@@ -36,7 +36,7 @@ int	handle_reformat_start(t_parsing *pars, int delimiter)
 	return (0);
 }
 
-int	pipe_case(t_parsing *pars, int delimiter, t_splitted *tmp)
+int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp)
 {
 	pars->last_neutral = NULL;
 	pars->tmp_exec->argc = 0;
@@ -63,7 +63,7 @@ int	pipe_case(t_parsing *pars, int delimiter, t_splitted *tmp)
 	return (0);
 }
 
-int	check_pipe_error(t_parsing *pars, t_splitted *tmp, int delimiter, t_ht *env)
+int	check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env)
 {
 	if (!tmp->content && tmp->delimiter != -1 && delimiter != PIPE)
 	{
@@ -82,7 +82,7 @@ int	check_pipe_error(t_parsing *pars, t_splitted *tmp, int delimiter, t_ht *env)
 	return (0);
 }
 
-int	norme_1(t_parsing *pars, int delimiter)
+int	norme_1(t_pars *pars, int delimiter)
 {
 	if (delimiter != PIPE && pars->elements)
 	{
@@ -100,7 +100,7 @@ int	norme_1(t_parsing *pars, int delimiter)
 	return (0);
 }
 
-int	norme_2(t_parsing *pars, int delimiter)
+int	norme_2(t_pars *pars, int delimiter)
 {
 	if (delimiter != PIPE)
 	{

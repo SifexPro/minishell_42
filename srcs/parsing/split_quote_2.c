@@ -58,7 +58,7 @@ t_exec	*init_exec(void)
 	return (tmp_exec);
 }
 
-void	end_replace(t_parsing *pars)
+void	end_replace(t_pars *pars)
 {
 	if (pars->tmp_exec->argv)
 		pars->tmp_exec->argv[pars->tmp_exec->i] = NULL;

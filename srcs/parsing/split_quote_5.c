@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	process_next_elem(t_parsing *pars, int delimiter)
+int	process_next_elem(t_pars *pars, int delimiter)
 {
 	if (handle_reformat_start(pars, delimiter))
 		return (1);
@@ -30,7 +30,7 @@ int	process_next_elem(t_parsing *pars, int delimiter)
 	return (0);
 }
 
-int	handle_no_next(t_parsing *pars, int delimiter, t_ht *env)
+int	handle_no_next(t_pars *pars, int delimiter, t_ht *env)
 {
 	if (pars->can_error)
 	{
@@ -50,7 +50,7 @@ int	handle_no_next(t_parsing *pars, int delimiter, t_ht *env)
 	return (0);
 }
 
-int	handle_delimiter(t_parsing *pars, t_ht *env)
+int	handle_delimiter(t_pars *pars, t_ht *env)
 {
 	int			delimiter;
 	int			status;
@@ -79,11 +79,11 @@ int	handle_delimiter(t_parsing *pars, t_ht *env)
 	return (norme_2(pars, delimiter));
 }
 
-t_parsing	*create_pars(t_list **ret, t_list *elements)
+t_pars	*create_pars(t_list **ret, t_list *elements)
 {
-	t_parsing	*pars;
+	t_pars	*pars;
 
-	pars = malloc(sizeof(t_parsing));
+	pars = malloc(sizeof(t_pars));
 	if (!pars)
 		return (NULL);
 	pars->ret = ret;
@@ -95,7 +95,7 @@ t_parsing	*create_pars(t_list **ret, t_list *elements)
 	return (pars);
 }
 
-int	to_argv(t_parsing *pars)
+int	to_argv(t_pars *pars)
 {
 	if (pars->last_neutral)
 	{
