@@ -45,6 +45,8 @@ void	process_env(t_entry	*entry, int j, char **new_envp)
 	e = entry->value;
 	len = ft_strlen(entry->key) + 2 + ft_strlen(e);
 	new_envp[j] = malloc(sizeof(char) * (len));
+	if (!new_envp[j])
+		return ;
 	do_entry(new_envp[j], entry->key, e);
 }
 

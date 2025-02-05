@@ -121,11 +121,24 @@ typedef struct s_splitted
 	int		delimiter;
 }	t_splitted;
 
+typedef struct s_parsing
+{
+	bool		can_error;
+	t_list		*elements;
+	t_exec		*last_neutral;
+	t_exec		*tmp_exec;
+	t_splitted	*tmp;
+	t_list		**ret;
+}	t_parsing;
+
+
+
 /* main */
 int		parse_cmd(char *input, t_ht *env, char **envp, int last_status);
 int		exit_prog(t_list **splitted, t_ht *env, int status);
 
 /* prefix */
+
 char	*get_prefix(int last_status);
 int		handle_lst_status(t_ht *env, int last_status);
 
@@ -170,6 +183,9 @@ t_list	*ft_split_quote(char const *str, t_ht *env);
 /* split_quote_2 */
 int		sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env);
 int		init_string_quote(t_split_sh *sp);
+int		count_until_del(t_list *ret);
+t_exec	*init_exec(void);
+bool	create_argv(t_exec *tmp_exec, t_list *elements);
 
 /* split_quote_3 */
 void	handle_start(t_split_sh *sp, t_list **elem, char *str, t_ht *env);
@@ -177,10 +193,25 @@ void	handle_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
 void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
 int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
+/* split_quote_4 */
+void	append_to_argv(t_parsing *pars);
+int		handle_delimiter(t_parsing *pars, t_ht *env);
+int		pipe_case(t_parsing *pars, int delimiter, t_splitted *tmp);
+int 	norme_2(t_parsing *pars, int delimiter);
+int		norme_1(t_parsing *pars, int delimiter);
+int		handle_reformat_start(t_parsing *pars, int delimiter);
+int		check_pipe_error(t_parsing *pars, t_splitted *tmp, int delimiter, t_ht *env);
+
+/* split_quote_5 */
+int		process_next_elem(t_parsing *pars, int delimiter);
+
 /* parsing */
 void	fix_argc(t_list *ret);
 
+
 /* parser/expansion */
+
+
 void	register_env_var(t_ht *env, char **envp);
 t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
 char	*handle_expansion(char *str, t_ht *env);

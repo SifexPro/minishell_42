@@ -203,6 +203,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
 			return (exit_with_clear(&splitted, env, flags, last_status));
 		envp_cpy = ht_to_envp(env);
+		if (!envp_cpy)
+			return (1);
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
 	}
