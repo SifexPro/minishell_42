@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-static void	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile)
+static void	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile,
+	int index)
 {
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]
 		= (t_file *)malloc(sizeof(t_file));
@@ -26,9 +27,12 @@ static void	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile)
 		= false;
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->is_append
 		= ((t_exec *)(*splitted)->content)->token_next == APPEND;
+	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->index
+		= index;
 }
 
-static void	set_files_infile(t_flags **flags, t_list **splitted, int i_infile)
+static void	set_files_infile(t_flags **flags, t_list **splitted, int i_infile,
+	int index)
 {
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]
 		= (t_file *)malloc(sizeof(t_file));
@@ -42,11 +46,16 @@ static void	set_files_infile(t_flags **flags, t_list **splitted, int i_infile)
 		= ((t_exec *)(*splitted)->content)->token_next == HEREDOC;
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->is_append
 		= false;
+	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->index
+		= index;
 }
 
 static void	set_files2_while(t_flags **flags, t_list **splitted,
 	int i_infile, int i_outfile)
 {
+	int		i;
+
+	i = 0;
 	while (*splitted)
 	{
 		if (((t_exec *)(*splitted)->content)->token_next == PIPE)
@@ -57,14 +66,16 @@ static void	set_files2_while(t_flags **flags, t_list **splitted,
 		else if (((t_exec *)(*splitted)->content)->token_next == REDIRECT_INPUT
 			|| ((t_exec *)(*splitted)->content)->token_next == HEREDOC)
 		{
-			set_files_infile(flags, splitted, i_infile);
+			set_files_infile(flags, splitted, i_infile, i);
 			i_infile++;
+			i++;
 		}
 		else if (((t_exec *)(*splitted)->content)->token_next == REDIRECT_OUTPUT
 			|| ((t_exec *)(*splitted)->content)->token_next == APPEND)
 		{
-			set_files_outfile(flags, splitted, i_outfile);
+			set_files_outfile(flags, splitted, i_outfile, i);
 			i_outfile++;
+			i++;
 		}
 		*splitted = (*splitted)->next;
 	}

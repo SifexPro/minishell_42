@@ -48,22 +48,24 @@ gerer export avec _
 
 
 ### Damn
-- gérer "wc -w < Makefile > test | wc -l" - "wc -l < Makefile | ls | wc -l > test | wc -l" - "ls > test | wc < Makefile -w -l"
-- > test1 > test2 > test3 echo salut | echo cho >test4
+-x gérer "wc -w < Makefile > test | wc -l" - "wc -l < Makefile | ls | wc -l > test | wc -l" - "ls > test | wc < Makefile -w -l"
+-x > test1 > test2 > test3 echo salut | echo cho >test4
 - < Makefile > t1 < bruh > t2
 
-- echo hello > test1 > test2 > test3
+-x echo hello > test1 > test2 > test3
 ouvrir tous les outfile et mettre dans le dernier
-- < Makefile > 000chmod < test3 > t2 echo tes
+-x < Makefile > 000chmod < test3 > t2 echo tes
 == pas d'exec
 rien
-- < Makefile > t2 < test3 > t1 echo test
+-x < Makefile > t2 < test3 > t1 echo test
 == pas d'exec
 creation t2
+-x < file < bruh cat
+== pas d'exec dans le pipe
 
-+ cat | cat | cat | cat | ls(command qui n'attend pas de input)
+-x cat | cat | cat | cat | ls(command qui n'attend pas de input)
 ouvre X*cat
-+ print exit quand exit
+-x print exit quand exit
 + exit avec non num arg
 == bash: exit: a: numeric argument required
 + exit avec > 1 arg
@@ -72,9 +74,6 @@ ouvre X*cat
 == dernier status
 -> ls | exit 9223372036854775809 | ls
 
-- Gerer multiple pipe & redirection
-- < file < bruh cat
-== pas d'exec dans le pipe
 
 ### Check
 - cat Makefile | gzip > test.gz

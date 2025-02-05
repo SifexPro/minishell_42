@@ -54,18 +54,21 @@ static void	check_outfile(t_flags **flags, int pipe_i)
 	j = 0;
 	while (j < (*flags)->pipe[pipe_i]->outfile_nb)
 	{
-		fd = open_outfile_fd((*flags)->pipe[pipe_i]->outfile[j]->file);
-		if (fstat(fd, &file_stat) == -1)
+		if (access((*flags)->pipe[pipe_i]->outfile[j]->file, F_OK) == 0)
 		{
-			perror("fstat");
+			fd = open_outfile_fd((*flags)->pipe[pipe_i]->outfile[j]->file);
+			if (fstat(fd, &file_stat) == -1)
+			{
+				perror("fstat");
+				close(fd);
+				return ;
+			}
 			close(fd);
-			return ;
-		}
-		close(fd);
-		if (!(file_stat.st_mode & S_IWOTH))
-		{
-			(*flags)->pipe[pipe_i]->outfile_max = j + 1;
-			break ;
+			if (!(file_stat.st_mode & S_IWOTH))
+			{
+				(*flags)->pipe[pipe_i]->outfile_max = j + 1;
+				break ;
+			}
 		}
 		j++;
 	}

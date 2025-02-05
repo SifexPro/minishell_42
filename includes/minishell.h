@@ -28,7 +28,6 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/time.h>////
-# include <poll.h>////
 
 # include <sys/wait.h>
 
@@ -64,6 +63,7 @@ typedef struct s_file
 	bool	is_outfile;
 	bool	is_heredoc;
 	bool	is_append;
+	int		index;
 }			t_file;
 
 typedef struct s_pipe
