@@ -91,7 +91,7 @@ void	append_to_argv(t_pars *pars)
 		return ;
 	pars->tmp_exec->argc = old_argc + 1;
 	i = 0;
-	while (old_argv && old_argv[i])
+	while (old_argv && old_argv[i] && i < pars->tmp_exec->i)
 	{
 		pars->tmp_exec->argv[i] = old_argv[i];
 		i++;

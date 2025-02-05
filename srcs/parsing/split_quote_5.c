@@ -106,6 +106,7 @@ int	to_argv(t_pars *pars)
 		pars->last_neutral = pars->tmp_exec;
 	pars->tmp_exec->argv[pars->tmp_exec->i] = ((t_splitted *)
 			pars->elements->content)->content;
+	pars->tmp_exec->argv[pars->tmp_exec->i + 1] = NULL;
 	pars->tmp_exec->i++;
 	pars->elements = pars->elements->next;
 	return (0);
