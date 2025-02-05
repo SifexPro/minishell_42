@@ -80,29 +80,29 @@ int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	return (0);
 }
 
-void	append_to_argv(t_pars *pars)
+void	append_to_argv(t_pars *pars, t_exec *elem)
 {
 	char	**old_argv;
 	int		i;
 	int		old_argc;
 
-	old_argv = pars->tmp_exec->argv;
-	old_argc = pars->tmp_exec->argc;
+	old_argv = elem->argv;
+	old_argc = elem->argc;
 	if (!old_argv)
 		return ;
-	pars->tmp_exec->argv = malloc(sizeof(char *) * (old_argc + 1));
-	if (!pars->tmp_exec->argv)
+	elem->argv = malloc(sizeof(char *) * (old_argc + 1));
+	if (!elem->argv)
 		return ;
-	pars->tmp_exec->argc = old_argc + 1;
+	elem->argc = old_argc + 1;
 	i = 0;
-	while (old_argv && old_argv[i] && i < pars->tmp_exec->i)
+	while (old_argv && old_argv[i] && i < elem->i)
 	{
-		pars->tmp_exec->argv[i] = old_argv[i];
+		elem->argv[i] = old_argv[i];
 		i++;
 	}
-	pars->tmp_exec->argv[i] = ((t_splitted *)pars->elements->content)->content;
-	pars->tmp_exec->argv[i + 1] = NULL;
-	pars->tmp_exec->i++;
+	elem->argv[i] = ((t_splitted *)pars->elements->content)->content;
+	elem->argv[i + 1] = NULL;
+	elem->i++;
 	free(old_argv);
 	pars->elements = pars->elements->next;
 }
