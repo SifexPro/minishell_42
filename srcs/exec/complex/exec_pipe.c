@@ -91,7 +91,6 @@ static void	handle_files(t_flags *flags, int infile_i, int outfile_i, int i)
 		}
 		else
 		{
-
 			if (!open_heredoc(i, flags))
 				return (close_pipe(flags), exit(1));////real exit
 		}
@@ -129,4 +128,3 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	clear_env(envp_cpy);
 	exit(0);
 }
-//// exit -> "real_exit"
