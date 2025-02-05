@@ -57,10 +57,17 @@ bool	handle_meta_2(
 	return (false);
 }
 
-int	handle_meta(char const *str, t_split_sh *sp, t_list **elem)
+int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	t_splitted	*content;
+	int			resp;
 
+	if (sp->i != sp->str_start)
+	{
+		resp = no_quote(str, sp, elem, env);
+		if (resp != 0)
+			return (resp);
+	}
 	content = malloc(sizeof(t_splitted));
 	if (!content)
 		return (0);

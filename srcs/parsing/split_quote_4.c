@@ -65,7 +65,7 @@ int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp)
 
 int	check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env)
 {
-	if (!tmp->content && tmp->delimiter != -1 && delimiter != PIPE)
+	if (!tmp->content && tmp->delimiter != -1 && tmp->delimiter != PIPE && delimiter != PIPE)
 	{
 		if (tmp->delimiter == REDIRECT_INPUT)
 			ft_putstr_fd("bash: syntax error near unexpected token `<`\n", 2);
