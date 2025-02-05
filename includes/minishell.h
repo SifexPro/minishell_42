@@ -225,7 +225,7 @@ bool	is_valid_env(char *str);
 
 /* parser/meta */
 bool	is_meta(char c);
-int		handle_meta(char const *str, t_split_sh *sp, t_list **elem);
+int		handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
 /* parser/environement */
 char	**ht_to_envp(t_ht *env);
