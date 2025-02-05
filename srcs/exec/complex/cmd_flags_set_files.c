@@ -17,6 +17,8 @@ static void	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile,
 {
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]
 		= (t_file *)malloc(sizeof(t_file));
+	if (!(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile])////belek
+		return ;
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->file
 		= ((t_exec *)(*splitted)->content)->argv[0];
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->is_infile
@@ -36,6 +38,8 @@ static void	set_files_infile(t_flags **flags, t_list **splitted, int i_infile,
 {
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]
 		= (t_file *)malloc(sizeof(t_file));
+	if (!(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile])////belek
+		return ;
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->file
 		= ((t_exec *)(*splitted)->content)->argv[0];
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->is_infile
@@ -88,8 +92,12 @@ static void	set_files2(int infile_count, int outfile_count,
 	(*flags)->pipe[(*flags)->pipe_index]->outfile_nb = outfile_count;
 	(*flags)->pipe[(*flags)->pipe_index]->infile
 		= (t_file **)malloc(sizeof(t_file *) * infile_count + 1);
+	if (!(*flags)->pipe[(*flags)->pipe_index]->infile)////belek
+		return ;
 	(*flags)->pipe[(*flags)->pipe_index]->outfile
 		= (t_file **)malloc(sizeof(t_file *) * outfile_count + 1);
+	if (!(*flags)->pipe[(*flags)->pipe_index]->outfile)////belek
+		return ;
 	set_files2_while(flags, splitted, 0, 0);
 }
 

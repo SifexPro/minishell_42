@@ -37,10 +37,16 @@ static t_flags	*set_flags3(t_flags *flags)
 	if (flags->total_redir > 0)
 	{
 		flags->pid = ft_calloc(flags->total_redir + 1, sizeof(pid_t));
+		if (!flags->pid)
+			return (NULL);//// put the real exit
 		flags->fd_in = ft_calloc((flags->total_redir + 2), sizeof(int));
+		if (!flags->fd_in)
+			return (NULL);//// put the real exit
 		flags->fd_in = ft_memset(flags->fd_in, -1,
 				(sizeof(int) * flags->total_redir + 1));
 		flags->fd_out = ft_calloc((flags->total_redir + 2), sizeof(int));
+		if (!flags->fd_out)
+			return (NULL);//// put the real exit
 		flags->fd_out = ft_memset(flags->fd_out, -1,
 				(sizeof(int) * flags->total_redir + 1));
 	}
@@ -80,7 +86,7 @@ t_flags	*set_flags(t_list *splitted)
 
 	flags = init_flags(splitted);
 	if (!flags)
-		return (0);//// put the real exit
+		return (NULL);//// put the real exit
 	start = splitted;
 	while (splitted)
 	{
@@ -89,7 +95,8 @@ t_flags	*set_flags(t_list *splitted)
 			flags->pipe_nb++;
 		splitted = splitted->next;
 	}
-	set_pipes(&flags, start);
+	if (!set_pipes(&flags, start))
+		return (NULL);//// put the real exit
 	flags = set_flags2(flags);
 	if (!flags->total_redir)
 		return (flags);

@@ -28,7 +28,6 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/time.h>////
-
 # include <sys/wait.h>
 
 # ifdef LINUX
@@ -255,7 +254,7 @@ void	set_files(int infile_count, int outfile_count, t_flags **flags,
 	t_list **splitted);
 
 /* exec/complex/cmd_flags_set_pipes */
-void	set_pipes(t_flags **flags, t_list *splitted);
+int		set_pipes(t_flags **flags, t_list *splitted);
 
 /* exec/complex/pipe */
 void	open_pipe(t_flags *flags);
