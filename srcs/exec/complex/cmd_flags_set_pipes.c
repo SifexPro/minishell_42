@@ -47,6 +47,8 @@ int	set_pipes(t_flags **flags, t_list *splitted)
 
 	(*flags)->pipe
 		= (t_pipe **)malloc(sizeof(t_pipe *) * (*flags)->pipe_nb + 1);
+	if (!(*flags)->pipe)
+		return (0);
 	i = set_pipes_while(flags, splitted, 0);
 	if (i < 0)
 		return (0);

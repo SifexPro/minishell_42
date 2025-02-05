@@ -86,7 +86,7 @@ t_flags	*set_flags(t_list *splitted)
 
 	flags = init_flags(splitted);
 	if (!flags)
-		return (NULL);//// put the real exit
+		return (NULL);
 	start = splitted;
 	while (splitted)
 	{

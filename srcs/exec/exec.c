@@ -132,6 +132,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	splitted = ft_split_quote(input, env);
 	if (!splitted)//// ???
 		return (free(input), -1);
+	free(input);
 
 	////
 	/*t_list	*temp_list = splitted;
