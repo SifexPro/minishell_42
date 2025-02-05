@@ -28,6 +28,10 @@ long	ft_exit(int argc, char **argv, long long last_status)
 	bool	has_sign;
 
 	i = -1;
+	if (last_status != -1)
+		ft_putstr_fd("exit\n", 2);
+	else
+		last_status = 0;
 	if (argc > 1)
 	{
 		has_sign = is_sign(argv[1][0]);
@@ -41,11 +45,7 @@ long	ft_exit(int argc, char **argv, long long last_status)
 			return (ft_exit_error(argv[1]), 2);
 		if (argc > 2)
 			return (exec_error("too many arguments", "exit"), 1);
-		last_status = ft_atol(argv[1]);
+		return (ft_atol(argv[1]));
 	}
-	if (last_status != -1)
-		ft_putstr_fd("exit\n", 2);
-	else
-		last_status = 0;
 	return (last_status);
 }
