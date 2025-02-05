@@ -22,7 +22,9 @@ char	**get_export_splitted(char *argv)
 	if (!split_argv[0])
 		return (ft_freesplit(split_argv), free(split_argv), NULL);
 	if (!is_valid_export(split_argv[0]))
+	{
 		return (ft_freesplit(split_argv), free(split_argv), NULL);
+	}
 	return (split_argv);
 }
 

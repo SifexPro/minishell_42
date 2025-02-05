@@ -17,12 +17,14 @@ bool	is_valid_env(char *str)
 	int	i;
 
 	i = 1;
-	if (!str || str[0] != '$')
+	if (!str)
 		return (false);
 	while (str && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	if (str[i] != 0)
+	{
 		return (false);
+	}
 	return (true);
 }
 

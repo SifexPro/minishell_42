@@ -22,7 +22,7 @@ char	*handle_last_status(char *str, t_ht *env, int i)
 		res = "0";
 	tmp = ft_strndup(str, i);
 	tmp = ft_strjoin_free(tmp, res);
-	if (str[i + 2])
+	if (str[i + 1])
 		tmp = ft_strjoin_free(tmp, &str[i + 2]);
 	free(str);
 	return (tmp);
@@ -35,9 +35,11 @@ char	*get_var_from_str(char *str, t_ht *env)
 	int		j;
 
 	j = 0;
-	while (ft_isalnum(str[j]) || str[j] == '_')
+	if (str[j] == '?')
+		return (ht_search(env, "?"));
+	while (ft_isalnum(str[j]) || str[j] == '_' || (j == 0 && str[j] == '?'))
 		j++;
-	env_var = ft_strndup(str, j - 1);
+	env_var = ft_strndup(str, j);
 	res = ht_search(env, env_var);
 	free(env_var);
 	return (res);

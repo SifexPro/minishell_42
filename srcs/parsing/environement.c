@@ -37,17 +37,21 @@ void	do_entry(char *out, char *key, char *val)
 	out[j] = 0;
 }
 
-void	process_env(t_entry	*entry, int j, char **new_envp)
+int	process_env(t_entry	*entry, int j, char **new_envp)
 {
 	char	*e;
 	int		len;
 
 	e = entry->value;
+	if (entry->key[0] == '?' && entry->key[1] == 0)
+		return (0);
 	len = ft_strlen(entry->key) + 2 + ft_strlen(e);
 	new_envp[j] = malloc(sizeof(char) * (len));
 	if (!new_envp[j])
-		return ;
+		return (0);
 	do_entry(new_envp[j], entry->key, e);
+	return (1);
+
 }
 
 char	**ht_to_envp(t_ht *env)
@@ -69,8 +73,8 @@ char	**ht_to_envp(t_ht *env)
 		{
 			while (entry)
 			{
-				process_env(entry, j, new_envp);
-				j++;
+				if (process_env(entry, j, new_envp))
+					j++;
 				entry = entry->next;
 			}
 		}

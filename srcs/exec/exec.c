@@ -135,7 +135,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	free(input);
 
 	////
-	/*t_list	*temp_list = splitted;
+	/* t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////

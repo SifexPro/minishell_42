@@ -27,20 +27,15 @@ char	*get_prefix(int last_status)
 	char	*pwd;
 	char	**splitted;
 	char	*tmp;
-	char	*status_str;
 
 	pwd = get_fixed_pwd();
-	status_str = ft_itoa(last_status);
-	if (!status_str)
-		return (NULL);
 	if (last_status == 0)
-		tmp = ft_strjoin("\e[1;32m", status_str);
+		tmp = ft_strdup("\e[1;32m");
 	else
-		tmp = ft_strjoin("\e[1;31m", status_str);
-	free(status_str);
+		tmp = ft_strdup("\e[1;31m");
 	if (!tmp)
 		return (NULL);
-	tmp = ft_strjoin_free(tmp, " \e[1;35m[CUSTOM] \e[1;33m");
+	tmp = ft_strjoin_free(tmp, "[CUSTOM] \e[1;33m");
 	splitted = ft_split(pwd, '/');
 	if (!splitted)
 		return (free(tmp), NULL);
