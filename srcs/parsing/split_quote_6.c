@@ -14,7 +14,7 @@
 
 int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 {
-	int 		status;
+	int			status;
 	t_parsing	*pars;
 
 	pars = create_pars(ret, elements);
