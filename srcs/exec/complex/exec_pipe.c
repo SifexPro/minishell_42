@@ -85,11 +85,16 @@ static void	handle_files(t_flags *flags, int infile_i, int outfile_i, int i)
 	if (infile_i != -1 && infile_i < flags->pipe[pipe_index]->infile_nb)
 	{
 		if (!flags->pipe[pipe_index]->infile[infile_i]->is_heredoc)
+		{
 			if (!open_infile(i, flags))
 				return (close_pipe(flags), exit(1));////real exit
+		}
 		else
+		{
+
 			if (!open_heredoc(i, flags))
 				return (close_pipe(flags), exit(1));////real exit
+		}
 		dup2(flags->fd_in[i], 0);
 	}
 	if (outfile_i != -1 && outfile_i < flags->pipe[pipe_index]->outfile_nb)
