@@ -244,6 +244,13 @@ char	*get_cmd_path(char *cmd, char *path);
 t_flags	*set_flags(t_list *splitted);
 void	free_flags(t_flags *flags);
 
+/* exec/complex/cmd_flags_set_files */
+void	set_files(int infile_count, int outfile_count, t_flags **flags,
+	t_list **splitted);
+
+/* exec/complex/cmd_flags_set_pipes */
+void	set_pipes(t_flags **flags, t_list *splitted);
+
 /* exec/complex/pipe */
 void	open_pipe(t_flags *flags);
 void	close_pipe(t_flags *flags);
@@ -253,6 +260,12 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp);
 
 /* exec/complex/fork */
 int		forking(t_flags *flags, t_ht *env, char **envp);
+
+/* exec/complex/edit_flags */
+bool	edit_flags(t_flags **flags);
+
+/* exec/complex/check_files */
+void	check_exec(t_flags **flags);
 
 /* exec/complex/open_files */
 int		open_infile(int index, t_flags *flags);

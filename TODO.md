@@ -84,3 +84,4 @@ ouvre X*cat
 - << heredoc < file cat | ls
 
 - < Makefile < TODO.md cat > test | < Makefile cat
+- fix tous les mallocs
