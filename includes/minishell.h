@@ -123,6 +123,7 @@ typedef struct s_splitted
 typedef struct s_parsing
 {
 	bool		can_error;
+	bool		has_started;
 	t_list		*elements;
 	t_exec		*last_neutral;
 	t_exec		*tmp_exec;
@@ -195,14 +196,14 @@ int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 /* split_quote_4 */
 void	append_to_argv(t_pars *pars, t_exec *elem);
 int		handle_delimiter(t_pars *pars, t_ht *env);
-int		pipe_case(t_pars *pars, int delimiter, t_splitted *tmp);
+int		pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env);
 int 	norme_2(t_pars *pars, int delimiter);
 int		norme_1(t_pars *pars, int delimiter);
 int		handle_reformat_start(t_pars *pars, int delimiter);
 int		check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env);
 
 /* split_quote_5 */
-int		process_next_elem(t_pars *pars, int delimiter);
+int		process_next_elem(t_pars *pars, int delimiter, t_ht *env);
 int		to_argv(t_pars *pars);
 void	end_replace(t_pars *pars);
 t_pars	*create_pars(t_list **ret, t_list *elements) 	;

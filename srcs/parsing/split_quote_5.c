@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-int	process_next_elem(t_pars *pars, int delimiter)
+int	process_next_elem(t_pars *pars, int delimiter, t_ht *env)
 {
 	if (handle_reformat_start(pars, delimiter))
 		return (1);
 	pars->tmp = pars->elements->next->content;
 	if (delimiter == PIPE)
-		pipe_case(pars, delimiter, pars->tmp);
+		pipe_case(pars, delimiter, pars->tmp, env);
 	else
 	{
 		pars->tmp_exec->argv[pars->tmp_exec->i] = pars->tmp->content;
@@ -62,7 +62,7 @@ int	handle_delimiter(t_pars *pars, t_ht *env)
 	if (!pars->elements->next)
 		pars->can_error = true;
 	else
-		if (process_next_elem(pars, delimiter))
+		if (process_next_elem(pars, delimiter, env))
 			return (1);
 	if (check_pipe_error(pars, pars->tmp, delimiter, env))
 		return (1);
@@ -90,9 +90,11 @@ t_pars	*create_pars(t_list **ret, t_list *elements)
 	pars->elements = elements;
 	pars->tmp_exec = init_exec();
 	pars->last_neutral = NULL;
+	pars->has_started = false;
 	if (!pars->tmp_exec || !create_argv(pars->tmp_exec, elements))
 		return (free(pars), NULL);
 	return (pars);
+
 }
 
 int	to_argv(t_pars *pars)
@@ -104,6 +106,7 @@ int	to_argv(t_pars *pars)
 	}
 	else if (pars->tmp_exec->token_next == -1)
 		pars->last_neutral = pars->tmp_exec;
+	pars->has_started = true;
 	pars->tmp_exec->argv[pars->tmp_exec->i] = ((t_splitted *)
 			pars->elements->content)->content;
 	pars->tmp_exec->argv[pars->tmp_exec->i + 1] = NULL;
