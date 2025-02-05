@@ -135,7 +135,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	free(input);
 
 	////
-	/*t_list	*temp_list = splitted;
+	t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -145,11 +145,12 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;*/
+	splitted = temp_list;
 	////
 
-	//// < Makefile cat | wc -l > test
 	flags = set_flags(splitted);
+	if (!flags)////real exit
+		return (1);
 
 	/*printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
 	printf("pipe_index: %d\n", flags->pipe_index);////
@@ -193,10 +194,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		}
 	}*/
 
-	if (flags->multi_exec) {
-		//printf("forking\n");////
+	if (flags->multi_exec)
 		res = forking(flags, env, envp);
-	}
 	else
 	{
 		temp = splitted->content;
