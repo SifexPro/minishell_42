@@ -99,7 +99,7 @@ int	to_argv(t_pars *pars)
 {
 	if (pars->last_neutral)
 	{
-		append_to_argv(pars);
+		append_to_argv(pars, pars->last_neutral);
 		return (1);
 	}
 	else if (pars->tmp_exec->token_next == -1)

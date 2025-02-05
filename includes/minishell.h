@@ -193,7 +193,7 @@ void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
 int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
 /* split_quote_4 */
-void	append_to_argv(t_pars *pars);
+void	append_to_argv(t_pars *pars, t_exec *elem);
 int		handle_delimiter(t_pars *pars, t_ht *env);
 int		pipe_case(t_pars *pars, int delimiter, t_splitted *tmp);
 int 	norme_2(t_pars *pars, int delimiter);
