@@ -67,6 +67,8 @@ bool	edit_flags(t_flags **flags)
 	{
 		if ((*flags)->pipe[(*flags)->pipe_index]->infile_max == -1)
 			(*flags)->pipe[(*flags)->pipe_index]->outfile_index++;
+		else if ((*flags)->pipe[(*flags)->pipe_index]->infile_max == 1)//// belek
+			(*flags)->pipe[(*flags)->pipe_index]->infile_index = -1;
 		else
 			(*flags)->pipe[(*flags)->pipe_index]->infile_index++;
 	}

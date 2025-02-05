@@ -112,14 +112,14 @@ int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last
 	exit_status = ft_exit(((t_exec *)(*splitted)->content)->argc, ((t_exec *)(*splitted)->content)->argv, last_status);
 	if (((t_exec *)(*splitted)->content)->argc > 2 && exit_status == 1)
 		return (1);
-	free_flags(flags);
+	if (flags)
+		free_flags(flags);
 	ft_lstclear(splitted, &free_splitted_wc);
 	exit_prog(splitted, env, exit_status);
 	return (exit_status);
 }
 
 int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
-
 {
 	t_list	*splitted;
 	t_flags	*flags;
@@ -130,12 +130,11 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 
 	res = 0;
 	splitted = ft_split_quote(input, env);
-	if (!splitted)
-		return (-1);
-	free(input);
+	if (!splitted)//// ???
+		return (free(input), -1);
 
 	////
-	t_list	*temp_list = splitted;
+	/*t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -145,14 +144,15 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;
+	splitted = temp_list;*/
 	////
 
 	flags = set_flags(splitted);
-	if (!flags)////real exit
-		return (1);
+	if (!flags)
+		return (exit_with_clear(&splitted, env, NULL, -1));
 
-	/*printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
+	/*
+	printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
 	printf("pipe_index: %d\n", flags->pipe_index);////
 	printf("pipe_nb: %d\n", flags->pipe_nb);////
 	for (int i = 0; i < flags->pipe_nb && flags->total_redir > 0; i++)
@@ -192,7 +192,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 			for (int j = 0; j < flags->pipe[i]->cmd->argc; j++)
 				printf("pipe[%d]->cmd->argv[%d]: %s\n", i, j, flags->pipe[i]->cmd->argv[j]);////
 		}
-	}*/
+	}
+	*/
 
 	if (flags->multi_exec)
 		res = forking(flags, env, envp);
@@ -207,7 +208,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
 	}
-	//ft_lstclear(&splitted, &free_splitted_wc);
+	ft_lstclear(&splitted, &free_splitted_wc);
 	//free_flags(flags);
 	return (res);
 }
