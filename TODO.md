@@ -41,6 +41,9 @@ gerer export avec _
 -x ab
 
 - Leaks avec `< Makefile cat |`
+- `cat` CTRL + C affiche 2 terminal
+- Makefile qui fait pas de .o
+- -Wall -Werror -Wextra
 
 ## CRASH
 

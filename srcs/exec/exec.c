@@ -100,7 +100,9 @@ void	free_splitted_c(void *v)
 	if (tmp_splitted)
 	{
 		if (tmp_splitted->content)
+		{
 			free(tmp_splitted->content);
+		}
 		free(tmp_splitted);
 	}
 }
@@ -128,15 +130,18 @@ void	free_splitted_wc(void *v)
 
 	tmp_exec = v;
 	i = 0;
-	if (tmp_exec && tmp_exec->argv)
+	if (tmp_exec)
 	{
-		while (tmp_exec->argv[i])
+		if (tmp_exec->argv)
 		{
-			/* ft_printf("free_splitted_wc %s\n", tmp_exec->argv[i]); */
-			free(tmp_exec->argv[i]);
+			while (tmp_exec->argv[i])
+			{
 			i++;
+				free(tmp_exec->argv[i]);
+				i++;
+			}
+			free(tmp_exec->argv);
 		}
-		free(tmp_exec->argv);
 		free(tmp_exec);
 	}
 }

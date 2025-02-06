@@ -21,7 +21,9 @@ int	process_next_elem(t_pars *pars, int delimiter, t_ht *env)
 		pipe_case(pars, delimiter, pars->tmp, env);
 	else
 	{
-		pars->tmp_exec->argv[pars->tmp_exec->i] = pars->tmp->content;
+		pars->tmp_exec->argv[pars->tmp_exec->i] = ft_strdup(pars->tmp->content);
+		free(pars->tmp->content);
+		pars->tmp->content = NULL;
 		pars->tmp_exec->argv[pars->tmp_exec->i + 1] = NULL;
 	}
 	pars->elements = pars->elements->next;
@@ -58,7 +60,14 @@ int	handle_delimiter(t_pars *pars, t_ht *env)
 	pars->tmp = pars->elements->content;
 	pars->can_error = false;
 	delimiter = pars->tmp->delimiter;
-	pars->tmp_exec->argv[pars->tmp_exec->i] = NULL;
+	if (pars->tmp_exec->i > pars->tmp_exec->argc)
+	{
+		pars->tmp_exec->argv[pars->tmp_exec->argc - 1] = NULL;
+	}
+	else
+	{
+		pars->tmp_exec->argv[pars->tmp_exec->i] = NULL;
+	}
 	if (!pars->elements->next)
 		pars->can_error = true;
 	else
@@ -90,6 +99,7 @@ t_pars	*create_pars(t_list **ret, t_list *elements)
 	pars->elements = elements;
 	pars->tmp_exec = init_exec();
 	pars->last_neutral = NULL;
+	pars->delimiter = -1;
 	pars->has_started = false;
 	if (!pars->tmp_exec || !create_argv(pars->tmp_exec, elements))
 		return (free(pars), NULL);
@@ -107,10 +117,13 @@ int	to_argv(t_pars *pars)
 	else if (pars->tmp_exec->token_next == -1)
 		pars->last_neutral = pars->tmp_exec;
 	pars->has_started = true;
-	pars->tmp_exec->argv[pars->tmp_exec->i] = ((t_splitted *)
-			pars->elements->content)->content;
+	pars->tmp_exec->argv[pars->tmp_exec->i] = ft_strdup(((t_splitted *)
+			pars->elements->content)->content);
+	free(((t_splitted *)pars->elements->content)->content);
+	((t_splitted *)pars->elements->content)->content = NULL;
 	pars->tmp_exec->argv[pars->tmp_exec->i + 1] = NULL;
 	pars->tmp_exec->i++;
+
 	pars->elements = pars->elements->next;
 	return (0);
 }
