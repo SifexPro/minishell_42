@@ -60,7 +60,7 @@ int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env)
 		pars->delimiter = tmp->delimiter;
 		pars->elements = pars->elements->next;
 		pars->tmp = pars->elements->next->content;
-		pars->tmp_exec->token_next = delimiter;
+		pars->tmp_exec->token_next = pars->delimiter;
 		pars->tmp_exec->argv[0] = ft_strdup(pars->tmp->content);
 		free(pars->tmp->content);
 		pars->tmp->content = NULL;
