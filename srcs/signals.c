@@ -43,7 +43,7 @@ void	handle_sigint_null(int signo)
 	{
 		rl_replace_line("", 0);
 		rl_redisplay();
-		exit(131);
+		exit(130);
 	}
 }
 

@@ -46,10 +46,11 @@ void	open_heredoc_while(int fd[2], char *heredoc)
 {
 	char	*line;
 
+	signal(SIGINT, handle_sigint_noredisplay);
 	while (1)
 	{
-		ft_printf(">: %d\n", g_sig);
-		line = get_next_line(0);
+		signal(SIGINT, handle_sigint_null);
+		line = readline(">");
 		if (!line || (!ft_strncmp(line, heredoc, ft_strlen(heredoc))
 				&& !line[ft_strlen(heredoc)]))
 		{
