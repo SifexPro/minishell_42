@@ -24,6 +24,7 @@ static int	set_pipes_while(t_flags **flags, t_list *splitted, int i)
 		(*flags)->pipe[i]->index_max = 1;
 		(*flags)->pipe[i]->infile_index = -1;
 		(*flags)->pipe[i]->infile_max = -1;
+		(*flags)->pipe[i]->infile_stop = -1;
 		(*flags)->pipe[i]->infile_nb = 0;
 		(*flags)->pipe[i]->infile = NULL;
 		(*flags)->pipe[i]->outfile_index = -1;

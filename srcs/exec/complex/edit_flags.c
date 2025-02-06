@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+static void edit_flags4(t_flags **flags)
+{
+	if ((*flags)->pipe[(*flags)->pipe_index]->index == 0
+		&& (*flags)->pipe[(*flags)->pipe_index]->infile_max != -1
+		&& (*flags)->pipe[(*flags)->pipe_index]->infile_index == -1)
+		(*flags)->pipe[(*flags)->pipe_index]->infile_index = 0;
+	if ((*flags)->pipe[(*flags)->pipe_index]->infile_max != -1 
+		&& (*flags)->pipe[(*flags)->pipe_index]->infile_stop == -1
+		&& (*flags)->pipe[(*flags)->pipe_index]->infile_index >= (*flags)->pipe[(*flags)->pipe_index]->infile_max - 1)
+	{
+		(*flags)->pipe[(*flags)->pipe_index]->infile_stop = (*flags)->pipe[(*flags)->pipe_index]->index;
+	}
+}
+
 static void	edit_flags3(t_flags **flags)
 {
 	if ((*flags)->pipe[(*flags)->pipe_index]->infile_index + 1
@@ -46,6 +60,7 @@ static void	edit_flags2(t_flags **flags)
 	if ((*flags)->pipe[(*flags)->pipe_index]->infile_nb > 1
 		&& (*flags)->pipe[(*flags)->pipe_index]->outfile_nb > 1)
 		edit_flags3(flags);
+	edit_flags4(flags);
 }
 
 bool	edit_flags(t_flags **flags)

@@ -244,8 +244,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
 	}
-	free_flags(flags);
-	ft_lstclear(&splitted, &free_splitted_wc);
+	////free_flags(flags);
+	////ft_lstclear(&splitted, &free_splitted_wc);
 	return (res);
 }
  

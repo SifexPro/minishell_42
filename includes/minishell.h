@@ -71,6 +71,7 @@ typedef struct s_pipe
 	int		index_max;
 	int		infile_index;
 	int		infile_max;
+	int		infile_stop;
 	int		infile_nb;
 	t_file	**infile;
 	int		outfile_index;

@@ -58,19 +58,11 @@ static int	check_outfile(t_flags **flags, int pipe_i)
 		{
 			fd = open_outfile_fd((*flags)->pipe[pipe_i]->outfile[j]->file);
 			if (fd == -1)
-				return (0);
-			if (fstat(fd, &file_stat) == -1)
-			{
-				perror("fstat");
-				close(fd);
-				return (0);
-			}
-			close(fd);
-			if (!(file_stat.st_mode & S_IWOTH))
 			{
 				(*flags)->pipe[pipe_i]->outfile_max = j + 1;
 				break ;
 			}
+			close(fd);
 		}
 		j++;
 	}

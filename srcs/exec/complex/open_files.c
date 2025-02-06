@@ -33,10 +33,10 @@ int	open_outfile(int index, t_flags *flags)
 	if (flags->pipe[flags->pipe_index]
 		->outfile[flags->pipe[flags->pipe_index]->outfile_index]->is_append)
 		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_APPEND,
-				0667);//// 0667~ 
+				0644);
 	else
 		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_TRUNC,
-				0667);//// 0667~
+				0644);
 	if (flags->fd_out[index] < 0)
 		return (file_error(strerror(errno), file), 0);
 	return (1);

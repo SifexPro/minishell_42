@@ -50,22 +50,23 @@ gerer export avec _
 ### Damn
 -x gérer "wc -w < Makefile > test | wc -l" - "wc -l < Makefile | ls | wc -l > test | wc -l" - "ls > test | wc < Makefile -w -l"
 -x > test1 > test2 > test3 echo salut | echo cho >test4
-- < Makefile > t1 < bruh > t2
 
--x echo hello > test1 > test2 > test3
++ < Makefile > t1 < bruh > t2
+
++ echo hello > test1 > test2 > test3
 ouvrir tous les outfile et mettre dans le dernier
--x < Makefile > 000chmod < test3 > t2 echo tes
++ < Makefile > blocked < test3 > t2 echo tes
 == pas d'exec
 rien
--x < Makefile > t2 < test3 > t1 echo test
++ < Makefile > t2 < test3 > t1 echo test
 == pas d'exec
 creation t2
--x < file < bruh cat
++ < file < bruh cat
 == pas d'exec dans le pipe
 
--x cat | cat | cat | cat | ls(command qui n'attend pas de input)
++ cat | cat | cat | cat | ls(command qui n'attend pas de input)
 ouvre X*cat
--x print exit quand exit
++ print exit quand exit
 + exit avec non num arg
 == bash: exit: a: numeric argument required
 + exit avec > 1 arg
@@ -76,18 +77,19 @@ ouvre X*cat
 
 
 ### Check
-- cat Makefile | gzip > test.gz
-- ls | echo t
-- ls | exit 5 5
-- < Makefile < test cat |
-- << heredoc < file cat | ls
++ cat Makefile | gzip > test.gz
++ ls | echo t
++ ls | exit 5 5
 
-- < Makefile < TODO.md cat > test | < Makefile cat
+-/+ < Makefile < TODO.md cat > test | < Makefile cat
 - fix tous les mallocs
 
+- << test < file cat | ls
+- < Makefile < test cat |
 
-- < Mdzadqs < bruh ls > test > testt
-- < bruh ls > test > test
++ < Mdzadqs < bruh ls > test > testt
++ < bruh ls > test > test
++ < Makefile < asjd < Makefile < asjd < TODO.md ls > t1 > t2 > t3
 
-- < sqdds ls > test > test1
-- < sqdds < sqd ls > test > test1
++ < sqdds ls > test > test1
++ < sqdds < sqd ls > test > test1
