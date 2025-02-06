@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		g_pid;////?
+int		g_sig;////?
 bool	g_ctrl_c;
 
 int	exit_prog(t_list **splitted, t_ht *env, int status)
@@ -58,8 +58,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	g_pid = 0;
 	g_ctrl_c = false;
+	g_sig = -1;
 	setup_term_signals();
 	env = hashtable_create(100);
 	if (!env)

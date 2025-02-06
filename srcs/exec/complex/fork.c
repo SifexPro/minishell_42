@@ -45,7 +45,6 @@ int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 	{
 		if (edit_flags(&flags))
 			flags->pid[i] = fork();
-		g_pid = flags->pid[i];
 		if (flags->pid[i] < 0)
 			return (exit_fork(flags, &splitted, env), 1);
 		else if (flags->pid[i] == 0)

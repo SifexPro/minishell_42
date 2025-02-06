@@ -48,7 +48,8 @@ void	open_heredoc_while(int fd[2], char *heredoc)
 
 	while (1)
 	{
-		line = readline("> ");
+		ft_printf(">: %d\n", g_sig);
+		line = get_next_line(0);
 		if (!line || (!ft_strncmp(line, heredoc, ft_strlen(heredoc))
 				&& !line[ft_strlen(heredoc)]))
 		{
@@ -72,10 +73,6 @@ int	open_heredoc(int index, t_flags *flags)
 	heredoc = flags->pipe[flags->pipe_index]
 		->infile[flags->pipe[flags->pipe_index]->infile_index]->file;
 	len_heredoc = ft_strlen(heredoc);
-	if (signal(SIGQUIT, handle_signals_heredoc) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
-	if (signal(SIGINT, handle_signals_heredoc) == SIG_ERR)
-		printf("failed to register interrupts with kernel\n");
 	open_heredoc_while(fd, heredoc);
 	close(fd[1]);
 	flags->fd_in[index] = fd[0];
