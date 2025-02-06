@@ -106,7 +106,9 @@ void	append_to_argv(t_pars *pars, t_exec *elem)
 		elem->argv[i] = old_argv[i];
 		i++;
 	}
-	elem->argv[i] = ((t_splitted *)pars->elements->content)->content;
+	elem->argv[i] = ft_strdup(((t_splitted *)pars->elements->content)->content);
+	free(((t_splitted *)pars->elements->content)->content);
+	((t_splitted *)pars->elements->content)->content = NULL;
 	elem->argv[i + 1] = NULL;
 	elem->i++;
 	free(old_argv);

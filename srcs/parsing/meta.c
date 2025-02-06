@@ -73,6 +73,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		return (0);
 	content->content = NULL;
 	content->is_delimiter = true;
+	content->delimiter = -1;
 	if (strncmp((char *)(&str[sp->i]), "<<", 2) == 0)
 	{
 		content->delimiter = HEREDOC;

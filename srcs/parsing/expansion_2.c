@@ -36,6 +36,7 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env)
 	if (!content)
 		return (NULL);
 	content->is_delimiter = false;
+	content->delimiter = -1;
 	if (!is_simple_quote)
 	{
 		content->content = handle_expansion(str, env);

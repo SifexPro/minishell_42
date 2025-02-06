@@ -129,6 +129,7 @@ typedef struct s_parsing
 	t_exec		*tmp_exec;
 	t_splitted	*tmp;
 	t_list		**ret;
+	int			delimiter;
 }	t_pars;
 
 

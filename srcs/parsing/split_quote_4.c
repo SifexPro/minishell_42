@@ -48,16 +48,23 @@ int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env)
 		return (free(pars->tmp_exec), 1);
 	if (pars->tmp->content)
 	{
-		pars->tmp_exec->argv[0] = tmp->content;
+		pars->tmp_exec->argv[0] = ft_strdup(tmp->content);
+		free(tmp->content);
+		tmp->content = NULL;
+		pars->tmp_exec->argv[1] = NULL;
 		pars->last_neutral = pars->tmp_exec;
+
 	}
-	else if (tmp->delimiter > -1 && delimiter != PIPE)
+	else if (tmp->delimiter > -1 && tmp->delimiter != PIPE)
 	{
-		delimiter = tmp->delimiter;
+		pars->delimiter = tmp->delimiter;
 		pars->elements = pars->elements->next;
 		pars->tmp = pars->elements->next->content;
-		pars->tmp_exec->token_next = delimiter;
-		pars->tmp_exec->argv[0] = pars->tmp->content;
+		pars->tmp_exec->token_next = pars->delimiter;
+		pars->tmp_exec->argv[0] = ft_strdup(pars->tmp->content);
+		free(pars->tmp->content);
+		pars->tmp->content = NULL;
+		pars->tmp_exec->argv[1] = NULL;
 		pars->tmp = pars->elements->content;
 	}
 	return (0);
@@ -67,14 +74,14 @@ int	check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env)
 {
 	if ((delimiter == PIPE && !pars->has_started) || (!tmp->content && delimiter == tmp->delimiter && delimiter == PIPE))
 	{
+		ft_lstadd_back(pars->ret, ft_lstnew(pars->tmp_exec));
 		ft_putstr_fd("bash: syntax error near unexpected token `|`\n", 2);
 		ht_deletef(env, "?");
 		ht_insert(env, "?", ft_strdup("2"));
-		return (free(pars->tmp_exec->argv), free(pars->tmp_exec), 1);
+		return (1);
 	}
 	if ((!tmp->content && tmp->delimiter != -1 && delimiter != PIPE) || (!tmp->content && tmp->delimiter != -1 && !pars->elements->next))
 	{
-		/* ft_printf("check_pipe_error 2 %d\n", delimiter); */
 		if (tmp->delimiter == REDIRECT_INPUT)
 			ft_putstr_fd("bash: syntax error near unexpected token `<`\n", 2);
 		else if (tmp->delimiter == REDIRECT_OUTPUT)
