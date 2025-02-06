@@ -24,9 +24,9 @@ static int	run_program_exec(char *path, char **argv, char **envp)
 	if (!cmd_path)
 		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK))
-		return (free(cmd_path), exec_error("Permission denied", argv[0]), exit(126), 126);
+		return (exec_error("Permission denied", path), free(cmd_path), exit(126), 126);
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (free(cmd_path), exec_error("failed to exec command", argv[0]), exit(1), 1);
+		return (exec_error("failed to exec command", argv[0]), free(cmd_path), exit(1), 1);
 	return (exit(0), 0);
 }
 

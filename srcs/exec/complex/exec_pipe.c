@@ -26,11 +26,11 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 		return (clear_env(envp),
 			exec_error("Command not found", argv[0]), 127);
 	else if (access(cmd_path, X_OK))
-		return (clear_env(envp), free(cmd_path),
-			exec_error("Permission denied", argv[0]), 126);
+		return (clear_env(envp),
+			exec_error("Permission denied", argv[0]), free(cmd_path), 126);
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (clear_env(envp), free(cmd_path),
-			exec_error("Failed to exec command", argv[0]), 1);
+		return (clear_env(envp),
+			exec_error("Failed to exec command", argv[0]), free(cmd_path), 1);
 	return (0);
 }
 
