@@ -136,7 +136,7 @@ t_list	*ft_split_quote(char const *str, t_ht *env)
 	ret = NULL;
 	if (sq_replace_and_free(elements, &ret, env))
 	{
-		return (ft_lstclear(&elements, &free_splitted_c), ft_lstclear(&ret, &free_splitted2), NULL);
+		return (ft_lstclear(&elements, &free_splitted), ft_lstclear(&ret, &free_splitted_wc), NULL);
 	}
 	if (elements)
 		ft_lstclear(&elements, &free_splitted);

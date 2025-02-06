@@ -80,5 +80,6 @@ bool	create_argv(t_exec *tmp_exec, t_list *elements)
 	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 	if (!tmp_exec->argv)
 		return (false);
+	tmp_exec->argv[0] = NULL;
 	return (true);
 }
