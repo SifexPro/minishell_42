@@ -132,7 +132,7 @@ void	free_splitted_wc(void *v)
 	{
 		while (tmp_exec->argv[i])
 		{
-			ft_printf("free_splitted_wc %s\n", tmp_exec->argv[i]);
+			/* ft_printf("free_splitted_wc %s\n", tmp_exec->argv[i]); */
 			free(tmp_exec->argv[i]);
 			i++;
 		}
