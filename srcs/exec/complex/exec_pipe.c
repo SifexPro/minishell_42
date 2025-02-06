@@ -156,7 +156,8 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	close_pipe(flags);
 	envp_cpy = ht_to_envp(env);
 	if (infile_index >= flags->pipe[pipe_index]->infile_nb - 1)
-		if (outfile_index >= flags->pipe[pipe_index]->outfile_nb - 1)
+		if (outfile_index >= flags->pipe[pipe_index]->outfile_nb - 1
+			&& flags->pipe[pipe_index]->cmd)
 			exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc,
 					flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
 	clear_env(envp_cpy);

@@ -15,10 +15,21 @@
 void	free_flags_pipe(t_flags *flags, int pipe_i)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < pipe_i)
 	{
+		j = -1;
+		while (++j < flags->pipe[i]->infile_nb)
+		{
+			free(flags->pipe[i]->infile[j]);
+		}
+		j = -1;
+		while (++j < flags->pipe[i]->outfile_nb)
+		{
+			free(flags->pipe[i]->outfile[j]);
+		}
 		free(flags->pipe[i]->infile);
 		free(flags->pipe[i]->outfile);
 		free(flags->pipe[i]);
