@@ -24,6 +24,12 @@ static void edit_flags4(t_flags **flags)
 	{
 		(*flags)->pipe[(*flags)->pipe_index]->infile_stop = (*flags)->pipe[(*flags)->pipe_index]->index;
 	}
+	/*if ((*flags)->pipe[(*flags)->pipe_index]->infile_stop != -1
+		&& (*flags)->pipe[(*flags)->pipe_index]->index
+		>= (*flags)->pipe[(*flags)->pipe_index]->infile_stop)
+	{
+		(*flags)->pipe[(*flags)->pipe_index]->infile_index = (*flags)->pipe[(*flags)->pipe_index]->infile_max - 1;
+	}*/
 }
 
 static void	edit_flags3(t_flags **flags)

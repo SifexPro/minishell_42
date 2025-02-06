@@ -56,15 +56,17 @@ static int	select_exec_pipe(int argc, char **argv, t_ht *env, char **envp)
 
 static void	open_some(t_flags *flags, int pipe_i, int infile_i, int outfile_i)
 {
+	if (infile_i > flags->pipe[pipe_i]->infile_max)
+		return (close_pipe(flags), exit(1));
 	while (flags->pipe[pipe_i]->infile[infile_i - 1]->index
 			> flags->pipe[pipe_i]->outfile[outfile_i]->index
 			&& flags->pipe[pipe_i]->outfile_index
 			< flags->pipe[pipe_i]->outfile_nb)
 	{
+		flags->pipe[pipe_i]->outfile_index = outfile_i;
 		if (!open_outfile(0, flags))
 			break ;
 		outfile_i++;
-		////flags->pipe[pipe_index]->outfile_index++;
 	}
 	return (close_pipe(flags), exit(1));
 }
@@ -130,7 +132,7 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	int		outfile_index;
 	int		pipe_index;
 
-	//usleep(100000 * (i+1));////
+	usleep(100000 * (i+1));////
 	pipe_index = flags->pipe_index;
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;
