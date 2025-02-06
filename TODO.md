@@ -56,7 +56,7 @@ gerer export avec _
 
 + < Makefile > t1 < bruh > t2
 
-- cat >test <bruh >blocked
++ cat >test <bruh >blocked
 
 + echo hello > test1 > test2 > test3
 ouvrir tous les outfile et mettre dans le dernier

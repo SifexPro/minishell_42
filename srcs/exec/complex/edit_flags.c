@@ -12,17 +12,19 @@
 
 #include "minishell.h"
 
-static void edit_flags4(t_flags **flags)
+static void	edit_flags4(t_flags **flags)
 {
 	if ((*flags)->pipe[(*flags)->pipe_index]->index == 0
 		&& (*flags)->pipe[(*flags)->pipe_index]->infile_max != -1
 		&& (*flags)->pipe[(*flags)->pipe_index]->infile_index == -1)
 		(*flags)->pipe[(*flags)->pipe_index]->infile_index = 0;
-	if ((*flags)->pipe[(*flags)->pipe_index]->infile_max != -1 
+	if ((*flags)->pipe[(*flags)->pipe_index]->infile_max != -1
 		&& (*flags)->pipe[(*flags)->pipe_index]->infile_stop == -1
-		&& (*flags)->pipe[(*flags)->pipe_index]->infile_index >= (*flags)->pipe[(*flags)->pipe_index]->infile_max - 1)
+		&& (*flags)->pipe[(*flags)->pipe_index]->infile_index
+		>= (*flags)->pipe[(*flags)->pipe_index]->infile_max - 1)
 	{
-		(*flags)->pipe[(*flags)->pipe_index]->infile_stop = (*flags)->pipe[(*flags)->pipe_index]->index;
+		(*flags)->pipe[(*flags)->pipe_index]->infile_stop
+			= (*flags)->pipe[(*flags)->pipe_index]->index;
 	}
 	/*if ((*flags)->pipe[(*flags)->pipe_index]->infile_stop != -1
 		&& (*flags)->pipe[(*flags)->pipe_index]->index
