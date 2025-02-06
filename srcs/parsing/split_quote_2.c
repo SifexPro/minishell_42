@@ -71,13 +71,14 @@ void	end_replace(t_pars *pars)
 		free(pars->tmp_exec->argv);
 		free(pars->tmp_exec);
 	}
+	free(pars);
 }
 
 bool	create_argv(t_exec *tmp_exec, t_list *elements)
 {
+	tmp_exec->argc = count_until_del(elements);
 	tmp_exec->argv = malloc(sizeof(char *) * (tmp_exec->argc + 1));
 	if (!tmp_exec->argv)
 		return (false);
-	tmp_exec->argc = count_until_del(elements);
 	return (true);
 }

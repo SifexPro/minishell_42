@@ -71,7 +71,10 @@ int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		no_value = true;
 	}
 	if (!no_value)
+	{
+		ft_printf("no_value %s\n", s);
 		ft_lstadd_back(elem, create_str(ft_strjoin(sp->pretext, s), false, env));
+	}
 	if (sp->pretext)
 		free(sp->pretext);
 	sp->pretext = NULL;

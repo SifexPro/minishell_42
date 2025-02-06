@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+void	free_pars(t_pars *pars)
+{
+	/* if (pars->tmp_exec)
+	{
+		free(pars->tmp_exec->argv);
+		free(pars->tmp_exec);
+	} */
+	free(pars);
+}
+
+
 int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 {
 	int		status;
@@ -26,7 +37,7 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 		{
 			status = handle_delimiter(pars, env);
 			if (status == 1)
-				return (1);
+				return (free_pars(pars), 1);
 			else if (status == 2)
 				continue ;
 			else if (status == 3)

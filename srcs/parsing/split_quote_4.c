@@ -65,7 +65,7 @@ int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env)
 
 int	check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env)
 {
-	if ((delimiter == PIPE && !pars->has_started) || (delimiter == tmp->delimiter && delimiter == PIPE))
+	if ((delimiter == PIPE && !pars->has_started) || (!tmp->content && delimiter == tmp->delimiter && delimiter == PIPE))
 	{
 		ft_putstr_fd("bash: syntax error near unexpected token `|`\n", 2);
 		ht_deletef(env, "?");

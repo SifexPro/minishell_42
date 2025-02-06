@@ -241,6 +241,7 @@ void	free_splitted(void *splitted);
 void	free_splitted_wc(void *splitted);
 void	free_splitted_c(void *v);
 int		check_file(char *file);
+void	free_splitted2(void *v);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);

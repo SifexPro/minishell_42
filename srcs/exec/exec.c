@@ -104,6 +104,22 @@ void	free_splitted_c(void *v)
 		free(tmp_splitted);
 	}
 }
+
+void	free_splitted2(void *v)
+{
+	t_list	*splitted;
+	t_exec	*tmp_exec;
+	int		i;
+
+	tmp_exec = v;
+	i = 0;
+	if (tmp_exec && tmp_exec->argv)
+	{
+		free(tmp_exec->argv);
+		free(tmp_exec);
+	}
+}
+
 void	free_splitted_wc(void *v)
 {
 	t_list	*splitted;
@@ -116,6 +132,7 @@ void	free_splitted_wc(void *v)
 	{
 		while (tmp_exec->argv[i])
 		{
+			ft_printf("free_splitted_wc %s\n", tmp_exec->argv[i]);
 			free(tmp_exec->argv[i]);
 			i++;
 		}
