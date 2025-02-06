@@ -55,9 +55,9 @@ int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env)
 		pars->last_neutral = pars->tmp_exec;
 
 	}
-	else if (tmp->delimiter > -1 )
+	else if (tmp->delimiter > -1 && tmp->delimiter != PIPE)
 	{
-		delimiter = tmp->delimiter;
+		pars->delimiter = tmp->delimiter;
 		pars->elements = pars->elements->next;
 		pars->tmp = pars->elements->next->content;
 		pars->tmp_exec->token_next = delimiter;

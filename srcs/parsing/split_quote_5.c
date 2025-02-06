@@ -54,38 +54,33 @@ int	handle_no_next(t_pars *pars, int delimiter, t_ht *env)
 
 int	handle_delimiter(t_pars *pars, t_ht *env)
 {
-	int			delimiter;
 	int			status;
 
 	pars->tmp = pars->elements->content;
 	pars->can_error = false;
-	delimiter = pars->tmp->delimiter;
+	pars->delimiter = pars->tmp->delimiter;
 	if (pars->tmp_exec->i > pars->tmp_exec->argc)
-	{
 		pars->tmp_exec->argv[pars->tmp_exec->argc - 1] = NULL;
-	}
 	else
-	{
 		pars->tmp_exec->argv[pars->tmp_exec->i] = NULL;
-	}
 	if (!pars->elements->next)
 		pars->can_error = true;
 	else
-		if (process_next_elem(pars, delimiter, env))
+		if (process_next_elem(pars, pars->delimiter, env))
 			return (1);
-	if (check_pipe_error(pars, pars->tmp, delimiter, env))
+	if (check_pipe_error(pars, pars->tmp, pars->delimiter, env))
 		return (1);
-	if (norme_1(pars, delimiter))
+	if (norme_1(pars, pars->delimiter))
 		return (1);
 	if (pars->elements == NULL)
 	{
-		status = handle_no_next(pars, delimiter, env);
+		status = handle_no_next(pars, pars->delimiter, env);
 		if (status == 1)
 			return (1);
 		else if (status == 3)
 			return (3);
 	}
-	return (norme_2(pars, delimiter));
+	return (norme_2(pars, pars->delimiter));
 }
 
 t_pars	*create_pars(t_list **ret, t_list *elements)
@@ -123,7 +118,6 @@ int	to_argv(t_pars *pars)
 	((t_splitted *)pars->elements->content)->content = NULL;
 	pars->tmp_exec->argv[pars->tmp_exec->i + 1] = NULL;
 	pars->tmp_exec->i++;
-
 	pars->elements = pars->elements->next;
 	return (0);
 }

@@ -101,7 +101,7 @@ void	append_to_argv(t_pars *pars, t_exec *elem)
 		return ;
 	elem->argc = old_argc + 1;
 	i = 0;
-	while (old_argv && old_argv[i] && i <= elem->i)
+	while (old_argv && old_argv[i] && i < elem->i)
 	{
 		elem->argv[i] = old_argv[i];
 		i++;
