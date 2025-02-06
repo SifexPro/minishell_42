@@ -14,6 +14,7 @@ SRCS		=	srcs/main.c \
 				srcs/prefix.c \
 				srcs/utils.c \
 				srcs/signals.c \
+				srcs/split_free.c \
 				srcs/exec/exec.c \
 				srcs/exec/exec_utils.c \
 				srcs/exec/clear_env.c \

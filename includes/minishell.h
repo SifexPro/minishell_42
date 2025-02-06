@@ -236,11 +236,10 @@ void	clear_envp(char **env);
 /* utils */
 int		ft_strarr_len(char **input);
 
-/* exec/exec */
+/* split_free */
 void	free_splitted(void *splitted);
 void	free_splitted_wc(void *splitted);
 void	free_splitted_c(void *v);
-void	free_splitted2(void *v);
 
 /* exec/exec_utils */
 int		check_file(char *file);

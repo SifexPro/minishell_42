@@ -89,7 +89,7 @@ ouvre X*cat
 
 + cat >test <bruh
 + << test < file cat | ls
-- < Makefile < test cat |
++ < Makefile < test cat |
 
 + < Mdzadqs < bruh ls > test > testt
 + < bruh ls > test > test
