@@ -57,9 +57,9 @@ void	free_flags(t_flags *flags)
 	int	i;
 
 	free_flags_pipe(flags, flags->pipe_nb);
-	//free(flags->pipe);
-	//free(flags->pid);
-	//free(flags->fd_in);
-	//free(flags->fd_out);
-	//free(flags);
+	free(flags->pipe);
+	free(flags->pid);
+	free(flags->fd_in);
+	free(flags->fd_out);
+	free(flags);
 }
