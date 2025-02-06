@@ -15,12 +15,16 @@
 static int	run_program_exec(char *path, char **argv, char **envp)
 {
 	char	*cmd_path;
+	int		check;
 	
 	if (path == NULL)
 		return (exec_error("failed to exec command", NULL), exit(1), 1);
 	cmd_path = get_cmd_path(path, get_path(envp));
+	check = 0;
 	if ((!cmd_path && !ft_strncmp(path, "./", 2)) || (cmd_path && !ft_strncmp(cmd_path, "./", 2)))
-		return (exit(check_file(path)), 0);
+		check = check_file(path);
+	if (check)
+		return (free(cmd_path), exit(check), 0);
 	if (!cmd_path)
 		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK))
