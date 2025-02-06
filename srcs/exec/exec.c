@@ -24,9 +24,9 @@ static int	run_program_exec(char *path, char **argv, char **envp)
 	if (!cmd_path)
 		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK))
-		return (exec_error("Permission denied", argv[0]), exit(126), 126);////check
+		return (free(cmd_path), exec_error("Permission denied", argv[0]), exit(126), 126);
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (exec_error("failed to exec command", argv[0]), exit(1), 1);////check
+		return (free(cmd_path), exec_error("failed to exec command", argv[0]), exit(1), 1);
 	return (exit(0), 0);
 }
 
@@ -155,7 +155,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		clear_env(envp_cpy);
 	}
 	free_flags(flags);
-	////ft_lstclear(&splitted, &free_splitted_wc);
+	ft_lstclear(&splitted, &free_splitted_wc);
 	return (res);
 }
  

@@ -73,17 +73,17 @@ static int	set_files2_while(t_flags **flags, t_list **splitted,
 			|| ((t_exec *)(*splitted)->content)->token_next == HEREDOC)
 		{
 			if (!set_files_infile(flags, splitted, i_infile, i))
-				return (free_flags_files((*flags), i_infile, i_outfile), 0);
+				return (0);
 			i_infile++;
-			i++;////opti?
+			i++;
 		}
 		else if (((t_exec *)(*splitted)->content)->token_next == REDIRECT_OUTPUT
 			|| ((t_exec *)(*splitted)->content)->token_next == APPEND)
 		{
 			if (!set_files_outfile(flags, splitted, i_outfile, i))
-				return (free_flags_files((*flags), i_infile, i_outfile), 0);
+				return (0);
 			i_outfile++;
-			i++;////opti?
+			i++;
 		}
 		*splitted = (*splitted)->next;
 	}

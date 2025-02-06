@@ -18,7 +18,7 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 
 	if (path == NULL)
 		return (clear_env(envp),
-			exec_error("Failed to exec command", NULL), 1); ////
+			exec_error("Failed to exec command", NULL), 1);
 	cmd_path = get_cmd_path(path, get_path(envp));
 	if ((!cmd_path && !ft_strncmp(path, "./", 2)) || (cmd_path && !ft_strncmp(cmd_path, "./", 2)))
 		return (exit(check_file(path)), 0);
@@ -26,11 +26,11 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 		return (clear_env(envp),
 			exec_error("Command not found", argv[0]), 127);
 	else if (access(cmd_path, X_OK))
-		return (clear_env(envp),
-			free(cmd_path), exec_error("Permission denied", argv[0]), 126); ////free(cmd_path) ? - check
+		return (clear_env(envp), free(cmd_path),
+			exec_error("Permission denied", argv[0]), 126);
 	else if (execve(cmd_path, argv, envp) < 0)
-		return (clear_env(envp),
-			exec_error("Failed to exec command", argv[0]), 1); ////check
+		return (clear_env(envp), free(cmd_path),
+			exec_error("Failed to exec command", argv[0]), 1);
 	return (0);
 }
 
