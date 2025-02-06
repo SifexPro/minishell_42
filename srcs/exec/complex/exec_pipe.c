@@ -29,6 +29,9 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 	if (!cmd_path)
 		return (clear_env(envp),
 			exec_error("Command not found", argv[0]), 127);
+	else if (access(cmd_path, X_OK) && ft_strncmp(cmd_path, "./", 2))
+		return (exec_error("command not found", path), free(cmd_path),
+			exit(127), 127);
 	else if (access(cmd_path, X_OK))
 		return (clear_env(envp),
 			exec_error("Permission denied", argv[0]), free(cmd_path), 126);
