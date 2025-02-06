@@ -86,3 +86,4 @@ void	check_exec(t_flags **flags)
 		i++;
 	}
 }
+////gerer exit

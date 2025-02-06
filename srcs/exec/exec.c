@@ -12,6 +12,23 @@
 
 #include "minishell.h"
 
+int	check_file(char *file)
+{
+	struct stat	file_stat;
+	int			fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (exec_error("No such file or directory", file), 127);
+	if (fstat(fd, &file_stat) == -1)
+        return (perror("fstat"), close(fd), 0);
+	if (!S_ISREG(file_stat.st_mode))
+		return (exec_error("Is a directory", file), 126);
+	if (!(file_stat.st_mode & S_IWOTH))
+        return (exec_error("Permission denied", file), 1);
+	return (close(fd), 0);
+}
+
 int	run_program_exec(char *path, char **argv, char **envp)
 {
 	char	*cmd_path;
@@ -19,10 +36,12 @@ int	run_program_exec(char *path, char **argv, char **envp)
 	//if (path == NULL)////
 	//	return (exec_error("failed to exec command", NULL), exit(1), 1);////
 	cmd_path = get_cmd_path(path, get_path(envp));
+	if ((!cmd_path && !ft_strncmp(path, "./", 2)) || (cmd_path && !ft_strncmp(cmd_path, "./", 2)))
+		return (exit(check_file(path)), 0);
 	if (!cmd_path)
 		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK))
-		return (exec_error("permission denied", argv[0]), exit(126), 126);////check
+		return (exec_error("Permission denied", argv[0]), exit(126), 126);////check
 	else if (execve(cmd_path, argv, envp) < 0)
 		return (exec_error("failed to exec command", argv[0]), exit(1), 1);////check
 	return (exit(0), 0);
@@ -130,11 +149,11 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	res = 0;
 	splitted = ft_split_quote(input, env);
 	free(input);
-	if (!splitted)//// ???
+	if (!splitted)
 		return (-1);
 
 	////
-	/* t_list	*temp_list = splitted;
+	/*t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -144,7 +163,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list; */
+	splitted = temp_list;*/
 	////
 
 	flags = set_flags(splitted);
@@ -201,7 +220,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	{
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
-			return (clear_env(envp_cpy), exit_with_clear(&splitted, env, flags, last_status));
+			return (exit_with_clear(&splitted, env, flags, last_status));
 		envp_cpy = ht_to_envp(env);
 		if (!envp_cpy)
 			return (1);

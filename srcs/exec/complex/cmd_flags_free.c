@@ -18,17 +18,13 @@ void	free_flags_pipe(t_flags *flags, int pipe_i)
 	int	j;
 
 	i = -1;
-	ft_printf("pipe_i: %d\n", pipe_i);////
 	while (++i < pipe_i)
 	{
-		ft_printf("i: %d\n", i);////
-		ft_printf("pipe[%d]->infile_nb: %d\n", i, flags->pipe[i]->infile_nb);////
 		j = -1;
 		while (++j < flags->pipe[i]->infile_nb)
 			free(flags->pipe[i]->infile[j]);
 		free(flags->pipe[i]->infile);
 		j = -1;
-		ft_printf("pipe[%d]->outfile_nb: %d\n", i, flags->pipe[i]->outfile_nb);////
 		while (++j < flags->pipe[i]->outfile_nb)
 			free(flags->pipe[i]->outfile[j]);
 		free(flags->pipe[i]->outfile);

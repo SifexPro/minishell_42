@@ -240,6 +240,7 @@ int		select_exec(int argc, char **argv, t_ht *env, char **envp);
 void	free_splitted(void *splitted);
 void	free_splitted_wc(void *splitted);
 void	free_splitted_c(void *v);
+int		check_file(char *file);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);
