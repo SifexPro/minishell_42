@@ -237,17 +237,14 @@ void	clear_envp(char **env);
 int		ft_strarr_len(char **input);
 
 /* exec/exec */
-int		run_program_exec(char *path, char **argv, char **envp);
-int		select_exec(int argc, char **argv, t_ht *env, char **envp);
 void	free_splitted(void *splitted);
 void	free_splitted_wc(void *splitted);
 void	free_splitted_c(void *v);
-int		check_file(char *file);
 void	free_splitted2(void *v);
 
-/* futur */
-
-int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status);
+/* exec/exec_utils */
+int		check_file(char *file);
+int		exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);

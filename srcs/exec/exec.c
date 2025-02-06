@@ -12,24 +12,7 @@
 
 #include "minishell.h"
 
-int	check_file(char *file)
-{
-	struct stat	file_stat;
-	int			fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (exec_error("No such file or directory", file), 127);
-	if (fstat(fd, &file_stat) == -1)
-        return (perror("fstat"), close(fd), 0);
-	if (!S_ISREG(file_stat.st_mode))
-		return (exec_error("Is a directory", file), 126);
-	if (!(file_stat.st_mode & S_IWOTH))
-        return (exec_error("Permission denied", file), 1);
-	return (close(fd), 0);
-}
-
-int	run_program_exec(char *path, char **argv, char **envp)
+static int	run_program_exec(char *path, char **argv, char **envp)
 {
 	char	*cmd_path;
 	
@@ -47,14 +30,14 @@ int	run_program_exec(char *path, char **argv, char **envp)
 	return (exit(0), 0);
 }
 
-int	run_program(char *path, char **argv, char **envp)
+static int	run_program(char *path, char **argv, char **envp)
 {
 	pid_t	child;
 	int		status;
 
 	child = fork();
 	if (child < 0)
-		return (1);////real exit
+		return (1);
 	g_pid = child;
 	if (!child)
 		run_program_exec(path, argv, envp);
@@ -63,7 +46,7 @@ int	run_program(char *path, char **argv, char **envp)
 	return (WEXITSTATUS(status));
 }
 
-int	select_exec(int argc, char **argv, t_ht *env, char **envp)
+static int	select_exec(int argc, char **argv, t_ht *env, char **envp)
 {
 	if (!ft_strncmp(argv[0], "cd", 2))
 		return (ft_cd(argc, argv, env));
@@ -144,19 +127,6 @@ void	free_splitted_wc(void *v)
 		}
 		free(tmp_exec);
 	}
-}
-
-int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status)
-{
-	long	exit_status;
-
-	exit_status = ft_exit(((t_exec *)(*splitted)->content)->argc, ((t_exec *)(*splitted)->content)->argv, last_status);
-	if (((t_exec *)(*splitted)->content)->argc > 2 && exit_status == 1)
-		return (1);
-	if (flags)
-		free_flags(flags);
-	exit_prog(splitted, env, exit_status);
-	return (exit_status);
 }
 
 int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
@@ -249,7 +219,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
 	}
-	////free_flags(flags);
+	free_flags(flags);
 	////ft_lstclear(&splitted, &free_splitted_wc);
 	return (res);
 }

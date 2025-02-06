@@ -15,6 +15,7 @@ SRCS		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/signals.c \
 				srcs/exec/exec.c \
+				srcs/exec/exec_utils.c \
 				srcs/exec/clear_env.c \
 				srcs/parsing/expansion.c \
 				srcs/parsing/expansion_2.c \

@@ -84,7 +84,7 @@ ouvre X*cat
 + ls | echo t
 + ls | exit 5 5
 
--/+ < Makefile < TODO.md cat > test | < Makefile cat
++ < Makefile < TODO.md cat > test | < Makefile cat
 - fix tous les mallocs
 
 - << test < file cat | ls
