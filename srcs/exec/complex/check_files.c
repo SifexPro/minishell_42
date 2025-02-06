@@ -45,7 +45,7 @@ static int	open_outfile_fd(char *file)
 	return (fd);
 }
 
-static void	check_outfile(t_flags **flags, int pipe_i)
+static int	check_outfile(t_flags **flags, int pipe_i)
 {
 	int			j;
 	int			fd;
@@ -57,11 +57,13 @@ static void	check_outfile(t_flags **flags, int pipe_i)
 		if (access((*flags)->pipe[pipe_i]->outfile[j]->file, F_OK) == 0)
 		{
 			fd = open_outfile_fd((*flags)->pipe[pipe_i]->outfile[j]->file);
+			if (fd == -1)
+				return (0);
 			if (fstat(fd, &file_stat) == -1)
 			{
 				perror("fstat");
 				close(fd);
-				return ;
+				return (0);
 			}
 			close(fd);
 			if (!(file_stat.st_mode & S_IWOTH))
@@ -72,9 +74,10 @@ static void	check_outfile(t_flags **flags, int pipe_i)
 		}
 		j++;
 	}
+	return (1);
 }
 
-void	check_exec(t_flags **flags)
+int	check_exec(t_flags **flags)
 {
 	int		i;
 
@@ -82,8 +85,9 @@ void	check_exec(t_flags **flags)
 	while (i < (*flags)->pipe_nb)
 	{
 		check_infile(flags, i);
-		check_outfile(flags, i);
+		if (!check_outfile(flags, i))
+			return (0);
 		i++;
 	}
+	return (1);
 }
-////gerer exit

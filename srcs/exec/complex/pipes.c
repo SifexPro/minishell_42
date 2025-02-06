@@ -12,22 +12,23 @@
 
 #include "minishell.h"
 
-void	open_pipe(t_flags *flags)
+int	open_pipe(t_flags *flags)
 {
 	int	i;
 	int	pipe_fd[2];
 
 	i = 0;
 	if (!flags)
-		return ;
+		return (0);
 	while (i < flags->total_redir)
 	{
 		if (pipe(pipe_fd) < 0)
-			exit(1);////real exit
+			return (0);
 		flags->fd_in[i + 1] = pipe_fd[0];
 		flags->fd_out[i] = pipe_fd[1];
 		i++;
 	}
+	return (1);
 }
 
 void	close_pipe(t_flags *flags)

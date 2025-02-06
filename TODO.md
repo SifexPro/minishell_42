@@ -84,3 +84,10 @@ ouvre X*cat
 
 - < Makefile < TODO.md cat > test | < Makefile cat
 - fix tous les mallocs
+
+
+- < Mdzadqs < bruh ls > test > testt
+- < bruh ls > test > test
+
+- < sqdds ls > test > test1
+- < sqdds < sqd ls > test > test1

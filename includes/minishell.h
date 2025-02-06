@@ -243,6 +243,10 @@ void	free_splitted_c(void *v);
 int		check_file(char *file);
 void	free_splitted2(void *v);
 
+/* futur */
+
+int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status);
+
 /* exec/cmd_path */
 char	*get_path(char **envp);
 char	*get_cmd_path(char *cmd, char *path);
@@ -263,20 +267,20 @@ void	free_flags_files(t_flags *flags, int i_infile, int i_outfile);
 void	free_flags(t_flags *flags);
 
 /* exec/complex/pipe */
-void	open_pipe(t_flags *flags);
+int		open_pipe(t_flags *flags);
 void	close_pipe(t_flags *flags);
 
 /* exec/complex/exec_pipe */
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp);
 
 /* exec/complex/fork */
-int		forking(t_flags *flags, t_ht *env, char **envp);
+int		forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp);
 
 /* exec/complex/edit_flags */
 bool	edit_flags(t_flags **flags);
 
 /* exec/complex/check_files */
-void	check_exec(t_flags **flags);
+int	check_exec(t_flags **flags);
 
 /* exec/complex/open_files */
 int		open_infile(int index, t_flags *flags);

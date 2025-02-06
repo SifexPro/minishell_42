@@ -26,20 +26,28 @@ static int	wait_child(int total_redir, pid_t *pid)
 	return (WEXITSTATUS(status));
 }
 
-int	forking(t_flags *flags, t_ht *env, char **envp)
+static void	exit_fork(t_flags *flags, t_list **splitted, t_ht *env)
+{
+	free_flags(flags);
+	exit_prog(splitted, env, 1);
+}
+
+int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 {
 	int	i;
 
 	i = 0;
-	open_pipe(flags);
-	check_exec(&flags);
+	if (!open_pipe(flags))
+		return (exit_fork(flags, &splitted, env), 1);
+	if (!check_exec(&flags))
+		return (exit_fork(flags, &splitted, env), 1);
 	while (i < flags->total_redir)
 	{
 		if (edit_flags(&flags))
 			flags->pid[i] = fork();
 		g_pid = flags->pid[i];
 		if (flags->pid[i] < 0)
-			return (ft_printf("fork failed\n"), exit(1), 1);////exit if fork is not successful REAL EXIT
+			return (exit_fork(flags, &splitted, env), 1);
 		else if (flags->pid[i] == 0)
 			child_exec(flags, i, env, envp);
 		i++;

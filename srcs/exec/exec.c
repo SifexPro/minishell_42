@@ -232,7 +232,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	*/
 
 	if (flags->multi_exec)
-		res = forking(flags, env, envp);
+		res = forking(flags, splitted, env, envp);
 	else
 	{
 		temp = splitted->content;

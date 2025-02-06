@@ -71,11 +71,11 @@ static void	check_files(t_flags *flags, int infile_i, int outfile_i)
 				break ;
 			flags->pipe[pipe_index]->outfile_index++;
 		}
-		return (close_pipe(flags), exit(1));////real exit
+		return (close_pipe(flags), exit(1));
 	}
 	else if (flags->pipe[pipe_index]->outfile_max != -1
 		&& outfile_i >= flags->pipe[pipe_index]->outfile_max)
-		return (close_pipe(flags), exit(1));////real exit
+		return (close_pipe(flags), exit(1));
 }
 
 static void	handle_files(t_flags *flags, int infile_i, int outfile_i, int i)
@@ -89,19 +89,19 @@ static void	handle_files(t_flags *flags, int infile_i, int outfile_i, int i)
 		if (!flags->pipe[pipe_index]->infile[infile_i]->is_heredoc)
 		{
 			if (!open_infile(i, flags))
-				return (close_pipe(flags), exit(1));////real exit
+				return (close_pipe(flags), exit(1));
 		}
 		else
 		{
 			if (!open_heredoc(i, flags))
-				return (close_pipe(flags), exit(1));////real exit
+				return (close_pipe(flags), exit(1));
 		}
 		dup2(flags->fd_in[i], 0);
 	}
 	if (outfile_i != -1 && outfile_i < flags->pipe[pipe_index]->outfile_nb)
 	{
 		if (!open_outfile(i, flags))
-			return (close_pipe(flags), exit(1));////real exit
+			return (close_pipe(flags), exit(1));
 		dup2(flags->fd_out[i], 1);
 	}
 }
@@ -118,11 +118,12 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;
 	
-	/*printf("> outfile_max\n");////
-	printf("+ flags->pipe[pipe_index]->index = %d\n", flags->pipe[pipe_index]->index);////
+	/*printf("+ flags->pipe[pipe_index]->index = %d\n", flags->pipe[pipe_index]->index);////
 	printf("+ flags->pipe[pipe_index]->index_max = %d\n", flags->pipe[pipe_index]->index_max);////
 	printf("- infile_index: %d\n", infile_index);////
-	printf("- outfile_index: %d\n", outfile_index);////*/
+	printf("- outfile_index: %d\n", outfile_index);////
+	printf("> infile_max: %d\n", flags->pipe[pipe_index]->infile_max);////
+	printf("> outfile_max: %d\n", flags->pipe[pipe_index]->outfile_max);////*/
 	/*printf("- flags->pipe[pipe_index]->infile[infile_index]->file->index: %d\n", flags->pipe[pipe_index]->infile[infile_index]->index);////
 	printf("- flags->pipe[pipe_index]->outfile[outfile_index]->file->index: %d\n", flags->pipe[pipe_index]->outfile[outfile_index]->index);////
 	printf("- flags->pipe[pipe_index]->infile_max: %d\n", flags->pipe[pipe_index]->infile_max);////
