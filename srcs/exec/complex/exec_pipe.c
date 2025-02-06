@@ -136,7 +136,7 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	int		outfile_index;
 	int		pipe_index;
 
-	usleep(100000 * (i+1));////
+	//usleep(100000 * (i+1));////
 	pipe_index = flags->pipe_index;
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;

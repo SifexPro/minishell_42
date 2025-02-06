@@ -38,10 +38,7 @@ static int	open_outfile_fd(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("open");
 		return (-1);
-	}
 	return (fd);
 }
 
