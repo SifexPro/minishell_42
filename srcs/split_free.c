@@ -52,7 +52,6 @@ void	free_splitted_wc(void *v)
 		{
 			while (tmp_exec->argv[i])
 			{
-			i++;
 				free(tmp_exec->argv[i]);
 				i++;
 			}
