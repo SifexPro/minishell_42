@@ -130,18 +130,18 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	int		outfile_index;
 	int		pipe_index;
 
-	usleep(100000 * (i+1));////
+	//usleep(100000 * (i+1));////
 	pipe_index = flags->pipe_index;
 	infile_index = flags->pipe[pipe_index]->infile_index;
 	outfile_index = flags->pipe[pipe_index]->outfile_index;
 
-	printf("+ pipe_index = %d\n", pipe_index);////
+	/*printf("+ pipe_index = %d\n", pipe_index);////
 	printf("+ flags->pipe[pipe_index]->index = %d\n", flags->pipe[pipe_index]->index);////
 	printf("+ flags->pipe[pipe_index]->index_max = %d\n", flags->pipe[pipe_index]->index_max);////
 	printf("- infile_index: %d\n", infile_index);////
 	printf("- outfile_index: %d\n", outfile_index);////
 	printf("> infile_max: %d\n", flags->pipe[pipe_index]->infile_max);////
-	printf("> outfile_max: %d\n", flags->pipe[pipe_index]->outfile_max);////
+	printf("> outfile_max: %d\n", flags->pipe[pipe_index]->outfile_max);////*/
 	/*printf("- flags->pipe[pipe_index]->infile[infile_index]->file->index: %d\n", flags->pipe[pipe_index]->infile[infile_index]->index);////
 	printf("- flags->pipe[pipe_index]->outfile[outfile_index]->file->index: %d\n", flags->pipe[pipe_index]->outfile[outfile_index]->index);////
 	printf("- flags->pipe[pipe_index]->infile_max: %d\n", flags->pipe[pipe_index]->infile_max);////
