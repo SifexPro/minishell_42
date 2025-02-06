@@ -38,15 +38,15 @@ static t_flags	*set_flags3(t_flags *flags)
 	{
 		flags->pid = ft_calloc(flags->total_redir + 1, sizeof(pid_t));
 		if (!flags->pid)
-			return (NULL);//// put the real exit
+			return (free_flags_pipe(flags, flags->pipe_nb), NULL);
 		flags->fd_in = ft_calloc((flags->total_redir + 2), sizeof(int));
 		if (!flags->fd_in)
-			return (NULL);//// put the real exit
+			return (free_flags_pipe(flags, flags->pipe_nb), free(flags->pid), NULL);
 		flags->fd_in = ft_memset(flags->fd_in, -1,
 				(sizeof(int) * flags->total_redir + 1));
 		flags->fd_out = ft_calloc((flags->total_redir + 2), sizeof(int));
 		if (!flags->fd_out)
-			return (NULL);//// put the real exit
+			return (free_flags_pipe(flags, flags->pipe_nb), free(flags->pid), free(flags->fd_in), NULL);
 		flags->fd_out = ft_memset(flags->fd_out, -1,
 				(sizeof(int) * flags->total_redir + 1));
 	}
@@ -96,21 +96,11 @@ t_flags	*set_flags(t_list *splitted)
 		splitted = splitted->next;
 	}
 	if (!set_pipes(&flags, start))
-		return (NULL);//// put the real exit
+		return (free(flags), NULL);
 	flags = set_flags2(flags);
 	if (!flags->total_redir)
 		return (flags);
 	return (set_flags3(flags));
 }
-
-void	free_flags(t_flags *flags)
-{
-	/*free(flags->cmd);
-	free(flags->fd_in);
-	free(flags->fd_out);
-	free(flags->pid);
-	free(flags);*/
-}
-
 ////Proteger les mallocs
 ////si malloc fail, free tout ce qui a été malloc avant

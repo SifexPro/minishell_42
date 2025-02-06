@@ -18,8 +18,8 @@ static int	set_pipes_while(t_flags **flags, t_list *splitted, int i)
 	{
 		(*flags)->pipe_index = i;
 		(*flags)->pipe[i] = (t_pipe *)malloc(sizeof(t_pipe));
-		if (!(*flags)->pipe[i])////belek
-			return (-1);
+		if (!(*flags)->pipe[i])
+			return (free_flags_pipe((*flags), i), -1);
 		(*flags)->pipe[i]->index = -1;
 		(*flags)->pipe[i]->index_max = 1;
 		(*flags)->pipe[i]->infile_index = -1;
@@ -31,7 +31,8 @@ static int	set_pipes_while(t_flags **flags, t_list *splitted, int i)
 		(*flags)->pipe[i]->outfile_nb = 0;
 		(*flags)->pipe[i]->outfile = NULL;
 		(*flags)->pipe[i]->cmd = NULL;
-		set_files(0, 0, flags, &splitted);
+		if (!set_files(0, 0, flags, &splitted))
+			return (free_flags_pipe((*flags), i), -1);
 		if ((*flags)->pipe[i]->infile_nb > 0)
 			(*flags)->pipe[i]->index_max += (*flags)->pipe[i]->infile_nb - 1;
 		if ((*flags)->pipe[i]->outfile_nb > 0)

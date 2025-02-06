@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-static void	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile,
+static int	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile,
 	int index)
 {
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]
 		= (t_file *)malloc(sizeof(t_file));
-	if (!(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile])////belek
-		return ;
+	if (!(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile])
+		return (0);
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->file
 		= ((t_exec *)(*splitted)->content)->argv[0];
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->is_infile
@@ -31,15 +31,16 @@ static void	set_files_outfile(t_flags **flags, t_list **splitted, int i_outfile,
 		= ((t_exec *)(*splitted)->content)->token_next == APPEND;
 	(*flags)->pipe[(*flags)->pipe_index]->outfile[i_outfile]->index
 		= index;
+	return (1);
 }
 
-static void	set_files_infile(t_flags **flags, t_list **splitted, int i_infile,
+static int	set_files_infile(t_flags **flags, t_list **splitted, int i_infile,
 	int index)
 {
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]
 		= (t_file *)malloc(sizeof(t_file));
-	if (!(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile])////belek
-		return ;
+	if (!(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile])
+		return (0);
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->file
 		= ((t_exec *)(*splitted)->content)->argv[0];
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->is_infile
@@ -52,9 +53,10 @@ static void	set_files_infile(t_flags **flags, t_list **splitted, int i_infile,
 		= false;
 	(*flags)->pipe[(*flags)->pipe_index]->infile[i_infile]->index
 		= index;
+	return (1);
 }
 
-static void	set_files2_while(t_flags **flags, t_list **splitted,
+static int	set_files2_while(t_flags **flags, t_list **splitted,
 	int i_infile, int i_outfile)
 {
 	int		i;
@@ -70,38 +72,41 @@ static void	set_files2_while(t_flags **flags, t_list **splitted,
 		else if (((t_exec *)(*splitted)->content)->token_next == REDIRECT_INPUT
 			|| ((t_exec *)(*splitted)->content)->token_next == HEREDOC)
 		{
-			set_files_infile(flags, splitted, i_infile, i);
+			if (!set_files_infile(flags, splitted, i_infile, i))
+				return (free_flags_files((*flags), i_infile, i_outfile), 0);
 			i_infile++;
-			i++;
+			i++;////opti?
 		}
 		else if (((t_exec *)(*splitted)->content)->token_next == REDIRECT_OUTPUT
 			|| ((t_exec *)(*splitted)->content)->token_next == APPEND)
 		{
-			set_files_outfile(flags, splitted, i_outfile, i);
+			if (!set_files_outfile(flags, splitted, i_outfile, i))
+				return (free_flags_files((*flags), i_infile, i_outfile), 0);
 			i_outfile++;
-			i++;
+			i++;////opti?
 		}
 		*splitted = (*splitted)->next;
 	}
+	return (1);
 }
 
-static void	set_files2(int infile_count, int outfile_count,
+static int	set_files2(int infile_count, int outfile_count,
 	t_flags **flags, t_list **splitted)
 {
 	(*flags)->pipe[(*flags)->pipe_index]->infile_nb = infile_count;
 	(*flags)->pipe[(*flags)->pipe_index]->outfile_nb = outfile_count;
 	(*flags)->pipe[(*flags)->pipe_index]->infile
 		= (t_file **)malloc(sizeof(t_file *) * infile_count + 1);
-	if (!(*flags)->pipe[(*flags)->pipe_index]->infile)////belek
-		return ;
+	if (!(*flags)->pipe[(*flags)->pipe_index]->infile)
+		return (0);
 	(*flags)->pipe[(*flags)->pipe_index]->outfile
 		= (t_file **)malloc(sizeof(t_file *) * outfile_count + 1);
-	if (!(*flags)->pipe[(*flags)->pipe_index]->outfile)////belek
-		return ;
-	set_files2_while(flags, splitted, 0, 0);
+	if (!(*flags)->pipe[(*flags)->pipe_index]->outfile)
+		return (free((*flags)->pipe[(*flags)->pipe_index]->infile), 0);
+	return (set_files2_while(flags, splitted, 0, 0));
 }
 
-void	set_files(int infile_count, int outfile_count,
+int	set_files(int infile_count, int outfile_count,
 	t_flags **flags, t_list **splitted)
 {
 	int		i_infile;
@@ -128,5 +133,5 @@ void	set_files(int infile_count, int outfile_count,
 		*splitted = (*splitted)->next;
 	}
 	*splitted = start;
-	set_files2(infile_count, outfile_count, flags, splitted);
+	return (set_files2(infile_count, outfile_count, flags, splitted));
 }

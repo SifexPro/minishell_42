@@ -114,7 +114,6 @@ int	exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last
 		return (1);
 	if (flags)
 		free_flags(flags);
-	ft_lstclear(splitted, &free_splitted_wc);
 	exit_prog(splitted, env, exit_status);
 	return (exit_status);
 }
@@ -130,9 +129,9 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 
 	res = 0;
 	splitted = ft_split_quote(input, env);
-	if (!splitted)//// ???
-		return (free(input), -1);
 	free(input);
+	if (!splitted)//// ???
+		return (-1);
 
 	////
 	/* t_list	*temp_list = splitted;
@@ -202,15 +201,15 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	{
 		temp = splitted->content;
 		if (ft_strcmp(temp->argv[0], "exit") == 0)
-			return (exit_with_clear(&splitted, env, flags, last_status));
+			return (clear_env(envp_cpy), exit_with_clear(&splitted, env, flags, last_status));
 		envp_cpy = ht_to_envp(env);
 		if (!envp_cpy)
 			return (1);
 		res = select_exec(temp->argc, temp->argv, env, envp_cpy);
 		clear_env(envp_cpy);
 	}
+	free_flags(flags);
 	ft_lstclear(&splitted, &free_splitted_wc);
-	//free_flags(flags);
 	return (res);
 }
  

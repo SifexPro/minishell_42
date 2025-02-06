@@ -88,12 +88,11 @@ typedef struct s_flags
 	int		*fd_in;
 	int		*fd_out;
 	int		pipe_index;
-	int		pipe_nb;//// ?
+	int		pipe_nb;
 	bool	pipe_index_changed;
 	t_pipe	**pipe;
 	t_list	*splitted;//// remove ?
 }			t_flags;
-// flag for if has file in start & end
 
 typedef struct s_str_input
 {
@@ -248,14 +247,18 @@ char	*get_cmd_path(char *cmd, char *path);
 
 /* exec/complex/cmd_flags */
 t_flags	*set_flags(t_list *splitted);
-void	free_flags(t_flags *flags);
 
 /* exec/complex/cmd_flags_set_files */
-void	set_files(int infile_count, int outfile_count, t_flags **flags,
+int		set_files(int infile_count, int outfile_count, t_flags **flags,
 	t_list **splitted);
 
 /* exec/complex/cmd_flags_set_pipes */
 int		set_pipes(t_flags **flags, t_list *splitted);
+
+/* exec/complex/cmd_flags_free */
+void	free_flags_pipe(t_flags *flags, int pipe_i);
+void	free_flags_files(t_flags *flags, int i_infile, int i_outfile);
+void	free_flags(t_flags *flags);
 
 /* exec/complex/pipe */
 void	open_pipe(t_flags *flags);

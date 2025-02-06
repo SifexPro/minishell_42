@@ -40,6 +40,7 @@ SRCS		=	srcs/main.c \
 				srcs/exec/complex/cmd_flags.c \
 				srcs/exec/complex/cmd_flags_set_files.c \
 				srcs/exec/complex/cmd_flags_set_pipes.c \
+				srcs/exec/complex/cmd_flags_free.c \
 				srcs/exec/complex/pipes.c \
 				srcs/exec/complex/exec_pipe.c \
 				srcs/exec/complex/fork.c \
