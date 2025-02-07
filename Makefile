@@ -14,6 +14,7 @@ SRCS		=	srcs/main.c \
 				srcs/prefix.c \
 				srcs/utils.c \
 				srcs/signals.c \
+				srcs/signals_2.c \
 				srcs/split_free.c \
 				srcs/exec/exec.c \
 				srcs/exec/exec_utils.c \

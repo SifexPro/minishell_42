@@ -57,6 +57,28 @@ bool	handle_meta_2(
 	return (false);
 }
 
+bool	handle_meta_3(
+	char const *str,
+	t_split_sh *sp,
+	t_list **elem,
+	t_splitted *content
+)
+{
+	if (strncmp((char *)(&str[sp->i]), "<<", 2) == 0)
+	{
+		content->delimiter = HEREDOC;
+		sp->str_start = sp->i + 2;
+		return (false);
+	}
+	else if (strncmp((char *)(&str[sp->i]), ">>", 2) == 0)
+	{
+		content->delimiter = APPEND;
+		sp->str_start = sp->i + 2;
+		return (true);
+	}
+	return (handle_meta_2(str, sp, elem, content));
+}
+
 int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	t_splitted	*content;
@@ -74,17 +96,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	content->content = NULL;
 	content->is_delimiter = true;
 	content->delimiter = -1;
-	if (strncmp((char *)(&str[sp->i]), "<<", 2) == 0)
-	{
-		content->delimiter = HEREDOC;
-		sp->str_start = sp->i + 2;
-	}
-	else if (strncmp((char *)(&str[sp->i]), ">>", 2) == 0)
-	{
-		content->delimiter = APPEND;
-		sp->str_start = sp->i + 2;
-	}
-	else if (handle_meta_2(str, sp, elem, content))
+	if (handle_meta_3(str, sp, elem, content))
 		return (0);
 	ft_lstadd_back(elem, ft_lstnew(content));
 	while (ft_str_is_whitespace(str[sp->str_start]))

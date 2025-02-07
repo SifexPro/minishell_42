@@ -56,9 +56,6 @@ int	handle_delimiter(t_pars *pars, t_ht *env)
 {
 	int			status;
 
-	pars->tmp = pars->elements->content;
-	pars->can_error = false;
-	pars->delimiter = pars->tmp->delimiter;
 	if (pars->tmp_exec->i > pars->tmp_exec->argc)
 		pars->tmp_exec->argv[pars->tmp_exec->argc - 1] = NULL;
 	else
@@ -99,7 +96,6 @@ t_pars	*create_pars(t_list **ret, t_list *elements)
 	if (!pars->tmp_exec || !create_argv(pars->tmp_exec, elements))
 		return (free(pars), NULL);
 	return (pars);
-
 }
 
 int	to_argv(t_pars *pars)
@@ -113,7 +109,7 @@ int	to_argv(t_pars *pars)
 		pars->last_neutral = pars->tmp_exec;
 	pars->has_started = true;
 	pars->tmp_exec->argv[pars->tmp_exec->i] = ft_strdup(((t_splitted *)
-			pars->elements->content)->content);
+				pars->elements->content)->content);
 	free(((t_splitted *)pars->elements->content)->content);
 	((t_splitted *)pars->elements->content)->content = NULL;
 	pars->tmp_exec->argv[pars->tmp_exec->i + 1] = NULL;

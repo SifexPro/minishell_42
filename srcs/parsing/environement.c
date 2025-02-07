@@ -51,7 +51,6 @@ int	process_env(t_entry	*entry, int j, char **new_envp)
 		return (0);
 	do_entry(new_envp[j], entry->key, e);
 	return (1);
-
 }
 
 char	**ht_to_envp(t_ht *env)

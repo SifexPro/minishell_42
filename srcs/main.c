@@ -60,13 +60,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	g_ctrl_c = false;
 	g_sig = -1;
-	setup_term_signals();
 	env = hashtable_create(100);
 	if (!env)
 		return (printf("failed to malloc!"), 1);
 	register_env_var(env, envp);
 	prefix = get_prefix(0);
-	setup_cmd_signals();
+	setup_term_signals();
 	buffer = readline(prefix);
 	free(prefix);
 	process_input(buffer, prefix, env, envp);
