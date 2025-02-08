@@ -132,8 +132,6 @@ typedef struct s_parsing
 	int			delimiter;
 }	t_pars;
 
-
-
 /* main */
 int		parse_cmd(char *input, t_ht *env, char **envp, int last_status);
 int		exit_prog(t_list **splitted, t_ht *env, int status);
@@ -182,6 +180,8 @@ long	ft_exit(int argc, char **argv, long long last_status);
 
 /* split_quote */
 t_list	*ft_split_quote(char const *str, t_ht *env);
+void	handle_sigint(int signo);
+void	sigquit_handler(int signo);
 
 /* split_quote_2 */
 int		sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env);

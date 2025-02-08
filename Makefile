@@ -39,6 +39,7 @@ SRCS		=	srcs/main.c \
 				srcs/command/ft_export_2.c \
 				srcs/command/ft_exit.c \
 				srcs/cmd_path.c \
+				srcs/exec/complex/exec_pipe_utils.c \
 				srcs/exec/complex/exec_utils.c \
 				srcs/exec/complex/cmd_flags.c \
 				srcs/exec/complex/cmd_flags_set_files.c \
