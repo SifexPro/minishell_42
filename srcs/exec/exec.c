@@ -47,6 +47,8 @@ static int	run_program(char *path, char **argv, char **envp)
 	if (!child)
 		run_program_exec(path, argv, envp);
 	waitpid(child, &status, 0);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		return (130);
 	return (WEXITSTATUS(status));
 }
 

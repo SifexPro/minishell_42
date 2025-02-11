@@ -99,3 +99,6 @@ ouvre X*cat
 
 + < sqdds ls > test > test1
 + < sqdds < sqd ls > test > test1
+
+- gerer mini | mini
+- > test > blocked < bloqsd> test > blocked < bloqsd

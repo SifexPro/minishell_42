@@ -23,6 +23,8 @@ static int	wait_child(int total_redir, pid_t *pid)
 		waitpid(pid[i], &status, 0);
 		i++;
 	}
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		return (130);
 	return (WEXITSTATUS(status));
 }
 
