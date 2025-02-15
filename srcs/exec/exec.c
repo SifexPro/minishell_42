@@ -17,12 +17,9 @@ static int	run_program_exec(char *path, char **argv, char **envp)
 	char	*cmd_path;
 	int		check;
 	
-	if (path == NULL)
-		return (exec_error("failed to exec command", NULL), exit(1), 1);
+	if (!ft_strcmp(path, ""))
+		return (exec_error("command not found", NULL), exit(127), 127);
 	cmd_path = get_cmd_path(path, get_path(envp));
-	printf("cmd_path: %s\n", cmd_path);////
-	printf("path: %s\n", path);////
-	printf("argv[0]: %s\n", argv[1]);////
 	check = check_file(cmd_path, path);
 	if (check)
 		return (free(cmd_path), exit(check), 0);
@@ -87,7 +84,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		return (-1);
 
 	////
-	t_list	*temp_list = splitted;
+	/*t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -97,23 +94,20 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;
+	splitted = temp_list;*/
 	////
 
 	flags = set_flags(splitted);
 	if (!flags)
 		return (exit_with_clear(&splitted, env, NULL, -1));
-
-	printf("\n[FLAGS]\n\npipe_nb: %d\n", flags->pipe_nb);////
+	
+	/*printf("\n[FLAGS]\n\npipe_nb: %d\n", flags->pipe_nb);////
 	printf("multi_exec: %d\n", flags->multi_exec);////
-	/*
-	printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
 	printf("pipe_index: %d\n", flags->pipe_index);////
 	printf("pipe_nb: %d\n", flags->pipe_nb);////
-	for (int i = 0; i < flags->pipe_nb && flags->total_redir > 0; i++)
+	for (int i = 0; i < flags->pipe_nb && flags->pipe_nb > 0; i++)
 	{
 		printf("\n[INFILE]\n");////
-		printf("pipe[%d]->infile_index: %d\n", i, flags->pipe[i]->infile_index);////
 		printf("pipe[%d]->infile_nb: %d\n", i, flags->pipe[i]->infile_nb);////
 		printf("[IN] infile\n");////
 		for (int f = 0; f < flags->pipe[i]->infile_nb; f++)
@@ -127,7 +121,6 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("[OUT] infile\n");////
 
 		printf("\n[OUTFILE]\n");///
-		printf("pipe[%d]->outfile_index: %d\n", i, flags->pipe[i]->outfile_index);////
 		printf("pipe[%d]->outfile_nb: %d\n", i, flags->pipe[i]->outfile_nb);////
 		printf("[IN] outfile\n");////
 		for (int f = 0; f < flags->pipe[i]->outfile_nb; f++)
@@ -147,8 +140,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 			for (int j = 0; j < flags->pipe[i]->cmd->argc; j++)
 				printf("pipe[%d]->cmd->argv[%d]: %s\n", i, j, flags->pipe[i]->cmd->argv[j]);////
 		}
-	}
-	*/
+	}*/
 
 	if (flags->multi_exec)
 		res = forking(flags, splitted, env, envp);

@@ -19,7 +19,7 @@ static int	check_dot(char *file)
 	i = 0;
 	while (file[i] == '.')
 		i++;
-	if (file[i] == '/')
+	if (file[i] == '/' && i > 0)
 		return (i - 1);
 	return (0);
 }

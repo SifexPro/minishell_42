@@ -17,9 +17,9 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp)
 	char	*cmd_path;
 	int		check;
 
-	if (path == NULL)
+	if (!ft_strcmp(path, ""))
 		return (clear_env(envp),
-			exec_error("failed to exec command", NULL), 1);
+			exec_error("command not found", NULL), 127);
 	cmd_path = get_cmd_path(path, get_path(envp));
 	check = check_file(cmd_path, path);
 	if (check)

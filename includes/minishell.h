@@ -190,27 +190,25 @@ int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 void	append_to_argv(t_pars *pars, t_exec *elem);
 int		handle_delimiter(t_pars *pars, t_ht *env);
 int		pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env);
-int 	norme_2(t_pars *pars, int delimiter);
+int		norme_2(t_pars *pars, int delimiter);
 int		norme_1(t_pars *pars, int delimiter);
 int		handle_reformat_start(t_pars *pars, int delimiter);
-int		check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter, t_ht *env);
+int		check_pipe_error(t_pars *pars, t_splitted *tmp, int delimiter,
+			t_ht *env);
 
 /* split_quote_5 */
 int		process_next_elem(t_pars *pars, int delimiter, t_ht *env);
 int		to_argv(t_pars *pars);
 void	end_replace(t_pars *pars);
-t_pars	*create_pars(t_list **ret, t_list *elements) 	;
+t_pars	*create_pars(t_list **ret, t_list *elements);
+
 /* split_quote_6 */
-int 	handle_no_next(t_pars *pars, int delimiter, t_ht *env);
+int		handle_no_next(t_pars *pars, int delimiter, t_ht *env);
 
 /* parsing */
 void	fix_argc(t_list *ret);
 
-
-
 /* parser/expansion */
-
-
 void	register_env_var(t_ht *env, char **envp);
 t_list	*create_str(char *str, bool is_simple_quote, t_ht *env);
 char	*handle_expansion(char *str, t_ht *env);
@@ -235,7 +233,8 @@ void	free_splitted_c(void *v);
 
 /* exec/exec_utils */
 int		check_file(char *cmd_path, char *file);
-int		exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status);
+int		exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags,
+			long long last_status);
 
 /* exec/cmd_path */
 char	*get_path(char **envp);
@@ -246,11 +245,11 @@ t_flags	*set_flags(t_list *splitted);
 
 /* exec/complex/cmd_flags_set_files */
 int		set_files(int infile_count, int outfile_count, t_flags **flags,
-	t_list **splitted);
+			t_list **splitted);
 
 /* exec/complex/cmd_flags_set_files_while */
 int		set_files_while(t_flags **flags, t_list **splitted,
-	int i_infile, int i_outfile);
+			int i_infile, int i_outfile);
 
 /* exec/complex/cmd_flags_set_pipes */
 int		set_pipes(t_flags **flags, t_list *splitted);
@@ -277,7 +276,7 @@ int		forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp);
 bool	edit_flags(t_flags **flags);
 
 /* exec/complex/check_files */
-int	check_exec(t_flags **flags);
+int		check_exec(t_flags **flags);
 
 /* exec/complex/open_files */
 int		open_infile(int index, int index_file, t_flags *flags);
