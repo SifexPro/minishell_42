@@ -18,7 +18,7 @@ static t_flags	*init_flags(t_list *splitted)
 
 	flags = malloc(sizeof(t_flags));
 	if (!flags)
-		return (0);//// put the real exit
+		return (0);
 	flags->multi_exec = false;
 	flags->pid = NULL;
 	flags->fd_in = NULL;
@@ -39,12 +39,14 @@ static t_flags	*set_flags3(t_flags *flags)
 			return (free_flags_pipe(flags, flags->pipe_nb), NULL);
 		flags->fd_in = ft_calloc((flags->pipe_nb + 2), sizeof(int));
 		if (!flags->fd_in)
-			return (free_flags_pipe(flags, flags->pipe_nb), free(flags->pid), NULL);
+			return (free_flags_pipe(flags, flags->pipe_nb),
+				free(flags->pid), NULL);
 		flags->fd_in = ft_memset(flags->fd_in, -1,
 				(sizeof(int) * flags->pipe_nb + 1));
 		flags->fd_out = ft_calloc((flags->pipe_nb + 2), sizeof(int));
 		if (!flags->fd_out)
-			return (free_flags_pipe(flags, flags->pipe_nb), free(flags->pid), free(flags->fd_in), NULL);
+			return (free_flags_pipe(flags, flags->pipe_nb),
+				free(flags->pid), free(flags->fd_in), NULL);
 		flags->fd_out = ft_memset(flags->fd_out, -1,
 				(sizeof(int) * flags->pipe_nb + 1));
 	}
@@ -93,5 +95,3 @@ t_flags	*set_flags(t_list *splitted)
 		return (flags);
 	return (set_flags3(flags));
 }
-////Proteger les mallocs
-////si malloc fail, free tout ce qui a été malloc avant

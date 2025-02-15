@@ -40,7 +40,6 @@ bool	edit_flags(t_flags **flags)
 	return (true);
 }
 
-
 int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 {
 	int	i;

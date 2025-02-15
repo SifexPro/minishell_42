@@ -234,7 +234,7 @@ void	free_splitted_wc(void *splitted);
 void	free_splitted_c(void *v);
 
 /* exec/exec_utils */
-int		check_file(char *file);
+int		check_file(char *cmd_path, char *file);
 int		exit_with_clear(t_list **splitted, t_ht *env, t_flags *flags, long long last_status);
 
 /* exec/cmd_path */
@@ -247,6 +247,10 @@ t_flags	*set_flags(t_list *splitted);
 /* exec/complex/cmd_flags_set_files */
 int		set_files(int infile_count, int outfile_count, t_flags **flags,
 	t_list **splitted);
+
+/* exec/complex/cmd_flags_set_files_while */
+int		set_files_while(t_flags **flags, t_list **splitted,
+	int i_infile, int i_outfile);
 
 /* exec/complex/cmd_flags_set_pipes */
 int		set_pipes(t_flags **flags, t_list *splitted);

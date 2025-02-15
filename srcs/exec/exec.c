@@ -20,14 +20,15 @@ static int	run_program_exec(char *path, char **argv, char **envp)
 	if (path == NULL)
 		return (exec_error("failed to exec command", NULL), exit(1), 1);
 	cmd_path = get_cmd_path(path, get_path(envp));
-	check = 0;
-	if ((!cmd_path && !ft_strncmp(path, "./", 2)) || (cmd_path && !ft_strncmp(cmd_path, "./", 2)))
-		check = check_file(path);
+	printf("cmd_path: %s\n", cmd_path);////
+	printf("path: %s\n", path);////
+	printf("argv[0]: %s\n", argv[1]);////
+	check = check_file(cmd_path, path);
 	if (check)
 		return (free(cmd_path), exit(check), 0);
 	if (!cmd_path)
 		return (exec_error("command not found", argv[0]), exit(127), 127);
-	else if (access(cmd_path, X_OK) && ft_strncmp(cmd_path, "./", 2))
+	else if (access(cmd_path, X_OK) && (ft_strncmp(cmd_path, ".", 1) || ft_strncmp(cmd_path, "/", 1)))
 		return (exec_error("command not found", path), free(cmd_path), exit(127), 127);
 	else if (access(cmd_path, X_OK))
 		return (exec_error("Permission denied", path), free(cmd_path), exit(126), 126);
@@ -103,8 +104,8 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	if (!flags)
 		return (exit_with_clear(&splitted, env, NULL, -1));
 
-	////printf("\n[FLAGS]\n\npipe_nb: %d\n", flags->pipe_nb);////
-	////printf("multi_exec: %d\n", flags->multi_exec);////
+	printf("\n[FLAGS]\n\npipe_nb: %d\n", flags->pipe_nb);////
+	printf("multi_exec: %d\n", flags->multi_exec);////
 	/*
 	printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
 	printf("pipe_index: %d\n", flags->pipe_index);////
