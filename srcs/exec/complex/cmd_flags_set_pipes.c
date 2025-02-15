@@ -12,14 +12,6 @@
 
 #include "minishell.h"
 
-static void	set_files_nb(t_flags **flags, int i)
-{
-	if ((*flags)->pipe[i]->infile_nb > 0)
-		(*flags)->pipe[i]->index_max += (*flags)->pipe[i]->infile_nb - 1;
-	if ((*flags)->pipe[i]->outfile_nb > 0)
-		(*flags)->pipe[i]->index_max += (*flags)->pipe[i]->outfile_nb - 1;
-}
-
 static int	set_pipes_while(t_flags **flags, t_list *splitted, int i)
 {
 	while (i < (*flags)->pipe_nb)
@@ -28,21 +20,13 @@ static int	set_pipes_while(t_flags **flags, t_list *splitted, int i)
 		(*flags)->pipe[i] = (t_pipe *)malloc(sizeof(t_pipe));
 		if (!(*flags)->pipe[i])
 			return (free_flags_pipe((*flags), i), -1);
-		(*flags)->pipe[i]->index = -1;
-		(*flags)->pipe[i]->index_max = 1;
-		(*flags)->pipe[i]->infile_index = -1;
-		(*flags)->pipe[i]->infile_max = -1;
-		(*flags)->pipe[i]->infile_stop = -1;
 		(*flags)->pipe[i]->infile_nb = 0;
 		(*flags)->pipe[i]->infile = NULL;
-		(*flags)->pipe[i]->outfile_index = -1;
-		(*flags)->pipe[i]->outfile_max = -1;
 		(*flags)->pipe[i]->outfile_nb = 0;
 		(*flags)->pipe[i]->outfile = NULL;
 		(*flags)->pipe[i]->cmd = NULL;
 		if (!set_files(0, 0, flags, &splitted))
 			return (free_flags_pipe((*flags), i), -1);
-		set_files_nb(flags, i);
 		i++;
 	}
 	return (i);
@@ -60,6 +44,6 @@ int	set_pipes(t_flags **flags, t_list *splitted)
 	if (i < 0)
 		return (0);
 	(*flags)->pipe[i] = NULL;
-	(*flags)->pipe_index = 0;
+	(*flags)->pipe_index = -1;
 	return (1);
 }

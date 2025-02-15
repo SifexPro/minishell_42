@@ -20,7 +20,7 @@ int	open_pipe(t_flags *flags)
 	i = 0;
 	if (!flags)
 		return (0);
-	while (i < flags->total_redir)
+	while (i < flags->pipe_nb)
 	{
 		if (pipe(pipe_fd) < 0)
 			return (0);
@@ -38,7 +38,7 @@ void	close_pipe(t_flags *flags)
 	i = 0;
 	if (!flags)
 		return ;
-	while (i < flags->total_redir)
+	while (i < flags->pipe_nb)
 	{
 		if (flags->fd_in && flags->fd_in[i] != -1)
 		{

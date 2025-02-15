@@ -86,7 +86,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		return (-1);
 
 	////
-	/*t_list	*temp_list = splitted;
+	t_list	*temp_list = splitted;
 	while (splitted)
 	{
 		ft_printf("splitted != NULL\n");////
@@ -96,13 +96,15 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 		printf("((t_exec *)splitted->content)->token_next: %d\n", ((t_exec *)splitted->content)->token_next);////
 		splitted = splitted->next;
 	}
-	splitted = temp_list;*/
+	splitted = temp_list;
 	////
 
 	flags = set_flags(splitted);
 	if (!flags)
 		return (exit_with_clear(&splitted, env, NULL, -1));
 
+	////printf("\n[FLAGS]\n\npipe_nb: %d\n", flags->pipe_nb);////
+	////printf("multi_exec: %d\n", flags->multi_exec);////
 	/*
 	printf("\n[FLAGS]\n\ntotal_redir: %d\n", flags->total_redir);////
 	printf("pipe_index: %d\n", flags->pipe_index);////

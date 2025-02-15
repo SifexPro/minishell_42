@@ -48,8 +48,6 @@ SRCS		=	srcs/main.c \
 				srcs/exec/complex/pipes.c \
 				srcs/exec/complex/exec_pipe.c \
 				srcs/exec/complex/fork.c \
-				srcs/exec/complex/edit_flags.c \
-				srcs/exec/complex/check_files.c \
 				srcs/exec/complex/open_files.c \
 
 OBJS		=	$(SRCS:/%.c=%.o)

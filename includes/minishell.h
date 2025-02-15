@@ -67,15 +67,8 @@ typedef struct s_file
 
 typedef struct s_pipe
 {
-	int		index;
-	int		index_max;
-	int		infile_index;
-	int		infile_max;
-	int		infile_stop;
 	int		infile_nb;
 	t_file	**infile;
-	int		outfile_index;
-	int		outfile_max;
 	int		outfile_nb;
 	t_file	**outfile;
 	t_exec	*cmd;
@@ -84,15 +77,12 @@ typedef struct s_pipe
 typedef struct s_flags
 {
 	bool	multi_exec;
-	int		total_redir;
 	pid_t	*pid;
 	int		*fd_in;
 	int		*fd_out;
 	int		pipe_index;
 	int		pipe_nb;
-	bool	pipe_index_changed;
 	t_pipe	**pipe;
-	t_list	*splitted;//// remove ?
 }			t_flags;
 
 typedef struct s_str_input
@@ -286,9 +276,9 @@ bool	edit_flags(t_flags **flags);
 int	check_exec(t_flags **flags);
 
 /* exec/complex/open_files */
-int		open_infile(int index, t_flags *flags);
-int		open_outfile(int index, t_flags *flags);
-int		open_heredoc(int index, t_flags *flags);
+int		open_infile(int index, int index_file, t_flags *flags);
+int		open_outfile(int index, int index_file, t_flags *flags);
+int		open_heredoc(int index, int index_file, t_flags *flags);
 
 /* exec/complex/exec_utils */
 void	exec_error(char *error, char *cmd);

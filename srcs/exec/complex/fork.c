@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-static int	wait_child(int total_redir, pid_t *pid)
+static int	wait_child(int pipe_nb, pid_t *pid)
 {
 	int	i;
 	int	status;
 
 	i = 0;
-	while (i < total_redir)
+	while (i < pipe_nb)
 	{
 		waitpid(pid[i], &status, 0);
 		i++;
@@ -34,6 +34,13 @@ static void	exit_fork(t_flags *flags, t_list **splitted, t_ht *env)
 	exit_prog(splitted, env, 1);
 }
 
+bool	edit_flags(t_flags **flags)
+{
+	(*flags)->pipe_index++;
+	return (true);
+}
+
+
 int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 {
 	int	i;
@@ -41,9 +48,7 @@ int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 	i = 0;
 	if (!open_pipe(flags))
 		return (exit_fork(flags, &splitted, env), 1);
-	if (!check_exec(&flags))
-		return (exit_fork(flags, &splitted, env), 1);
-	while (i < flags->total_redir)
+	while (i < flags->pipe_nb)
 	{
 		if (edit_flags(&flags))
 			flags->pid[i] = fork();
@@ -54,5 +59,5 @@ int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 		i++;
 	}
 	close_pipe(flags);
-	return (wait_child(flags->total_redir, flags->pid));
+	return (wait_child(flags->pipe_nb, flags->pid));
 }

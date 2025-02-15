@@ -12,7 +12,36 @@
 
 #include "minishell.h"
 
-int	open_infile(int index, t_flags *flags)
+int	open_infile(int index, int index_file, t_flags *flags)
+{
+	char	*file;
+
+	file = flags->pipe[flags->pipe_index]->infile[index_file]->file;
+	flags->fd_in[index] = open(file, O_RDONLY);
+	if (flags->fd_in[index] < 0)
+		return (file_error(strerror(errno), file), 0);
+	return (1);
+}
+
+int	open_outfile(int index, int index_file, t_flags *flags)
+{
+	char	*file;
+
+	file = flags->pipe[flags->pipe_index]->outfile[index_file]->file;
+	ft_printf("flags->pipe[flags->pipe_index]->outfile[index_file]->is_append: %d\n", flags->pipe[flags->pipe_index]->outfile[index_file]->is_append);
+	if (flags->pipe[flags->pipe_index]->outfile[index_file]->is_append)
+		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_APPEND,
+				0644);
+	else
+		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_TRUNC,
+				0644);
+	if (flags->fd_out[index] < 0)
+		return (file_error(strerror(errno), file), 0);
+	return (1);
+}
+
+////
+/*int	open_infile(int index, t_flags *flags)
 {
 	char	*file;
 
@@ -22,9 +51,9 @@ int	open_infile(int index, t_flags *flags)
 	if (flags->fd_in[index] < 0)
 		return (file_error(strerror(errno), file), 0);
 	return (1);
-}
+}*/
 
-int	open_outfile(int index, t_flags *flags)
+/*int	open_outfile(int index, t_flags *flags)
 {
 	char	*file;
 
@@ -40,7 +69,7 @@ int	open_outfile(int index, t_flags *flags)
 	if (flags->fd_out[index] < 0)
 		return (file_error(strerror(errno), file), 0);
 	return (1);
-}
+}*/
 
 void	open_heredoc_while(int fd[2], char *heredoc)
 {
@@ -63,7 +92,22 @@ void	open_heredoc_while(int fd[2], char *heredoc)
 	}
 }
 
-int	open_heredoc(int index, t_flags *flags)
+int	open_heredoc(int index, int index_file, t_flags *flags)
+{
+	int		fd[2];
+	char	*heredoc;
+	int		len_heredoc;
+
+	if (pipe(fd) < 0)
+		return (0);
+	heredoc = flags->pipe[flags->pipe_index]->infile[index_file]->file;
+	len_heredoc = ft_strlen(heredoc);
+	open_heredoc_while(fd, heredoc);
+	close(fd[1]);
+	flags->fd_in[index] = fd[0];
+	return (1);
+}
+/*int	open_heredoc(int index, t_flags *flags)
 {
 	int		fd[2];
 	char	*heredoc;
@@ -78,4 +122,4 @@ int	open_heredoc(int index, t_flags *flags)
 	close(fd[1]);
 	flags->fd_in[index] = fd[0];
 	return (1);
-}
+}*/

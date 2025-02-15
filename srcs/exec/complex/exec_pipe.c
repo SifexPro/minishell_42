@@ -12,77 +12,56 @@
 
 #include "minishell.h"
 
-static void	open_some(t_flags *flags, int pipe_i, int infile_i, int outfile_i)
+static int open_infile_pipe(t_flags *flags, int pipe_index, int infile_index, int i)
 {
-	if (infile_i > flags->pipe[pipe_i]->infile_max
-		|| outfile_i >= flags->pipe[pipe_i]->outfile_nb || outfile_i == -1)
-		return (close_pipe(flags), exit(1));
-	while (flags->pipe[pipe_i]->infile[infile_i - 1]->index
-		> flags->pipe[pipe_i]->outfile[outfile_i]->index
-		&& flags->pipe[pipe_i]->outfile_index
-		< flags->pipe[pipe_i]->outfile_nb)
+	if (!flags->pipe[pipe_index]->infile[infile_index]->is_heredoc)
 	{
-		flags->pipe[pipe_i]->outfile_index = outfile_i;
-		if (!open_outfile(0, flags))
-			break ;
-		outfile_i++;
+		if (!open_infile(i, infile_index, flags))
+			return (close_pipe(flags), exit(1), 0);
 	}
-	return (close_pipe(flags), exit(1));
+	else
+	{
+		if (!open_heredoc(i, infile_index, flags))
+			return (close_pipe(flags), exit(1), 0);
+	}
+	dup2(flags->fd_in[i], 0);
+	return (1);
 }
 
-static void	check_files(t_flags *flags, int infile_i, int outfile_i)
+static int open_outfile_pipe(t_flags *flags, int pipe_index, int outfile_index, int i)
 {
-	int	pipe_index;
-
-	pipe_index = flags->pipe_index;
-	if (flags->pipe[pipe_index]->infile_max != -1
-		&& infile_i >= flags->pipe[pipe_index]->infile_max)
-		open_some(flags, pipe_index, infile_i, outfile_i);
-	if (flags->pipe[pipe_index]->infile_max != -1
-		&& flags->pipe[pipe_index]->infile_nb == 1
-		&& flags->pipe[pipe_index]->outfile_nb == 1
-		&& infile_i == 0 && outfile_i == 0
-		&& flags->pipe[pipe_index]->infile[infile_i]->index
-		> flags->pipe[pipe_index]->outfile[outfile_i]->index)
-	{
-		open_outfile(0, flags);
-		return (close_pipe(flags), exit(1));
-	}
-	else if (flags->pipe[pipe_index]->outfile_max != -1
-		&& outfile_i >= flags->pipe[pipe_index]->outfile_max)
-		return (close_pipe(flags), exit(1));
-	else if (flags->pipe[pipe_index]->infile_stop != -1
-		&& flags->pipe[pipe_index]->index
-		> flags->pipe[pipe_index]->infile_stop)
-		return (close_pipe(flags), exit(1));
+	if (!open_outfile(i, outfile_index, flags))
+		return (close_pipe(flags), exit(1), 0);
+	dup2(flags->fd_out[i], 1);
+	return (1);
 }
 
-static void	handle_files(t_flags *flags, int infile_i, int outfile_i, int i)
+static int	open_all_files(t_flags *flags, int pipe_index, int i)
 {
-	int	pipe_index;
+	int index_check;
+	int	infile_index;
+	int	outfile_index;
 
-	pipe_index = flags->pipe_index;
-	check_files(flags, infile_i, outfile_i);
-	if (infile_i != -1 && infile_i < flags->pipe[pipe_index]->infile_nb)
+	index_check = 0;
+	infile_index = 0;
+	outfile_index = 0;
+	while (index_check < (flags->pipe[flags->pipe_index]->infile_nb + flags->pipe[flags->pipe_index]->outfile_nb))
 	{
-		if (!flags->pipe[pipe_index]->infile[infile_i]->is_heredoc)
+		if (infile_index < flags->pipe[flags->pipe_index]->infile_nb && flags->pipe[flags->pipe_index]->infile[infile_index]->index == index_check)
 		{
-			if (!open_infile(i, flags))
-				return (close_pipe(flags), exit(1));
+			if (!open_infile_pipe(flags, pipe_index, infile_index, i))
+				return (0);
+			infile_index++;
 		}
-		else
+		else if (outfile_index < flags->pipe[flags->pipe_index]->outfile_nb && flags->pipe[flags->pipe_index]->outfile[outfile_index]->index == index_check)
 		{
-			if (!open_heredoc(i, flags))
-				return (close_pipe(flags), exit(1));
+			if (!open_outfile_pipe(flags, pipe_index, outfile_index, i))
+				return (0);
+			outfile_index++;
 		}
-		dup2(flags->fd_in[i], 0);
+		index_check++;
 	}
-	if (outfile_i != -1 && outfile_i < flags->pipe[pipe_index]->outfile_nb)
-	{
-		if (!open_outfile(i, flags))
-			return (close_pipe(flags), exit(1));
-		dup2(flags->fd_out[i], 1);
-	}
+	return (1);
 }
 
 void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
@@ -93,20 +72,16 @@ void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
 	int		pipe_index;
 
 	pipe_index = flags->pipe_index;
-	infile_index = flags->pipe[pipe_index]->infile_index;
-	outfile_index = flags->pipe[pipe_index]->outfile_index;
-	handle_files(flags, infile_index, outfile_index, i);
+	if (!open_all_files(flags, pipe_index, i))
+		return (close_pipe(flags), exit(1));
 	if (pipe_index > 0)
 		dup2(flags->fd_in[i], 0);
 	if (pipe_index < flags->pipe_nb - 1)
 		dup2(flags->fd_out[i], 1);
 	close_pipe(flags);
 	envp_cpy = ht_to_envp(env);
-	if (infile_index >= flags->pipe[pipe_index]->infile_nb - 1)
-		if (outfile_index >= flags->pipe[pipe_index]->outfile_nb - 1
-			&& flags->pipe[pipe_index]->cmd)
-			exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc,
-					flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
+	if (flags->pipe[pipe_index]->cmd)
+		exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc, flags->pipe[pipe_index]->cmd->argv, env, envp_cpy));
 	clear_env(envp_cpy);
 	exit(0);
 }
