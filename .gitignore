@@ -8,3 +8,5 @@ minishell
 minishell.dSYM
 
 .DS_Store
+
+.vscode/
