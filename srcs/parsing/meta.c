@@ -74,7 +74,7 @@ bool	handle_meta_3(
 	{
 		content->delimiter = APPEND;
 		sp->str_start = sp->i + 2;
-		return (true);
+		return (false);
 	}
 	return (handle_meta_2(str, sp, elem, content));
 }
