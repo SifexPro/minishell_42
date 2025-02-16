@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_flags	*init_flags()
+static t_flags	*init_flags(void)
 {
 	t_flags	*flags;
 
