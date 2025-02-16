@@ -20,11 +20,11 @@ static int	run_program_exec(char *path, char **argv, char **envp)
 	if (!ft_strcmp(path, ""))
 		return (exec_error("command not found", NULL), exit(127), 127);
 	cmd_path = get_cmd_path(path, get_path(envp));
+	if (!cmd_path)
+		return (exec_error("command not found", argv[0]), exit(127), 127);
 	check = check_file(cmd_path, path);
 	if (check)
 		return (free(cmd_path), exit(check), 0);
-	if (!cmd_path)
-		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK) && (ft_strncmp(cmd_path, ".", 1) || ft_strncmp(cmd_path, "/", 1)))
 		return (exec_error("command not found", path), free(cmd_path), exit(127), 127);
 	else if (access(cmd_path, X_OK))

@@ -18,7 +18,7 @@ static t_flags	*init_flags(t_list *splitted)
 
 	flags = malloc(sizeof(t_flags));
 	if (!flags)
-		return (0);
+		return (NULL);
 	flags->multi_exec = false;
 	flags->pid = NULL;
 	flags->fd_in = NULL;

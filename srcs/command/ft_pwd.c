@@ -21,8 +21,8 @@ char	*get_pwd(void)
 		return (NULL);
 	if (getcwd(cwd, sizeof(char) * PATH_MAX) != NULL)
 		return (cwd);
-	else
-		return (NULL);
+	free(cwd);
+	return (NULL);
 }
 
 int	ft_pwd(int argc, char **argv)
