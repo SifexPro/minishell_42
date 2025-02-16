@@ -45,7 +45,7 @@ void	handle_content_after(t_pars *pars, t_splitted *tmp)
 	pars->last_neutral = pars->tmp_exec;
 }
 
-int	pipe_case(t_pars *pars, int delimiter, t_splitted *tmp, t_ht *env)
+int	pipe_case(t_pars *pars, t_splitted *tmp)
 {
 	pars->last_neutral = NULL;
 	pars->tmp_exec->argc = 0;

@@ -21,10 +21,8 @@ int	exit_prog(t_list **splitted, t_ht *env, int status)
 	exit(status);
 }
 
-int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
+int	process_input(char *buffer, char *prefix, t_ht *env)
 {
-	HIST_ENTRY	*le;
-	char		*last_status_str;
 	int			last_status;
 
 	last_status = 0;
@@ -35,7 +33,7 @@ int	process_input(char *buffer, char *prefix, t_ht *env, char **envp)
 		{
 			add_history(buffer);
 			setup_cmd_signals();
-			last_status = parse_cmd(buffer, env, envp, last_status);
+			last_status = parse_cmd(buffer, env, last_status);
 			setup_term_signals();
 			last_status = handle_lst_status(env, last_status);
 		}
@@ -64,5 +62,5 @@ int	main(int argc, char **argv, char **envp)
 	setup_term_signals();
 	buffer = readline(prefix);
 	free(prefix);
-	process_input(buffer, prefix, env, envp);
+	process_input(buffer, prefix, env);
 }

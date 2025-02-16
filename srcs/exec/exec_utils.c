@@ -33,11 +33,11 @@ int	check_file(char *cmd_path, char *file)
 
 	file_len = ft_strlen(file) - 1;
 	cmd_path_len = ft_strlen(cmd_path) - 1;
-	if (!((cmd_path && !ft_strncmp(&cmd_path[check_dot(cmd_path)], "./", 2)
-				|| !cmd_path && !ft_strncmp(&file[check_dot(file)], "./", 2))
+	if (!(((cmd_path && !ft_strncmp(&cmd_path[check_dot(cmd_path)], "./", 2))
+				|| (!cmd_path && !ft_strncmp(&file[check_dot(file)], "./", 2)))
 			|| (!ft_strncmp(file, "/", 1))
-			|| (cmd_path && !ft_strncmp(&cmd_path[cmd_path_len], "/", 1)
-				|| !cmd_path && !ft_strncmp(&file[file_len], "/", 1))))
+			|| ((cmd_path && !ft_strncmp(&cmd_path[cmd_path_len], "/", 1))
+				|| (!cmd_path && !ft_strncmp(&file[file_len], "/", 1)))))
 		return (0);
 	fd = open(file, O_RDONLY);
 	if (fd == -1 && !access(file, F_OK))

@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+static int select_exec(int argc, char **argv, t_ht *env, char **envp);
+
 static int	run_program_exec(char *path, char **argv, char **envp)
 {
 	char	*cmd_path;
@@ -20,11 +22,11 @@ static int	run_program_exec(char *path, char **argv, char **envp)
 	if (!ft_strcmp(path, ""))
 		return (exec_error("command not found", NULL), exit(127), 127);
 	cmd_path = get_cmd_path(path, get_path(envp));
-	if (!cmd_path)
-		return (exec_error("command not found", argv[0]), exit(127), 127);
 	check = check_file(cmd_path, path);
 	if (check)
 		return (free(cmd_path), exit(check), 0);
+	if (!cmd_path)
+		return (exec_error("command not found", argv[0]), exit(127), 127);
 	else if (access(cmd_path, X_OK) && (ft_strncmp(cmd_path, ".", 1) || ft_strncmp(cmd_path, "/", 1)))
 		return (exec_error("command not found", path), free(cmd_path), exit(127), 127);
 	else if (access(cmd_path, X_OK))
@@ -50,25 +52,8 @@ static int	run_program(char *path, char **argv, char **envp)
 	return (WEXITSTATUS(status));
 }
 
-static int	select_exec(int argc, char **argv, t_ht *env, char **envp)
-{
-	if (!ft_strncmp(argv[0], "cd", 2))
-		return (ft_cd(argc, argv, env));
-	else if (!ft_strncmp(argv[0], "pwd", 3))
-		return (ft_pwd(argc, argv));
-	else if (!ft_strncmp(argv[0], "echo", 4))
-		return (ft_echo(argc, argv));
-	else if (!ft_strncmp(argv[0], "env", 3))
-		return (ft_env(envp));
-	else if (!ft_strncmp(argv[0], "unset", 5))
-		return (ft_unset(argc, argv, env));
-	else if (!ft_strncmp(argv[0], "export", 6))
-		return (ft_export(argc, argv, env, envp));
-	else
-		return (run_program(argv[0], argv, envp));
-}
 
-int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
+int	parse_cmd(char *input, t_ht *env, int last_status)
 {
 	t_list	*splitted;
 	t_flags	*flags;
@@ -143,7 +128,7 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	}*/
 
 	if (flags->multi_exec)
-		res = forking(flags, splitted, env, envp);
+		res = forking(flags, splitted, env);
 	else
 	{
 		temp = splitted->content;
@@ -159,4 +144,21 @@ int	parse_cmd(char *input, t_ht *env, char **envp, int last_status)
 	ft_lstclear(&splitted, &free_splitted_wc);
 	return (res);
 }
- 
+
+static int	select_exec(int argc, char **argv, t_ht *env, char **envp)
+{
+	if (!ft_strncmp(argv[0], "cd", 2))
+		return (ft_cd(argc, argv, env));
+	else if (!ft_strncmp(argv[0], "pwd", 3))
+		return (ft_pwd(argc, argv));
+	else if (!ft_strncmp(argv[0], "echo", 4))
+		return (ft_echo(argc, argv));
+	else if (!ft_strncmp(argv[0], "env", 3))
+		return (ft_env(envp));
+	else if (!ft_strncmp(argv[0], "unset", 5))
+		return (ft_unset(argc, argv, env));
+	else if (!ft_strncmp(argv[0], "export", 6))
+		return (ft_export(argc, argv, env, envp));
+	else
+		return (run_program(argv[0], argv, envp));
+}

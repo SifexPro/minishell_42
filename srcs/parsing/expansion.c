@@ -92,7 +92,6 @@ char	*handle_expansion(char *str, t_ht *env)
 void	register_env_var(t_ht *env, char **envp)
 {
 	char	**splitted;
-	char	*key;
 	char	*val;
 	int		i;
 

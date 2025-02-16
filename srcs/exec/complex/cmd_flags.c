@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_flags	*init_flags(t_list *splitted)
+static t_flags	*init_flags()
 {
 	t_flags	*flags;
 
@@ -77,7 +77,7 @@ t_flags	*set_flags(t_list *splitted)
 	t_exec	*temp;
 	t_list	*start;
 
-	flags = init_flags(splitted);
+	flags = init_flags();
 	if (!flags)
 		return (NULL);
 	start = splitted;

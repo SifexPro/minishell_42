@@ -18,7 +18,7 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	if (!sp->is_simp_quote && !sp->is_dbl_quote)
 	{
-		handle_start(sp, elem, (char *)str, env);
+		handle_start(sp, (char *)str);
 		sp->is_dbl_quote = true;
 	}
 	else if (sp->is_dbl_quote)
@@ -33,8 +33,8 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 							sp->i - sp->quote_start - 1), false, env));
 		}
 		else
-			concat_pretext(elem, ft_strndup((char *)(&str[sp->quote_start + 1]),
-					sp->i - sp->quote_start - 1), sp, env);
+			concat_pretext(ft_strndup((char *)(&str[sp->quote_start + 1]),
+					sp->i - sp->quote_start - 1), sp);
 		sp->str_start = sp->i + 1;
 		sp->quote_start = 0;
 		sp->is_dbl_quote = false;
@@ -46,7 +46,7 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	if (!sp->is_simp_quote && !sp->is_dbl_quote)
 	{
-		handle_start(sp, elem, (char *)str, env);
+		handle_start(sp, (char *)str);
 		sp->is_simp_quote = true;
 	}
 	else if (sp->is_simp_quote)
@@ -61,8 +61,8 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 							sp->i - sp->quote_start - 1), true, env));
 		}
 		else
-			concat_pretext(elem, ft_strndup((char *)(&str[sp->quote_start + 1]),
-					sp->i - sp->quote_start - 1), sp, env);
+			concat_pretext(ft_strndup((char *)(&str[sp->quote_start + 1]),
+					sp->i - sp->quote_start - 1), sp);
 		sp->str_start = sp->i + 1;
 		sp->is_simp_quote = false;
 		sp->quote_start = 0;
@@ -126,7 +126,6 @@ t_list	*ft_split_quote(char const *str, t_ht *env)
 {
 	t_list		*elements;
 	t_list		*ret;
-	int			exit_parse;
 
 	if (!str)
 		return (NULL);

@@ -26,7 +26,7 @@ void	handle_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
 	ft_lstadd_back(elem, create_str(txt, true, env));
 }
 
-void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
+void	concat_pretext(char *str, t_split_sh *sp)
 {
 	char	*txt;
 
@@ -37,11 +37,11 @@ void	concat_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
 	sp->pretext = txt;
 }
 
-void	handle_start(t_split_sh *sp, t_list **elem, char *str, t_ht *env)
+void	handle_start(t_split_sh *sp, char *str)
 {
 	if (sp->i != sp->str_start || sp->pretext)
-		concat_pretext(elem, ft_strndup((char *)(&str[sp->str_start]),
-				sp->i - sp->str_start), sp, env);
+		concat_pretext(ft_strndup((char *)(&str[sp->str_start]),
+				sp->i - sp->str_start), sp);
 	else
 		sp->pretext = NULL;
 	sp->quote_start = sp->i;
@@ -66,7 +66,6 @@ int	handle_ambiguous_redirect(char *s, t_split_sh *sp, t_ht *env)
 int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 {
 	char	*s;
-	int		j;
 	int		no_value;
 
 	if (str[sp->str_start] == 0)

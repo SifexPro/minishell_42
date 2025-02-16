@@ -88,7 +88,7 @@ static int	open_all_files(t_flags *flags, int pipe_index, int i)
 	return (1);
 }
 
-void	child_exec(t_flags *flags, int i, t_ht *env, char **envp)
+void	child_exec(t_flags *flags, int i, t_ht *env)
 {
 	char	**envp_cpy;
 	int		pipe_index;
