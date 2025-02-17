@@ -102,3 +102,12 @@ ouvre X*cat
 
 - gerer mini | mini
 - > test > blocked < bloqsd> test > blocked < bloqsd
+
+- << 1 << 2 << 3
+- export a= e
+- export a==a
+- export a=""
+- export a1=""
+- echo
+- www
+- >>>/<<<

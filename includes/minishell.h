@@ -82,6 +82,9 @@ typedef struct s_flags
 	int		pipe_index;
 	int		pipe_nb;
 	t_pipe	**pipe;
+	t_ht	*env;
+	char	**envp;
+	t_list	*splitted;
 }			t_flags;
 
 typedef struct s_str_input
@@ -267,7 +270,7 @@ void	close_pipe(t_flags *flags);
 void	child_exec(t_flags *flags, int i, t_ht *env);
 
 /* exec/complex/exec_pipe_utils */
-int		select_exec_pipe(int argc, char **argv, t_ht *env, char **envp);
+int		select_exec_pipe(int argc, char **argv, t_flags *flags, char **envp);
 
 /* exec/complex/fork */
 int		forking(t_flags *flags, t_list *splitted, t_ht *env);
@@ -285,8 +288,11 @@ int		open_heredoc(int index, int index_file, t_flags *flags);
 
 /* exec/complex/exec_utils */
 void	exec_error(char *error, char *cmd);
+void	free_child(t_ht *env, t_list *splitted, t_flags *flags, char **envp);
+void	exec_error_free(char *error, char *cmd, t_flags *flags);
 void	exec_error_arg(char *error, char *arg, char *cmd);
 void	file_error(char *error, char *file);
+
 
 extern int	g_sig;
 

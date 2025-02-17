@@ -1,0 +1,13 @@
+includes
+libft
+Makefile
+minishell
+minishell_tester
+objs
+ok
+ok1
+readline.supp
+README.md
+srcs
+testmax
+TODO.md

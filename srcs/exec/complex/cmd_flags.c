@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_flags	*init_flags(void)
+static t_flags	*init_flags(t_list *splitted)
 {
 	t_flags	*flags;
 
@@ -26,6 +26,9 @@ static t_flags	*init_flags(void)
 	flags->pipe_index = -1;
 	flags->pipe_nb = 1;
 	flags->pipe = NULL;
+	flags->envp = NULL;
+	flags->env = NULL;
+	flags->splitted = splitted;
 	return (flags);
 }
 
@@ -76,7 +79,7 @@ t_flags	*set_flags(t_list *splitted)
 	t_exec	*temp;
 	t_list	*start;
 
-	flags = init_flags();
+	flags = init_flags(splitted);
 	if (!flags)
 		return (NULL);
 	start = splitted;

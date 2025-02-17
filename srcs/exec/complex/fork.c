@@ -40,6 +40,7 @@ bool	edit_flags(t_flags **flags)
 	return (true);
 }
 
+//// free in child like exec.c
 int	forking(t_flags *flags, t_list *splitted, t_ht *env)
 {
 	int	i;
@@ -47,6 +48,8 @@ int	forking(t_flags *flags, t_list *splitted, t_ht *env)
 	i = 0;
 	if (!open_pipe(flags))
 		return (exit_fork(flags, &splitted, env), 1);
+	flags->splitted = splitted;
+	flags->env = env;
 	while (i < flags->pipe_nb)
 	{
 		if (edit_flags(&flags))
@@ -58,5 +61,7 @@ int	forking(t_flags *flags, t_list *splitted, t_ht *env)
 		i++;
 	}
 	close_pipe(flags);
+	flags->splitted = NULL;
+	flags->env = NULL;
 	return (wait_child(flags->pipe_nb, flags->pid));
 }

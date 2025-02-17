@@ -103,6 +103,7 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 		}
 		i++;
 	}
+	////clear_env(envp);
 	if (has_error)
 		return (1);
 	return (0);
