@@ -60,6 +60,8 @@ int	main(int argc, char **argv, char **envp)
 	register_env_var(env, envp);
 	prefix = get_prefix(0);
 	setup_term_signals();
+	if (!prefix)
+		return (printf("failed to malloc!"), 1);
 	buffer = readline(prefix);
 	free(prefix);
 	process_input(buffer, prefix, env);

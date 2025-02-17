@@ -33,11 +33,11 @@ char	*get_prefix(int last_status)
 		tmp = ft_strdup("\e[1;32m");
 	else
 		tmp = ft_strdup("\e[1;31m");
-	if (!tmp)
+	if (!tmp || !pwd)
 		return (NULL);
 	tmp = ft_strjoin_free(tmp, "[CUSTOM] \e[1;33m");
 	splitted = ft_split(pwd, '/');
-	if (!splitted)
+	if (!splitted || ft_strarr_len(splitted) == 0)
 		return (free(tmp), NULL);
 	tmp = ft_strjoin_free(tmp,
 			splitted[ft_strarr_len(splitted) - 1]);

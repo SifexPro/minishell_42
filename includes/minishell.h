@@ -180,8 +180,9 @@ t_exec	*init_exec(void);
 bool	create_argv(t_exec *tmp_exec, t_list *elements);
 
 /* split_quote_3 */
-void	handle_start(t_split_sh *sp, char *str);
+void	handle_start(t_split_sh *sp, char *str, t_ht *env);
 void	handle_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
+void	handle_pretext_env(t_list **elem, char *str, t_split_sh *sp, t_ht *env);
 void	concat_pretext(char *str, t_split_sh *sp);
 int		no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env);
 
