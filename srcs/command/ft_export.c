@@ -45,7 +45,6 @@ int	process_line(char *argv, t_ht *env)
 	char	**split_argv;
 	char	*prev;
 	char	*env_key;
-	char	*new_value;
 
 	split_argv = get_export_splitted(argv);
 	if (!split_argv)
@@ -57,32 +56,15 @@ int	process_line(char *argv, t_ht *env)
 		env_key[ft_strlen(env_key) - 1] = '\0';
 		prev = ht_search(env, env_key);
 		if (prev)
-		{
 			prev = ft_strdup(prev);
-			if (!prev)
-				return (ft_freesplit(split_argv), free(split_argv), 1);
-		}
 	}
 	ht_deletef(env, split_argv[0]);
 	if (!split_argv[1])
-		return (free(prev), ft_freesplit(split_argv), free(split_argv), 0);
+		return (ft_freesplit(split_argv), free(split_argv), 0);
 	if (prev)
-	{
-		new_value = ft_strjoin(prev, split_argv[1]);
-		free(prev);
-		if (!new_value)
-			return (ft_freesplit(split_argv), free(split_argv), 1);
-		if (!ht_insert(env, split_argv[0], new_value))
-			return (free(new_value), ft_freesplit(split_argv), free(split_argv), 1);
-	}
+		ht_insert(env, split_argv[0], ft_strjoin(prev, split_argv[1]));
 	else
-	{
-		new_value = ft_strdup(split_argv[1]);
-		if (!new_value)
-			return (ft_freesplit(split_argv), free(split_argv), 1);
-		if (!ht_insert(env, split_argv[0], new_value))
-			return (free(new_value), ft_freesplit(split_argv), free(split_argv), 1);
-	}
+		ht_insert(env, split_argv[0], ft_strdup(split_argv[1]));
 	return (ft_freesplit(split_argv), free(split_argv), 0);
 }
 
