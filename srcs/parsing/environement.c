@@ -65,7 +65,7 @@ char	**ht_to_envp(t_ht *env)
 		return (NULL);
 	i = -1;
 	j = 0;
-	while (++i < env->size)
+	while (++i < (int)env->size)
 	{
 		entry = env->elements[i];
 		if (entry)

@@ -38,8 +38,6 @@ void	free_flags_pipe(t_flags *flags, int pipe_i)
 
 void	free_flags(t_flags *flags)
 {
-	int	i;
-
 	free_flags_pipe(flags, flags->pipe_nb);
 	free(flags->pipe);
 	free(flags->pid);

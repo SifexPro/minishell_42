@@ -12,33 +12,30 @@
 
 #include "minishell.h"
 
-static int	check_dot(char *file)
+static bool	has_slash(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (file[i] == '.')
-		i++;
-	if (file[i] == '/' && i > 0)
-		return (i - 1);
-	return (0);
+	while (*str)
+	{
+		if (*str == '/')
+			return (true);
+		str++;
+	}
+	return (false);
 }
 
 int	check_file(char *cmd_path, char *file)
 {
 	struct stat	file_stat;
 	int			fd;
-	int			file_len;
-	int			cmd_path_len;
 
-	file_len = ft_strlen(file) - 1;
-	cmd_path_len = ft_strlen(cmd_path) - 1;
-	if (!((cmd_path && !ft_strncmp(&cmd_path[check_dot(cmd_path)], "./", 2)
-				|| !cmd_path && !ft_strncmp(&file[check_dot(file)], "./", 2))
-			|| (!ft_strncmp(file, "/", 1))
-			|| (cmd_path && !ft_strncmp(&cmd_path[cmd_path_len], "/", 1)
-				|| !cmd_path && !ft_strncmp(&file[file_len], "/", 1))))
+	if (!((cmd_path && has_slash(cmd_path)) || (!cmd_path && has_slash(file)))
+		|| (cmd_path && !ft_strncmp(cmd_path, "/usr/bin/", 9)))
+	{
+		if ((cmd_path && !has_slash(cmd_path))
+			|| (!cmd_path && !has_slash(file)))
+			return (exec_error("command not found", file), 127);
 		return (0);
+	}
 	fd = open(file, O_RDONLY);
 	if (fd == -1 && !access(file, F_OK))
 		return (exec_error("Permission denied", file), close(fd), 126);

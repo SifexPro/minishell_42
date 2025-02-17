@@ -31,13 +31,8 @@ static int	set_files2(int infile_count, int outfile_count,
 int	set_files(int infile_count, int outfile_count,
 	t_flags **flags, t_list **splitted)
 {
-	int		i_infile;
-	int		i_outfile;
-	t_file	**file;
 	t_list	*start;
 
-	i_infile = 0;
-	i_outfile = 0;
 	start = *splitted;
 	while (*splitted)
 	{
@@ -49,7 +44,7 @@ int	set_files(int infile_count, int outfile_count,
 		else if (((t_exec *)(*splitted)->content)->token_next == REDIRECT_OUTPUT
 			|| ((t_exec *)(*splitted)->content)->token_next == APPEND)
 			outfile_count++;
-		else if (((t_exec *)(*splitted)->content)->token_next == -1)
+		else if ((int)((t_exec *)(*splitted)->content)->token_next == -1)
 			(*flags)->pipe[(*flags)->pipe_index]->cmd
 				= (t_exec *)(*splitted)->content;
 		*splitted = (*splitted)->next;

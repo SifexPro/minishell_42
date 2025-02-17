@@ -40,7 +40,6 @@ void	free_splitted_c(void *v)
 
 void	free_splitted_wc(void *v)
 {
-	t_list	*splitted;
 	t_exec	*tmp_exec;
 	int		i;
 

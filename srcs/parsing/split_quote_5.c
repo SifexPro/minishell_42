@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-int	process_next_elem(t_pars *pars, int delimiter, t_ht *env)
+int	process_next_elem(t_pars *pars, int delimiter)
 {
 	if (handle_reformat_start(pars, delimiter))
 		return (1);
 	pars->tmp = pars->elements->next->content;
 	if (delimiter == PIPE)
-		pipe_case(pars, delimiter, pars->tmp, env);
+		pipe_case(pars, pars->tmp);
 	else
 	{
 		pars->tmp_exec->argv[pars->tmp_exec->i] = ft_strdup(pars->tmp->content);
@@ -63,7 +63,7 @@ int	handle_delimiter(t_pars *pars, t_ht *env)
 	if (!pars->elements->next)
 		pars->can_error = true;
 	else
-		if (process_next_elem(pars, pars->delimiter, env))
+		if (process_next_elem(pars, pars->delimiter))
 			return (1);
 	if (check_pipe_error(pars, pars->tmp, pars->delimiter, env))
 		return (1);
@@ -105,7 +105,7 @@ int	to_argv(t_pars *pars)
 		append_to_argv(pars, pars->last_neutral);
 		return (1);
 	}
-	else if (pars->tmp_exec->token_next == -1)
+	else if ((int)pars->tmp_exec->token_next == -1)
 		pars->last_neutral = pars->tmp_exec;
 	pars->has_started = true;
 	pars->tmp_exec->argv[pars->tmp_exec->i] = ft_strdup(((t_splitted *)

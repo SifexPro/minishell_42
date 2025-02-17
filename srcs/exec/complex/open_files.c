@@ -64,12 +64,10 @@ int	open_heredoc(int index, int index_file, t_flags *flags)
 {
 	int		fd[2];
 	char	*heredoc;
-	int		len_heredoc;
 
 	if (pipe(fd) < 0)
 		return (0);
 	heredoc = flags->pipe[flags->pipe_index]->infile[index_file]->file;
-	len_heredoc = ft_strlen(heredoc);
 	open_heredoc_while(fd, heredoc);
 	close(fd[1]);
 	flags->fd_in[index] = fd[0];

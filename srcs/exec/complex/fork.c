@@ -40,7 +40,7 @@ bool	edit_flags(t_flags **flags)
 	return (true);
 }
 
-int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
+int	forking(t_flags *flags, t_list *splitted, t_ht *env)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ int	forking(t_flags *flags, t_list *splitted, t_ht *env, char **envp)
 		if (flags->pid[i] < 0)
 			return (exit_fork(flags, &splitted, env), 1);
 		else if (flags->pid[i] == 0)
-			child_exec(flags, i, env, envp);
+			child_exec(flags, i, env);
 		i++;
 	}
 	close_pipe(flags);

@@ -56,8 +56,7 @@ static int	set_files_infile(t_flags **flags, t_list **splitted, int i_infile,
 	return (1);
 }
 
-static int	set_files_while2(t_flags **flags, t_list **splitted,
-	int i_infile, int i_outfile)
+static int	set_files_while2(t_list **splitted)
 {
 	if (((t_exec *)(*splitted)->content)->token_next == PIPE)
 	{
@@ -92,7 +91,7 @@ int	set_files_while(t_flags **flags, t_list **splitted,
 	i = 0;
 	while (*splitted)
 	{
-		res = set_files_while2(flags, splitted, i_infile, i_outfile);
+		res = set_files_while2(splitted);
 		if (res == 3)
 			break ;
 		else if (res == 1)
