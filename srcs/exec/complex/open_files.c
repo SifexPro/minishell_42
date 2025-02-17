@@ -16,6 +16,8 @@ int	open_infile(int index, int index_file, t_flags *flags)
 {
 	char	*file;
 
+	if (index > 0)
+		close(flags->fd_in[index]);
 	file = flags->pipe[flags->pipe_index]->infile[index_file]->file;
 	flags->fd_in[index] = open(file, O_RDONLY);
 	if (flags->fd_in[index] < 0)
@@ -28,6 +30,7 @@ int	open_outfile(int index, int index_file, t_flags *flags)
 	char	*file;
 
 	file = flags->pipe[flags->pipe_index]->outfile[index_file]->file;
+	close(flags->fd_out[index]);
 	if (flags->pipe[flags->pipe_index]->outfile[index_file]->is_append)
 		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_APPEND,
 				0644);

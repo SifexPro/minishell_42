@@ -25,6 +25,8 @@ static int	open_infile_pipe(t_flags *flags, int pipe_i, int infile_i, int i)
 			return (close_pipe(flags), exit(1), 0);
 	}
 	dup2(flags->fd_in[i], 0);
+	if (infile_i + 1 != flags->pipe[pipe_i]->infile_nb)
+		close(flags->fd_in[i]);
 	return (1);
 }
 
@@ -33,10 +35,12 @@ static int	open_outfile_pipe(t_flags *flags, int outfile_i, int i)
 	if (!open_outfile(i, outfile_i, flags))
 		return (close_pipe(flags), exit(1), 0);
 	dup2(flags->fd_out[i], 1);
+	if (outfile_i + 1 != flags->pipe[flags->pipe_index]->outfile_nb)
+		close(flags->fd_out[i]);
 	return (1);
 }
 
-bool	check_file_index(t_flags *flags, int index_check,
+static bool	check_file_index(t_flags *flags, int index_check,
 	int file_i, bool is_infile)
 {
 	int	file_nb;

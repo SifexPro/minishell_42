@@ -29,7 +29,6 @@ static t_flags	*init_flags(void)
 	return (flags);
 }
 
-//// check calloc etc
 static t_flags	*set_flags3(t_flags *flags)
 {
 	if (flags->pipe_nb > 0)
@@ -42,13 +41,13 @@ static t_flags	*set_flags3(t_flags *flags)
 			return (free_flags_pipe(flags, flags->pipe_nb),
 				free(flags->pid), NULL);
 		flags->fd_in = ft_memset(flags->fd_in, -1,
-				(sizeof(int) * flags->pipe_nb + 1));
+				(sizeof(int) * (flags->pipe_nb + 1)));
 		flags->fd_out = ft_calloc((flags->pipe_nb + 2), sizeof(int));
 		if (!flags->fd_out)
 			return (free_flags_pipe(flags, flags->pipe_nb),
 				free(flags->pid), free(flags->fd_in), NULL);
 		flags->fd_out = ft_memset(flags->fd_out, -1,
-				(sizeof(int) * flags->pipe_nb + 1));
+				(sizeof(int) * (flags->pipe_nb + 1)));
 	}
 	return (flags);
 }

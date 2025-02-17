@@ -44,6 +44,3 @@ void	file_error(char *error, char *file)
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(error, 2);
 }
-//close(pipe_fd[0]);
-//close(pipe_fd[1]);
-//return (exit_status);

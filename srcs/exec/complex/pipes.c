@@ -38,17 +38,15 @@ void	close_pipe(t_flags *flags)
 	i = 0;
 	if (!flags)
 		return ;
-	while (i < flags->pipe_nb)
+	while (i < flags->pipe_nb + 1)
 	{
 		if (flags->fd_in && flags->fd_in[i] != -1)
 		{
-			printf("close fd_in[%d]\n", i);
 			close(flags->fd_in[i]);
 			flags->fd_in[i] = -1;
 		}
 		if (flags->fd_out && flags->fd_out[i] != -1)
 		{
-			printf("close fd_out[%d]\n", i);
 			close(flags->fd_out[i]);
 			flags->fd_out[i] = -1;
 		}

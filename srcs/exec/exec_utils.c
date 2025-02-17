@@ -38,7 +38,7 @@ int	check_file(char *cmd_path, char *file)
 	}
 	fd = open(file, O_RDONLY);
 	if (fd == -1 && !access(file, F_OK))
-		return (exec_error("Permission denied", file), close(fd), 126);
+		return (exec_error("Permission denied", file), 126);
 	else if (fd == -1)
 		return (exec_error("No such file or directory", file), 127);
 	if (fstat(fd, &file_stat) == -1)
