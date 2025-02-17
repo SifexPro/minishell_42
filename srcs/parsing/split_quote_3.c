@@ -17,7 +17,6 @@ void	handle_pretext(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
 	char	*txt;
 	char	*end;
 
-	ft_printf("pretext nenv\n");
 	end = ft_strndup((char *)(&str[sp->quote_start + 1]),
 			sp->i - sp->quote_start - 1);
 	txt = ft_strjoin(sp->pretext, end);
@@ -32,7 +31,6 @@ void	handle_pretext_env(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
 	char	*txt;
 	char	*end;
 
-	ft_printf("pretext env\n");
 	end = handle_expansion(ft_strndup((char *)(&str[sp->quote_start + 1]),
 			sp->i - sp->quote_start - 1), env);
 	txt = ft_strjoin(sp->pretext, end);
@@ -46,7 +44,6 @@ void	concat_pretext(char *str, t_split_sh *sp)
 {
 	char	*txt;
 
-	ft_printf("concat)pretext\n");
 	txt = ft_strjoin(sp->pretext, str);
 	free(str);
 	if (sp->pretext)
@@ -56,7 +53,6 @@ void	concat_pretext(char *str, t_split_sh *sp)
 
 void	handle_start(t_split_sh *sp, char *str, t_ht *env)
 {
-	ft_printf("handle_start\n");
 	if (sp->i != sp->str_start || sp->pretext)
 		concat_pretext(handle_expansion(ft_strndup((char *)(&str[sp->str_start]),
 				sp->i - sp->str_start), env), sp);
