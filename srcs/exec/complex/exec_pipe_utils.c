@@ -19,22 +19,27 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp, t_flags *
 
 	if (!ft_strcmp(path, ""))
 		return (free_child(flags->env, flags->splitted, flags, envp),
-			exec_error("command not found", NULL), 127);
+			exec_error("command not found", NULL),
+			free_child(flags->env, flags->splitted, flags, envp), 127);
 	cmd_path = get_cmd_path(path, get_path(envp));
 	check = check_file(cmd_path, path);
 	if (check)
 		return (free_child(flags->env, flags->splitted, flags, envp), check);	
 	if (!cmd_path)
-		return (clear_env(envp), exec_error("Command not found", argv[0]), 127);////free_child(flags->env, flags->splitted, flags, envp)
+		return (clear_env(envp), exec_error("Command not found", argv[0]),
+			free_child(flags->env, flags->splitted, flags, envp), 127);////free_child(flags->env, flags->splitted, flags, envp)
 	else if (access(cmd_path, X_OK)
 		&& (ft_strncmp(cmd_path, ".", 1) || ft_strncmp(cmd_path, "/", 1)))
-		return (exec_error("command not found", path), free(cmd_path), 127);////...
+		return (exec_error("command not found", path),
+			free_child(flags->env, flags->splitted, flags, envp), 127);////...
 	else if (access(cmd_path, X_OK))
 		return (clear_env(envp),
-			exec_error("Permission denied", argv[0]), free(cmd_path), 126);////...
+			exec_error("Permission denied", argv[0]),
+			free_child(flags->env, flags->splitted, flags, envp), 126);////...
 	else if (execve(cmd_path, argv, envp) < 0)
 		return (clear_env(envp),
-			exec_error("failed to exec command", argv[0]), free(cmd_path), 1);////...
+			exec_error("failed to exec command", argv[0]),
+			free_child(flags->env, flags->splitted, flags, envp), 1);////...
 	return (0);
 }
 
