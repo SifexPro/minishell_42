@@ -12,34 +12,40 @@
 
 #include "minishell.h"
 
-static int	run_program_exec_pipe(char *path, char **argv, char **envp, t_flags *flags)
+static void	exec_pipe_error(char *error, char *cmd, t_flags *flags, char **envp)
+{
+	ft_putstr_fd("bash: ", 2);
+	if (cmd)
+		ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(error, 2);
+	free_child(flags->env, flags->splitted, flags, envp);
+}
+
+static int	run_program_exec_pipe(char *path, char **argv, char **envp,
+	t_flags *flags)
 {
 	char	*cmd_path;
 	int		check;
 
 	if (!ft_strcmp(path, ""))
-		return (free_child(flags->env, flags->splitted, flags, envp),
-			exec_error("command not found", NULL),
-			free_child(flags->env, flags->splitted, flags, envp), 127);
+		return (exec_pipe_error("command not found", NULL, flags, envp), 127);
 	cmd_path = get_cmd_path(path, get_path(envp));
 	check = check_file(cmd_path, path);
 	if (check)
 		return (free_child(flags->env, flags->splitted, flags, envp), check);	
 	if (!cmd_path)
-		return (clear_env(envp), exec_error("Command not found", argv[0]),
-			free_child(flags->env, flags->splitted, flags, envp), 127);////free_child(flags->env, flags->splitted, flags, envp)
+		return (clear_env(envp),
+			exec_pipe_error("Command not found", argv[0], flags, envp), 127);
 	else if (access(cmd_path, X_OK)
 		&& (ft_strncmp(cmd_path, ".", 1) || ft_strncmp(cmd_path, "/", 1)))
-		return (exec_error("command not found", path),
-			free_child(flags->env, flags->splitted, flags, envp), 127);////...
+		return (exec_pipe_error("command not found", path, flags, envp), 127);
 	else if (access(cmd_path, X_OK))
 		return (clear_env(envp),
-			exec_error("Permission denied", argv[0]),
-			free_child(flags->env, flags->splitted, flags, envp), 126);////...
+			exec_pipe_error("Permission denied", argv[0], flags, envp), 126);
 	else if (execve(cmd_path, argv, envp) < 0)
 		return (clear_env(envp),
-			exec_error("failed to exec command", argv[0]),
-			free_child(flags->env, flags->splitted, flags, envp), 1);////...
+			exec_pipe_error("failed to exec command", argv[0], flags, envp), 1);
 	return (0);
 }
 
