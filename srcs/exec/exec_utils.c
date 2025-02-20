@@ -29,7 +29,7 @@ int	check_file(char *cmd_path, char *file)
 	int			fd;
 
 	if (!((cmd_path && has_slash(cmd_path)) || (!cmd_path && has_slash(file)))
-		|| (cmd_path && !ft_strncmp(cmd_path, "/bin/", 5)))/// linux: "/usr/bin/", 9
+		|| (cmd_path && !ft_strncmp(cmd_path, "/usr/bin/", 9)))/// linux: "/usr/bin/", 9 | Mac: /bin/, 5
 	{
 		if ((cmd_path && !has_slash(cmd_path))
 			|| (!cmd_path && !has_slash(file)))
