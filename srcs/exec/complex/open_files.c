@@ -42,7 +42,21 @@ int	open_outfile(int index, int index_file, t_flags *flags)
 	return (1);
 }
 
-void	open_heredoc_while(int fd[2], char *heredoc)
+static bool	is_last_heredoc(t_flags *flags, int index_file)
+{
+	int	i;
+
+	i = index_file + 1;
+	while (i < flags->pipe[flags->pipe_index]->infile_nb)
+	{
+		if (flags->pipe[flags->pipe_index]->infile[i]->is_heredoc)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+static void	open_heredoc_while(int fd[2], char *heredoc)
 {
 	char	*line;
 
@@ -73,6 +87,9 @@ int	open_heredoc(int index, int index_file, t_flags *flags)
 	heredoc = flags->pipe[flags->pipe_index]->infile[index_file]->file;
 	open_heredoc_while(fd, heredoc);
 	close(fd[1]);
-	flags->fd_in[index] = fd[0];
+	if (!is_last_heredoc(flags, index_file))
+		close(fd[0]);
+	else
+		flags->fd_in[index] = fd[0];
 	return (1);
 }

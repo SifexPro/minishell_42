@@ -99,15 +99,17 @@ ouvre X*cat
 
 + < sqdds ls > test > test1
 + < sqdds < sqd ls > test > test1
++ > test > blocked < bloqsd> test > blocked < bloqsd
 
 - gerer mini | mini
-- > test > blocked < bloqsd> test > blocked < bloqsd
++ << 1 << 2 << 3
+- << 1 < Makefile << 2
+- echo
+- www
 
-- << 1 << 2 << 3
+POL: 
 - export a= e
 - export a==a
 - export a=""
 - export a1=""
-- echo
-- www
 - >>>/<<<
