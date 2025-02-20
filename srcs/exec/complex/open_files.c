@@ -14,14 +14,19 @@
 
 int	open_infile(int index, int index_file, t_flags *flags)
 {
+	int		fd;
 	char	*file;
 
-	if (index > 0)
+	if (flags->fd_in[index] != -1)
 		close(flags->fd_in[index]);
 	file = flags->pipe[flags->pipe_index]->infile[index_file]->file;
-	flags->fd_in[index] = open(file, O_RDONLY);
-	if (flags->fd_in[index] < 0)
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
 		return (file_error(strerror(errno), file), 0);
+	if (index_file + 1 != flags->pipe[flags->pipe_index]->infile_nb)
+		close(fd);
+	else
+		flags->fd_in[index] = fd;
 	return (1);
 }
 
@@ -29,8 +34,9 @@ int	open_outfile(int index, int index_file, t_flags *flags)
 {
 	char	*file;
 
+	if (flags->fd_out[index] != -1)
+		close(flags->fd_out[index]);
 	file = flags->pipe[flags->pipe_index]->outfile[index_file]->file;
-	close(flags->fd_out[index]);
 	if (flags->pipe[flags->pipe_index]->outfile[index_file]->is_append)
 		flags->fd_out[index] = open(file, O_WRONLY | O_CREAT | O_APPEND,
 				0644);
@@ -40,20 +46,6 @@ int	open_outfile(int index, int index_file, t_flags *flags)
 	if (flags->fd_out[index] < 0)
 		return (file_error(strerror(errno), file), 0);
 	return (1);
-}
-
-static bool	is_last_heredoc(t_flags *flags, int index_file)
-{
-	int	i;
-
-	i = index_file + 1;
-	while (i < flags->pipe[flags->pipe_index]->infile_nb)
-	{
-		if (flags->pipe[flags->pipe_index]->infile[i]->is_heredoc)
-			return (false);
-		i++;
-	}
-	return (true);
 }
 
 static void	open_heredoc_while(int fd[2], char *heredoc)
@@ -87,7 +79,7 @@ int	open_heredoc(int index, int index_file, t_flags *flags)
 	heredoc = flags->pipe[flags->pipe_index]->infile[index_file]->file;
 	open_heredoc_while(fd, heredoc);
 	close(fd[1]);
-	if (!is_last_heredoc(flags, index_file))
+	if (index_file + 1 != flags->pipe[flags->pipe_index]->infile_nb)
 		close(fd[0]);
 	else
 		flags->fd_in[index] = fd[0];
