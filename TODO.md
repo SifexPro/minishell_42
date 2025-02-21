@@ -112,4 +112,7 @@ POL:
 - export a==a
 - export a=""
 - export a1=""
+si token étranges :
 - >>>/<<<
+- <>
+- peut etre d'autres essaye de fix pour tout
