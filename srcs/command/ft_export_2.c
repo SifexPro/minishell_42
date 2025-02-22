@@ -12,11 +12,28 @@
 
 #include "minishell.h"
 
+char	**custom_splitted(char *argv)
+{
+	char	**split_argv;
+	int		i;
+
+	i = 0;
+	split_argv = malloc(sizeof(char *) * 3);
+	if (!split_argv)
+		return (NULL);
+	while (argv[i] && argv[i] != '=')
+		i++;
+	split_argv[0] = ft_strndup(argv, i);
+	split_argv[1] = ft_strdup(&argv[i + 1]);
+	split_argv[2] = NULL;
+	return (split_argv);
+}
+
 char	**get_export_splitted(char *argv)
 {
 	char	**split_argv;
 
-	split_argv = ft_split(argv, '=');
+	split_argv = custom_splitted(argv);
 	if (!split_argv)
 		return (NULL);
 	if (!split_argv[0])

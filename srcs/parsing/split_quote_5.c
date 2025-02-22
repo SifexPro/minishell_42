@@ -19,8 +19,9 @@ int	process_next_elem(t_pars *pars, int delimiter)
 	pars->tmp = pars->elements->next->content;
 	if (delimiter == PIPE)
 		pipe_case(pars, pars->tmp);
-	else
+	else if (pars->tmp && pars->tmp->content)
 	{
+		ft_printf("pars->tmp_exec->argv %i\n", pars->tmp_exec->i);
 		pars->tmp_exec->argv[pars->tmp_exec->i] = ft_strdup(pars->tmp->content);
 		free(pars->tmp->content);
 		pars->tmp->content = NULL;

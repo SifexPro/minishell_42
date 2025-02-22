@@ -40,5 +40,6 @@ int	ft_pwd(int argc, char **argv)
 	printf("%s\n", pwd);
 	(void)argc;
 	(void)argv;
+	free(pwd);
 	return (0);
 }

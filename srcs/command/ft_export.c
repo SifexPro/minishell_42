@@ -24,6 +24,20 @@ bool	has_plus(char *str)
 	return (str[i - 1] == '+');
 }
 
+bool	has_equal(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 bool	is_valid_identifier(char *str)
 {
 	int		i;
@@ -59,6 +73,8 @@ int	process_line(char *argv, t_ht *env)
 			prev = ft_strdup(prev);
 	}
 	ht_deletef(env, split_argv[0]);
+	if (!split_argv[1] && has_equal(argv))
+		return (ht_insert(env, split_argv[0], ft_strdup("")), ft_freesplit(split_argv), free(split_argv), 0);
 	if (!split_argv[1])
 		return (ft_freesplit(split_argv), free(split_argv), 0);
 	if (prev)
@@ -90,6 +106,7 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 	if (argc == 1)
 	{
 		show_export(envp);
+		clear_env(envp);
 		return (0);
 	}
 	while (argv[i])
@@ -103,7 +120,7 @@ int	ft_export(int argc, char **argv, t_ht *env, char **envp)
 		}
 		i++;
 	}
-	////clear_env(envp);
+	clear_env(envp);
 	if (has_error)
 		return (1);
 	return (0);

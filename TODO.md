@@ -40,10 +40,10 @@ gerer export avec _
 -x echo a'b'
 -x ab
 
-- Leaks avec `< Makefile cat |`
-- `cat` CTRL + C affiche 2 terminal
-- Makefile qui fait pas de .o
-- -Wall -Werror -Wextra
+-x Leaks avec `< Makefile cat |`
+-x `cat` CTRL + C affiche 2 terminal
+-x Makefile qui fait pas de .o
+-x -Wall -Werror -Wextra
 
 ## CRASH
 
@@ -108,11 +108,12 @@ ouvre X*cat
 - www
 
 POL: 
-- export a= e
-- export a==a
-- export a=""
-- export a1=""
+-x export a= e
+-x export a==a
+-x export a=""
+-x export a1=""
 si token étranges :
-- >>>/<<<
-- <>
-- peut etre d'autres essaye de fix pour tout
+-x >>>/<<<
+-x <>
+-x peut etre d'autres essaye de fix pour tout
+-  Fix echo test|>

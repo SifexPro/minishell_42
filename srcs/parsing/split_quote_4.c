@@ -59,8 +59,11 @@ int	pipe_case(t_pars *pars, t_splitted *tmp)
 	{
 		handle_content_after(pars, tmp);
 	}
-	else if (tmp->delimiter > -1 && tmp->delimiter != PIPE)
+	else if (tmp->delimiter > -1 && tmp->delimiter != PIPE && pars->tmp && pars->elements && pars->elements->next && pars->elements->next->content)
 	{
+		ft_printf("pars->tmp->content %p\n", pars->elements->next);
+		ft_printf("pars->elements->next->content %p\n", pars->elements->next->content);
+		//ft_printf("pars->elements->next->content->delimiter %i\n", pars->elements->next->content->delimiter);
 		pars->delimiter = tmp->delimiter;
 		pars->elements = pars->elements->next;
 		pars->tmp = pars->elements->next->content;

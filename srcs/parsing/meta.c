@@ -95,7 +95,7 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	content->is_delimiter = true;
 	content->delimiter = -1;
 	if (handle_meta_3(str, sp, content))
-		return (1);
+		return (free(content), 1);
 	ft_lstadd_back(elem, ft_lstnew(content));
 	while (ft_str_is_whitespace(str[sp->str_start]))
 		sp->str_start++;
