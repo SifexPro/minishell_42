@@ -6,8 +6,8 @@ CC			=	clang
 INCLUDE 	=	./includes/
 INCLUDE_LIBFT = $(addprefix $(LIBFT), includes/)
 
-CFLAGS		=	-Wall -Werror -Wextra -g -I$(INCLUDE_LIBFT) -I$(INCLUDE)
-#CFLAGS		=	-Wall -Werror -Wextra -gdwarf-4 -I$(INCLUDE_LIBFT) -I$(INCLUDE)
+#CFLAGS		=	-Wall -Werror -Wextra -g -I$(INCLUDE_LIBFT) -I$(INCLUDE)
+CFLAGS		=	-Wall -Werror -Wextra -gdwarf-4 -I$(INCLUDE_LIBFT) -I$(INCLUDE)
 RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	srcs/main.c \

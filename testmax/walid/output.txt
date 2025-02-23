@@ -1,0 +1,2499 @@
+Exécution de Valgrind pour: \n
+==33132== Memcheck, a memory error detector
+==33132== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33132== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33132== Command: ../../minishell
+==33132== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m\n
+bash: \n: command not found
+==33135== 
+==33135== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33135== 
+==33135== HEAP SUMMARY:
+==33135==     in use at exit: 208,247 bytes in 225 blocks
+==33135==   total heap usage: 968 allocs, 743 frees, 264,996 bytes allocated
+==33135== 
+==33135== LEAK SUMMARY:
+==33135==    definitely lost: 0 bytes in 0 blocks
+==33135==    indirectly lost: 0 bytes in 0 blocks
+==33135==      possibly lost: 0 bytes in 0 blocks
+==33135==    still reachable: 0 bytes in 0 blocks
+==33135==         suppressed: 208,247 bytes in 225 blocks
+==33135== 
+==33135== For lists of detected and suppressed errors, rerun with: -s
+==33135== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33132== 
+==33132== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33132== 
+==33132== HEAP SUMMARY:
+==33132==     in use at exit: 215,146 bytes in 321 blocks
+==33132==   total heap usage: 871 allocs, 550 frees, 268,148 bytes allocated
+==33132== 
+==33132== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x109698: handle_lst_status (prefix.c:57)
+==33132==    by 0x1093BE: process_input (main.c:38)
+==33132==    by 0x1094BF: main (main.c:67)
+==33132== 
+==33132== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x109670: handle_lst_status (prefix.c:55)
+==33132==    by 0x1093BE: process_input (main.c:38)
+==33132==    by 0x1094BF: main (main.c:67)
+==33132== 
+==33132== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x109698: handle_lst_status (prefix.c:57)
+==33132==    by 0x1093BE: process_input (main.c:38)
+==33132==    by 0x1094BF: main (main.c:67)
+==33132== 
+==33132== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x10A817: register_env_var (expansion.c:108)
+==33132==    by 0x109463: main (main.c:60)
+==33132== 
+==33132== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x10A817: register_env_var (expansion.c:108)
+==33132==    by 0x109463: main (main.c:60)
+==33132== 
+==33132== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33132==    by 0x109463: main (main.c:60)
+==33132== 
+==33132== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x10942D: main (main.c:57)
+==33132== 
+==33132== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33132==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33132==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33132==    by 0x10942D: main (main.c:57)
+==33132== 
+==33132== LEAK SUMMARY:
+==33132==    definitely lost: 24 bytes in 1 blocks
+==33132==    indirectly lost: 6,874 bytes in 94 blocks
+==33132==      possibly lost: 0 bytes in 0 blocks
+==33132==    still reachable: 0 bytes in 0 blocks
+==33132==         suppressed: 208,248 bytes in 226 blocks
+==33132== 
+==33132== For lists of detected and suppressed errors, rerun with: -s
+==33132== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: :
+==33137== Memcheck, a memory error detector
+==33137== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33137== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33137== Command: ../../minishell
+==33137== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m:
+bash: :: command not found
+==33139== 
+==33139== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33139== 
+==33139== HEAP SUMMARY:
+==33139==     in use at exit: 208,246 bytes in 225 blocks
+==33139==   total heap usage: 968 allocs, 743 frees, 264,943 bytes allocated
+==33139== 
+==33139== LEAK SUMMARY:
+==33139==    definitely lost: 0 bytes in 0 blocks
+==33139==    indirectly lost: 0 bytes in 0 blocks
+==33139==      possibly lost: 0 bytes in 0 blocks
+==33139==    still reachable: 0 bytes in 0 blocks
+==33139==         suppressed: 208,246 bytes in 225 blocks
+==33139== 
+==33139== For lists of detected and suppressed errors, rerun with: -s
+==33139== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33137== 
+==33137== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33137== 
+==33137== HEAP SUMMARY:
+==33137==     in use at exit: 215,145 bytes in 321 blocks
+==33137==   total heap usage: 871 allocs, 550 frees, 268,143 bytes allocated
+==33137== 
+==33137== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x109698: handle_lst_status (prefix.c:57)
+==33137==    by 0x1093BE: process_input (main.c:38)
+==33137==    by 0x1094BF: main (main.c:67)
+==33137== 
+==33137== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x109670: handle_lst_status (prefix.c:55)
+==33137==    by 0x1093BE: process_input (main.c:38)
+==33137==    by 0x1094BF: main (main.c:67)
+==33137== 
+==33137== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x109698: handle_lst_status (prefix.c:57)
+==33137==    by 0x1093BE: process_input (main.c:38)
+==33137==    by 0x1094BF: main (main.c:67)
+==33137== 
+==33137== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x10A817: register_env_var (expansion.c:108)
+==33137==    by 0x109463: main (main.c:60)
+==33137== 
+==33137== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x10A817: register_env_var (expansion.c:108)
+==33137==    by 0x109463: main (main.c:60)
+==33137== 
+==33137== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33137==    by 0x109463: main (main.c:60)
+==33137== 
+==33137== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x10942D: main (main.c:57)
+==33137== 
+==33137== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33137==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33137==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33137==    by 0x10942D: main (main.c:57)
+==33137== 
+==33137== LEAK SUMMARY:
+==33137==    definitely lost: 24 bytes in 1 blocks
+==33137==    indirectly lost: 6,874 bytes in 94 blocks
+==33137==      possibly lost: 0 bytes in 0 blocks
+==33137==    still reachable: 0 bytes in 0 blocks
+==33137==         suppressed: 208,247 bytes in 226 blocks
+==33137== 
+==33137== For lists of detected and suppressed errors, rerun with: -s
+==33137== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: !
+==33141== Memcheck, a memory error detector
+==33141== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33141== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33141== Command: ../../minishell
+==33141== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m!
+bash: !: command not found
+==33144== 
+==33144== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33144== 
+==33144== HEAP SUMMARY:
+==33144==     in use at exit: 208,246 bytes in 225 blocks
+==33144==   total heap usage: 968 allocs, 743 frees, 264,943 bytes allocated
+==33144== 
+==33144== LEAK SUMMARY:
+==33144==    definitely lost: 0 bytes in 0 blocks
+==33144==    indirectly lost: 0 bytes in 0 blocks
+==33144==      possibly lost: 0 bytes in 0 blocks
+==33144==    still reachable: 0 bytes in 0 blocks
+==33144==         suppressed: 208,246 bytes in 225 blocks
+==33144== 
+==33144== For lists of detected and suppressed errors, rerun with: -s
+==33144== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33141== 
+==33141== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33141== 
+==33141== HEAP SUMMARY:
+==33141==     in use at exit: 215,145 bytes in 321 blocks
+==33141==   total heap usage: 871 allocs, 550 frees, 268,143 bytes allocated
+==33141== 
+==33141== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x109698: handle_lst_status (prefix.c:57)
+==33141==    by 0x1093BE: process_input (main.c:38)
+==33141==    by 0x1094BF: main (main.c:67)
+==33141== 
+==33141== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x109670: handle_lst_status (prefix.c:55)
+==33141==    by 0x1093BE: process_input (main.c:38)
+==33141==    by 0x1094BF: main (main.c:67)
+==33141== 
+==33141== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x109698: handle_lst_status (prefix.c:57)
+==33141==    by 0x1093BE: process_input (main.c:38)
+==33141==    by 0x1094BF: main (main.c:67)
+==33141== 
+==33141== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x10A817: register_env_var (expansion.c:108)
+==33141==    by 0x109463: main (main.c:60)
+==33141== 
+==33141== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x10A817: register_env_var (expansion.c:108)
+==33141==    by 0x109463: main (main.c:60)
+==33141== 
+==33141== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33141==    by 0x109463: main (main.c:60)
+==33141== 
+==33141== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x10942D: main (main.c:57)
+==33141== 
+==33141== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33141==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33141==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33141==    by 0x10942D: main (main.c:57)
+==33141== 
+==33141== LEAK SUMMARY:
+==33141==    definitely lost: 24 bytes in 1 blocks
+==33141==    indirectly lost: 6,874 bytes in 94 blocks
+==33141==      possibly lost: 0 bytes in 0 blocks
+==33141==    still reachable: 0 bytes in 0 blocks
+==33141==         suppressed: 208,247 bytes in 226 blocks
+==33141== 
+==33141== For lists of detected and suppressed errors, rerun with: -s
+==33141== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >
+==33145== Memcheck, a memory error detector
+==33145== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33145== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33145== Command: ../../minishell
+==33145== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m>
+bash: syntax error near unexpected token `>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33145== 
+==33145== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33145== 
+==33145== HEAP SUMMARY:
+==33145==     in use at exit: 215,143 bytes in 321 blocks
+==33145==   total heap usage: 831 allocs, 510 frees, 264,497 bytes allocated
+==33145== 
+==33145== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33145==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33145==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33145==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33145==    by 0x109A0F: parse_cmd (exec.c:109)
+==33145==    by 0x1093AA: process_input (main.c:36)
+==33145==    by 0x1094BF: main (main.c:67)
+==33145== 
+==33145== 2 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33145==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33145==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33145==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33145==    by 0x109A0F: parse_cmd (exec.c:109)
+==33145==    by 0x1093AA: process_input (main.c:36)
+==33145==    by 0x1094BF: main (main.c:67)
+==33145== 
+==33145== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33145==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33145==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33145==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33145==    by 0x109A0F: parse_cmd (exec.c:109)
+==33145==    by 0x1093AA: process_input (main.c:36)
+==33145==    by 0x1094BF: main (main.c:67)
+==33145== 
+==33145== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10A817: register_env_var (expansion.c:108)
+==33145==    by 0x109463: main (main.c:60)
+==33145== 
+==33145== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10A817: register_env_var (expansion.c:108)
+==33145==    by 0x109463: main (main.c:60)
+==33145== 
+==33145== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33145==    by 0x109463: main (main.c:60)
+==33145== 
+==33145== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10942D: main (main.c:57)
+==33145== 
+==33145== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33145==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33145==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33145==    by 0x10942D: main (main.c:57)
+==33145== 
+==33145== LEAK SUMMARY:
+==33145==    definitely lost: 24 bytes in 1 blocks
+==33145==    indirectly lost: 6,872 bytes in 94 blocks
+==33145==      possibly lost: 0 bytes in 0 blocks
+==33145==    still reachable: 0 bytes in 0 blocks
+==33145==         suppressed: 208,247 bytes in 226 blocks
+==33145== 
+==33145== For lists of detected and suppressed errors, rerun with: -s
+==33145== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: <
+==33148== Memcheck, a memory error detector
+==33148== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33148== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33148== Command: ../../minishell
+==33148== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m<
+bash: syntax error near unexpected token `<`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33148== 
+==33148== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33148== 
+==33148== HEAP SUMMARY:
+==33148==     in use at exit: 215,143 bytes in 321 blocks
+==33148==   total heap usage: 831 allocs, 510 frees, 264,497 bytes allocated
+==33148== 
+==33148== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33148==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33148==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33148==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33148==    by 0x109A0F: parse_cmd (exec.c:109)
+==33148==    by 0x1093AA: process_input (main.c:36)
+==33148==    by 0x1094BF: main (main.c:67)
+==33148== 
+==33148== 2 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33148==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33148==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33148==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33148==    by 0x109A0F: parse_cmd (exec.c:109)
+==33148==    by 0x1093AA: process_input (main.c:36)
+==33148==    by 0x1094BF: main (main.c:67)
+==33148== 
+==33148== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33148==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33148==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33148==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33148==    by 0x109A0F: parse_cmd (exec.c:109)
+==33148==    by 0x1093AA: process_input (main.c:36)
+==33148==    by 0x1094BF: main (main.c:67)
+==33148== 
+==33148== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10A817: register_env_var (expansion.c:108)
+==33148==    by 0x109463: main (main.c:60)
+==33148== 
+==33148== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10A817: register_env_var (expansion.c:108)
+==33148==    by 0x109463: main (main.c:60)
+==33148== 
+==33148== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33148==    by 0x109463: main (main.c:60)
+==33148== 
+==33148== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10942D: main (main.c:57)
+==33148== 
+==33148== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33148==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33148==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33148==    by 0x10942D: main (main.c:57)
+==33148== 
+==33148== LEAK SUMMARY:
+==33148==    definitely lost: 24 bytes in 1 blocks
+==33148==    indirectly lost: 6,872 bytes in 94 blocks
+==33148==      possibly lost: 0 bytes in 0 blocks
+==33148==    still reachable: 0 bytes in 0 blocks
+==33148==         suppressed: 208,247 bytes in 226 blocks
+==33148== 
+==33148== For lists of detected and suppressed errors, rerun with: -s
+==33148== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >>
+==33151== Memcheck, a memory error detector
+==33151== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33151== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33151== Command: ../../minishell
+==33151== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m>>
+bash: syntax error near unexpected token `>>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33151== 
+==33151== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33151== 
+==33151== HEAP SUMMARY:
+==33151==     in use at exit: 215,144 bytes in 321 blocks
+==33151==   total heap usage: 831 allocs, 510 frees, 264,499 bytes allocated
+==33151== 
+==33151== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33151==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33151==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33151==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33151==    by 0x109A0F: parse_cmd (exec.c:109)
+==33151==    by 0x1093AA: process_input (main.c:36)
+==33151==    by 0x1094BF: main (main.c:67)
+==33151== 
+==33151== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33151==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33151==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33151==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33151==    by 0x109A0F: parse_cmd (exec.c:109)
+==33151==    by 0x1093AA: process_input (main.c:36)
+==33151==    by 0x1094BF: main (main.c:67)
+==33151== 
+==33151== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33151==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33151==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33151==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33151==    by 0x109A0F: parse_cmd (exec.c:109)
+==33151==    by 0x1093AA: process_input (main.c:36)
+==33151==    by 0x1094BF: main (main.c:67)
+==33151== 
+==33151== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10A817: register_env_var (expansion.c:108)
+==33151==    by 0x109463: main (main.c:60)
+==33151== 
+==33151== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10A817: register_env_var (expansion.c:108)
+==33151==    by 0x109463: main (main.c:60)
+==33151== 
+==33151== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33151==    by 0x109463: main (main.c:60)
+==33151== 
+==33151== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10942D: main (main.c:57)
+==33151== 
+==33151== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33151==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33151==    by 0x10942D: main (main.c:57)
+==33151== 
+==33151== LEAK SUMMARY:
+==33151==    definitely lost: 24 bytes in 1 blocks
+==33151==    indirectly lost: 6,872 bytes in 94 blocks
+==33151==      possibly lost: 0 bytes in 0 blocks
+==33151==    still reachable: 0 bytes in 0 blocks
+==33151==         suppressed: 208,248 bytes in 226 blocks
+==33151== 
+==33151== For lists of detected and suppressed errors, rerun with: -s
+==33151== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: <<
+==33154== Memcheck, a memory error detector
+==33154== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33154== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33154== Command: ../../minishell
+==33154== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m<<
+bash: syntax error near unexpected token `<<`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33154== 
+==33154== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33154== 
+==33154== HEAP SUMMARY:
+==33154==     in use at exit: 215,144 bytes in 321 blocks
+==33154==   total heap usage: 831 allocs, 510 frees, 264,499 bytes allocated
+==33154== 
+==33154== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33154==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33154==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33154==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33154==    by 0x109A0F: parse_cmd (exec.c:109)
+==33154==    by 0x1093AA: process_input (main.c:36)
+==33154==    by 0x1094BF: main (main.c:67)
+==33154== 
+==33154== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33154==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33154==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33154==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33154==    by 0x109A0F: parse_cmd (exec.c:109)
+==33154==    by 0x1093AA: process_input (main.c:36)
+==33154==    by 0x1094BF: main (main.c:67)
+==33154== 
+==33154== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33154==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33154==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33154==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33154==    by 0x109A0F: parse_cmd (exec.c:109)
+==33154==    by 0x1093AA: process_input (main.c:36)
+==33154==    by 0x1094BF: main (main.c:67)
+==33154== 
+==33154== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10A817: register_env_var (expansion.c:108)
+==33154==    by 0x109463: main (main.c:60)
+==33154== 
+==33154== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10A817: register_env_var (expansion.c:108)
+==33154==    by 0x109463: main (main.c:60)
+==33154== 
+==33154== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33154==    by 0x109463: main (main.c:60)
+==33154== 
+==33154== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10942D: main (main.c:57)
+==33154== 
+==33154== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33154==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33154==    by 0x10942D: main (main.c:57)
+==33154== 
+==33154== LEAK SUMMARY:
+==33154==    definitely lost: 24 bytes in 1 blocks
+==33154==    indirectly lost: 6,872 bytes in 94 blocks
+==33154==      possibly lost: 0 bytes in 0 blocks
+==33154==    still reachable: 0 bytes in 0 blocks
+==33154==         suppressed: 208,248 bytes in 226 blocks
+==33154== 
+==33154== For lists of detected and suppressed errors, rerun with: -s
+==33154== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: <>
+==33157== Memcheck, a memory error detector
+==33157== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33157== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33157== Command: ../../minishell
+==33157== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m<>
+bash: syntax error near unexpected token `>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33157== 
+==33157== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33157== 
+==33157== HEAP SUMMARY:
+==33157==     in use at exit: 215,144 bytes in 321 blocks
+==33157==   total heap usage: 833 allocs, 512 frees, 264,539 bytes allocated
+==33157== 
+==33157== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33157==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33157==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33157==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33157==    by 0x109A0F: parse_cmd (exec.c:109)
+==33157==    by 0x1093AA: process_input (main.c:36)
+==33157==    by 0x1094BF: main (main.c:67)
+==33157== 
+==33157== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33157==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33157==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33157==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33157==    by 0x109A0F: parse_cmd (exec.c:109)
+==33157==    by 0x1093AA: process_input (main.c:36)
+==33157==    by 0x1094BF: main (main.c:67)
+==33157== 
+==33157== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33157==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33157==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33157==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33157==    by 0x109A0F: parse_cmd (exec.c:109)
+==33157==    by 0x1093AA: process_input (main.c:36)
+==33157==    by 0x1094BF: main (main.c:67)
+==33157== 
+==33157== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10A817: register_env_var (expansion.c:108)
+==33157==    by 0x109463: main (main.c:60)
+==33157== 
+==33157== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10A817: register_env_var (expansion.c:108)
+==33157==    by 0x109463: main (main.c:60)
+==33157== 
+==33157== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33157==    by 0x109463: main (main.c:60)
+==33157== 
+==33157== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10942D: main (main.c:57)
+==33157== 
+==33157== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33157==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33157==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33157==    by 0x10942D: main (main.c:57)
+==33157== 
+==33157== LEAK SUMMARY:
+==33157==    definitely lost: 24 bytes in 1 blocks
+==33157==    indirectly lost: 6,872 bytes in 94 blocks
+==33157==      possibly lost: 0 bytes in 0 blocks
+==33157==    still reachable: 0 bytes in 0 blocks
+==33157==         suppressed: 208,248 bytes in 226 blocks
+==33157== 
+==33157== For lists of detected and suppressed errors, rerun with: -s
+==33157== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >>>>>
+==33160== Memcheck, a memory error detector
+==33160== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33160== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33160== Command: ../../minishell
+==33160== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m>>>>>
+bash: syntax error near unexpected token `>>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33160== 
+==33160== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33160== 
+==33160== HEAP SUMMARY:
+==33160==     in use at exit: 215,147 bytes in 321 blocks
+==33160==   total heap usage: 835 allocs, 514 frees, 264,585 bytes allocated
+==33160== 
+==33160== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33160==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33160==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33160==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33160==    by 0x109A0F: parse_cmd (exec.c:109)
+==33160==    by 0x1093AA: process_input (main.c:36)
+==33160==    by 0x1094BF: main (main.c:67)
+==33160== 
+==33160== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33160==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33160==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33160==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33160==    by 0x109A0F: parse_cmd (exec.c:109)
+==33160==    by 0x1093AA: process_input (main.c:36)
+==33160==    by 0x1094BF: main (main.c:67)
+==33160== 
+==33160== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33160==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33160==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33160==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33160==    by 0x109A0F: parse_cmd (exec.c:109)
+==33160==    by 0x1093AA: process_input (main.c:36)
+==33160==    by 0x1094BF: main (main.c:67)
+==33160== 
+==33160== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10A817: register_env_var (expansion.c:108)
+==33160==    by 0x109463: main (main.c:60)
+==33160== 
+==33160== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10A817: register_env_var (expansion.c:108)
+==33160==    by 0x109463: main (main.c:60)
+==33160== 
+==33160== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33160==    by 0x109463: main (main.c:60)
+==33160== 
+==33160== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10942D: main (main.c:57)
+==33160== 
+==33160== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33160==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33160==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33160==    by 0x10942D: main (main.c:57)
+==33160== 
+==33160== LEAK SUMMARY:
+==33160==    definitely lost: 24 bytes in 1 blocks
+==33160==    indirectly lost: 6,872 bytes in 94 blocks
+==33160==      possibly lost: 0 bytes in 0 blocks
+==33160==    still reachable: 0 bytes in 0 blocks
+==33160==         suppressed: 208,251 bytes in 226 blocks
+==33160== 
+==33160== For lists of detected and suppressed errors, rerun with: -s
+==33160== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >>>>>>>>>>>>>>>
+==33163== Memcheck, a memory error detector
+==33163== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33163== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33163== Command: ../../minishell
+==33163== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m>>>>>>>>>>>>>>>
+bash: syntax error near unexpected token `>>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33163== 
+==33163== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33163== 
+==33163== HEAP SUMMARY:
+==33163==     in use at exit: 215,157 bytes in 321 blocks
+==33163==   total heap usage: 845 allocs, 524 frees, 264,805 bytes allocated
+==33163== 
+==33163== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33163==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33163==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33163==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33163==    by 0x109A0F: parse_cmd (exec.c:109)
+==33163==    by 0x1093AA: process_input (main.c:36)
+==33163==    by 0x1094BF: main (main.c:67)
+==33163== 
+==33163== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33163==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33163==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33163==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33163==    by 0x109A0F: parse_cmd (exec.c:109)
+==33163==    by 0x1093AA: process_input (main.c:36)
+==33163==    by 0x1094BF: main (main.c:67)
+==33163== 
+==33163== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33163==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33163==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33163==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33163==    by 0x109A0F: parse_cmd (exec.c:109)
+==33163==    by 0x1093AA: process_input (main.c:36)
+==33163==    by 0x1094BF: main (main.c:67)
+==33163== 
+==33163== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10A817: register_env_var (expansion.c:108)
+==33163==    by 0x109463: main (main.c:60)
+==33163== 
+==33163== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10A817: register_env_var (expansion.c:108)
+==33163==    by 0x109463: main (main.c:60)
+==33163== 
+==33163== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33163==    by 0x109463: main (main.c:60)
+==33163== 
+==33163== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10942D: main (main.c:57)
+==33163== 
+==33163== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33163==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33163==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33163==    by 0x10942D: main (main.c:57)
+==33163== 
+==33163== LEAK SUMMARY:
+==33163==    definitely lost: 24 bytes in 1 blocks
+==33163==    indirectly lost: 6,872 bytes in 94 blocks
+==33163==      possibly lost: 0 bytes in 0 blocks
+==33163==    still reachable: 0 bytes in 0 blocks
+==33163==         suppressed: 208,261 bytes in 226 blocks
+==33163== 
+==33163== For lists of detected and suppressed errors, rerun with: -s
+==33163== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: <<<<<
+==33166== Memcheck, a memory error detector
+==33166== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33166== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33166== Command: ../../minishell
+==33166== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m<<<<<
+bash: syntax error near unexpected token `<<`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33166== 
+==33166== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33166== 
+==33166== HEAP SUMMARY:
+==33166==     in use at exit: 215,147 bytes in 321 blocks
+==33166==   total heap usage: 835 allocs, 514 frees, 264,585 bytes allocated
+==33166== 
+==33166== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33166==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33166==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33166==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33166==    by 0x109A0F: parse_cmd (exec.c:109)
+==33166==    by 0x1093AA: process_input (main.c:36)
+==33166==    by 0x1094BF: main (main.c:67)
+==33166== 
+==33166== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33166==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33166==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33166==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33166==    by 0x109A0F: parse_cmd (exec.c:109)
+==33166==    by 0x1093AA: process_input (main.c:36)
+==33166==    by 0x1094BF: main (main.c:67)
+==33166== 
+==33166== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33166==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33166==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33166==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33166==    by 0x109A0F: parse_cmd (exec.c:109)
+==33166==    by 0x1093AA: process_input (main.c:36)
+==33166==    by 0x1094BF: main (main.c:67)
+==33166== 
+==33166== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10A817: register_env_var (expansion.c:108)
+==33166==    by 0x109463: main (main.c:60)
+==33166== 
+==33166== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10A817: register_env_var (expansion.c:108)
+==33166==    by 0x109463: main (main.c:60)
+==33166== 
+==33166== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33166==    by 0x109463: main (main.c:60)
+==33166== 
+==33166== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10942D: main (main.c:57)
+==33166== 
+==33166== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33166==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33166==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33166==    by 0x10942D: main (main.c:57)
+==33166== 
+==33166== LEAK SUMMARY:
+==33166==    definitely lost: 24 bytes in 1 blocks
+==33166==    indirectly lost: 6,872 bytes in 94 blocks
+==33166==      possibly lost: 0 bytes in 0 blocks
+==33166==    still reachable: 0 bytes in 0 blocks
+==33166==         suppressed: 208,251 bytes in 226 blocks
+==33166== 
+==33166== For lists of detected and suppressed errors, rerun with: -s
+==33166== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: <<<<<<<<<<<<<<<<
+==33169== Memcheck, a memory error detector
+==33169== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33169== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33169== Command: ../../minishell
+==33169== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m<<<<<<<<<<<<<<<<
+bash: syntax error near unexpected token `<<`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33169== 
+==33169== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33169== 
+==33169== HEAP SUMMARY:
+==33169==     in use at exit: 215,158 bytes in 321 blocks
+==33169==   total heap usage: 845 allocs, 524 frees, 264,807 bytes allocated
+==33169== 
+==33169== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33169==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33169==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33169==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33169==    by 0x109A0F: parse_cmd (exec.c:109)
+==33169==    by 0x1093AA: process_input (main.c:36)
+==33169==    by 0x1094BF: main (main.c:67)
+==33169== 
+==33169== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33169==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33169==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33169==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33169==    by 0x109A0F: parse_cmd (exec.c:109)
+==33169==    by 0x1093AA: process_input (main.c:36)
+==33169==    by 0x1094BF: main (main.c:67)
+==33169== 
+==33169== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33169==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33169==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33169==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33169==    by 0x109A0F: parse_cmd (exec.c:109)
+==33169==    by 0x1093AA: process_input (main.c:36)
+==33169==    by 0x1094BF: main (main.c:67)
+==33169== 
+==33169== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10A817: register_env_var (expansion.c:108)
+==33169==    by 0x109463: main (main.c:60)
+==33169== 
+==33169== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10A817: register_env_var (expansion.c:108)
+==33169==    by 0x109463: main (main.c:60)
+==33169== 
+==33169== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33169==    by 0x109463: main (main.c:60)
+==33169== 
+==33169== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10942D: main (main.c:57)
+==33169== 
+==33169== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33169==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33169==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33169==    by 0x10942D: main (main.c:57)
+==33169== 
+==33169== LEAK SUMMARY:
+==33169==    definitely lost: 24 bytes in 1 blocks
+==33169==    indirectly lost: 6,872 bytes in 94 blocks
+==33169==      possibly lost: 0 bytes in 0 blocks
+==33169==    still reachable: 0 bytes in 0 blocks
+==33169==         suppressed: 208,262 bytes in 226 blocks
+==33169== 
+==33169== For lists of detected and suppressed errors, rerun with: -s
+==33169== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: > > > >
+==33172== Memcheck, a memory error detector
+==33172== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33172== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33172== Command: ../../minishell
+==33172== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m> > > >
+bash: syntax error near unexpected token `>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33172== 
+==33172== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33172== 
+==33172== HEAP SUMMARY:
+==33172==     in use at exit: 215,149 bytes in 321 blocks
+==33172==   total heap usage: 837 allocs, 516 frees, 264,629 bytes allocated
+==33172== 
+==33172== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33172==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33172==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33172==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33172==    by 0x109A0F: parse_cmd (exec.c:109)
+==33172==    by 0x1093AA: process_input (main.c:36)
+==33172==    by 0x1094BF: main (main.c:67)
+==33172== 
+==33172== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33172==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33172==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33172==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33172==    by 0x109A0F: parse_cmd (exec.c:109)
+==33172==    by 0x1093AA: process_input (main.c:36)
+==33172==    by 0x1094BF: main (main.c:67)
+==33172== 
+==33172== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33172==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33172==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33172==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33172==    by 0x109A0F: parse_cmd (exec.c:109)
+==33172==    by 0x1093AA: process_input (main.c:36)
+==33172==    by 0x1094BF: main (main.c:67)
+==33172== 
+==33172== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10A817: register_env_var (expansion.c:108)
+==33172==    by 0x109463: main (main.c:60)
+==33172== 
+==33172== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10A817: register_env_var (expansion.c:108)
+==33172==    by 0x109463: main (main.c:60)
+==33172== 
+==33172== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33172==    by 0x109463: main (main.c:60)
+==33172== 
+==33172== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10942D: main (main.c:57)
+==33172== 
+==33172== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33172==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33172==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33172==    by 0x10942D: main (main.c:57)
+==33172== 
+==33172== LEAK SUMMARY:
+==33172==    definitely lost: 24 bytes in 1 blocks
+==33172==    indirectly lost: 6,872 bytes in 94 blocks
+==33172==      possibly lost: 0 bytes in 0 blocks
+==33172==    still reachable: 0 bytes in 0 blocks
+==33172==         suppressed: 208,253 bytes in 226 blocks
+==33172== 
+==33172== For lists of detected and suppressed errors, rerun with: -s
+==33172== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >> >> >> >>
+==33175== Memcheck, a memory error detector
+==33175== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33175== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33175== Command: ../../minishell
+==33175== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m>> >> >> >>
+bash: syntax error near unexpected token `>>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33175== 
+==33175== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33175== 
+==33175== HEAP SUMMARY:
+==33175==     in use at exit: 215,153 bytes in 321 blocks
+==33175==   total heap usage: 837 allocs, 516 frees, 264,637 bytes allocated
+==33175== 
+==33175== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33175==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33175==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33175==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33175==    by 0x109A0F: parse_cmd (exec.c:109)
+==33175==    by 0x1093AA: process_input (main.c:36)
+==33175==    by 0x1094BF: main (main.c:67)
+==33175== 
+==33175== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33175==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33175==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33175==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33175==    by 0x109A0F: parse_cmd (exec.c:109)
+==33175==    by 0x1093AA: process_input (main.c:36)
+==33175==    by 0x1094BF: main (main.c:67)
+==33175== 
+==33175== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33175==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33175==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33175==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33175==    by 0x109A0F: parse_cmd (exec.c:109)
+==33175==    by 0x1093AA: process_input (main.c:36)
+==33175==    by 0x1094BF: main (main.c:67)
+==33175== 
+==33175== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10A817: register_env_var (expansion.c:108)
+==33175==    by 0x109463: main (main.c:60)
+==33175== 
+==33175== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10A817: register_env_var (expansion.c:108)
+==33175==    by 0x109463: main (main.c:60)
+==33175== 
+==33175== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33175==    by 0x109463: main (main.c:60)
+==33175== 
+==33175== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10942D: main (main.c:57)
+==33175== 
+==33175== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33175==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33175==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33175==    by 0x10942D: main (main.c:57)
+==33175== 
+==33175== LEAK SUMMARY:
+==33175==    definitely lost: 24 bytes in 1 blocks
+==33175==    indirectly lost: 6,872 bytes in 94 blocks
+==33175==      possibly lost: 0 bytes in 0 blocks
+==33175==    still reachable: 0 bytes in 0 blocks
+==33175==         suppressed: 208,257 bytes in 226 blocks
+==33175== 
+==33175== For lists of detected and suppressed errors, rerun with: -s
+==33175== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >>>> >> >> >>
+==33178== Memcheck, a memory error detector
+==33178== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33178== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33178== Command: ../../minishell
+==33178== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m>>>> >> >> >>
+bash: syntax error near unexpected token `>>`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33178== 
+==33178== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33178== 
+==33178== HEAP SUMMARY:
+==33178==     in use at exit: 215,155 bytes in 321 blocks
+==33178==   total heap usage: 839 allocs, 518 frees, 264,681 bytes allocated
+==33178== 
+==33178== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10BEB5: check_pipe_error (split_quote_4.c:103)
+==33178==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33178==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33178==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33178==    by 0x109A0F: parse_cmd (exec.c:109)
+==33178==    by 0x1093AA: process_input (main.c:36)
+==33178==    by 0x1094BF: main (main.c:67)
+==33178== 
+==33178== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33178==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33178==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33178==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33178==    by 0x109A0F: parse_cmd (exec.c:109)
+==33178==    by 0x1093AA: process_input (main.c:36)
+==33178==    by 0x1094BF: main (main.c:67)
+==33178== 
+==33178== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10BEC8: check_pipe_error (split_quote_4.c:103)
+==33178==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33178==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33178==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33178==    by 0x109A0F: parse_cmd (exec.c:109)
+==33178==    by 0x1093AA: process_input (main.c:36)
+==33178==    by 0x1094BF: main (main.c:67)
+==33178== 
+==33178== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10A817: register_env_var (expansion.c:108)
+==33178==    by 0x109463: main (main.c:60)
+==33178== 
+==33178== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10A817: register_env_var (expansion.c:108)
+==33178==    by 0x109463: main (main.c:60)
+==33178== 
+==33178== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33178==    by 0x109463: main (main.c:60)
+==33178== 
+==33178== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10942D: main (main.c:57)
+==33178== 
+==33178== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33178==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33178==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33178==    by 0x10942D: main (main.c:57)
+==33178== 
+==33178== LEAK SUMMARY:
+==33178==    definitely lost: 24 bytes in 1 blocks
+==33178==    indirectly lost: 6,872 bytes in 94 blocks
+==33178==      possibly lost: 0 bytes in 0 blocks
+==33178==    still reachable: 0 bytes in 0 blocks
+==33178==         suppressed: 208,259 bytes in 226 blocks
+==33178== 
+==33178== For lists of detected and suppressed errors, rerun with: -s
+==33178== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: /
+==33181== Memcheck, a memory error detector
+==33181== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33181== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33181== Command: ../../minishell
+==33181== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m/
+bash: /: Is a directory
+==33183== 
+==33183== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33183== 
+==33183== HEAP SUMMARY:
+==33183==     in use at exit: 208,246 bytes in 225 blocks
+==33183==   total heap usage: 872 allocs, 647 frees, 261,225 bytes allocated
+==33183== 
+==33183== LEAK SUMMARY:
+==33183==    definitely lost: 0 bytes in 0 blocks
+==33183==    indirectly lost: 0 bytes in 0 blocks
+==33183==      possibly lost: 0 bytes in 0 blocks
+==33183==    still reachable: 0 bytes in 0 blocks
+==33183==         suppressed: 208,246 bytes in 225 blocks
+==33183== 
+==33183== For lists of detected and suppressed errors, rerun with: -s
+==33183== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33181== 
+==33181== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33181== 
+==33181== HEAP SUMMARY:
+==33181==     in use at exit: 215,145 bytes in 321 blocks
+==33181==   total heap usage: 871 allocs, 550 frees, 268,143 bytes allocated
+==33181== 
+==33181== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x109698: handle_lst_status (prefix.c:57)
+==33181==    by 0x1093BE: process_input (main.c:38)
+==33181==    by 0x1094BF: main (main.c:67)
+==33181== 
+==33181== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x109670: handle_lst_status (prefix.c:55)
+==33181==    by 0x1093BE: process_input (main.c:38)
+==33181==    by 0x1094BF: main (main.c:67)
+==33181== 
+==33181== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x109698: handle_lst_status (prefix.c:57)
+==33181==    by 0x1093BE: process_input (main.c:38)
+==33181==    by 0x1094BF: main (main.c:67)
+==33181== 
+==33181== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x10A817: register_env_var (expansion.c:108)
+==33181==    by 0x109463: main (main.c:60)
+==33181== 
+==33181== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x10A817: register_env_var (expansion.c:108)
+==33181==    by 0x109463: main (main.c:60)
+==33181== 
+==33181== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33181==    by 0x109463: main (main.c:60)
+==33181== 
+==33181== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x10942D: main (main.c:57)
+==33181== 
+==33181== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33181==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33181==    by 0x10942D: main (main.c:57)
+==33181== 
+==33181== LEAK SUMMARY:
+==33181==    definitely lost: 24 bytes in 1 blocks
+==33181==    indirectly lost: 6,874 bytes in 94 blocks
+==33181==      possibly lost: 0 bytes in 0 blocks
+==33181==    still reachable: 0 bytes in 0 blocks
+==33181==         suppressed: 208,247 bytes in 226 blocks
+==33181== 
+==33181== For lists of detected and suppressed errors, rerun with: -s
+==33181== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: //
+==33185== Memcheck, a memory error detector
+==33185== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33185== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33185== Command: ../../minishell
+==33185== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m//
+bash: //: Is a directory
+==33188== 
+==33188== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33188== 
+==33188== HEAP SUMMARY:
+==33188==     in use at exit: 208,247 bytes in 225 blocks
+==33188==   total heap usage: 872 allocs, 647 frees, 261,230 bytes allocated
+==33188== 
+==33188== LEAK SUMMARY:
+==33188==    definitely lost: 0 bytes in 0 blocks
+==33188==    indirectly lost: 0 bytes in 0 blocks
+==33188==      possibly lost: 0 bytes in 0 blocks
+==33188==    still reachable: 0 bytes in 0 blocks
+==33188==         suppressed: 208,247 bytes in 225 blocks
+==33188== 
+==33188== For lists of detected and suppressed errors, rerun with: -s
+==33188== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33185== 
+==33185== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33185== 
+==33185== HEAP SUMMARY:
+==33185==     in use at exit: 215,146 bytes in 321 blocks
+==33185==   total heap usage: 871 allocs, 550 frees, 268,148 bytes allocated
+==33185== 
+==33185== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x109698: handle_lst_status (prefix.c:57)
+==33185==    by 0x1093BE: process_input (main.c:38)
+==33185==    by 0x1094BF: main (main.c:67)
+==33185== 
+==33185== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x109670: handle_lst_status (prefix.c:55)
+==33185==    by 0x1093BE: process_input (main.c:38)
+==33185==    by 0x1094BF: main (main.c:67)
+==33185== 
+==33185== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x109698: handle_lst_status (prefix.c:57)
+==33185==    by 0x1093BE: process_input (main.c:38)
+==33185==    by 0x1094BF: main (main.c:67)
+==33185== 
+==33185== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x10A817: register_env_var (expansion.c:108)
+==33185==    by 0x109463: main (main.c:60)
+==33185== 
+==33185== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x10A817: register_env_var (expansion.c:108)
+==33185==    by 0x109463: main (main.c:60)
+==33185== 
+==33185== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33185==    by 0x109463: main (main.c:60)
+==33185== 
+==33185== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x10942D: main (main.c:57)
+==33185== 
+==33185== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33185==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33185==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33185==    by 0x10942D: main (main.c:57)
+==33185== 
+==33185== LEAK SUMMARY:
+==33185==    definitely lost: 24 bytes in 1 blocks
+==33185==    indirectly lost: 6,874 bytes in 94 blocks
+==33185==      possibly lost: 0 bytes in 0 blocks
+==33185==    still reachable: 0 bytes in 0 blocks
+==33185==         suppressed: 208,248 bytes in 226 blocks
+==33185== 
+==33185== For lists of detected and suppressed errors, rerun with: -s
+==33185== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: /.
+==33189== Memcheck, a memory error detector
+==33189== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33189== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33189== Command: ../../minishell
+==33189== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m/.
+bash: /.: Is a directory
+==33192== 
+==33192== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33192== 
+==33192== HEAP SUMMARY:
+==33192==     in use at exit: 208,247 bytes in 225 blocks
+==33192==   total heap usage: 872 allocs, 647 frees, 261,230 bytes allocated
+==33192== 
+==33192== LEAK SUMMARY:
+==33192==    definitely lost: 0 bytes in 0 blocks
+==33192==    indirectly lost: 0 bytes in 0 blocks
+==33192==      possibly lost: 0 bytes in 0 blocks
+==33192==    still reachable: 0 bytes in 0 blocks
+==33192==         suppressed: 208,247 bytes in 225 blocks
+==33192== 
+==33192== For lists of detected and suppressed errors, rerun with: -s
+==33192== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33189== 
+==33189== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33189== 
+==33189== HEAP SUMMARY:
+==33189==     in use at exit: 215,146 bytes in 321 blocks
+==33189==   total heap usage: 871 allocs, 550 frees, 268,148 bytes allocated
+==33189== 
+==33189== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x109698: handle_lst_status (prefix.c:57)
+==33189==    by 0x1093BE: process_input (main.c:38)
+==33189==    by 0x1094BF: main (main.c:67)
+==33189== 
+==33189== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x109670: handle_lst_status (prefix.c:55)
+==33189==    by 0x1093BE: process_input (main.c:38)
+==33189==    by 0x1094BF: main (main.c:67)
+==33189== 
+==33189== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x109698: handle_lst_status (prefix.c:57)
+==33189==    by 0x1093BE: process_input (main.c:38)
+==33189==    by 0x1094BF: main (main.c:67)
+==33189== 
+==33189== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x10A817: register_env_var (expansion.c:108)
+==33189==    by 0x109463: main (main.c:60)
+==33189== 
+==33189== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x10A817: register_env_var (expansion.c:108)
+==33189==    by 0x109463: main (main.c:60)
+==33189== 
+==33189== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33189==    by 0x109463: main (main.c:60)
+==33189== 
+==33189== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x10942D: main (main.c:57)
+==33189== 
+==33189== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33189==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33189==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33189==    by 0x10942D: main (main.c:57)
+==33189== 
+==33189== LEAK SUMMARY:
+==33189==    definitely lost: 24 bytes in 1 blocks
+==33189==    indirectly lost: 6,874 bytes in 94 blocks
+==33189==      possibly lost: 0 bytes in 0 blocks
+==33189==    still reachable: 0 bytes in 0 blocks
+==33189==         suppressed: 208,248 bytes in 226 blocks
+==33189== 
+==33189== For lists of detected and suppressed errors, rerun with: -s
+==33189== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: /./../../../../..
+==33193== Memcheck, a memory error detector
+==33193== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33193== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33193== Command: ../../minishell
+==33193== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m/./../../../../..
+bash: /./../../../../..: Is a directory
+==33196== 
+==33196== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33196== 
+==33196== HEAP SUMMARY:
+==33196==     in use at exit: 208,262 bytes in 225 blocks
+==33196==   total heap usage: 872 allocs, 647 frees, 261,305 bytes allocated
+==33196== 
+==33196== LEAK SUMMARY:
+==33196==    definitely lost: 0 bytes in 0 blocks
+==33196==    indirectly lost: 0 bytes in 0 blocks
+==33196==      possibly lost: 0 bytes in 0 blocks
+==33196==    still reachable: 0 bytes in 0 blocks
+==33196==         suppressed: 208,262 bytes in 225 blocks
+==33196== 
+==33196== For lists of detected and suppressed errors, rerun with: -s
+==33196== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33193== 
+==33193== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33193== 
+==33193== HEAP SUMMARY:
+==33193==     in use at exit: 215,161 bytes in 321 blocks
+==33193==   total heap usage: 871 allocs, 550 frees, 268,223 bytes allocated
+==33193== 
+==33193== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x109698: handle_lst_status (prefix.c:57)
+==33193==    by 0x1093BE: process_input (main.c:38)
+==33193==    by 0x1094BF: main (main.c:67)
+==33193== 
+==33193== 4 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x109670: handle_lst_status (prefix.c:55)
+==33193==    by 0x1093BE: process_input (main.c:38)
+==33193==    by 0x1094BF: main (main.c:67)
+==33193== 
+==33193== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x109698: handle_lst_status (prefix.c:57)
+==33193==    by 0x1093BE: process_input (main.c:38)
+==33193==    by 0x1094BF: main (main.c:67)
+==33193== 
+==33193== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x10A817: register_env_var (expansion.c:108)
+==33193==    by 0x109463: main (main.c:60)
+==33193== 
+==33193== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x10A817: register_env_var (expansion.c:108)
+==33193==    by 0x109463: main (main.c:60)
+==33193== 
+==33193== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33193==    by 0x109463: main (main.c:60)
+==33193== 
+==33193== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x10942D: main (main.c:57)
+==33193== 
+==33193== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33193==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33193==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33193==    by 0x10942D: main (main.c:57)
+==33193== 
+==33193== LEAK SUMMARY:
+==33193==    definitely lost: 24 bytes in 1 blocks
+==33193==    indirectly lost: 6,874 bytes in 94 blocks
+==33193==      possibly lost: 0 bytes in 0 blocks
+==33193==    still reachable: 0 bytes in 0 blocks
+==33193==         suppressed: 208,263 bytes in 226 blocks
+==33193== 
+==33193== For lists of detected and suppressed errors, rerun with: -s
+==33193== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: ///////
+==33197== Memcheck, a memory error detector
+==33197== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33197== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33197== Command: ../../minishell
+==33197== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m///////
+bash: ///////: Is a directory
+==33200== 
+==33200== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33200== 
+==33200== HEAP SUMMARY:
+==33200==     in use at exit: 208,252 bytes in 225 blocks
+==33200==   total heap usage: 872 allocs, 647 frees, 261,255 bytes allocated
+==33200== 
+==33200== LEAK SUMMARY:
+==33200==    definitely lost: 0 bytes in 0 blocks
+==33200==    indirectly lost: 0 bytes in 0 blocks
+==33200==      possibly lost: 0 bytes in 0 blocks
+==33200==    still reachable: 0 bytes in 0 blocks
+==33200==         suppressed: 208,252 bytes in 225 blocks
+==33200== 
+==33200== For lists of detected and suppressed errors, rerun with: -s
+==33200== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33197== 
+==33197== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33197== 
+==33197== HEAP SUMMARY:
+==33197==     in use at exit: 215,151 bytes in 321 blocks
+==33197==   total heap usage: 871 allocs, 550 frees, 268,173 bytes allocated
+==33197== 
+==33197== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x109698: handle_lst_status (prefix.c:57)
+==33197==    by 0x1093BE: process_input (main.c:38)
+==33197==    by 0x1094BF: main (main.c:67)
+==33197== 
+==33197== 4 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x109670: handle_lst_status (prefix.c:55)
+==33197==    by 0x1093BE: process_input (main.c:38)
+==33197==    by 0x1094BF: main (main.c:67)
+==33197== 
+==33197== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x109698: handle_lst_status (prefix.c:57)
+==33197==    by 0x1093BE: process_input (main.c:38)
+==33197==    by 0x1094BF: main (main.c:67)
+==33197== 
+==33197== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x10A817: register_env_var (expansion.c:108)
+==33197==    by 0x109463: main (main.c:60)
+==33197== 
+==33197== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x10A817: register_env_var (expansion.c:108)
+==33197==    by 0x109463: main (main.c:60)
+==33197== 
+==33197== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33197==    by 0x109463: main (main.c:60)
+==33197== 
+==33197== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x10942D: main (main.c:57)
+==33197== 
+==33197== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33197==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33197==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33197==    by 0x10942D: main (main.c:57)
+==33197== 
+==33197== LEAK SUMMARY:
+==33197==    definitely lost: 24 bytes in 1 blocks
+==33197==    indirectly lost: 6,874 bytes in 94 blocks
+==33197==      possibly lost: 0 bytes in 0 blocks
+==33197==    still reachable: 0 bytes in 0 blocks
+==33197==         suppressed: 208,253 bytes in 226 blocks
+==33197== 
+==33197== For lists of detected and suppressed errors, rerun with: -s
+==33197== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: -
+==33201== Memcheck, a memory error detector
+==33201== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33201== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33201== Command: ../../minishell
+==33201== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m-
+bash: -: command not found
+==33204== 
+==33204== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33204== 
+==33204== HEAP SUMMARY:
+==33204==     in use at exit: 208,246 bytes in 225 blocks
+==33204==   total heap usage: 968 allocs, 743 frees, 264,943 bytes allocated
+==33204== 
+==33204== LEAK SUMMARY:
+==33204==    definitely lost: 0 bytes in 0 blocks
+==33204==    indirectly lost: 0 bytes in 0 blocks
+==33204==      possibly lost: 0 bytes in 0 blocks
+==33204==    still reachable: 0 bytes in 0 blocks
+==33204==         suppressed: 208,246 bytes in 225 blocks
+==33204== 
+==33204== For lists of detected and suppressed errors, rerun with: -s
+==33204== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33201== 
+==33201== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33201== 
+==33201== HEAP SUMMARY:
+==33201==     in use at exit: 215,145 bytes in 321 blocks
+==33201==   total heap usage: 871 allocs, 550 frees, 268,143 bytes allocated
+==33201== 
+==33201== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x109698: handle_lst_status (prefix.c:57)
+==33201==    by 0x1093BE: process_input (main.c:38)
+==33201==    by 0x1094BF: main (main.c:67)
+==33201== 
+==33201== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x111A12: ft_uitoa (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x109670: handle_lst_status (prefix.c:55)
+==33201==    by 0x1093BE: process_input (main.c:38)
+==33201==    by 0x1094BF: main (main.c:67)
+==33201== 
+==33201== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x109698: handle_lst_status (prefix.c:57)
+==33201==    by 0x1093BE: process_input (main.c:38)
+==33201==    by 0x1094BF: main (main.c:67)
+==33201== 
+==33201== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x10A817: register_env_var (expansion.c:108)
+==33201==    by 0x109463: main (main.c:60)
+==33201== 
+==33201== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x10A817: register_env_var (expansion.c:108)
+==33201==    by 0x109463: main (main.c:60)
+==33201== 
+==33201== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33201==    by 0x109463: main (main.c:60)
+==33201== 
+==33201== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x10942D: main (main.c:57)
+==33201== 
+==33201== 6,898 (24 direct, 6,874 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33201==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33201==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33201==    by 0x10942D: main (main.c:57)
+==33201== 
+==33201== LEAK SUMMARY:
+==33201==    definitely lost: 24 bytes in 1 blocks
+==33201==    indirectly lost: 6,874 bytes in 94 blocks
+==33201==      possibly lost: 0 bytes in 0 blocks
+==33201==    still reachable: 0 bytes in 0 blocks
+==33201==         suppressed: 208,247 bytes in 226 blocks
+==33201== 
+==33201== For lists of detected and suppressed errors, rerun with: -s
+==33201== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: |
+==33205== Memcheck, a memory error detector
+==33205== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33205== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33205== Command: ../../minishell
+==33205== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m|
+bash: syntax error near unexpected token `|`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33205== 
+==33205== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33205== 
+==33205== HEAP SUMMARY:
+==33205==     in use at exit: 215,143 bytes in 321 blocks
+==33205==   total heap usage: 832 allocs, 511 frees, 264,513 bytes allocated
+==33205== 
+==33205== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10BD81: check_pipe_error (split_quote_4.c:88)
+==33205==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33205==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33205==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33205==    by 0x109A0F: parse_cmd (exec.c:109)
+==33205==    by 0x1093AA: process_input (main.c:36)
+==33205==    by 0x1094BF: main (main.c:67)
+==33205== 
+==33205== 2 bytes in 1 blocks are indirectly lost in loss record 4 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33205==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33205==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33205==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33205==    by 0x109A0F: parse_cmd (exec.c:109)
+==33205==    by 0x1093AA: process_input (main.c:36)
+==33205==    by 0x1094BF: main (main.c:67)
+==33205== 
+==33205== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33205==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33205==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33205==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33205==    by 0x109A0F: parse_cmd (exec.c:109)
+==33205==    by 0x1093AA: process_input (main.c:36)
+==33205==    by 0x1094BF: main (main.c:67)
+==33205== 
+==33205== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10A817: register_env_var (expansion.c:108)
+==33205==    by 0x109463: main (main.c:60)
+==33205== 
+==33205== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10A817: register_env_var (expansion.c:108)
+==33205==    by 0x109463: main (main.c:60)
+==33205== 
+==33205== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33205==    by 0x109463: main (main.c:60)
+==33205== 
+==33205== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10942D: main (main.c:57)
+==33205== 
+==33205== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33205==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33205==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33205==    by 0x10942D: main (main.c:57)
+==33205== 
+==33205== LEAK SUMMARY:
+==33205==    definitely lost: 24 bytes in 1 blocks
+==33205==    indirectly lost: 6,872 bytes in 94 blocks
+==33205==      possibly lost: 0 bytes in 0 blocks
+==33205==    still reachable: 0 bytes in 0 blocks
+==33205==         suppressed: 208,247 bytes in 226 blocks
+==33205== 
+==33205== For lists of detected and suppressed errors, rerun with: -s
+==33205== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: | hola
+==33208== Memcheck, a memory error detector
+==33208== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33208== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33208== Command: ../../minishell
+==33208== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m| hola
+bash: syntax error near unexpected token `|`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33208== 
+==33208== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33208== 
+==33208== HEAP SUMMARY:
+==33208==     in use at exit: 215,148 bytes in 321 blocks
+==33208==   total heap usage: 840 allocs, 519 frees, 264,642 bytes allocated
+==33208== 
+==33208== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10BD81: check_pipe_error (split_quote_4.c:88)
+==33208==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33208==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33208==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33208==    by 0x109A0F: parse_cmd (exec.c:109)
+==33208==    by 0x1093AA: process_input (main.c:36)
+==33208==    by 0x1094BF: main (main.c:67)
+==33208== 
+==33208== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33208==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33208==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33208==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33208==    by 0x109A0F: parse_cmd (exec.c:109)
+==33208==    by 0x1093AA: process_input (main.c:36)
+==33208==    by 0x1094BF: main (main.c:67)
+==33208== 
+==33208== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33208==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33208==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33208==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33208==    by 0x109A0F: parse_cmd (exec.c:109)
+==33208==    by 0x1093AA: process_input (main.c:36)
+==33208==    by 0x1094BF: main (main.c:67)
+==33208== 
+==33208== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10A817: register_env_var (expansion.c:108)
+==33208==    by 0x109463: main (main.c:60)
+==33208== 
+==33208== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10A817: register_env_var (expansion.c:108)
+==33208==    by 0x109463: main (main.c:60)
+==33208== 
+==33208== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33208==    by 0x109463: main (main.c:60)
+==33208== 
+==33208== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10942D: main (main.c:57)
+==33208== 
+==33208== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33208==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33208==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33208==    by 0x10942D: main (main.c:57)
+==33208== 
+==33208== LEAK SUMMARY:
+==33208==    definitely lost: 24 bytes in 1 blocks
+==33208==    indirectly lost: 6,872 bytes in 94 blocks
+==33208==      possibly lost: 0 bytes in 0 blocks
+==33208==    still reachable: 0 bytes in 0 blocks
+==33208==         suppressed: 208,252 bytes in 226 blocks
+==33208== 
+==33208== For lists of detected and suppressed errors, rerun with: -s
+==33208== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: | | |
+==33211== Memcheck, a memory error detector
+==33211== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33211== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33211== Command: ../../minishell
+==33211== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m| | |
+bash: syntax error near unexpected token `|`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33211== 
+==33211== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33211== 
+==33211== HEAP SUMMARY:
+==33211==     in use at exit: 215,147 bytes in 321 blocks
+==33211==   total heap usage: 839 allocs, 518 frees, 264,657 bytes allocated
+==33211== 
+==33211== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10BD81: check_pipe_error (split_quote_4.c:88)
+==33211==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33211==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33211==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33211==    by 0x109A0F: parse_cmd (exec.c:109)
+==33211==    by 0x1093AA: process_input (main.c:36)
+==33211==    by 0x1094BF: main (main.c:67)
+==33211== 
+==33211== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33211==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33211==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33211==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33211==    by 0x109A0F: parse_cmd (exec.c:109)
+==33211==    by 0x1093AA: process_input (main.c:36)
+==33211==    by 0x1094BF: main (main.c:67)
+==33211== 
+==33211== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33211==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33211==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33211==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33211==    by 0x109A0F: parse_cmd (exec.c:109)
+==33211==    by 0x1093AA: process_input (main.c:36)
+==33211==    by 0x1094BF: main (main.c:67)
+==33211== 
+==33211== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10A817: register_env_var (expansion.c:108)
+==33211==    by 0x109463: main (main.c:60)
+==33211== 
+==33211== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10A817: register_env_var (expansion.c:108)
+==33211==    by 0x109463: main (main.c:60)
+==33211== 
+==33211== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33211==    by 0x109463: main (main.c:60)
+==33211== 
+==33211== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10942D: main (main.c:57)
+==33211== 
+==33211== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33211==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33211==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33211==    by 0x10942D: main (main.c:57)
+==33211== 
+==33211== LEAK SUMMARY:
+==33211==    definitely lost: 24 bytes in 1 blocks
+==33211==    indirectly lost: 6,872 bytes in 94 blocks
+==33211==      possibly lost: 0 bytes in 0 blocks
+==33211==    still reachable: 0 bytes in 0 blocks
+==33211==         suppressed: 208,251 bytes in 226 blocks
+==33211== 
+==33211== For lists of detected and suppressed errors, rerun with: -s
+==33211== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: ||
+==33214== Memcheck, a memory error detector
+==33214== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33214== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33214== Command: ../../minishell
+==33214== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m||
+bash: syntax error near unexpected token `|`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33214== 
+==33214== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33214== 
+==33214== HEAP SUMMARY:
+==33214==     in use at exit: 215,144 bytes in 321 blocks
+==33214==   total heap usage: 837 allocs, 516 frees, 264,611 bytes allocated
+==33214== 
+==33214== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10BD81: check_pipe_error (split_quote_4.c:88)
+==33214==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33214==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33214==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33214==    by 0x109A0F: parse_cmd (exec.c:109)
+==33214==    by 0x1093AA: process_input (main.c:36)
+==33214==    by 0x1094BF: main (main.c:67)
+==33214== 
+==33214== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33214==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33214==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33214==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33214==    by 0x109A0F: parse_cmd (exec.c:109)
+==33214==    by 0x1093AA: process_input (main.c:36)
+==33214==    by 0x1094BF: main (main.c:67)
+==33214== 
+==33214== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33214==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33214==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33214==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33214==    by 0x109A0F: parse_cmd (exec.c:109)
+==33214==    by 0x1093AA: process_input (main.c:36)
+==33214==    by 0x1094BF: main (main.c:67)
+==33214== 
+==33214== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10A817: register_env_var (expansion.c:108)
+==33214==    by 0x109463: main (main.c:60)
+==33214== 
+==33214== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10A817: register_env_var (expansion.c:108)
+==33214==    by 0x109463: main (main.c:60)
+==33214== 
+==33214== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33214==    by 0x109463: main (main.c:60)
+==33214== 
+==33214== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10942D: main (main.c:57)
+==33214== 
+==33214== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33214==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33214==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33214==    by 0x10942D: main (main.c:57)
+==33214== 
+==33214== LEAK SUMMARY:
+==33214==    definitely lost: 24 bytes in 1 blocks
+==33214==    indirectly lost: 6,872 bytes in 94 blocks
+==33214==      possibly lost: 0 bytes in 0 blocks
+==33214==    still reachable: 0 bytes in 0 blocks
+==33214==         suppressed: 208,248 bytes in 226 blocks
+==33214== 
+==33214== For lists of detected and suppressed errors, rerun with: -s
+==33214== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: |||||
+==33217== Memcheck, a memory error detector
+==33217== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33217== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33217== Command: ../../minishell
+==33217== 
+
+[1;32m[CUSTOM] [1;33mwalid > [0;37m|||||
+bash: syntax error near unexpected token `|`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33217== 
+==33217== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33217== 
+==33217== HEAP SUMMARY:
+==33217==     in use at exit: 215,147 bytes in 321 blocks
+==33217==   total heap usage: 843 allocs, 522 frees, 264,737 bytes allocated
+==33217== 
+==33217== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10BD81: check_pipe_error (split_quote_4.c:88)
+==33217==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33217==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33217==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33217==    by 0x109A0F: parse_cmd (exec.c:109)
+==33217==    by 0x1093AA: process_input (main.c:36)
+==33217==    by 0x1094BF: main (main.c:67)
+==33217== 
+==33217== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33217==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33217==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33217==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33217==    by 0x109A0F: parse_cmd (exec.c:109)
+==33217==    by 0x1093AA: process_input (main.c:36)
+==33217==    by 0x1094BF: main (main.c:67)
+==33217== 
+==33217== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33217==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33217==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33217==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33217==    by 0x109A0F: parse_cmd (exec.c:109)
+==33217==    by 0x1093AA: process_input (main.c:36)
+==33217==    by 0x1094BF: main (main.c:67)
+==33217== 
+==33217== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10A817: register_env_var (expansion.c:108)
+==33217==    by 0x109463: main (main.c:60)
+==33217== 
+==33217== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10A817: register_env_var (expansion.c:108)
+==33217==    by 0x109463: main (main.c:60)
+==33217== 
+==33217== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33217==    by 0x109463: main (main.c:60)
+==33217== 
+==33217== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10942D: main (main.c:57)
+==33217== 
+==33217== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33217==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33217==    by 0x10942D: main (main.c:57)
+==33217== 
+==33217== LEAK SUMMARY:
+==33217==    definitely lost: 24 bytes in 1 blocks
+==33217==    indirectly lost: 6,872 bytes in 94 blocks
+==33217==      possibly lost: 0 bytes in 0 blocks
+==33217==    still reachable: 0 bytes in 0 blocks
+==33217==         suppressed: 208,251 bytes in 226 blocks
+==33217== 
+==33217== For lists of detected and suppressed errors, rerun with: -s
+==33217== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: |||||||||||||
+==33220== Memcheck, a memory error detector
+==33220== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33220== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33220== Command: ../../minishell
+==33220== 
+[1;32m[CUSTOM] [1;33mwalid > [0;37m
+[1;32m[CUSTOM] [1;33mwalid > [0;37m|||||||||||||
+bash: syntax error near unexpected token `|`
+[1;31m[CUSTOM] [1;33mwalid > [0;37m
+[1;31m[CUSTOM] [1;33mwalid > [0;37m==33220== 
+==33220== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33220== 
+==33220== HEAP SUMMARY:
+==33220==     in use at exit: 215,155 bytes in 321 blocks
+==33220==   total heap usage: 859 allocs, 538 frees, 265,073 bytes allocated
+==33220== 
+==33220== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10BD81: check_pipe_error (split_quote_4.c:88)
+==33220==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33220==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33220==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33220==    by 0x109A0F: parse_cmd (exec.c:109)
+==33220==    by 0x1093AA: process_input (main.c:36)
+==33220==    by 0x1094BF: main (main.c:67)
+==33220== 
+==33220== 2 bytes in 1 blocks are indirectly lost in loss record 3 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33220==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33220==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33220==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33220==    by 0x109A0F: parse_cmd (exec.c:109)
+==33220==    by 0x1093AA: process_input (main.c:36)
+==33220==    by 0x1094BF: main (main.c:67)
+==33220== 
+==33220== 32 bytes in 1 blocks are indirectly lost in loss record 17 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10BD94: check_pipe_error (split_quote_4.c:88)
+==33220==    by 0x10C2E8: handle_delimiter (split_quote_5.c:69)
+==33220==    by 0x10C87C: sq_replace_and_free (split_quote_6.c:78)
+==33220==    by 0x10B0DF: ft_split_quote (split_quote.c:136)
+==33220==    by 0x109A0F: parse_cmd (exec.c:109)
+==33220==    by 0x1093AA: process_input (main.c:36)
+==33220==    by 0x1094BF: main (main.c:67)
+==33220== 
+==33220== 317 bytes in 30 blocks are indirectly lost in loss record 30 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x111DB8: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10A817: register_env_var (expansion.c:108)
+==33220==    by 0x109463: main (main.c:60)
+==33220== 
+==33220== 960 bytes in 30 blocks are indirectly lost in loss record 35 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x111D9A: ht_insert (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10A817: register_env_var (expansion.c:108)
+==33220==    by 0x109463: main (main.c:60)
+==33220== 
+==33220== 2,359 bytes in 30 blocks are indirectly lost in loss record 48 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x1116F7: ft_strdup (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10A7EF: register_env_var (expansion.c:106)
+==33220==    by 0x109463: main (main.c:60)
+==33220== 
+==33220== 3,200 bytes in 1 blocks are indirectly lost in loss record 49 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x1106A6: ft_calloc (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x111B01: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10942D: main (main.c:57)
+==33220== 
+==33220== 6,896 (24 direct, 6,872 indirect) bytes in 1 blocks are definitely lost in loss record 61 of 75
+==33220==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==33220==    by 0x111AC6: hashtable_create (in /mnt/c/Users/Sifex/Desktop/Dev/42/42/Projects/9-Minishell/minishell)
+==33220==    by 0x10942D: main (main.c:57)
+==33220== 
+==33220== LEAK SUMMARY:
+==33220==    definitely lost: 24 bytes in 1 blocks
+==33220==    indirectly lost: 6,872 bytes in 94 blocks
+==33220==      possibly lost: 0 bytes in 0 blocks
+==33220==    still reachable: 0 bytes in 0 blocks
+==33220==         suppressed: 208,259 bytes in 226 blocks
+==33220== 
+==33220== For lists of detected and suppressed errors, rerun with: -s
+==33220== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+----------------------------------------
+Exécution de Valgrind pour: >>|><
+==33223== Memcheck, a memory error detector
+==33223== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==33223== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==33223== Command: ../../minishell
+==33223== 
+==33223== 
+==33223== Process terminating with default action of signal 2 (SIGINT)
+==33223==    at 0x4026B16: __open_nocancel (open64_nocancel.c:39)
+==33223==    by 0x4006978: open_verify.constprop.0 (dl-load.c:1626)
+==33223==    by 0x4007107: open_path (dl-load.c:1922)
+==33223==    by 0x400A6B0: _dl_map_object (dl-load.c:2158)
+==33223==    by 0x4003494: openaux (dl-deps.c:64)
+==33223==    by 0x401D349: _dl_catch_exception (dl-error-skeleton.c:208)
+==33223==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==33223==    by 0x402339F: dl_main (rtld.c:1970)
+==33223==    by 0x401F83B: _dl_sysdep_start (dl-sysdep.c:256)
+==33223==    by 0x4021597: _dl_start_final (rtld.c:507)
+==33223==    by 0x4021597: _dl_start (rtld.c:596)
+==33223==    by 0x4020297: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==33223== 
+==33223== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==33223== 
+==33223== HEAP SUMMARY:
+==33223==     in use at exit: 0 bytes in 0 blocks
+==33223==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==33223== 
+==33223== All heap blocks were freed -- no leaks are possible
+==33223== 
+==33223== For lists of detected and suppressed errors, rerun with: -s
+==33223== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

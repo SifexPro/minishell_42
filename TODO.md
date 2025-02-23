@@ -104,8 +104,8 @@ ouvre X*cat
 - gerer mini | mini
 + << 1 << 2 << 3
 + << 1 < Makefile << 2
-- echo
-- www
++ echo
+-/+ www
 
 POL: 
 -x export a= e
