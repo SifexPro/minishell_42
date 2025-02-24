@@ -45,3 +45,4 @@ t_list	*create_str(char *str, bool is_simple_quote, t_ht *env)
 		content->content = str;
 	return (ft_lstnew(content));
 }
+

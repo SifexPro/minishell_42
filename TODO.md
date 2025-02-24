@@ -117,3 +117,4 @@ si token étranges :
 -x <>
 -x peut etre d'autres essaye de fix pour tout
 -  Fix echo test|>
+-  Fix .o delete par le makefile

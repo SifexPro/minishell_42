@@ -206,6 +206,8 @@ int		to_argv(t_pars *pars);
 void	end_replace(t_pars *pars);
 t_pars	*create_pars(t_list **ret, t_list *elements);
 
+char	**custom_splitted(char *argv);
+
 /* split_quote_6 */
 int		handle_no_next(t_pars *pars, int delimiter, t_ht *env);
 

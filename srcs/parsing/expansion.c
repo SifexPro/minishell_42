@@ -98,7 +98,7 @@ void	register_env_var(t_ht *env, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		splitted = ft_split(envp[i], '=');
+		splitted = custom_splitted(envp[i]);
 		if (!splitted)
 			return ;
 		if (splitted[1])
