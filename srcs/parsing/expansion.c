@@ -61,8 +61,13 @@ char	*handle_env_var(char **s, t_ht *env, int i)
 	tmp = ft_strndup(str, i);
 	res = ht_search(env, env_var);
 	if (!res)
+	{
 		res = ft_strdup("");
-	tmp = ft_strjoin_free(tmp, res);
+		tmp = ft_strjoin_free(tmp, res);
+		free(res);
+	}
+	else
+		tmp = ft_strjoin_free(tmp, res);
 	tmp = ft_strjoin_free(tmp, &str[j]);
 	free(env_var);
 	free(str);
@@ -79,10 +84,14 @@ char	*handle_expansion(char *str, t_ht *env)
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
 			str = handle_last_status(str, env, i);
+			i = 0;  // Reset i since the string has been modified
+			continue;
 		}
 		else if (str[i] == '$' && ft_isalnum(str[i + 1]))
 		{
 			str = handle_env_var(&str, env, i);
+			i = 0;  // Reset i since the string has been modified
+			continue;
 		}
 		i++;
 	}
