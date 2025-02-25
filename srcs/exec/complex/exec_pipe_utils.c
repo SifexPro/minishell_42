@@ -33,7 +33,7 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp,
 	cmd_path = get_cmd_path(path, get_path(envp));
 	check = check_file(cmd_path, path);
 	if (check)
-		return (free_child(flags->env, flags->splitted, flags, envp), check);	
+		return (free_child(flags->env, flags->splitted, flags, envp), check);
 	if (!cmd_path)
 		return (clear_env(envp),
 			exec_pipe_error("Command not found", argv[0], flags, envp), 127);
@@ -49,27 +49,43 @@ static int	run_program_exec_pipe(char *path, char **argv, char **envp,
 	return (0);
 }
 
+static bool	is_buildin(char *cmd)
+{
+	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "pwd")
+		|| !ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "export")
+		|| !ft_strcmp(cmd, "exit"))
+		return (true);
+	return (false);
+}
+
 int	select_exec_pipe(int argc, char **argv, t_flags *flags, char **envp)
 {
-	t_ht *env;
+	int		status;
+	t_ht	*env;
 
+	status = 0;
 	env = flags->env;
-	if (!ft_strncmp(argv[0], "cd", 2))
-		return (ft_cd(argc, argv, env));
-	else if (!ft_strncmp(argv[0], "pwd", 3))
-		return (ft_pwd(argc, argv));
-	else if (!ft_strncmp(argv[0], "echo", 4))
-		return (ft_echo(argc, argv));
-	else if (!ft_strncmp(argv[0], "env", 3))
-		return (ft_env(envp));
-	else if (!ft_strncmp(argv[0], "unset", 5))
-		return (ft_unset(argc, argv, env));
-	else if (!ft_strncmp(argv[0], "export", 6))
-		return (ft_export(argc, argv, env, envp));
-	else if (!ft_strcmp(argv[0], "exit"))
-		return (ft_exit(argc, argv, -1));
-	else
-		return (run_program_exec_pipe(argv[0], argv, envp, flags));
+	if (is_buildin(argv[0]))
+	{
+		if (!ft_strcmp(argv[0], "cd"))
+			status = ft_cd(argc, argv, env);
+		else if (!ft_strcmp(argv[0], "pwd"))
+			status = ft_pwd(argc, argv);
+		else if (!ft_strcmp(argv[0], "echo"))
+			status = ft_echo(argc, argv);
+		else if (!ft_strcmp(argv[0], "env"))
+			status = ft_env(envp);
+		else if (!ft_strcmp(argv[0], "unset"))
+			status = ft_unset(argc, argv, env);
+		else if (!ft_strcmp(argv[0], "export"))
+			status = ft_export(argc, argv, env, envp);
+		else if (!ft_strcmp(argv[0], "exit"))
+			status = ft_exit(argc, argv, -1);
+		free_child(env, flags->splitted, flags, envp);
+		return (status);
+	}
+	return (run_program_exec_pipe(argv[0], argv, envp, flags));
 }
 
 int	open_exit_pipe(t_flags *flags)

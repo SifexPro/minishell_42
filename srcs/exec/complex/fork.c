@@ -40,7 +40,6 @@ bool	edit_flags(t_flags **flags)
 	return (true);
 }
 
-//// free in child like exec.c
 int	forking(t_flags *flags, t_list *splitted, t_ht *env)
 {
 	int	i;

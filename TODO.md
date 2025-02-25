@@ -105,7 +105,8 @@ ouvre X*cat
 + << 1 << 2 << 3
 + << 1 < Makefile << 2
 + echo
--/+ www
++ www
+- echo t | ls
 
 POL: 
 -x export a= e

@@ -296,7 +296,6 @@ void	exec_error_free(char *error, char *cmd, t_flags *flags);
 void	exec_error_arg(char *error, char *arg, char *cmd);
 void	file_error(char *error, char *file);
 
-
 extern int	g_sig;
 
 #endif
