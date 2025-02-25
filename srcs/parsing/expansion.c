@@ -85,13 +85,13 @@ char	*handle_expansion(char *str, t_ht *env)
 		{
 			str = handle_last_status(str, env, i);
 			i = 0;
-			continue;
+			continue ;
 		}
 		else if (str[i] == '$' && ft_isalnum(str[i + 1]))
 		{
 			str = handle_env_var(&str, env, i);
 			i = 0;
-			continue;
+			continue ;
 		}
 		i++;
 	}

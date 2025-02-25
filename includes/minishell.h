@@ -156,6 +156,8 @@ int		ft_unset(int argc, char **argv, t_ht *env);
 
 /* command/export */
 int		ft_export(int argc, char **argv, t_ht *env, char **envp);
+bool	has_plus(char *str);
+bool	has_equal(char *str);
 
 /* command/export_2 */
 char	**get_export_splitted(char *argv);
@@ -207,8 +209,12 @@ t_pars	*create_pars(t_list **ret, t_list *elements);
 
 char	**custom_splitted(char *argv);
 
+/* split_quote_7 */
+int		pipe_case2(t_pars *pars, t_splitted *tmp);
+
 /* split_quote_6 */
 int		handle_no_next(t_pars *pars, int delimiter, t_ht *env);
+void	concat_pretext(char *str, t_split_sh *sp);
 
 /* parsing */
 void	fix_argc(t_list *ret);

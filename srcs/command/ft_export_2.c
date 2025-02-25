@@ -53,3 +53,29 @@ bool	is_valid_export(char *str)
 		return (false);
 	return (true);
 }
+
+bool	has_plus(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (str[i - 1] == '+');
+}
+
+bool	has_equal(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (true);
+		i++;
+	}
+	return (false);
+}

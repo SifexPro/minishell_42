@@ -59,28 +59,9 @@ int	pipe_case(t_pars *pars, t_splitted *tmp)
 	{
 		handle_content_after(pars, tmp);
 	}
-	else if (tmp->delimiter > -1 && tmp->delimiter != PIPE && pars->tmp && 
-		pars->elements && pars->elements->next && pars->elements->next->content)
-	{
-		pars->delimiter = tmp->delimiter;
-		if (!pars->elements->next->next)
-			return (0);
-		pars->elements = pars->elements->next;
-		if (!pars->elements->next)
-			return (0);
-		pars->tmp = pars->elements->next->content;
-		if (!pars->tmp)
-			return (0);
-		pars->tmp_exec->token_next = pars->delimiter;
-		if (pars->tmp->content)
-		{
-			pars->tmp_exec->argv[0] = ft_strdup(pars->tmp->content);
-			free(pars->tmp->content);
-			pars->tmp->content = NULL;
-			pars->tmp_exec->argv[1] = NULL;
-		}
-		pars->tmp = pars->elements->content;
-	}
+	else if (tmp->delimiter > -1 && tmp->delimiter != PIPE && pars->tmp
+		&& pars->elements->next && pars->elements->next->content)
+		pipe_case2(pars, tmp);
 	return (0);
 }
 

@@ -32,7 +32,7 @@ void	handle_pretext_env(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
 	char	*end;
 
 	end = handle_expansion(ft_strndup((char *)(&str[sp->quote_start + 1]),
-			sp->i - sp->quote_start - 1), env);
+				sp->i - sp->quote_start - 1), env);
 	txt = ft_strjoin(sp->pretext, end);
 	free(sp->pretext);
 	sp->pretext = NULL;
@@ -40,22 +40,11 @@ void	handle_pretext_env(t_list **elem, char *str, t_split_sh *sp, t_ht *env)
 	ft_lstadd_back(elem, create_str(txt, true, env));
 }
 
-void	concat_pretext(char *str, t_split_sh *sp)
-{
-	char	*txt;
-
-	txt = ft_strjoin(sp->pretext, str);
-	free(str);
-	if (sp->pretext)
-		free(sp->pretext);
-	sp->pretext = txt;
-}
-
 void	handle_start(t_split_sh *sp, char *str, t_ht *env)
 {
 	if (sp->i != sp->str_start || sp->pretext)
-		concat_pretext(handle_expansion(ft_strndup((char *)(&str[sp->str_start]),
-				sp->i - sp->str_start), env), sp);
+		concat_pretext(handle_expansion(ft_strndup((char *)
+					(&str[sp->str_start]), sp->i - sp->str_start), env), sp);
 	else
 		sp->pretext = NULL;
 	sp->quote_start = sp->i;
@@ -65,7 +54,6 @@ int	handle_ambiguous_redirect(char *s, t_split_sh *sp, t_ht *env)
 {
 	if (!s)
 		return (-2);
-	
 	if (s[0] == '$' && is_valid_env(&s[1]) && !get_var_from_str(&s[1], env))
 	{
 		if (sp->prev_meta != -1 && sp->prev_meta != PIPE)
@@ -92,15 +80,15 @@ int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		return (1);
 	if (str[sp->i + 1] == 0 && str[sp->i] != ' ')
 		sp->i++;
-	s = handle_expansion(ft_strndup((char *)(&str[sp->str_start]), sp->i - sp->str_start), env);
-	no_value = handle_ambiguous_redirect(ft_strndup((char *)(&str[sp->str_start]), sp->i - sp->str_start), sp, env);
+	s = handle_expansion(ft_strndup((char *)(&str[sp->str_start]),
+				sp->i - sp->str_start), env);
+	no_value = handle_ambiguous_redirect(ft_strndup((char *)
+				(&str[sp->str_start]), sp->i - sp->str_start), sp, env);
 	if (no_value == -2)
 		return (free(s), -2);
 	if (no_value != 1)
-	{
 		ft_lstadd_back(elem, create_str(
 				ft_strjoin(sp->pretext, s), true, env));
-	}
 	if (sp->pretext)
 		free(sp->pretext);
 	sp->pretext = NULL;

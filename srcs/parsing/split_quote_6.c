@@ -88,3 +88,14 @@ int	sq_replace_and_free(t_list *elements, t_list **ret, t_ht *env)
 	}
 	return (end_replace(pars), 0);
 }
+
+void	concat_pretext(char *str, t_split_sh *sp)
+{
+	char	*txt;
+
+	txt = ft_strjoin(sp->pretext, str);
+	free(str);
+	if (sp->pretext)
+		free(sp->pretext);
+	sp->pretext = txt;
+}

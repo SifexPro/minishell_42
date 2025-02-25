@@ -28,6 +28,7 @@ SRCS		=	srcs/main.c \
 				srcs/parsing/split_quote_4.c \
 				srcs/parsing/split_quote_5.c \
 				srcs/parsing/split_quote_6.c \
+				srcs/parsing/split_quote_7.c \
 				srcs/parsing/meta.c \
 				srcs/parsing/parsing.c \
 				srcs/parsing/environement.c \
