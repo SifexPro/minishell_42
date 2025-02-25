@@ -65,6 +65,7 @@ int	handle_ambiguous_redirect(char *s, t_split_sh *sp, t_ht *env)
 {
 	if (!s)
 		return (-2);
+	
 	if (s[0] == '$' && is_valid_env(&s[1]) && !get_var_from_str(&s[1], env))
 	{
 		if (sp->prev_meta != -1 && sp->prev_meta != PIPE)
@@ -72,14 +73,13 @@ int	handle_ambiguous_redirect(char *s, t_split_sh *sp, t_ht *env)
 			printf("bash: %s: ambiguous redirect\n", s);
 			ht_deletef(env, "?");
 			ht_insert(env, "?", ft_strdup("1"));
+			free(s);
+			return (-2);
 		}
-		else
-		{
-			ht_deletef(env, "?");
-			ht_insert(env, "?", ft_strdup("0"));
-		}
-		return (-2);
+		free(s);
+		return (1);
 	}
+	free(s);
 	return (0);
 }
 
@@ -93,12 +93,14 @@ int	no_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	if (str[sp->i + 1] == 0 && str[sp->i] != ' ')
 		sp->i++;
 	s = handle_expansion(ft_strndup((char *)(&str[sp->str_start]), sp->i - sp->str_start), env);
-	no_value = handle_ambiguous_redirect((char *)(&str[sp->str_start]), sp, env);
+	no_value = handle_ambiguous_redirect(ft_strndup((char *)(&str[sp->str_start]), sp->i - sp->str_start), sp, env);
 	if (no_value == -2)
 		return (free(s), -2);
 	if (no_value != 1)
+	{
 		ft_lstadd_back(elem, create_str(
 				ft_strjoin(sp->pretext, s), true, env));
+	}
 	if (sp->pretext)
 		free(sp->pretext);
 	sp->pretext = NULL;

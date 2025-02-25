@@ -9,7 +9,8 @@ INCLUDE_LIBFT = $(addprefix $(LIBFT), includes/)
 #CFLAGS		=	-Wall -Werror -Wextra -g -I$(INCLUDE_LIBFT) -I$(INCLUDE)
 CFLAGS		=	-Wall -Werror -Wextra -gdwarf-4 -I$(INCLUDE_LIBFT) -I$(INCLUDE)
 RM			=	rm -f
-OBJ_DIR		=	objs
+OBJ_DIR		=	objs/
+SRC_DIR		=	srcs/
 SRCS		=	srcs/main.c \
 				srcs/prefix.c \
 				srcs/utils.c \
@@ -51,9 +52,9 @@ SRCS		=	srcs/main.c \
 				srcs/exec/complex/fork.c \
 				srcs/exec/complex/open_files.c \
 
-OBJS		=	$(SRCS:/%.c=%.o)
+OBJS		=	$(patsubst %.c, %.o, $(SRCS))
 
-$(NAME):		$(OBJS) $(LIBFT_A)
+$(NAME):		$(OBJS) $(LIBFT_A) includes/minishell.h
 				@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft  -L/opt/homebrew/opt/readline/lib -lreadline -I/opt/homebrew/opt/readline/include -o $(NAME);
 				@echo "Linked into executable \033[0;32m$(NAME)\033[0m."
 
@@ -63,12 +64,11 @@ $(LIBFT_A):
 
 all:			$(NAME)
 
-
 bonus:			all
 
-.c.o:
-				@$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$(<:.c=.o)
-				@echo "Compiling $<."
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+				@$(CC) $(CFLAGS) -c $< -o $@
+				@echo "Compiling $< -> $@"
 
 localclean:
 				@$(RM) -rf $(OBJ_DIR)
