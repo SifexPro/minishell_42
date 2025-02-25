@@ -71,3 +71,11 @@ int	select_exec_pipe(int argc, char **argv, t_flags *flags, char **envp)
 	else
 		return (run_program_exec_pipe(argv[0], argv, envp, flags));
 }
+
+int	open_exit_pipe(t_flags *flags)
+{
+	close_pipe(flags);
+	free_child(flags->env, flags->splitted, flags, NULL);
+	exit(1);
+	return (0);
+}

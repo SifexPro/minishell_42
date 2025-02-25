@@ -17,15 +17,16 @@ static int	open_infile_pipe(t_flags *flags, int pipe_i, int infile_i, int i)
 	if (!flags->pipe[pipe_i]->infile[infile_i]->is_heredoc)
 	{
 		if (!open_infile(i, infile_i, flags))
-			return (close_pipe(flags), exit(1), 0);
+			return (open_exit_pipe(flags));
 	}
 	else
 	{
 		if (!open_heredoc(i, infile_i, flags))
-			return (close_pipe(flags), exit(1), 0);
+			return (open_exit_pipe(flags));
 	}
 	dup2(flags->fd_in[i], 0);
-	if (infile_i + 1 != flags->pipe[pipe_i]->infile_nb)
+	if (infile_i + 1 != flags->pipe[pipe_i]->infile_nb
+		&& flags->fd_in[i] != -1)
 		close(flags->fd_in[i]);
 	return (1);
 }
@@ -33,9 +34,10 @@ static int	open_infile_pipe(t_flags *flags, int pipe_i, int infile_i, int i)
 static int	open_outfile_pipe(t_flags *flags, int outfile_i, int i)
 {
 	if (!open_outfile(i, outfile_i, flags))
-		return (close_pipe(flags), exit(1), 0);
+		return (open_exit_pipe(flags));
 	dup2(flags->fd_out[i], 1);
-	if (outfile_i + 1 != flags->pipe[flags->pipe_index]->outfile_nb)
+	if (outfile_i + 1 != flags->pipe[flags->pipe_index]->outfile_nb
+		&& flags->fd_out[i] != -1)
 		close(flags->fd_out[i]);
 	return (1);
 }
@@ -109,6 +111,6 @@ void	child_exec(t_flags *flags, int i, t_ht *env)
 	if (flags->pipe[pipe_index]->cmd)
 		exit(select_exec_pipe(flags->pipe[pipe_index]->cmd->argc,
 				flags->pipe[pipe_index]->cmd->argv, flags, envp_cpy));
-	clear_env(envp_cpy);
+	free_child(flags->env, flags->splitted, flags, envp_cpy);
 	exit(0);
 }

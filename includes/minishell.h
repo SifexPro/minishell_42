@@ -29,7 +29,6 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
-//// ???
 # ifdef LINUX
 #  include <linux/limits.h>
 # endif
@@ -274,6 +273,7 @@ void	child_exec(t_flags *flags, int i, t_ht *env);
 
 /* exec/complex/exec_pipe_utils */
 int		select_exec_pipe(int argc, char **argv, t_flags *flags, char **envp);
+int		open_exit_pipe(t_flags *flags);
 
 /* exec/complex/fork */
 int		forking(t_flags *flags, t_list *splitted, t_ht *env);
