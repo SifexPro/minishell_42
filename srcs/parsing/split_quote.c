@@ -39,7 +39,7 @@ void	double_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		sp->quote_start = 0;
 		sp->is_dbl_quote = false;
 	}
-	sp->prev_meta = false;
+	sp->prev_meta = -1;
 }
 
 void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
@@ -67,7 +67,7 @@ void	simple_quote(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 		sp->is_simp_quote = false;
 		sp->quote_start = 0;
 	}
-	sp->prev_meta = false;
+	sp->prev_meta = -1;
 }
 
 int	loop_char(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
@@ -106,11 +106,7 @@ int	create_strings_quote(char const *str, t_list **elem, t_ht *env)
 	{
 		res = loop_char(str, sp, elem, env);
 		if (res == -2)
-		{
-			ht_deletef(env, "?");
-			ht_insert(env, "?", "1");
 			return (free(sp), 1);
-		}
 		if (res > 0)
 			break ;
 		sp->i++;

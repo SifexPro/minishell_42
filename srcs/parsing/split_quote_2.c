@@ -19,7 +19,7 @@ int	init_string_quote(t_split_sh *sp)
 	sp->quote_start = 0;
 	sp->is_simp_quote = false;
 	sp->is_dbl_quote = false;
-	sp->prev_meta = false;
+	sp->prev_meta = -1;
 	sp->pretext = NULL;
 	return (0);
 }

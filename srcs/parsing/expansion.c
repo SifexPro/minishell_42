@@ -84,13 +84,13 @@ char	*handle_expansion(char *str, t_ht *env)
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
 			str = handle_last_status(str, env, i);
-			i = 0;  // Reset i since the string has been modified
+			i = 0;
 			continue;
 		}
 		else if (str[i] == '$' && ft_isalnum(str[i + 1]))
 		{
 			str = handle_env_var(&str, env, i);
-			i = 0;  // Reset i since the string has been modified
+			i = 0;
 			continue;
 		}
 		i++;

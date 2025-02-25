@@ -101,7 +101,7 @@ typedef struct s_split_sh
 	int		quote_start;
 	bool	is_simp_quote;
 	bool	is_dbl_quote;
-	bool	prev_meta;
+	int		prev_meta;
 	char	*pretext;
 }	t_split_sh;
 

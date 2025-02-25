@@ -17,9 +17,9 @@ bool	is_valid_env(char *str)
 	int	i;
 
 	i = 1;
-	if (!str)
+	if (!str || !str[0])
 		return (false);
-	while (str && (ft_isalnum(str[i]) || str[i] == '_'))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	if (str[i] != 0)
 	{

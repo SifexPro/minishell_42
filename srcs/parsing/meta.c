@@ -100,6 +100,6 @@ int	handle_meta(char const *str, t_split_sh *sp, t_list **elem, t_ht *env)
 	while (ft_str_is_whitespace(str[sp->str_start]))
 		sp->str_start++;
 	sp->i = sp->str_start - 1;
-	sp->prev_meta = true;
+	sp->prev_meta = content->delimiter;
 	return (0);
 }
