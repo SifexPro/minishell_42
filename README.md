@@ -30,7 +30,7 @@ Ensure you have the following installed:
 
 1. Clone this repository:
    ```sh
-   git clone --recursive https://github.com/PolEpie/minishell_42
+   git clone --recursive https://github.com/SifexPro/minishell_42
    ```
 2. Navigate to the project directory:
    ```sh
